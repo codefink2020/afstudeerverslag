@@ -31,7 +31,7 @@
 		twoside,openright,titlepage,numbers=noenddot,headinclude,%1headlines,
 	 	footinclude=true,cleardoublepage=empty,
 		dottedtoc, % Make page numbers in the table of contents flushed right with dots leading to them
-		BCOR=5mm,paper=a4,fontsize=11pt, % Binding correction, paper type and font size
+		BCOR=2mm,paper=a4,fontsize=10pt, % Binding correction, paper type and font size
 		ngerman,dutch, % Languages, change this to your language(s)
 		]{scrreprt} 
                 
@@ -94,10 +94,20 @@
 
 \ctparttext{ } % Text on the Part 1 page describing  the content in Part 1
 
-\part{Inleiding} % First part of the thesis
 \include{Chapters/Inleiding} % inleiding
-\include{Chapters/Chapter01} % Chapter 1
-\include{Chapters/Chapter02} % Chapter 2
+\part{Opdracht} % First part of the thesis
+\include{Chapters/Chapter01} % Chapter 1 Eaglescience
+\include{Chapters/Chapter02} % Chapter 2 Opdracht
+
+\part{Onderzoek} % Second part of the thesis
+
+
+\include{Chapters/Chapter03} % Chapter 3
+\include{Chapters/Chapter04} % Chapter 4 - empty template
+
+
+\part{Ontwikkeling van SOUP module}
+
 
 \cleardoublepage % Empty page before the start of the next part
 
@@ -105,11 +115,6 @@
 
 \ctparttext{You can put some informational part preamble text here. Illo principalmente su nos. Non message \emph{occidental} angloromanic da. Debitas effortio simplificate sia se, auxiliar summarios da que, se avantiate publicationes via. Pan in terra summarios, capital interlingua se que. Al via multo esser specimen, campo responder que da. Le usate medical addresses pro, europa origine sanctificate nos se.} % Text on the Part 2 page describing the content in Part 2
 
-\part{Onderzoek} % Second part of the thesis
-
-
-\include{Chapters/Chapter03} % Chapter 3
-%\include{Chapters/Chapter04} % Chapter 4 - empty template
 
 \cleardoublepage % Empty page before the start of the next part
 
@@ -117,7 +122,7 @@
 %	THESIS CONTENT - APPENDICES
 %----------------------------------------------------------------------------------------
 
-\part{Ontwikkeling van SOUP module}
+
 
 
 \appendix

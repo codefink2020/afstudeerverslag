@@ -3,102 +3,55 @@
 \chapter{Opdracht} % Chapter title
 
 \label{ch:opdracht} % For referencing the chapter elsewhere, use \autoref{ch:examples} 
+Tegenwoordig zijn software-bibliotheken niet meer weg te denken in het software ontwikkelproces van nu. Bibliotheken geven ontwikkelaars de mogelijkheid code her te gebruiken in meerdere  projecten om zo effici\"enter te kunnen ontwikkelen. Dit helpt weer mee om een snelle Time-To-Market te behalen. Bibliotheken kunnen door bedrijven zelf geschreven worden, in het geval van EaglseScience is dit ArchES, of worden overgenomen van andere bedrijven/ instellingen. Zelfs Arches is afhankelijk van een aantal bibliotheken die niet ontwikkeld zijn door Eaglescience. Dus ontkom je er tegenwoordig niet aan om bibliotheken te gebruiken waarvan je de afkomst niet geheel kan herleiden. Deze bibliotheken wordt Software of Unknown Provenance/Pedigree (SOUP) genoemd. Door het gebruik van SOUP bibliotheken wordt er een aannemelijk risico gevormd op het gebied van veiligheid. Om deze risico’s te verminderen kan er een SOUP analyse gedaan worden om op die manier inzicht te krijgen in de voor de gebruikte bibliotheken bekende kwetsbaarheden mat daarbij de mogelijke risico’s en eventueel fixes om het risico te beperken of op te lossen.
+Binnen Eaglescience wordt het belang gezien om deze analyse te doen en is daarom op zoek naar een efficiënte en mogelijk geautomatiseerde manier voor het uitvoeren van een dergelijke analyse om zo de veiligheid van de ontwikkelde applicaties te waarborgen zonder afbreuk te doen aan kwaliteit. 
 
-%----------------------------------------------------------------------------------------
 
-\lipsum[1]
-
-%----------------------------------------------------------------------------------------
-
-\section{A New Section}
-
-\lipsum[2]
-
-Examples: \textit{Italics}, \spacedallcaps{All Caps}, \textsc{Small Caps}, \spacedlowsmallcaps{Low Small Caps}\footnote{Footnote example.}.
-Acronym testing: \ac{UML} -- \acs{UML} -- \acf{UML} -- \acp{UML}
-
+\section{Opdracht vanuit Eaglescience}
+Vanuit de CTO is de wens ontstaan om een gestructureerde methode te ontwikkelen waarbij er automatisch periodiek een SOUP analyse gedaan wordt op bestaande en nieuwe projecten. Het uiteindelijke resultaat moet zijn dat er een module wordt toegevoegd aan de reeds bestaande portal van Eaglescience waarbij project verantwoordelijken inzicht kunnen verkrijgen in de kwetsbaarheden die in een project aanwezig kunnen zijn door het gebruik van externe bibliotheken.
 %------------------------------------------------
 
-\subsection{Test for a Subsection}
+\subsection{Eisen aan de opdracht}
+Vanuit Eaglescience zijn er een aantal eisen gesteld waaraan het eindproduct moet voldoen:
+\begin{itemize}
+\item De module dient eenvoudig te worden gebruikt in de huidige CI/CD pipeline voor bestaande en nieuwe projecten
+\item De module dient gebruik te maken van de bestaande ++huidige++ projectstructuur van het portal 
+\item De module dient ondersteuning te bieden voor meerdere omgevingen(OTAP)
+\item De module dient met een instelbaar interval de analyse uit te voeren
+\item De module op project en omgeving niveau te rapporteren over bekende kwetsbaarheden
+\item De module dient kwetsbaarheden op minimaal drie niveau’s in te schalen (kritisch, gemiddeld en laag)
+\item De module dient ondersteuning te bieden voor het instellen van quality gates ten aanzien van ieder niveau, per project, per omgeving
+\item De module voldoet aan de geldende kwaliteitsnormen binnen Eaglescience, minimaal meetbaar door:
+	\begin{itemize}
+	\item test coverage > 70\%
+	\item onderdeel van de bestaande CI/CD voor het Eaglescience Portal
+	\end{itemize}
+\item De module wordt ontwikkeld in Angular en Play(scala), overeenkomstig bestaande portal modules
+\item Geschreven code is gerevierd door een Eaglescience ontwikkelaar
+\item In de module zijn gescheiden componenten: Frontend, Backend, API onafhankelijk en goed gedocumenteerd.
+\item Voor de API documentatie wordt gebruik gemaakt van swagger.
+\end{itemize}
 
-\graffito{Note: The content of this chapter is just some dummy text.}
-\lipsum[3-5]
+\subsection{Deliverables}
+Vanuit de CTO zijn er naast de functionele eisen ook eisen gesteld aan de oplevering:
+\begin{itemize}
+\item Geïntregreerde en aantoonbaar werkende module
+\item De code van de module in Eaglsescience GitLab
+\item API documentatie (middels swagger)
+\item Een handleiding hoe de module gebruikt dient te worden
+\item Eventuele aanvullende deliverables vanuit de HvA
+\end{itemize}
+\section{Opdracht fasen}
 
-%------------------------------------------------
+\section{plan van aanpak}
 
-\subsection{Autem Timeam}
+Content
+\section{Fase 1: Onderzoek}
 
-\lipsum[6]
+Content
+\section{Fase 2: Oplevering SOUP analyse module}
 
-%----------------------------------------------------------------------------------------
+Content
+\section{Opdracht fasen}
 
-\section{Another Section in This Chapter}
-
-\lipsum[7]
-
-Sia ma sine svedese americas. Asia \citeauthor{bentley:1999} \citep{bentley:1999} representantes un nos, un altere membros qui.\footnote{De web nostre historia angloromanic.} Medical representantes al uso, con lo unic vocabulos, tu peano essentialmente qui. Lo malo laborava anteriormente uso.
-
-\begin{description}
-\item[Description-Label Test:] \lipsum[8]
-\item[Label Test 2:] \lipsum[9]
-\end{description}
-
-\noindent This statement requires citation \citeauthor{cormen:2001} \citep{cormen:2001}.
-
-%------------------------------------------------
-
-\subsection{Personas Initialmente}
-
-\lipsum[10]
-
-\subsubsection{A Subsubsection}
-\lipsum[11]
-
-\paragraph{A Paragraph Example} \lipsum[12]
-
-\begin{aenumerate}
-\item Enumeration with small caps
-\item Second item
-\end{aenumerate}
-
-\paragraph{A Paragraph Example} Uno de membros summario preparation, es inter disuso qualcunque que. Del hodie philologos occidental al, como publicate litteratura in web. Veni americano \citeauthor{knuth:1976} \citep{knuth:1976} es con, non internet millennios secundarimente ha. Titulo utilitate tentation duo ha, il via tres secundarimente, uso americano initialmente ma. De duo deler personas initialmente. Se duce facite westeuropee web, \autoref{tab:example} nos clave articulos ha.
-
-\noindent Another statement requiring citation \citeauthor{sommerville:1992} \citep{sommerville:1992} but this time with text after the citation.
-
-\begin{table}
-\myfloatalign
-\begin{tabularx}{\textwidth}{Xll} \toprule
-\tableheadline{labitur bonorum pri no} & \tableheadline{que vista}
-& \tableheadline{human} \\ \midrule
-fastidii ea ius & germano &  demonstratea \\
-suscipit instructior & titulo & personas \\
-\midrule
-quaestio philosophia & facto & demonstrated \citeauthor{knuth:1976} \\
-\bottomrule
-\end{tabularx}
-\caption[Autem timeam deleniti usu id]{Autem timeam deleniti usu id. \citeauthor{knuth:1976}}  
-\label{tab:example}
-\end{table}
-
-\enlargethispage{2cm}
-
-%------------------------------------------------
-
-\subsection{Figure Citations}
-Veni introduction es pro, qui finalmente demonstrate il. E tamben anglese programma uno. Sed le debitas demonstrate. Non russo existe o, facite linguistic registrate se nos. Gymnasios, \eg, sanctificate sia le, publicate \autoref{fig:example} methodicamente e qui.
-
-Lo sed apprende instruite. Que altere responder su, pan ma, \ie, signo studio. \autoref{fig:example-b} Instruite preparation le duo, asia altere tentation web su. Via unic facto rapide de, iste questiones methodicamente o uno, nos al.
-
-\begin{figure}[bth]
-\myfloatalign
-\subfloat[Asia personas duo.]
-{\includegraphics[width=.45\linewidth]{gfx/example_1}} \quad
-\subfloat[Pan ma signo.]
-{\label{fig:example-b}
-\includegraphics[width=.45\linewidth]{gfx/example_2}} \\
-\subfloat[Methodicamente o uno.]
-{\includegraphics[width=.45\linewidth]{gfx/example_3}} \quad
-\subfloat[Titulo debitas.]
-{\includegraphics[width=.45\linewidth]{gfx/example_4}}
-\caption[Tu duo titulo debitas latente]{Tu duo titulo debitas latente.}\label{fig:example}
-\end{figure}
+Content
