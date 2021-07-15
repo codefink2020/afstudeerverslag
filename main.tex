@@ -32,7 +32,7 @@
 	 	footinclude=true,cleardoublepage=empty,
 		dottedtoc, % Make page numbers in the table of contents flushed right with dots leading to them
 		BCOR=5mm,paper=a4,fontsize=11pt, % Binding correction, paper type and font size
-		ngerman,american, % Languages, change this to your language(s)
+		ngerman,dutch, % Languages, change this to your language(s)
 		]{scrreprt} 
                 
 % Includes the file which contains all the document configurations and packages - make sure to edit this file
@@ -44,17 +44,13 @@
 %\hyphenation{Put special hyphenation here}
 
 
-\usepackage[dutch]{babel}
-\selectlanguage{dutch}
-
-
 \begin{document}
 
 \frenchspacing % Reduces space after periods to make text more compact
 
 \raggedbottom % Makes all pages the height of the text on that page
 
-\selectlanguage{american} % Select your default language - e.g. american or ngerman
+\selectlanguage{dutch} % Select your default language - e.g. american or ngerman
 
 %\renewcommand*{\bibname}{new name} % Uncomment to change the name of the bibliography
 %\setbibpreamble{} % Uncomment to include a preamble to the bibliography - some text before the reference list starts
@@ -71,15 +67,15 @@
 
 \include{FrontBackMatter/Titleback} % Back of the title page
 
-\cleardoublepage\include{FrontBackMatter/Dedication} % Dedication page
+%\cleardoublepage\include{FrontBackMatter/Dedication} % Dedication page
 
 %\cleardoublepage\include{FrontBackMatter/Foreword} % Uncomment and create a Foreword.tex to include a foreword
 
 \cleardoublepage\include{FrontBackMatter/Abstract} % Abstract page
 
-\cleardoublepage\include{FrontBackMatter/Publications} % Publications from the thesis page
+%\cleardoublepage\include{FrontBackMatter/Publications} % Publications from the thesis page
 
-\cleardoublepage\include{FrontBackMatter/Acknowledgments} % Acknowledgements page
+%\cleardoublepage\include{FrontBackMatter/Acknowledgments} % Acknowledgements page
 
 \pagestyle{scrheadings} % Show chapter titles as headings
 
@@ -96,10 +92,7 @@
 %	THESIS CONTENT - CHAPTERS
 %----------------------------------------------------------------------------------------
 
-\ctparttext{
-
-introductie over dit deel van de 
-You can put some informational part preamble text here. Illo principalmente su nos. Non message \emph{occidental} angloromanic da. Debitas effortio simplificate sia se, auxiliar summarios da que, se avantiate publicationes via. Pan in terra summarios, capital interlingua se que. Al via multo esser specimen, campo responder que da. Le usate medical addresses pro, europa origine sanctificate nos se.} % Text on the Part 1 page describing  the content in Part 1
+\ctparttext{ } % Text on the Part 1 page describing  the content in Part 1
 
 \part{Inleiding} % First part of the thesis
 
