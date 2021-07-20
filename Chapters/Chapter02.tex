@@ -3,9 +3,9 @@
 \chapter{Opdracht --Chapter02.tex} % Chapter title
 
 \label{ch:opdracht} % For referencing the chapter elsewhere, use \autoref{ch:examples} 
-Tegenwoordig zijn software-bibliotheken niet meer weg te denken in het software ontwikkelproces van nu. Bibliotheken geven ontwikkelaars de mogelijkheid code her te gebruiken in meerdere  projecten om zo effici\"enter te kunnen ontwikkelen. Dit helpt weer mee om een snelle Time-To-Market te behalen. Bibliotheken kunnen door bedrijven zelf geschreven worden, in het geval van EaglseScience is dit ArchES, of worden overgenomen van andere bedrijven/ instellingen. Zelfs Arches is afhankelijk van een aantal bibliotheken die niet ontwikkeld zijn door Eaglescience. Dus ontkom je er tegenwoordig niet aan om bibliotheken te gebruiken waarvan je de afkomst niet geheel kan herleiden. 
+Tegenwoordig zijn software-bibliotheken niet meer weg te denken in het software ontwikkelproces van nu. Bibliotheken geven ontwikkelaars de mogelijkheid code her te gebruiken in meerdere  projecten om zo effici\"enter te kunnen ontwikkelen. Dit helpt weer mee om een snelle Time-To-Market te behalen. Bibliotheken kunnen door bedrijven zelf geschreven worden, in het geval van EagseScience is dit Arches, of worden overgenomen van andere bedrijven/ instellingen. Zelfs Arches is afhankelijk van een aantal bibliotheken die niet ontwikkeld zijn door Eaglescience. Dus ontkom je er tegenwoordig niet aan om bibliotheken te gebruiken waarvan je de afkomst niet geheel kan herleiden. 
 \\
-Deze bibliotheken wordt Software of Unknown Provenance/Pedigree (SOUP) genoemd. Door het gebruik van SOUP bibliotheken kan er een aannemelijk risico worden genomen op het gebied van kwetsbaarheden. Om inzicht te krijgen in deze kwestbaarheden en daarmee dus mogelijk veiligheids issues dient er een SOUP analyse gedaan worden. Binnen Eaglescience wordt het belang gezien om deze analyse te doen en is daarom op zoek naar een efficiënte en mogelijk geautomatiseerde manier voor het uitvoeren van een dergelijke analyse om zo de veiligheid van de ontwikkelde applicaties te waarborgen zonder afbreuk te doen aan kwaliteit. 
+Deze bibliotheken wordt Software of Unknown Provenance/Pedigree (SOUP) genoemd. Door het gebruik van SOUP bibliotheken kan er een aannemelijk risico worden genomen op het gebied van kwetsbaarheden. Om inzicht te krijgen in deze kwetsbaarheden en daarmee dus mogelijk veiligheidsissues dient er een SOUP analyse gedaan worden. Binnen Eaglescience wordt het belang gezien om deze analyse te doen en is daarom op zoek naar een efficiënte en mogelijk geautomatiseerde manier voor het uitvoeren van een dergelijke analyse om zo de veiligheid van de ontwikkelde applicaties te waarborgen zonder afbreuk te doen aan kwaliteit. 
 
 
 \section{Opdracht vanuit Eaglescience}
@@ -13,7 +13,10 @@ Vanuit de CTO is de wens ontstaan om een gestructureerde methode te ontwikkelen 
 %------------------------------------------------
 
 \subsection{Eisen aan de opdracht}
-Vanuit Eaglescience zijn er een aantal eisen gesteld waaraan het eindproduct moet voldoen:
+
+Vanuit Eaglescience zijn er een aantal eisen gesteld waaraan het eindproduct moet voldoen. Als er aan deze eisen is voldaan dan is er voor Eaglescience een waardevol product wat men dan ook in gebruik kan nemen. Daarnaast zijn er een aantal oplever eisen die gehaald dienen te worden om de kwaliteit te waarborgen. \\
+
+\textbf{functionele eisen}
 \begin{itemize}
 \item De module dient eenvoudig te worden gebruikt in de huidige CI/CD pipeline voor bestaande en nieuwe projecten
 \item De module dient gebruik te maken van de bestaande ++huidige++ projectstructuur van het portal 
@@ -22,13 +25,16 @@ Vanuit Eaglescience zijn er een aantal eisen gesteld waaraan het eindproduct moe
 \item De module op project en omgeving niveau te rapporteren over bekende kwetsbaarheden
 \item De module dient kwetsbaarheden op minimaal drie niveau’s in te schalen (kritisch, gemiddeld en laag)
 \item De module dient ondersteuning te bieden voor het instellen van quality gates ten aanzien van ieder niveau, per project, per omgeving
+\item De module wordt ontwikkeld in Angular en Play(scala), overeenkomstig bestaande portal modules
+\end{itemize}
+\textbf{kwaliteitseisen}
+\begin{itemize}
 \item De module voldoet aan de geldende kwaliteitsnormen binnen Eaglescience, minimaal meetbaar door:
 	\begin{itemize}
 	\item test coverage > 70\%
 	\item onderdeel van de bestaande CI/CD voor het Eaglescience Portal
 	\end{itemize}
-\item De module wordt ontwikkeld in Angular en Play(scala), overeenkomstig bestaande portal modules
-\item Geschreven code is gerevierd door een Eaglescience ontwikkelaar
+\item Geschreven code is gereviewd door een Eaglescience ontwikkelaar
 \item In de module zijn gescheiden componenten: Frontend, Backend, API onafhankelijk en goed gedocumenteerd.
 \item Voor de API documentatie wordt gebruik gemaakt van swagger.
 \end{itemize}
@@ -42,11 +48,17 @@ Vanuit de CTO zijn er naast de functionele eisen ook eisen gesteld aan de opleve
 \item Een handleiding hoe de module gebruikt dient te worden
 \item Eventuele aanvullende deliverables vanuit de HvA
 \end{itemize}
+
+
 \section{Opdracht fasen}
-Om de hierboven beschreven opdracht zo goed als mogelijk uit te voeren dient er eerst een onderzoek gedaan worden naar mogelijk beschikbare oplossingen die al gebouwd zijn en die direct te implementeren zijn in de bestaande pipeline. hieruit zal blijken of we zelf een module dienen te schrijven en hoe. In fase 2 wordt verder uitgewerkt hoe we dit gaan aanpakken
+
+Om de hierboven beschreven opdracht zo goed als mogelijk uit te voeren dient er eerst een onderzoek gedaan worden naar mogelijk beschikbare oplossingen van derden.
+mochten deze er niet zijn dan wordt er over gegaan naar een onderzoek naar een mogelijke oplossing om deze inhouse te gaan bouwen. Als hiervan de resultaten bekend zijn wordt overgegaan op het daadwerkelijk implementeren van een oplossing dan al niet van een derde partij. 
 
 \subsection{Fase 1: Onderzoek}
-Het onderzoek zal bestaan uit twee onderzoeken als eerst een literatuur onderzoek met als resulktaat en beter beeld bij de gestelde opdracht en ten tweede een marktonderzoek waarbij er gezocht wordt naar een oplossing voor het onderzoeksprobleem. Mocht het zo zijn dat er in het marktonderzoek geen geschikte kandidaat wordt gevonden dan wordt er overgegaan naar een onderzoek waarbij de mogelijkheden voor het ontwikkelen binnen Eaglescience. 
+Het onderzoek dat gedaan moet worden is tweeledig: ten eerste dient er een marktonderzoek gedaan te worden om te kijken of er een bestaande oplossing is die direct al dan niet met enige aanpassing ge\"integreerd kan worden in de huidige pipeline. Hier dient gelet te worden op de eisen die gesteld zijn vanuit de CTO maar ook de onderhoudbaarheid van de oplossing zelf.
+Naast het marktonderzoek dient er ook een literatuur studie gedaan te worden om de begrippen en onderwerpen die samenhangen met het begrip SOUP en de analyse van vulnerabilities. Met als uitgangspunt een beter begrip te vormen om een eigen module te kunnen schrijven. 
+
 
 \subsection{Fase 2: Oplevering SOUP analyse module}
 De fase kan snel gaan als er een bestaande module bestaat die voldoet aan de eisen, anders moet er een module worden geschreven die aan de eisen voldoet. 
@@ -71,7 +83,43 @@ De planning zal als volgt zijn:
 \item (Sept  2021) Architectuur onderzoek opzetten van architectuur voor module
 \item (Okt 2021) Opbouw Artchitectuur en frontend. 
 \end{itemize}
-
+\section{mindmap test}
+\begin{tikzpicture}[grow cyclic, text width=2.7cm, align=flush center,
+	level 1/.style={level distance=5cm,sibling angle=90},
+	level 2/.style={level distance=3cm,sibling angle=45}]
+	
+\node{ShareLaTeX Tutorial Videos}
+child { node {Beginners Series}
+	child { node {First Document}}
+	child { node {Sections and Paragraphs}}
+	child { node {Mathematics}}
+	child { node {Images}}
+	child { node {bibliography}}
+	child { node {Tables and Matrices}}
+	child { node {Longer Documents}}
+}
+child { node {Thesis Series}
+	child { node {Basic Structure}}
+	child { node {Page Layout}}
+	child { node {Figures, Subfigures and Tables}}
+	child { node {Biblatex}}
+	child { node {Title Page}}
+}
+child { node {Beamer Series}
+	child { node {Getting Started}}
+	child { node {Text, Pictures and Tables}}
+	child { node {Blocks, Code and Hyperlinks}}
+	child { node {Overlay Specifications}}
+	child { node {Themes and Handouts}}
+}
+child { node {TikZ Series}
+	child { node {Basic Drawing}}
+	child { node {Geogebra}}
+	child { node {Flow Charts}}
+	child { node {Circuit Diagrams}}
+	child { node {Mind Maps}}
+};
+\end{tikzpicture}
 
 
 
