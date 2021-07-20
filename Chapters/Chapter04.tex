@@ -1,20 +1,55 @@
 % Chapter X
 
-\chapter{Literatuur onderzoek} % Chapter title
+\chapter{Literatuur onderzoek -- Chapter04.tex} % Chapter title
 
 \label{ondMarkt} % For referencing the chapter elsewhere, use \autoref{ch:name} 
 
 %----------------------------------------------------------------------------------------
+Voordat we daadwerkelijk onderzoek kunnen doen naar de beste methode voor een soup analyse moeten er eerst een aantal definities worden verduidelijkt.
+\section{ Wat is Open source Software}
+Er is veel debat over wat nou precies Open Source Software is. Met als resultaat dat er twee verschillende interpretaties zijn: \textbf{free software} en \textbf{open-source software}. Waarbij free software niet gaat over de kosten van de software maar eerder over wat er met de software gedaan mag worden. volgens GNU free software foundation is de defunitiue van free software : \\ \\
+
+% nog in quote block zetten bron: https://www.gnu.org/philosophy/free-sw.en.html
+Free software is a matter of liberty, not price. To understand the concept, you should think of  \"free\" as in ‘‘free speech \", not as in \"free beer\". Free software is a matter of the users freedom to run, copy, distribute, study, change and improve the software. \\ ... \\
+In order for the freedoms to make changes, and to publish improved versions, to be meaningful, you must have access to the source code of the program. Therefore, accessibility of source code is a necessary condition for free software.\\ \\
+
+De definitie van OpenSource software is: 
+
+% nog in quote block zetten : Bron: https://en.wikipedia.org/wiki/Open-source_software Betere bron vinden......
+Open-source software (OSS) is computer software that is released under a license in which the copyright holder grants users the rights to use, study, change, and distribute the software and its source code to anyone and for any purpose. Open-source software may be developed in a collaborative public manner. Open-source software is a prominent example of open collaboration. 
+\\
+Zo op het oog lijken de vormen van software gelijk het verschil zit hem in de manier waarom de software geschreven is. Bij OSS wordt de software veelal door een groep mensen ontwikkeld en bij Freesoftware niet. Hierdoor is het niet altijd duidelijk hoe de software is opgebouwd en wie verantwoordelijk is voor welke delen. Hierdoor kan er niet worden gezien of er daadwerkelijk kwetsbaarheden zijn. 
+\\
+\section{Wat is SOUP?}
+De definitie van SOUP luidt: "  SOUP stands for software of unknown (or uncertain) pedigree (or provenance), and is a term often used in the context of safety-critical and safety-involved systems such as medical software. SOUP is software that has not been developed with a known software development process or methodology, or which has unknown or no safety-related properties." \\ 
+\\
+Vanuit deze definitie kunnen we concluderen dat er software gebruikt kan worden waarvan niet zeker van is met welk proces het ontwikkeld is. En welke veiligheids gerelateerde eigenschappen deze software heeft. Hier door is het dus niet te garanderen dat de ontwikkelde software die gebruik maakt van OSS geen kwetsbaarheden bevat.
+
+Dit vraagstuk is al een tijd gaan en er zijn een aantal instanties die zich wereldwijd bezighouden met het opslaan van bekende kwetsbaarheden in veel gebruikte software. Een aantal van deze instanties zijn:
+\begin{itemize}
+\item{https://nvd.nist.gov/  \textbf{National Vulnerability Database} Een amerikaanse database waar ... }
+\item{https://vuldb.com/? \textbf{VULDB} Een communit driven vulnerability database. }
+\end{itemize} 
+
+
+
 
 \section{HoofdVraag en deelvragen}
 
+De hoofdvraag die het onderzoek moet beantwoorden is: "Wat is de beste manier om een SOUP analyse te integreren in de huidige ontwikkel straat, en hoe kunnen we ervoor zorgen dat onze software veiliger wordt?" 
+
+
+% zeker nog uitbreiden
 De hoofdvraag luid als volgt: "Hoe kunnen we zien of blibliotheken van buiten af op het moment van checken geen bekende kwetsbaarheden bevat?" 
+
 Daaruit volgen een aantal deelvragen:
 \begin{enumerate}
-\item Welke methoden zijn er om te zien of een bibliotheek kwetsbaarheden bevat?
-\item Vraag 1:
-\item Vraag 1:
-\item Vraag 1:
+\item Hoe wordt er op het dit moment een SOUP analyse uitgevoerd door Eaglescience en wat zijn de resource die gebruikt worden?
+\item Welke methoden zijn er buiten Eaglescience om te zien of een bibliotheek kwetsbaarheden bevat?
+\item Wat is de methode die we nu gebruiken?
+\item Wie zijn de uiteindelijke (eind)gebruikers? 
+\item Hoe ziet de portal er op dit moment uit? 
+\item 
 \end{enumerate}
 
 \section{Onderzoeks model}
