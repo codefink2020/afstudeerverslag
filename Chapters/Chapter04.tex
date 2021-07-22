@@ -1,69 +1,77 @@
 % Chapter X
 
-\chapter{Literatuur onderzoek -- Chapter04.tex} % Chapter title
+\chapter{Voor onderzoek -- Chapter04.tex} % Chapter title
 
-\label{ondMarkt} % For referencing the chapter elsewhere, use \autoref{ch:name} 
+\label{vooronderzoek} % For referencing the chapter elsewhere, use \autoref{ch:voorOnderzoek} 
 
-%----------------------------------------------------------------------------------------
-Voordat we daadwerkelijk onderzoek kunnen doen naar de beste methode voor een soup analyse moeten er eerst een aantal definities worden verduidelijkt.
-\section{ Wat is Open source Software}
-Er is veel debat over wat nou precies Open Source Software is. Met als resultaat dat er twee verschillende interpretaties zijn: \textbf{free software} en \textbf{open-source software}. Waarbij free software niet gaat over de kosten van de software maar eerder over wat er met de software gedaan mag worden. volgens GNU free software foundation is de defunitiue van free software : \\ \\
+In dit onderzoek wordt een antwoord gegeven uit de vraag: " Hoe implementeer ik een oplossing die een periodieke SOUP analyse doet op gezette tijden, welke voldoet aan de eisen van de CTO?" Er zal worden gekeken naar de mogelijkheid tot een bestaande oplossing die binnen de huidige pipeline valt. Uit deze hoofdvraag komen een aantal deelvragen die gedurende dit hoofdstuk zullen worden beantwoord. 
 
-% nog in quote block zetten bron: https://www.gnu.org/philosophy/free-sw.en.html
-Free software is a matter of liberty, not price. To understand the concept, you should think of  \"free\" as in ‘‘free speech \", not as in \"free beer\". Free software is a matter of the users freedom to run, copy, distribute, study, change and improve the software. \\ ... \\
-In order for the freedoms to make changes, and to publish improved versions, to be meaningful, you must have access to the source code of the program. Therefore, accessibility of source code is a necessary condition for free software.\\ \\
-
-De definitie van OpenSource software is: 
-
-% nog in quote block zetten : Bron: https://en.wikipedia.org/wiki/Open-source_software Betere bron vinden......
-Open-source software (OSS) is computer software that is released under a license in which the copyright holder grants users the rights to use, study, change, and distribute the software and its source code to anyone and for any purpose. Open-source software may be developed in a collaborative public manner. Open-source software is a prominent example of open collaboration. 
-\\
-Zo op het oog lijken de vormen van software gelijk het verschil zit hem in de manier waarom de software geschreven is. Bij OSS wordt de software veelal door een groep mensen ontwikkeld en bij Freesoftware niet. Hierdoor is het niet altijd duidelijk hoe de software is opgebouwd en wie verantwoordelijk is voor welke delen. Hierdoor kan er niet worden gezien of er daadwerkelijk kwetsbaarheden zijn. 
-\\
-\section{Wat is SOUP?}
-De definitie van SOUP luidt: "  SOUP stands for software of unknown (or uncertain) pedigree (or provenance), and is a term often used in the context of safety-critical and safety-involved systems such as medical software. SOUP is software that has not been developed with a known software development process or methodology, or which has unknown or no safety-related properties." \\ 
-\\
-Vanuit deze definitie kunnen we concluderen dat er software gebruikt kan worden waarvan niet zeker van is met welk proces het ontwikkeld is. En welke veiligheids gerelateerde eigenschappen deze software heeft. Hier door is het dus niet te garanderen dat de ontwikkelde software die gebruik maakt van OSS geen kwetsbaarheden bevat.
-
-Dit vraagstuk is al een tijd gaan en er zijn een aantal instanties die zich wereldwijd bezighouden met het opslaan van bekende kwetsbaarheden in veel gebruikte software. Een aantal van deze instanties zijn:
 \begin{itemize}
-\item{https://nvd.nist.gov/  \textbf{National Vulnerability Database} Een amerikaanse database waar ... }
-\item{https://vuldb.com/? \textbf{VULDB} Een communit driven vulnerability database. }
-\end{itemize} 
+\item Wat is Software of Unkown Pedigree?
+\item Welk type bibliotheken kunnen onbekende veiligheid eigenschappen hebben of is de methode van ontwikkelen niet bekend?
 
-
-
-
-\section{HoofdVraag en deelvragen}
-
-De hoofdvraag die het onderzoek moet beantwoorden is: "Wat is de beste manier om een SOUP analyse te integreren in de huidige ontwikkel straat, en hoe kunnen we ervoor zorgen dat onze software veiliger wordt?" 
-
-
-% zeker nog uitbreiden
-De hoofdvraag luid als volgt: "Hoe kunnen we zien of blibliotheken van buiten af op het moment van checken geen bekende kwetsbaarheden bevat?" 
-
-Daaruit volgen een aantal deelvragen:
-\begin{enumerate}
+\item 
 \item Hoe wordt er op het dit moment een SOUP analyse uitgevoerd door Eaglescience en wat zijn de resource die gebruikt worden?
 \item Welke methoden zijn er buiten Eaglescience om te zien of een bibliotheek kwetsbaarheden bevat?
 \item Wat is de methode die we nu gebruiken?
 \item Wie zijn de uiteindelijke (eind)gebruikers? 
 \item Hoe ziet de portal er op dit moment uit? 
-\item 
-\end{enumerate}
+\item Welke pakketten zijn er te vinden die mogelijk binnen de eisen valt en passen in de pipeline van Eaglescience?
+\end{itemize}
+ 
+ 
+ \section{onderzoekmethode en model}
+ Uitweiden over welke methode er is gekozen en hoe het onderzoeksmodel er uit ziet. 
+ 
 
-\section{Onderzoeks model}
 
-Content
 
-%------------------------------------------------
+\section{Wat is Software of Unkown Pedigree(SOUP)?}
+Volgens Wikipedia is \'software of unkown pedigree\' software dat niet volgens een software ontwikkel process of methode is ontwikkeld dat bekend is bij de eindgebruiker alsook software dat onbekende veiligheids eigenschappen heeft. De term wordt vooral gebruikt binnen het ontwikkelen van medische software.\\  % Bron: https://en.wikipedia.org/wiki/Software_of_unknown_pedigree
+Door het gebruik van dit soort software kan men er dus nooit van uitgaan dat het veilig is.  SOUP komt veelvuldig voor in Open-source software, echter is closed software ook nooit gegarandeerd 100\% veilig als het van derden komt. Betekende dat eigen software niet altijd 100\% veilig is maar er is wel meer controle dan als er software van derden gebruikt wordt.
+ 
+Deze definitie geld voor zowel volledige software pakketten als voor bibliotheken. Het gebruik van bibliotheken is iets waar Eaglescience veelvuldig gebruik van maakt. En geeft dit mogelijk problemen bij de veiligheid van de software zelf.
 
-\section{Subsection Title}
+\section{Welk type bibliotheken kunnen onbekende veiligheid eigenschappen hebben of is de methode van ontwikkelen niet bekend?}
+In principe is iedere bibliotheek waarvan niet de ontwikkelmethode of process te herleiden is, software of unkown pedigree. Veelal zijn dit de open-source bibliotheken die als onderdeel worden gebruikt in het ontwikkelen van zowel de frontend als de backend. 
 
-Content
+\subsection{OpenSource Software}Open-Source software staat er om bekend dat het veelal door een community wordt ontwikkeld waar bij de structuur niet altijd direct zichtbaar is en daarmee dus ook de methode niet altijd duidelijk.  	Eric S. Raymond spreek ook wel van een Bazaar model % Bron:https://en.wikipedia.org/wiki/Open-source_software#Development_model %bron : https://en.wikipedia.org/wiki/The_Cathedral_and_the_Bazaar
+waarbij iedereen toegang heeft tot de source code en er zijn eigen aanpassingen aan doet, dit model stelt ook dat software snel gereleased wordt en er daarna frequente iteraties zijn om de software up-to-date te houden. Soms metd egebruiker als mede ontwikkelaar. Het grote voordeel is dat er meerdere inzichten van veel developers kunnen worden benut. dit geeft gelijk ook het nadeel dat het er vaak op neer komt dat er meerdere methodes gebruikt kunnen worden en daarmee dus niet kan worden vastgesteld hoe een pakket is ontwikkeld.  
 
-%----------------------------------------------------------------------------------------
+\subsection{Closed Source Software}% Bron:https://en.wikipedia.org/wiki/Proprietary_software
+Closed source software is software dat is gebouwd onder een licentie, dit wil zeggen dat de gebruiker van de software/ bibliotheek meestal een bedrag moet betallen om het te betalen. Enkele voordelen van closed software is dat je weet wie het onwikkeld heeft en na een beetje onderzoek ook hoe de sotware gebouwd is. Al is dit laatste niet geheel relevant gezien er meestal een binary wordt geleverd zonder dat er aanpassingen vanuit de gebruiker in de source kan worden gedaan. Een nadeel is dat er meestal voor de software moet worden betaald en daarom dus duurder kan worden om het te gebuiken. 
 
-\section{Section Title}
+\subsection{Conclusie}
 
-Content
+% tabel toevoegen https://en.wikipedia.org/wiki/Proprietary_software Types
+het verschil tussen open en closed software zit hem vooral op de manier waarop het vervaardigd is, in een community of door een bedrijf. daarnaast zijn de kosten ook een verschil omdat er bij closes-source altijd een licentie moet worden verkregen en hier vaak (herhaaldelijke kosten) aan zitten. is dit bij open-source meestal 
+niet en wordt er vaak een vrijwillige bijdrage geleverd voor het gebruik ervan. 
+
+op basis van de kosten zou je kunnen zeggen dat open-source goedkoper is dan closed source bij de aanschaf. echter moet er rekening gehouden worden dat er niet altijd bekend is heo de software gebouwd is en wat de potenti\"ele gevaren hiervan zijn. 
+
+\section{Hoe wordt er op het dit moment een SOUP analyse uitgevoerd door Eaglescience en wat zijn de resource die gebruikt worden?}
+
+Interview bouwen....
+
+
+\lipsum[10]
+
+
+\section{deelvraag 2}
+
+\lipsum[10]
+
+\section{deelvraag 3}
+
+\lipsum[10]
+
+\section{deelvraag 4}
+
+\lipsum[10]
+\section{deelvraag 5}
+
+\lipsum[10]
+
+
+\section{deelvraag 6}
+\lipsum[10]
