@@ -1,0 +1,44 @@
+
+\chapter{Planning} % Chapter title
+
+\label{planning} % For referencing the chapter elsewhere, use \autoref{ch:InOnderzoek}
+
+\section{Planning methode}
+Binnen Eaglescience wordt er gewerkt middels de Agile Scrum methode, wat inhoud dat elk project incrementeel opgeleverd wordt in sprints. De Gant Chart hieronder is dan ook ingedeeld in sprints van twee weken en geeft alleen de hoofdperio
+
+\lipsum[1]
+
+\section{Planning zelf}
+\lipsum[2]\\
+\begin{ganttchart}[hgrid=true,
+vgrid={*2{red}, *1{green}, *{10}{blue, dashed}}, x unit=.6cm, y unit title=.6cm, y unit chart=.6cm]{1}{22}
+  \gantttitle{2021}{22}\\
+  \gantttitlelist{31,...,52}{1} \\
+  \ganttgroup{Ontwerp}{1}{6}\\
+  \ganttbar{interviews}{1}{2}\\
+  \ganttlinkedbar{uitwerking}{2}{5}\\
+  \ganttlinkedbar{check}{6}{6}\\
+  \ganttmilestone{design approved}{6}\\
+
+  \ganttgroup{Implementatie}{7}{12}\\
+\end{ganttchart}\\
+\begin{ganttchart}[hgrid=true,
+vgrid={*2{red}, *1{green}, *{10}{blue, dashed}}, x unit=.6cm, y unit title=.6cm, y unit chart=.6cm]{1}{8}
+  \gantttitle{2022}{8}\\
+  \gantttitlelist{1,...,8}{1} \\
+  \ganttgroup{Ontwerp}{1}{6}\\
+  \ganttbar{interviews}{1}{2}\\
+  \ganttlinkedbar{uitwerking}{2}{5}\\
+  \ganttlinkedbar{check}{6}{6}\\
+  \ganttmilestone{design approved}{6}\\
+
+  \ganttgroup{Implementatie}{7}{12}\\
+\end{ganttchart}\\
+
+
+\section{}
+\lipsum[3]
+
+
+\section{WerkWijze en planning}
+\lipsum[4]
