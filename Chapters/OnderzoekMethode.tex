@@ -3,30 +3,77 @@
 \chapter{Onderzoeksmethode} % Chapter title
 
 \label{OnderzoeksMethode} % For referencing the chapter elsewhere, use \autoref{ch:InOnderzoek}
+Zoals in de inleiding vermeld zijn er twee onderzoek benodigd om deze opdracht tot een goed einde te brengen. in dit hoofdstuk wordt uitwijd over de methoden die zijn toegepast om antwoorden te verkrijgen op de vragen.
 
-De opdracht van de CTO luid: "Implementeer een oplossing om automatisch, periodiek een SOUP analyse te doen op project die zowel in productie draaien als in ontwikkeling zijn en geef hier een verslag van die in de portal te bekijken is." Om deze opdracht tot een goed einde te brengen wordt er eerst onderzoek gedaan naar de betekenis van een SOUP analyse en op welke manier het op dit moment wordt uitgevoerd. Daarnaast zal er gegeken worden naar de impact van de nieuwe methode op het bedrijf. Daarna zal er worden gekeken of er een dergelijk product op de markt is die zonder problemen in de huidige pipeline kan worden ge\"implementeert. Mocht dit niet mogelijk zijn zal er worden uitgeweken naar het implementeren van eigen oplossing.
+\section{Onderzoeksmethode Architectuur binnen eagleScience}
+\subsection{Doel van het onderzoek}
+Het doel van het onderzoek is het in kaart brengen van de dev-stack die bij Eaglescience gebruikt wordt. Deze kennis is noodzakelijk om een goede architectuur te kunnen opzetten die past binnen de huidige manier van werken maar toch de faciliteiten biedt die nodig zijn om de nieuwe oplossing bruikbaar te maken voor alle stakeholders. Daarnaast is door het in kaart brengen van de huidige dev-stack ook de mogelijkheid om te onderzoeken of er toevoegingen zijn die het implementeren van deze oplossing kunnen vergemakkelijken.
 
-\section{Intake gesprek met opdrachtgever}
-Om meer inzicht te krijgen in de details van de opdracht is er een intake gesprek gehouden. Dit intake gesprek is 1 op 1 gevoerd met de CTO waarna er een hoofdvraag is opgesteld voor het onderzoek welke de basis was voor een aantal deelvragen die in het onderzoeksdeel wordt beantwoord. 
+Om dit doel te bereiken is er als eerst een interview geweest met een senior ontwikkelaar op basis van dit interview is verder onderzocht welke bibliotheken en tools er beschikbaar zouden zijn om de nieuwe oplossing te ontwikkelen.
 
-Een verslag van het intakegesprek is te vinden in bijlage X%nog toewijzen.
+\subsection{Onderzoeksmodel}
+Het onderstaande onderzoeksmodel is samengesteld uit de vragen aan de linkerkant en de weg naar het resultaat van links naar rechts.\\
+\begin{figure}[h!]
+\myfloatalign
+\includegraphics[width=10cm]{gfx/OnderzoeksmodelES}
+\caption{Onderzoeksmodel Eaglescience}
+\label{fig:Onderzoeks model Dev-Stack}
+\end{figure}
 
-\section{Onderzoeks vragen}
-De hoofdvraag voor het onderzoek luid als volgt: "Hoe kan Eaglescience een methode implementeren in de huidige pipeline zodat er periodiek een SOUP analyse gedaan wordt aan de software die in productie draait of op software waar op dit moment aan ontwikkelt wordt zonder dat dit onderdoet aan kwaliteit van de software en het gebruik van de huidige pipeline". Uit deze hoofdvraag komen een aantal deelvragen:
+\subsection{Onderzoeks vragen}
+De hoofdvraag in dit onderzoek luid: \\
+"Waaruit bestaat de huidige Dev-stack en welke tooling missen we om een geautomatiseerde SOUP analyse te doen?"\\
+Uit deze hoofdvraag komen een aantal deelvragen:
+
 \begin{itemize}
-\item Wat is SOUP en hoe analyseer ik dit?
-\item Welke bibliotheken worden er gebruikt en in welke categorie vallen deze?
-\item Hoe wordt er op het dit moment een SOUP analyse uitgevoerd door Eaglescience en wat zijn de resource die gebruikt worden?
-\item Welke methoden zijn er buiten Eaglescience om te zien of een bibliotheek kwetsbaarheden bevat?
-\item Wie zijn de uiteindelijke (eind)gebruikers van de module?
-
-\item Welke pakketten zijn er te vinden die mogelijk binnen de eisen valt en passen in de pipeline van Eaglescience?
-\item Waaruit bestaat de huidige pipeline?
-\item Hoe gaat Eaglescience te werk, wat is het process dat gevolgd wordt?
-\item Hoe relateert de pipeline zich tot het process binnen Eaglescience.
+  \item Hoe wordt op dit moment gewerkt binnen Eaglescience en dan met name op het gebied van SOUP analyses?
+  \item Welke Ontwikkeltalen gebruiken we binnen Eaglescience?
+  \item Welke frameworks worden er gebruikt binnen de ontwikkeltalen?
+  \item Hoe wordt op dit moment de ontwikkelde software gedeployed?
+  \item Welke architectuur wordt er op dit moment gebruikt in de portal?
+  \item Waar wordt de softwar uiteindelijk gedeployed?
+  \item Nog veel meer vast??
 \end{itemize}
 
-opsomming van de hoofd en deelvragen, er wordt nog geen antwoord gegeven!!!!!
-\section{Onderzoekstypen}
-\section{Onderzoeksmodel}
-test
+\subsection{Resultaat}
+Het resultaat van dit onderzoek is het hebben van een beeld hoe software op dit moment wordt ontwikkeld binnen Eaglescience en hoe deze vervolgens wordt gedeployed en waar. Ook wordt er inzicht verschaft in de mogelijkheden om de nieuwe oplossing te implementeren gezien deze een onderdeel moet gaan worden van de bestaande deploy-pipeline.
+\subsection{Strategie}
+De beste manier om de antwoorden op deze vragen te krijgen is door het interviewen van de ontwikkelaars en de CTO. Deze hebben op dit moment de meeste kennis van de gebruikte systemen binnen Eaglescience. Ook de verschillende "artifact files" (Package.json / build.sbt) zijn goede bronnen om te onderzoeken welke frameworks er gebruikt worden. het gaat dan voornamelijk over de build tools waar informatie uit te halen is over bibliotheken en versies hiervan.
+
+\section{Onderzoek naar SOUP analyse}
+\subsection{Doel van het onderzoek}
+Het doel van dit onderzoek is het opbouwen van een theoretische basis voor het ontwikkelen van de SOUP module. Alsmede methodes om dit geautomatiseerd te kunnen doen in combinatie met databases waar kwetsbaarheden in opgeslagen zijn.
+
+
+\subsection{Onderzoeksmodel}
+Het onderstaande onderzoeksmodel is samengesteld uit de vragen aan de linkerkant en de weg naar het resultaat van links naar rechts.\\
+\begin{figure}[h!]
+\myfloatalign
+\includegraphics[width=10cm]{gfx/OnderzoeksmodelES}
+\caption{Onderzoeksmodel Eaglescience}
+\label{fig:Onderzoeks model Dev-Stack}
+\end{figure}
+
+\subsection{Onderzoeks vragen}
+De hoofdvraag in dit onderzoek luid: \\
+"Waaruit bestaat de huidige Dev-stack en welke tooling missen we om een geautomatiseerde SOUP analyse te doen?"\\
+Uit deze hoofdvraag komen een aantal deelvragen:
+
+\begin{itemize}
+  \item Hoe wordt op dit moment gewerkt binnen Eaglescience en dan met name op het gebied van SOUP analyses?
+  \item Welke Ontwikkeltalen gebruiken we binnen Eaglescience?
+  \item Welke frameworks worden er gebruikt binnen de ontwikkeltalen?
+  \item Hoe wordt op dit moment de ontwikkelde software gedeployed?
+  \item Welke architectuur wordt er op dit moment gebruikt in de portal?
+  \item Waar wordt de softwar uiteindelijk gedeployed?
+  \item Nog veel meer vast??
+\end{itemize}
+
+\subsection{Resultaat}% is dit niet het zelfde als het doel.
+Het resultaat van dit onderzoek moet zijn dat er een theoretische basis is voor het verdere verloop van het project.
+\subsection{Strategie}
+Dit onderzoek is voor een groot deel een bureauonderzoek uit bronnen online en boeken. Waarbij er een verslag wordt gelegd die geverifieerd wordt door de opdrachtgever..
+De beste manier om de antwoorden op deze vragen te krijgen is door het interviewen van de ontwikkelaars en de CTO. Deze hebben op dit moment de meeste kennis van de gebruikte systemen binnen Eaglescience. Ook de verschillende "artifact files" (Package.json / build.sbt) zijn goede bronnen om te onderzoeken welke frameworks er gebruikt worden. het gaat dan voornamelijk over de build tools waar informatie uit te halen is over bibliotheken en versies hiervan.
+
+\section{Tijdsverloop Onderzoeken}
+Beide onderzoeken zullen parallel uitgevoerd worden zodat beide onderzoeken elkaar inzichten kunnen verschaffen. en er op die manier een beter begrip van de mogelijkheden is.

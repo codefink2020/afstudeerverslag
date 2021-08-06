@@ -1,0 +1,95 @@
+% Chapter X
+
+\chapter{Onderzoek: Architectuur binnen Eaglescience} % Chapter title
+
+\label{OnderzoekArchituur} % For referencing the chapter elsewhere, use \autoref{ch:voorOnderzoek}
+
+In dit onderzoek wordt een antwoord gegeven uit de vraag: " Hoe implementeer ik een oplossing die een periodieke SOUP analyse doet op gezette tijden, welke voldoet aan de eisen van de CTO?" Er zal worden gekeken naar de mogelijkheid tot een bestaande oplossing die binnen de huidige pipeline valt. Uit deze hoofdvraag komen een aantal deelvragen die gedurende dit hoofdstuk zullen worden beantwoord.
+
+\begin{itemize}
+
+\begin{itemize}
+\item Welke Ontwikkeltalen gebruiken we binnen Eaglescience?
+\item Welke Frameworks worden er gebruikt binnen de ontwikkeltalen?
+\item Hoe wordt op dit moment de ontwikkelde software gedeployed?
+\item Welke architectuur wordt er op dit moment gebruikt in de portal?
+\item
+Eaglescience en wat zijn de resource die gebruikt worden?
+\item Welke methoden zijn er buiten Eaglescience om te zien of een bibliotheek kwetsbaarheden bevat?
+
+
+\item Wie zijn de uiteindelijke (eind)gebruikers van de module?
+
+\item Welke pakketten zijn er te vinden die mogelijk binnen de eisen valt en passen in de pipeline van Eaglescience?
+\item Waaruit bestaat de huidige pipeline?
+\item Hoe gaat Eaglescience te werk, wat is het process dat gevolgd wordt?
+\item Hoe relateert de pipeline zich tot het process binnen Eaglescience.
+\end{itemize}
+
+\item Wat is Software of Unkown Pedigree?
+\item Welk type bibliotheken kunnen onbekende veiligheid eigenschappen hebben of is de methode van ontwikkelen niet bekend?
+
+\item
+\item Hoe wordt er op het dit moment een SOUP analyse uitgevoerd door Eaglescience en wat zijn de resource die gebruikt worden?
+\item Welke methoden zijn er buiten Eaglescience om te zien of een bibliotheek kwetsbaarheden bevat?
+\item Wat is de methode die we nu gebruiken?
+\item Wie zijn de uiteindelijke (eind)gebruikers?
+\item Hoe ziet de portal er op dit moment uit?
+\item Welke pakketten zijn er te vinden die mogelijk binnen de eisen valt en passen in de pipeline van Eaglescience?
+\end{itemize}
+
+
+\section{Interview Senior Ontwikkelaar}
+Om antwoorden te krijgen op de vraag welke dev-stack er gebruikt wordt bij Eaglescience is er een interview gehouden met een senior ontwikkelaar.Een verslag van het dit gesprek is te vinden in bijlage X%nog toewijzen.
+
+
+
+\section{Wat is Software of Unkown Pedigree(SOUP)?}
+Volgens Wikipedia is \'software of unkown pedigree\' software dat niet volgens een software ontwikkel process of methode is ontwikkeld dat bekend is bij de eindgebruiker alsook software dat onbekende veiligheids eigenschappen heeft. De term wordt vooral gebruikt binnen het ontwikkelen van medische software.\\  % Bron: https://en.wikipedia.org/wiki/Software_of_unknown_pedigree
+Door het gebruik van dit soort software kan men er dus nooit van uitgaan dat het veilig is.  SOUP komt veelvuldig voor in Open-source software, echter is closed software ook nooit gegarandeerd 100\% veilig als het van derden komt. Betekende dat eigen software niet altijd 100\% veilig is maar er is wel meer controle dan als er software van derden gebruikt wordt.
+
+Deze definitie geld voor zowel volledige software pakketten als voor bibliotheken. Het gebruik van bibliotheken is iets waar Eaglescience veelvuldig gebruik van maakt. En geeft dit mogelijk problemen bij de veiligheid van de software zelf.
+
+\section{Welk type bibliotheken kunnen onbekende veiligheid eigenschappen hebben of is de methode van ontwikkelen niet bekend?}
+In principe is iedere bibliotheek waarvan niet de ontwikkelmethode of process te herleiden is, software of unkown pedigree. Veelal zijn dit de open-source bibliotheken die als onderdeel worden gebruikt in het ontwikkelen van zowel de frontend als de backend.
+
+\subsection{OpenSource Software}Open-Source software staat er om bekend dat het veelal door een community wordt ontwikkeld waar bij de structuur niet altijd direct zichtbaar is en daarmee dus ook de methode niet altijd duidelijk.  	Eric S. Raymond spreek ook wel van een Bazaar model % Bron:https://en.wikipedia.org/wiki/Open-source_software#Development_model %bron : https://en.wikipedia.org/wiki/The_Cathedral_and_the_Bazaar
+waarbij iedereen toegang heeft tot de source code en er zijn eigen aanpassingen aan doet, dit model stelt ook dat software snel gereleased wordt en er daarna frequente iteraties zijn om de software up-to-date te houden. Soms metd egebruiker als mede ontwikkelaar. Het grote voordeel is dat er meerdere inzichten van veel developers kunnen worden benut. dit geeft gelijk ook het nadeel dat het er vaak op neer komt dat er meerdere methodes gebruikt kunnen worden en daarmee dus niet kan worden vastgesteld hoe een pakket is ontwikkeld.
+
+\subsection{Closed Source Software}% Bron:https://en.wikipedia.org/wiki/Proprietary_software
+Closed source software is software dat is gebouwd onder een licentie, dit wil zeggen dat de gebruiker van de software/ bibliotheek meestal een bedrag moet betallen om het te betalen. Enkele voordelen van closed software is dat je weet wie het onwikkeld heeft en na een beetje onderzoek ook hoe de sotware gebouwd is. Al is dit laatste niet geheel relevant gezien er meestal een binary wordt geleverd zonder dat er aanpassingen vanuit de gebruiker in de source kan worden gedaan. Een nadeel is dat er meestal voor de software moet worden betaald en daarom dus duurder kan worden om het te gebuiken.
+
+\subsection{Conclusie}
+
+% tabel toevoegen https://en.wikipedia.org/wiki/Proprietary_software Types
+het verschil tussen open en closed software zit hem vooral op de manier waarop het vervaardigd is, in een community of door een bedrijf. daarnaast zijn de kosten ook een verschil omdat er bij closes-source altijd een licentie moet worden verkregen en hier vaak (herhaaldelijke kosten) aan zitten. is dit bij open-source meestal
+niet en wordt er vaak een vrijwillige bijdrage geleverd voor het gebruik ervan.
+
+op basis van de kosten zou je kunnen zeggen dat open-source goedkoper is dan closed source bij de aanschaf. echter moet er rekening gehouden worden dat er niet altijd bekend is heo de software gebouwd is en wat de potenti\"ele gevaren hiervan zijn.
+
+\section{Hoe wordt er op het dit moment een SOUP analyse uitgevoerd door Eaglescience en wat zijn de resource die gebruikt worden?}
+
+Interview bouwen....
+
+
+\lipsum[10]
+
+
+\section{deelvraag 2}
+
+\lipsum[10]
+
+\section{deelvraag 3}
+
+\lipsum[10]
+
+\section{deelvraag 4}
+
+\lipsum[10]
+\section{deelvraag 5}
+
+\lipsum[10]
+
+
+\section{deelvraag 6}
+\lipsum[10]
