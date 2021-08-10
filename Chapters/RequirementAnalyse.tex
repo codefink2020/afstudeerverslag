@@ -14,11 +14,19 @@ De gewenste situatie is dat projectmanagers, ontwikkelaars en het dagelijks best
 om de informatie weer te kunnen geven moet er een manier worden gevonden om tijdens een bouwprocess de versies van de gebruikte bibliotheken te achterhalen. En deze vervolgens tegen een Vulnerability Database te leggen. Deze gegevens dienen in een interne database opgeslagen te worden waarop de het onderdeel in de portal gegevens op kan halen. Waarop vervolgens door de stakeholders de gewenste informatie gehaald kan worden.
 
 \section{De stakeholders}
+
 De stakeholders kunnen opgedeelt worden in twee hoofdgroepen(Tabel 1): externe en interne stakeholders. De klant is als enige een externe stakeholder en is buiten de analyse gehouden omdat deze staceholder alleen indirect resultaten bemerkt doormiddel van het verkrijgen van verbeterde software. De klant als stakeholder is dus passief en zal niet worden geinterviewt. Met personen uit de interne stakeholders groepen zijn interviews gehouden om een inzicht te krijgen in hun belang en invloed bij de module. Daarnaast is er een eerste lijst met requirements opgesteld waaraan de module dient te voldoen. Deze lijst is een start en zal na enkele sprintdemo's worden aangepast of uitgebreid. Na iedere tweede sprint zal een evaluatie worden gehouden om inzicht te krijgen of de requirements nog accuraat zijn en eventueel nog moeten worden aangescherpt.
+De belangen en invloeden worden in de komende subsecties verder toegelicht.
+\subsection{Dagelijks bestuur (intern)}
+Het dagelijks bestuur ziet vooral voordelen in het inzicht krijgen van kwetsbaarheden op een overzichtelijke manier, zodat ze kunnen sturen in het gebruik van biblioteken of andere technologi\"en. Echter zien zij ook kosten gemoeid met de verandering. Door de manier van werken dienen deze kosten terug verdient te worden door werkzaamheden binnen andere projecten. De CTO ziet vooral tijdswinst zodat de time-to-market voor andere projecten hoger ligt en dus meer verdient kan worden.
+\subsection{Projectmanagers (intern)}
+Project managers krijgen op dit moment een update over de staat van kwetsbaarheden tijdens stand-ups en aan het einde van een sprint tijdens de sprint demo's. De nieuwe module biedt ze de mogelijkheid om up-to-date informatie on-demand te verkrijgen. Op de vraag of het het waard is dat een aantal ontwikkelaars tijd kwijt zijn in testen en meedenken over de module weegt volgens hen op tegen de voordelen die de module in de toekomst kan brengen.
+\subsection{Ontwikkelteam (intern)}
+Het ontwikkelteam wil graag meedenken en meewerken aan een oplossing, gezien zij de gene waren die handmatig de analyse uitvoerden. Zij zien voor een oplossing voor een taak dat veel tijd in beslag nam en afleide van de daadwerkelijke taak.
+\subsection{Klant(extern)}
+Als laatste de klant welke een passieve stakeholder is gezien zij niet direct betrokken zijn bij de ontwikkeling van de module maar wel verbeteringen genieten ind e zin van veilige en betrouwbare software.
 
-De belangen en invloeden worden in de komende subsecties verder toegelicht.\\
-
-\begin{table}[h!]
+\begin{table}[H]
 %\myfloatalign
   \begin{tabularx}{\textwidth}{Xll}
   \toprule
@@ -34,21 +42,9 @@ De belangen en invloeden worden in de komende subsecties verder toegelicht.\\
   \end{tabularx}
   \caption[Verdeling stakeholders]{Verdeling stakeholders}
   \label{tab:verdeling_StakeHolders}
-  \end{table}
-\\
-\subsection{Dagelijks bestuur (intern) }
-Het dagelijks bestuur ziet vooral voordelen in het inzicht krijgen van kwetsbaarheden op een overzichtelijke manier, zodat ze kunnen sturen in het gebruik van biblioteken of andere technologi\"en. Echter zien zij ook kosten gemoeid met de verandering. Door de manier van werken dienen deze kosten terug verdient te worden door werkzaamheden binnen andere projecten. De CTO ziet vooral tijdswinst zodat de time-to-market voor andere projecten hoger ligt en dus meer verdient kan worden.
-
-\subsection{Projectmanagers (intern)}
-Project managers krijgen op dit moment een update over de staat van kwetsbaarheden tijdens stand-ups en aan het einde van een sprint tijdens de sprint demo's. De nieuwe module biedt ze de mogelijkheid om up-to-date informatie on-demand te verkrijgen. Op de vraag of het het waard is dat een aantal ontwikkelaars tijd kwijt zijn in testen en meedenken over de module weegt volgens hen op tegen de voordelen die de module in de toekomst kan brengen.
-\subsection{Ontwikkelteam (intern)}
-Het ontwikkelteam wil graag meedenken en meewerken aan een oplossing, gezien zij de gene waren die handmatig de analyse uitvoerden. Zij zien voor een oplossing voor een taak dat veel tijd in beslag nam en afleide van de daadwerkelijke taak.
-
-\subsection{Klant(extern)}
-Als laatste de klant welke een passieve stakeholder is gezien zij niet direct betrokken zijn bij de ontwikkeling van de module maar wel verbeteringen genieten ind e zin van veilige en betrouwbare software.
-
+\end{table}
 \subsection{Stakeholder analyse}
-\begin{figure}[bth]
+\begin{figure}[H]
 \myfloatalign
 \includegraphics[width=10cm]{gfx/stakeholderanalyse}
 \caption{StakeHolders Analyse}
@@ -60,60 +56,29 @@ Naast het analyseren van de betrokkenheid en belang van de stakeholders is er oo
 
 \textbf{Must Have Moet nog onderverdeeld worden in MoSCoW}
 \begin{itemize}
-  \item Als \textit{gebruiker} wil ik een overzicht per project zien welke kwetsbaarheden er zich in bibliotheken bevinden, zodat ik actie kan ondernemen om de software nog veiligier te maken.
+  \item Als \textit{gebruiker} wil ik dat de SOUP module in de portal te vinden is zodat alle tools die gebruikt worden binnen Eaglescience op een enkele plek te vinden zijn.
+  \item Als \textit{gebruiker} wil ik een overzicht per project kunnen zien met daarin de gebruikte bibliotheken zodat ik inzage heb ik wat er gebruikt wordt voor ontwikkeling.
+  \item Als \textit{gebruiker} wil ik een overzicht per project zien welke kwetsbaarheden er zich in bibliotheken bevinden, zodat ik actie kan ondernemen om de software nog veiliger te maken.
   \item Als \textit{gebruiker} wil ik in kunnen loggen met mijn LDAP? account zodat ik niet nog een keer een username/wachtwoord combinatie hoe te leren.
   \item Als \textit{gebruiker} wil ik een project kunnen toevoegen zodat ik ook van dat project de kwetsbaarheden in kan zien en deze software ook veilger wordt.
-  \item Als \textit{gebruiker} wil ik  zodat ik...
-  \item Als \textit{gebruiker} wil ik  zodat ik...
-  \item Als \textit{gebruiker} wil ik  zodat ik...
-  
-  \item Als \textit{Project manager} wil ik een overzicht per project kunnen zien met daarin de gebruikte bibliotheken zodat ik inzage heb ik wat er gebruikt wordt voor ontwikkeling.
-  \item Als \textit{Project manager} wil ik een overzicht per project kunnen zien met daarin de kwetsbaarheden die gevonden zijn en welke bibliotheken er geupdate moeten worden om deze kwetsbaarheden aan te kunnen pakken.\item
+  \item Als \textit{gebruiker} wil ik dat periodiek automatisch een check analyse wordt uitgevoerd zodat ik er zelf niet naar om hoef te kijken.
+  \item Als \textit{gebruiker} wil ik zelf een analyse kunnen starten voor een project zodat ik een up-to-date versie heb van de resultaten.
+
 \end{itemize}
 
 \textbf{Should Have}
 \begin{itemize}
-  \item Als \textit{Dagelijks Bestuur} wil ik  ... zodat ik...
-  \item Als \textit{Dagelijks Bestuur} wil ik  ... zodat ik...
-  \item Als \textit{Dagelijks Bestuur} wil ik  ... zodat ik...
-  \item Als \textit{Dagelijks Bestuur} wil ik  ... zodat ik...
-  \item Als \textit{Ontwikkel team } wil ik  ... zodat ik...
-  \item Als \textit{Ontwikkel team } wil ik  ... zodat ik...
-  \item Als \textit{Ontwikkel team } wil ik  ... zodat ik...
-  \item Als \textit{Ontwikkel team } wil ik  ... zodat ik...
-  \item Als \textit{Ontwikkel team } wil ik  ... zodat ik...
-  \item Als \textit{Project manager} wil ik een overzicht per project kunnen zien met daarin de gebruikte bibliotheken zodat ik inzage heb ik wat er gebruikt wordt voor ontwikkeling.
-  \item Als \textit{Project manager} wil ik een overzicht per project kunnen zien met daarin de kwetsbaarheden die gevonden zijn en welke bibliotheken er geupdate moeten worden om deze kwetsbaarheden aan te kunnen pakken.\item
+  \item Moeten nog voorkomen uit de prioriteit analyse
 \end{itemize}
 
 \textbf{Could Have}
 \begin{itemize}
-  \item Als \textit{Dagelijks Bestuur} wil ik  ... zodat ik...
-  \item Als \textit{Dagelijks Bestuur} wil ik  ... zodat ik...
-  \item Als \textit{Dagelijks Bestuur} wil ik  ... zodat ik...
-  \item Als \textit{Dagelijks Bestuur} wil ik  ... zodat ik...
-  \item Als \textit{Ontwikkel team } wil ik  ... zodat ik...
-  \item Als \textit{Ontwikkel team } wil ik  ... zodat ik...
-  \item Als \textit{Ontwikkel team } wil ik  ... zodat ik...
-  \item Als \textit{Ontwikkel team } wil ik  ... zodat ik...
-  \item Als \textit{Ontwikkel team } wil ik  ... zodat ik...
-  \item Als \textit{Project manager} wil ik een overzicht per project kunnen zien met daarin de gebruikte bibliotheken zodat ik inzage heb ik wat er gebruikt wordt voor ontwikkeling.
-  \item Als \textit{Project manager} wil ik een overzicht per project kunnen zien met daarin de kwetsbaarheden die gevonden zijn en welke bibliotheken er geupdate moeten worden om deze kwetsbaarheden aan te kunnen pakken.\item
+\item
 \end{itemize}
 
 \textbf{Won't Have}
 \begin{itemize}
-  \item Als \textit{Dagelijks Bestuur} wil ik  ... zodat ik...
-  \item Als \textit{Dagelijks Bestuur} wil ik  ... zodat ik...
-  \item Als \textit{Dagelijks Bestuur} wil ik  ... zodat ik...
-  \item Als \textit{Dagelijks Bestuur} wil ik  ... zodat ik...
-  \item Als \textit{Ontwikkel team } wil ik  ... zodat ik...
-  \item Als \textit{Ontwikkel team } wil ik  ... zodat ik...
-  \item Als \textit{Ontwikkel team } wil ik  ... zodat ik...
-  \item Als \textit{Ontwikkel team } wil ik  ... zodat ik...
-  \item Als \textit{Ontwikkel team } wil ik  ... zodat ik...
-  \item Als \textit{Project manager} wil ik een overzicht per project kunnen zien met daarin de gebruikte bibliotheken zodat ik inzage heb ik wat er gebruikt wordt voor ontwikkeling.
-  \item Als \textit{Project manager} wil ik een overzicht per project kunnen zien met daarin de kwetsbaarheden die gevonden zijn en welke bibliotheken er geupdate moeten worden om deze kwetsbaarheden aan te kunnen pakken.\item
+  \item Moeten nog voorkomen uit de prioriteit analyse
 \end{itemize}
 De Won't haves staan hierbij genoemd als leidraad voor eventueel updates in de toekomst. Als blijkt dat er tussen de won'ts toch low hanging fruit blijkt te hangen kunnen deze meegenomen worden in de sprints. De requirements worden als epics in een JIRA omgeving gezet om vervolgens een planning te kunnen maken.
 
