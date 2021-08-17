@@ -1,9 +1,9 @@
 % Chapter 2
 
-\chapter{Opdracht [WIP]} % Chapter title
-\label{ch:opdracht} % For referencing the chapter elsewhere, use \autoref{ch:examples} 
+\chapter{Opdracht} % Chapter title
+\label{ch:opdracht} % For referencing the chapter elsewhere, use \autoref{ch:examples}
 Tegenwoordig zijn software-bibliotheken niet meer weg te denken in het software ontwikkelproces van nu. Bibliotheken geven ontwikkelaars de mogelijkheid code her te gebruiken in meerdere projecten om zo effici\"enter te kunnen ontwikkelen. Wat op zijn beurt weer meehelpt om de Time-To-Market te verkorten. Bibliotheken kunnen door bedrijven zelf geschreven worden, in het geval van EagseScience is dit Arches, of worden overgenomen van andere bedrijven/instellingen. Zelfs Arches is afhankelijk van een aantal bibliotheken die niet ontwikkeld zijn door Eaglescience. Dus ontkom je er tegenwoordig niet aan om bibliotheken te gebruiken waarvan je de afkomst niet geheel kan herleiden.\\
-Deze bibliotheken vallen onder de noemer "Software of Unknown Provenance/Pedigree(SOUP)". Door het gebruik van dit soort bibliotheken kan er een aannemelijk risico ontstaan op het gebied van kwetsbaarheden. Om inzicht te krijgen in deze kwetsbaarheden en daarmee dus mogelijk veiligheidsissues dient er een SOUP analyse gedaan worden. Binnen Eaglescience wordt het belang gezien om deze analyse te doen en is daarom op zoek naar een efficiënte en mogelijk geautomatiseerde manier voor het uitvoeren van een dergelijke analyse om zo de veiligheid van de ontwikkelde applicaties te waarborgen zonder afbreuk te doen aan kwaliteit. 
+Deze bibliotheken vallen onder de noemer "Software of Unknown Provenance/Pedigree(SOUP)". Door het gebruik van dit soort bibliotheken kan er een aannemelijk risico ontstaan op het gebied van kwetsbaarheden. Om inzicht te krijgen in deze kwetsbaarheden en daarmee dus mogelijk veiligheidsissues dient er een SOUP analyse gedaan worden. Binnen Eaglescience wordt het belang gezien om deze analyse te doen en is daarom op zoek naar een efficiënte en mogelijk geautomatiseerde manier voor het uitvoeren van een dergelijke analyse om zo de veiligheid van de ontwikkelde applicaties te waarborgen zonder afbreuk te doen aan kwaliteit.
 
 \section{Opdracht vanuit Eaglescience}
 Vanuit de CTO is de wens ontstaan om een gestructureerde methode te ontwikkelen waarbij er automatisch periodiek een SOUP analyse gedaan wordt op bestaande en nieuwe projecten. Het uiteindelijke resultaat moet zijn dat er een module wordt toegevoegd aan de reeds bestaande portal van Eaglescience waarbij project verantwoordelijken inzicht kunnen verkrijgen in de kwetsbaarheden die in een project aanwezig kunnen zijn door het gebruik van externe bibliotheken.
@@ -16,7 +16,7 @@ Vanuit Eaglescience zijn er een aantal eisen gesteld waaraan het eindproduct moe
 \textbf{functionele eisen}
 \begin{itemize}
 \item De module dient eenvoudig te worden gebruikt in de huidige CI/CD pipeline voor bestaande en nieuwe projecten
-\item De module dient gebruik te maken van de bestaande ++huidige++ projectstructuur van het portal 
+\item De module dient gebruik te maken van de bestaande ++huidige++ projectstructuur van het portal
 \item De module dient ondersteuning te bieden voor meerdere omgevingen(OTAP)
 \item De module dient met een instelbaar interval de analyse uit te voeren
 \item De module op project en omgeving niveau te rapporteren over bekende kwetsbaarheden
@@ -48,12 +48,12 @@ Vanuit de CTO zijn er naast de functionele eisen ook eisen gesteld aan de opleve
 
 
 \section{Opdracht fasen}
-Om de hierboven beschreven opdracht zo goed als mogelijk uit te voeren dient er eerst een onderzoek gedaan worden naar het begrippen binnen het domein SOUP en daarnaast mogelijkheden om bibliotheken te screenen/testen op kwetsbaarheden. Daarna moet er een module ontwikkeld worden die deze mogelijkheid implementeerd met in achtneming van de bovengenoemde eisen. 
+Om de hierboven beschreven opdracht zo goed als mogelijk uit te voeren dient er eerst een onderzoek gedaan worden naar het begrippen binnen het domein SOUP en daarnaast mogelijkheden om bibliotheken te screenen/testen op kwetsbaarheden. Daarna moet er een module ontwikkeld worden die deze mogelijkheid implementeerd met in achtneming van de bovengenoemde eisen.
 \subsection{Fase 1: Onderzoek}
-Als eerste dient er een begrippen/literatuur onderzoek gedaan te worden binnen het domein soup om een goed kennis te vergaren over het domein om zo een basis te leggen voor een te implementeren module. Daarnaast dient er onderzoek gedaan te worden om te zien of er bibliotheken zijn en resources waar informatie of SOUP bibliotheken te vinden is. en aan welke eisen deze moeten voldoen. Hier lettende op de eisen vanuit Eaglescience en de mogelijkheden die deze analyse bibliotheken bieden. Deze fase wordt beschreven in het tweede deel van dit document. 
+Als eerste dient er een begrippen/literatuur onderzoek gedaan te worden binnen het domein soup om een goed kennis te vergaren over het domein om zo een basis te leggen voor een te implementeren module. Daarnaast dient er onderzoek gedaan te worden om te zien of er bibliotheken zijn en resources waar informatie of SOUP bibliotheken te vinden is. en aan welke eisen deze moeten voldoen. Hier lettende op de eisen vanuit Eaglescience en de mogelijkheden die deze analyse bibliotheken bieden. Deze fase wordt beschreven in het tweede deel van dit document.
 
 \subsection{Fase 2: Oplevering SOUP analyse module}
-De uit het onderzoek behaalde resultaten ten opzicht van beschikbare resources om een SOUP analyse te voeden moet worden geimplementeerd in een module binnen een bestaande applicatie. Deze module dient te voldoen aan de eisen die gesteld zijn. Het ontwerp en implementatie wordt beschreven 
+De uit het onderzoek behaalde resultaten ten opzicht van beschikbare resources om een SOUP analyse te voeden moet worden geimplementeerd in een module binnen een bestaande applicatie. Deze module dient te voldoen aan de eisen die gesteld zijn. Het ontwerp en implementatie wordt beschreven
 
 \section{plan van aanpak}
 Het plan is als volgt:
@@ -76,7 +76,7 @@ Kijken of dit nog waardevol is : \\
 \begin{tikzpicture}[grow cyclic, text width=2.7cm, align=flush center,
 	level 1/.style={level distance=5cm,sibling angle=90},
 	level 2/.style={level distance=3cm,sibling angle=45}]
-	
+
 \node{ShareLaTeX Tutorial Videos}
 child { node {Beginners Series}
 	child { node {First Document}}
@@ -109,6 +109,3 @@ child { node {TikZ Series}
 	child { node {Mind Maps}}
 };
 \end{tikzpicture}
-
-
-

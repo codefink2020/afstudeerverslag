@@ -27,30 +27,40 @@ Om antwoorden te krijgen op de vraag welke dev-stack er gebruikt wordt bij Eagle
 
 \section{Hoe wordt er op het moment gewerkt binnen eagleScience?}
 \subsection{projecten}
+Projecten lopen binnen eaglescience een vooraf bepaalde fasen door die hieronder worden beschreven. De module die ontwikkeld wordt zal middels het zelfde principe worden ontwikkeld echter dan met veel interne kenmerken.
 \subsubsection{Phase1: Sales \& acquisition}
-Deze fase is een onderzoeksfase waarin vooral de wensen van de klant in kaart wordt gebracht. Hieraan kan gedacht worden aan de volgende zaken: Doel van de applicatie en de requirements, planning, budget.\\
-De resultaten van de fase zijn: \\
-\begin{itemize}
-\item
-\item Onderhoud na ontwikkeling
-\end{itemize}
-
+Deze fase is een onderzoeksfase waarin vooral de wensen van de klant in kaart wordt gebracht. Hierbij kan gedacht worden aan de volgende zaken: Doel van de applicatie met daarbij de requirements en restraints, planning, het te gebruiken budget. Deze fase wordt vaak door de CEO, Senior Dev, en een projectmanager uitgevoerd. Het resultaat is een inschattingsdocument.
 \subsubsection{Phase2: Project initiation}
-
+In deze fase wordt het project opgestart. Er wordt een team samengesteld die gaat werken aan het ontwikkelen van de software. Er wordt een confluence en Jira pagina aangemaakt waarbij zaken over het project gedocumenteerd wordt. Deze fase is ook cruciaal om alle platform in gereedheid te brengen. te denken aan rechten voor de ontwikkelaars op Azure Cloud, Sentri, Jenkins en dergelijke. Als alles in gereedheid wordt gebracht is er een project kick-off waarbij hetteam wordt ingelicht over het project en taken die vervult moeten gaan worden.
 \subsubsection{Phase3: Start \& Execution}
-
+Dit is een iteratieve fase die in sprints doorloopt tot het project gereed is. Waarbij na iedere sprint een demo wordt gegeven.
 \subsubsection{Phase4: Project Warp up}
-
+In deze fase wordt het project opgeleverd aan de klant en wordt dan al niet door Eaglescience gehost op Azure cloud. Er wordt een project retro gehouden waarbij het team terugkijkt op de werkzaamheden en hoe deze verliepen, daarnaast is er een evaluatie met de klant.
 \subsubsection{Phase5: Project maintenance}
+Geen enkel software wordt direct zonder bugs opgeleverd deze fase duurt dan ook zolang de als software lifecycle is. of tot het budget van de klant op is :D In deze fase wordt support geleverd door Eaglescience op de source code en mogelijk aanpassingen gedaan om bugs te verwijderen of performance te verbeteren.
 
+\section{Dagelijkse werkwijze}
+Binnen Eaglesciende wordt er gewerkt middels het scrum principe. Er wordt gestracht om middels een full scrum manier te werken. Dit wil zeggen dat er teams volledig agile aan het werk zijn om iedere sprint van ongeveer 2 weken. een werkend product op te leveren middels een demo. Daarnaast wordt er gebruik gemaakt van een OTAP straat die gebruikt wordt in de verschillende fasen van ontwikkeling. Alle omgevingen worden door Jenkins op een Azure cloud gebuild. Om applicaties op te zetten wordt er gebruik gemaakt van een 'template' waarin veel boilerplate code staat die ervoor zorgt basis instellingen voor het bouwen van een project. Het voordeel is dat veel instellingen het zelfde zijn voor alle projecten en daar dus voor consistentie zorgen. In de template worden waarden aangepast benodigd voor het project.
 
-
-Binnen Eaglesciende wordt er gewerkt middels het scrum principe. Er wordt gestracht om middels een full scrum manier te werken. Dit wil zeggen dat er teams volledig agile aan het werk zijn om iedere sprint van ongeveer 2 weken. een werkend product op te leveren. Daarnaast wordt er gebruik gemaakt van een OTAP straat die gebruikt wordt in de verschillende fasen van ontwikkeling. Alle omgevingen worden door Jenkins op een Azure cloud gebuild. Om applicaties op te zetten wordt er gebruik gemaakt van een 'template' waarin veel boilerplate code staat die ervoor zorgt basis instellingen voor het bouwen van een project. Het voordeel is dat veel instellingen het zelfde zijn voor alle projecten en daar dus voor consistentie zorgen. In de template worden waarden aangepast benodigd voor het project..
-
-
+Projecten worden in taken verdeeld en die worden individueel door een developer ontwikkeld en opgeleverd. het ontwikkelen gebeurt volledig lokaal op eigen machine waarna het getest wordt op een persoonlijke omgeving in Azure cloud. Als de taak voltooid is, wat wil zeggen dat er voldoende code coverage is middels unit tests en de taak is gereviewd door een collega. wordt deze terug gemerged in de een development-branch op git welke een build kan triggeren om een testomgeving te bouwen waar iedereen in het team op kan testen. Als alles volledig en juist is getest wordt er een snapshot genmaakt van deze branch en op een acceptatie platform gebuild, dit platform waarbij getracht wordt een zo correct mogelijke replica van productie te zijn. Op acceptatie kan de klant zelf onderzoeken of de software/ aanpassingen naar wens en requirements zijn. waarna er een deploy wordt gestart naar productie waar het leefd tot een volgende iteratie wordt gedeployed.
 
 \section{Welke dev-stack wordt op het moment voornamlijk gebruikt binnen eagleScience?}
-Binnen Eaglescience worden er in principe drie talen gebruikt voor het ontwikkelen van een applicatie
+
+Binnen Eaglescience worden er in principe drie talen gebruikt voor het ontwikkelen van een applicatie binnen deze talen worden een aantal frameworks gebruikt. Naast de programeer talen maakt eagleScience gebruik van zowel SQL(MySQL) als NoSQL(MongoDB) databases om data in op te slaan.
+\begin{itemize}
+\item \textbf{Scala 2.xx} gekozen om functioneel programeren te ondersteunen maar ook de mogelijkheid om OOP methodieken te gebruiken. De filosofie binnen Eaglescience is dat functioneel programeren de testbaarheid en daarmee de zekerheid op goede software toeneemt als er puur funtioneel geprogrammeert wordt. Dit wil zeggen dat voor input x in een functie altijd output y is. Zonder enig side effect wat andere waarden muteerd. sterker nog er wordt binnen functioneel programeren bijna altijd gewerkt middels constanten die een waarde toegewezen krijgen. Mocht een veranderde waarde toch aangepast moeten worden wordt deze in een nieuwe constante geplaatst. De filosofie komt uit de wiskunde waarbij een input x nooit veranderd in een functie naar een andere waarde. Een ander voordeel van het gebruik maken van Scala is dat het draait in de Java Virtual Machine(JVM) en dus gebruik kan maken van Java bibliotheken. en Java Sourcecode. Binnen scala maken we gebruik van de volgende bibliotheken
+\begin{itemize}
+\item \textbf{PlayFramework 2.xx} Een web framework voor de ontwikkeling van webapplicaties in Scala we gebruikten het vooral als router voor de verschillende microservices die er achterliggen.
+\item \textbf{archES} is een intern ontwikkeld framework wat de opbouw en de communicatie tussen microservices in scala verbeterd. archES is geinspireerd op Apache KAFKA en werkt middels de zelfde pub -> sub principe.
+\iutem \textbf{GraphQL} Niet echt een Scala framework maar wel voor gebruikt door eaglescience als in de backend. GraphQL is een query taal voor API's en een runtime om deze queries te voorzien van bestaande data. GraphQL geeft de mogelijkheid om precies te vragen aan de backend wat er nodig is zonder een heel object en alle metadata op te halen.
+\end{itemize}
+\item \textbf{TypeScript}
+\begin{itemize}
+\item \textbf{Angular 12 > 14}
+\item \textbf{ReactJS} 
+\end{itemize}
+\item \textbf{NativeScript}
+\end{itemize}
 
 \section{Wat wordt er gebruikt op het gebied van SOUP analyses?}
 Op het moment van onderzoeken worden en er aantal tools gebruikt om inzichtelijk te maken welke kwetsbaarheden er
