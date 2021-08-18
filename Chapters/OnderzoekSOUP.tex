@@ -2,30 +2,46 @@
 
 \chapter{Onderzoek: SOUP analyse} % Chapter title
 
-\label{literatuurstudie} % For referencing the chapter elsewhere, use \autoref{ch:voorOnderzoek}
-
-In dit onderzoek wordt een antwoord gegeven uit de vraag: " Hoe implementeer ik een oplossing die een periodieke SOUP analyse doet op gezette tijden, welke voldoet aan de eisen van de CTO?" Er zal worden gekeken naar de mogelijkheid tot een bestaande oplossing die binnen de huidige pipeline valt. Uit deze hoofdvraag komen een aantal deelvragen die gedurende dit hoofdstuk zullen worden beantwoord.
-
-% OWASP 
+\label{OndSOUPAnalyse} % For referencing the chapter elsewhere, use \autoref{ch:voorOnderzoek}
+In het vorige hoofdstuk is te lezen dat Eaglescience gebruik maakt van de volgende technologi\"en
+\begin{itemize}
+  \item Scala 2.XX
+  \item TypeScript
+  \item Jenkins
+  \item Docker
+  \item Azure cloud
+\end{itemize}
+Dit onderzoek richt voornamelijk op kwetbaarheden in software en de bestrijding ervan. En specifiek op de bovenstaande technieken. De hoofdvraag voor dit hoofdstuk luid dan ook: "Met welke kwetsbaarheden hebben we te maken binnen Eaglescience en hoe kunnen we deze opsporen op een geautomatiseerde manier zonder de huidige werkwijze te verstoren?" Uit deze hoofdvraag onstaan de volgende deelvragen die in dit onderzoek beantwoord worden met daarna een conclusie op de hoofdvraag.
 
 \begin{itemize}
 \item Welke soorten kwetsbaarheden zijn er?
-\item Wat zijn Software supply chain attacks?
-\item Wat is Software of Unkown Pedigree?
-\item Welk type bibliotheken kunnen onbekende veiligheid eigenschappen hebben of is de methode van ontwikkelen niet bekend?
-
-\item
-\item Hoe wordt er op het dit moment een SOUP analyse uitgevoerd door Eaglescience en wat zijn de resource die gebruikt worden?
-\item Welke methoden zijn er buiten Eaglescience om te zien of een bibliotheek kwetsbaarheden bevat?
-\item Wat is de methode die we nu gebruiken?
-\item Wie zijn de uiteindelijke (eind)gebruikers?
-\item Hoe ziet de portal er op dit moment uit?
-\item Welke pakketten zijn er te vinden die mogelijk binnen de eisen valt en passen in de pipeline van Eaglescience?
+\item Hoe kunnen deze kwetbaarheden hun weg vinden in onze gebouwde software?
+\item Zijn er instanties die bijhouden waar zich kwetsbaarheden schuilhouden?
+\item Wat zijn methodes om te onderzoeken of er in de bestaande software kwetbaarheden bevinden?
+\item Is er een mogelijkheid om een third-party pakket in te zetten om dit te doen?
 \end{itemize}
 
 
- \section{onderzoekmethode en model}
- Uitweiden over welke methode er is gekozen en hoe het onderzoeksmodel er uit ziet.
+\section{Welke soorten kwetsbaarheden zijn er?}
+Een instantie dat zich bezighoud met het bestuderen en onderhouden van kwetbaarheden binnen software is OWASP. (OWASP.org) Wat een nonprofit organisatie is dat zich bezig houd met het verbeteren van de veiligheid van software. Het bestaat uit verschillende communities in veel landen en heeft meer dan tientallen duizend leden. OWASP zorgt voor erkenning door training en educatie aan te bieden als ook Tools en resources, maar vooral de community en het netwerk is van groot belang. Een van de zaken die zei doen is het opstellen van een top10 die eens in de 5 jaar wordt geupdate\footnote{Helaas is de laatste versie die aan het einde van 2021 uit moet komen nog niet beschikbaar op het moment van schrijven}. De OWASP-Top10 wordt samengesteld uit data van meer dan 100.000 productie applicaties en APIs wat door meer dan 500 mensen is getest door 40 verschillende bedrijven. De top 10 is een aggegratie van deze data in de meest voorkomende issues met inachtneming van exploitabity, detectability en impact.
+\begin{itemize}
+\item \textbf{A01:2017} Injection
+\item \textbf{A02:2017} Broken Authentication
+\item \textbf{A03:2017} Sensitive Data Exposure
+\item \textbf{A04:2017} XML External Entities (XXE)
+\item \textbf{A05:2017} Broken Acces Control
+\item \textbf{A06:2017} Security Misconfiguration
+\item \textbf{A07:2017} Cross-Site Scripting (XSS)
+\item \textbf{A08:2017} Insecure Deserialization
+\item \textbf{A09:2017} Using components with Known vulnerabilities
+\item \textbf{A10:2017} Insuffivient Logging \& Monitoring
+\end{itemize}
+
+Zoals te zien is in de top 10 staat op nummer A09 "Using components with Known vulberabilities"
+\section{Hoe kunnen deze kwetbaarheden hun weg vinden in onze gebouwde software?}
+\section{Zijn er instanties die bijhouden waar zich kwetsbaarheden schuilhouden?}
+\section{Wat zijn methodes om te onderzoeken of er in de bestaande software kwetbaarheden bevinden?}
+\section{Is er een mogelijkheid om een third-party pakket in te zetten om dit te doen?}
 
 
 
