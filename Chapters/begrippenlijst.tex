@@ -5,6 +5,35 @@
 %----------------------------------------------------------------------------------------
 
 % Content begins here
+
+\textbf{Nog op alphabetische volgorde zetten!!!!!!}
+
+\textbf{Pure functie}
+Een Pure functie is een functie die alleen een output genereerd op basis van een input dus als de functie \( y = x+1\) is dan geeft de functie bij een input van 2 dus 3 terug. Een pure functie heeft dus geen side-effects die iets anders doen dan een output genereren op basis van de input. Een applicatie bouwen met alleen maar pure functies is niet mogelijk gezien er nooit een I/O plaats kan vinden. Deze IO wordt dan ook meestal door een schil geregeld als in de volgende listing is te zien:
+
+Zie \autoref{lst:pf} hieronder voor een voorbeeld.
+
+%float=b,language=Scala,frame=tb, << Settings die eerst voor caption stonden
+\begin{lstlisting}[caption={Pure functie met IO},label=lst:pf]
+
+
+def abs(n:Int):Int =
+  if(n<0) -n
+  else n
+
+def formatabs(x:Int): String = {
+  val msg = "The absolute value of %d is %d"
+  msg.format(x,abs(x))
+}
+
+//Unit is het Scala equivalent van Void in Java.
+def main(args: Array[String]):Unit = {
+  println(formatabs(-42)
+}
+\end{lstlisting}
+Zoals te zien is de abs functie en pure functie gezien deze een input(Int) verwacht en alleen een output(Int) terug geeft. Ook de format Abs is een pure functie er gaan twee input variabelen in en er komt altijd een String als output uit. De waarde van de string is altijd het zelfde bij de zelfde inputs. De main functie is geen pure functie dit omdat er geen input en geen output is gedefineerd. Echter ontstaat er wel een output gezien er iets op de console wordt geprint middels de println(formatabs(-42)) functie.\\
+\textbf{JVM}\\
+De JVM ook wel Java Virtual Machine is de runtime omgeving voor java applicaties. Het voordeel is dat een JVM de runtime abstraheert van de os waardoor de applicaties geschreven in Java of een Java afgeleide taal kan worden uitgevoerd op verschillende bestuuringssystemen. Dit wordt gedaan door middel van een compilatie van (Java)Sourcecode naar bytecode wat door de JVM wordt gecompileerd middels het JIT (Just in Time) principe. Dirt komt de portabiliteit ten goede omdat er maar een enkele keer code geschreven hoef te worden wat zowel op mac, windows als linux het zelfde gedraagt. de JVM bied ondersteuning voor verschillende talen naast Java namelijk: Scala, Groovy en Kotlin.\\
 \textbf{Time to Market}\\
 De marktintroductietijd is de tijdsduur benodigd om een product te ontwerpen totdat het op de markt verschijnt. De benodigde tijd om een product op de markt te brengen is zeer belangrijk in industrieën waar de levensduur van een product kort is. Bij een korte productlevenscyclus is het belangrijk, om winst te kunnen maken, om als eerste met het product op de markt te verschijnen.\\
 
@@ -14,7 +43,7 @@ De MoSCoW-methode is een wijze van prioriteiten stellen in onder meer de softwar
 \textit{S} - should haves: deze eisen zijn zeer gewenst, maar zonder is het product wel bruikbaar;\\
 \textit{C} - could haves: deze eisen zullen alleen aan bod komen als er tijd genoeg is;\\
 \textit{W} - won't haves: deze eisen zullen in dit project niet aan bod komen maar kunnen in de toekomst, bij een vervolgproject, interessant zijn.\\
-De o's in de afkorting hebben geen betekenis
+De o's in de afkorting hebben geen betekenis\\
 
 \textbf{dev-stack}
 gebruikte technologi\"en door een bedrijf om software te ontwikkelen. Hieronder vallen de verschillende talen, frameworks de gebruikt worden om te ontwikkelen maar ook tooling dat ondersteund bij het ontwikkelen van de software.....

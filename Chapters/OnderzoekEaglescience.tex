@@ -48,11 +48,19 @@ Binnen Eaglescience worden er in principe drie talen gebruikt voor het ontwikkel
 
 \textbf{OntwikkelTalen en frameworks}
 \begin{itemize}
-\item \textbf{Scala 2.xx} gekozen om functioneel programeren te ondersteunen maar ook de mogelijkheid om OOP methodieken te gebruiken. De filosofie binnen Eaglescience is dat functioneel programeren de testbaarheid en daarmee de zekerheid op goede software toeneemt als er puur funtioneel geprogrammeert wordt. Dit wil zeggen dat voor input x in een functie altijd output y is. Zonder enig side effect wat andere waarden muteerd. sterker nog er wordt binnen functioneel programeren bijna altijd gewerkt middels constanten die een waarde toegewezen krijgen. Mocht een veranderde waarde toch aangepast moeten worden wordt deze in een nieuwe constante geplaatst. De filosofie komt uit de wiskunde waarbij een input x nooit veranderd in een functie naar een andere waarde. Een ander voordeel van het gebruik maken van Scala is dat het draait in de Java Virtual Machine(JVM) en dus gebruik kan maken van Java bibliotheken. en Java Sourcecode. Binnen scala maken we gebruik van de volgende bibliotheken
+\item \textbf{Scala 2.xx} is gekozen om functioneel programeren te ondersteunen maar ook de mogelijkheid om OOP methodieken te gebruiken. Daarnaast maakt scala gebruik van de JVM wat op zichzelf voordelen heeft in portabiliteit( code once run everywhere). Door op de JVM te draaien kan Scala ook gebruik maken van bibliotheken die op diezelfde JVM draaien gebruiken en daarmee dus ook bibliotheken die geschreven zijn in Java, Groovy of Kotlin.\\
+
+Functioneel programeren is een manier van programeren dat zijn basis heeft in de wiskunde. Neem bijvoorbeeldde volgende functie: \(y = func(x)\) waarbij \(x\) de input voor een functie is. Uit deze functie komt altijd \(y\). bijvoorbeeld als de functie \(x+1\) is dan zal de waarde van \(y\) altijd 3 zijn als \(x\) 2 is. Dit is een zekerheid alsook de zekerheid dat er geen andere waarden als output zijn dan \(y\). Dit fenomeen wordt een pure functie\footnote{Pure functies hebben geen side-effects wat betekend dat het niets anders doet dan de output geven van de functie. een Console.log wordt gezien als een side-effect omdat dit naast de output ook een andere output heeft(namelijk naar het scherm). Meestal bestaat de kern (business logic) van een applicatie uit pure functies en is er een schil omheen gebouwd die niet puur is maar zorgt voor de I/O van de applicatie} genoemd. Enkele voordelen van het functioneel programeren zijn:
+\begin{enumerate}
+  \item functioneel programeren stelt de programeur in staat om code te schrijven dat voorspelbaarder is.
+  \item makkelijker te testen is door het feit dat bij een pure functie de output altijd zeker is vanuit de input\item
+\end{enumerate}
+Daarnaast bestaat ook door een effect uit de wiskunde de muterende variable niet. een waarde van een variable is altijd het zelfde en mocht deze toch gewijzigd moeten worden ( bijv een e-mail adres van een gebruiker ) dan wordt de data in het programma opgeslagen in een nieuwe variabele waar vervolgens verder mee gewerkt wordt. Hiermee komt gelijk een nadeel van functioneel programeren. Als de applicatie veel data tegelijk muteerd dat kan de geheugen footprint groter worden dan bij een soort gelijke applicatie dat volgens het OOP principe is geschreven. Een ander nadeel is dat OOP op dit moment de defacto methode is om applicaties te schrijven en het omscholen naar functioneel programeren tijd kost.
+
+De filosofie binnen Eaglescience is dat Scala helpt bij het bouwen van software waarbij de output vast staat aan de input en dus veel betrouwbaarder en voorspelbaarder wordt. Daarnaast wordt het testen, wat een eis is in alle projecten binnen Eaglescience, veel inzichtelijker wordt.
   \begin{itemize}
     \item \textbf{PlayFramework 2.xx} Een web framework voor de ontwikkeling van webapplicaties in Scala we gebruikten het vooral als router voor de verschillende microservices die er achterliggen.
-    \item \textbf{archES} is een intern ontwikkeld framework wat de opbouw en de communicatie tussen microservices in scala verbeterd. archES is geinspireerd op Apache KAFKA en werkt middels de zelfde pub -> sub principe.
-    \item \textbf{GraphQL} Niet echt een Scala framework maar wel voor gebruikt door eaglescience als in de backend. GraphQL is een query taal voor API's en een runtime om deze queries te voorzien van bestaande data. GraphQL geeft de mogelijkheid om precies te vragen aan de backend wat er nodig is zonder een heel object en alle metadata op te halen.
+    \item \textbf{archES} is een intern ontwikkeld framework wat de opbouw en de communicatie tussen microservices in scala verbeterd. archES is geinspireerd op Apache KAFKA en werkt middels hetzelfde pub -> sub principe.
   \end{itemize}
 \item \textbf{TypeScript} TypeScript is een open-source taal wat gebouwd is op JavaScript maar met statische type definities toegevoegd, het voordeel is dat het lijkt op JavaScript echter door Types te gebruiken kunnen veel fouten worden ontdekt en opgelost bij het schrijven van de code in plaats van tijdens Run-time. Typescript is daarom de keuze van EagleScience om front-end applicaties te schrijven. Eaglescience gebruikt voornamelijk Angular voor de ontwikkeling van front-end applicaties.
 \end{itemize}
@@ -104,8 +112,3 @@ in dit geval wordt de deploy niet uitgevoerd. deze stap zorgt ervoor dat de gebo
 \item \textbf{End}
 Einde van de PipeLine Jenkins geeft de workers die het project heeft gebruikt weer vrij.
 \end{itemize}
-
-\section{Welke methoden en tools wordt er nu gebruikt voor een kwetsbaarheden analyse?}
-In de build pipeline wordt nu al gebruik gemaakt van een methode om kwetsbaarheden in images te onderzoeken en aan te geven.
-\subsection{wat is de clair en wat doet het?}
-clair is een applicatie wat docker images doorzoekt op gerapporteerde kwetsbaarheden. Dit wordt gedaan door een analyse op de inhoud van een image en niet gedurende runtime. (https://quay.github.io/clair/) Het ondersteunt een aantal linux distro's die veel gebruikt worden in docker containers. 
