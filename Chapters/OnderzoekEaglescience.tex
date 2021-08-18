@@ -3,16 +3,15 @@
 \chapter{Onderzoek: Architectuur binnen Eaglescience} % Chapter title
 
 \label{OnderzoekArchituur} % For referencing the chapter elsewhere, use \autoref{ch:voorOnderzoek}
-Dit onderzoek is een onderzoek binnen Eaglescience naar gebruikte technologi\"en welke dev-stack er gebruikt wordt. Ook zal er worden onderzocht welke build pipeline er gebruikt wordty en of mogelijkheden zijn om deze aan te passen om een SOUP-analyse uit te kunnen voeren.an SOUP-Bibliotheken mogelijk kan maken.
+Dit onderzoek is een onderzoek binnen Eaglescience naar gebruikte technologi\"en welke dev-stack er gebruikt wordt. Daarnaast wordt er gekeken naar de huidige manier van werken. Het resultaat van dit onderzoek moet zijn dat er een beeld is over hoe er nu gewerkt wordt met welke technologi\"en. Daarnaast moet er een beeld komen van de nieuwe situatie en hoe de nieuwe module in deze bestaande werkwijze past zonder veel aanpassingen.
+
+Ook zal er worden onderzocht welke build pipeline er gebruikt wordty en of mogelijkheden zijn om deze aan te passen om een SOUP-analyse uit te kunnen voeren.an SOUP-Bibliotheken mogelijk kan maken.
 \section{Onderzoeksvraag}
-De onderzoeksvraag luid: "Wat gebruikt Eaglescience aan tooling en dev-stack om dagelijks software te ontwikkellen. "
-Uit deze onderzoeksvraag komen een aantal deelvragen die verder in dit onderzoek zullen worden beantwoord.
+De onderzoeksvraag luid: "Hoe levert Eaglescience software, en wat moet er aangepast worden om de huidige manier om te zetten naar een manier waarbij er autmatisch een SOUP-analyse gedaan wordt?" Uit deze onderzoeksvraag komen een aantal deelvragen die verder in dit onderzoek zullen worden beantwoord. met als laatst het antwoord op de hoofvraag als resultaat.
+
 \begin{itemize}
-  \item Hoe wordt op dit moment gewerkt binnen Eaglescience en dan met name op het gebied van Builds en het analyseren van SOUP-Bibliotheken?
-  \item Welke Ontwikkeltalen gebruiken we binnen Eaglescience?
-
-  \item Welke frameworks worden er gebruikt binnen de ontwikkeltalen?
-
+  \item Welk process wordt er gebruikt binnen Eaglescience om software te leveren aan de klant?
+  \item Welke tooling en Ontwikkeltalen worden er gebruikt binnen eagleScience?
   \item Hoe wordt op dit moment de ontwikkelde software gedeployed?
   \item Welke architectuur wordt er op dit moment gebruikt in de portal?
   \item Waar wordt de software uiteindelijk gedeployed?
@@ -20,99 +19,94 @@ Uit deze onderzoeksvraag komen een aantal deelvragen die verder in dit onderzoek
   \item Wat is Software of Unkown Pedigree?
 \end{itemize}
 
-
-\section{Interview Senior Ontwikkelaar}
-Om antwoorden te krijgen op de vraag welke dev-stack er gebruikt wordt bij Eaglescience is er een interview gehouden met een senior ontwikkelaar.Een verslag van het dit gesprek is te vinden in bijlage X%nog toewijzen.
-
+\section{Interviews Teamleden Eaglescience}
+Om antwoorden te krijgen op de vragen die hierboven zijn uitgewerkt, zijn er interviews gehouden met een aantal personen binnen eaglescience. De gesprekken zijn uitgewerkt in de secties hieronder. De verslagen van de interviews zijn te vinden in Appendix A
 
 \section{Hoe wordt er op het moment gewerkt binnen eagleScience?}
-\subsection{projecten}
-Projecten lopen binnen eaglescience een vooraf bepaalde fasen door die hieronder worden beschreven. De module die ontwikkeld wordt zal middels het zelfde principe worden ontwikkeld echter dan met veel interne kenmerken.
-\subsubsection{Phase1: Sales \& acquisition}
-Deze fase is een onderzoeksfase waarin vooral de wensen van de klant in kaart wordt gebracht. Hierbij kan gedacht worden aan de volgende zaken: Doel van de applicatie met daarbij de requirements en restraints, planning, het te gebruiken budget. Deze fase wordt vaak door de CEO, Senior Dev, en een projectmanager uitgevoerd. Het resultaat is een inschattingsdocument.
-\subsubsection{Phase2: Project initiation}
-In deze fase wordt het project opgestart. Er wordt een team samengesteld die gaat werken aan het ontwikkelen van de software. Er wordt een confluence en Jira pagina aangemaakt waarbij zaken over het project gedocumenteerd wordt. Deze fase is ook cruciaal om alle platform in gereedheid te brengen. te denken aan rechten voor de ontwikkelaars op Azure Cloud, Sentri, Jenkins en dergelijke. Als alles in gereedheid wordt gebracht is er een project kick-off waarbij hetteam wordt ingelicht over het project en taken die vervult moeten gaan worden.
-\subsubsection{Phase3: Start \& Execution}
-Dit is een iteratieve fase die in sprints doorloopt tot het project gereed is. Waarbij na iedere sprint een demo wordt gegeven.
-\subsubsection{Phase4: Project Warp up}
+Eaglescience werkt op project basis met klanten, wat wil zeggen dat er in principe altijd een einde is gedefineerd. Door dit gegeven kan er worden gewerkt in fasen die hieronder worden beschreven. Er is een uitzondering op de laatste fase project maintenance. Welke doorloopt tot de end-of-life van de software, of tot de klant de samenwerking stopzet.
+
+\textbf{Phase1: Sales \& acquisition}
+onderzoeksfase waarin vooral de wensen en restricutes vanuit de klant in kaart wordt gebracht. Hierbij kan gedacht worden aan: Doel van de applicatie met daarbij de requirements en restraints, planning, budget en hosting. Het resultaat is een inschattingsdocument met daarin informatie die het team verder helpt in het vormgeven van het project.
+
+\textbf{Phase2: Project initiation}
+In deze fase wordt het project opgestart. Er wordt een team samengesteld die gaat werken aan het ontwikkelen van de software. Deze fase is ook cruciaal om alle platform in gereedheid te brengen. te denken aan rechten voor de ontwikkelaars op Azure Cloud, Sentri, Jenkins en dergelijke. Als alles in gereedheid wordt gebracht is er een project kick-off waarbij hetteam wordt ingelicht over het project en taken die vervult moeten gaan worden.
+
+\textbf{Phase3: Start \& Execution}
+Dit is een iteratieve fase die in sprints doorloopt tot het project gereed is. Waarbij na iedere sprint een demo wordt gegeven. verdere uitweiding over deze fase is hieronder te vinden onder "Dagelijkse werkwijze"
+
+\textbf{Phase4: Project Warp up}
 In deze fase wordt het project opgeleverd aan de klant en wordt dan al niet door Eaglescience gehost op Azure cloud. Er wordt een project retro gehouden waarbij het team terugkijkt op de werkzaamheden en hoe deze verliepen, daarnaast is er een evaluatie met de klant.
-\subsubsection{Phase5: Project maintenance}
+
+\textbf{Phase5: Project maintenance}
 Geen enkel software wordt direct zonder bugs opgeleverd deze fase duurt dan ook zolang de als software lifecycle is. of tot het budget van de klant op is :D In deze fase wordt support geleverd door Eaglescience op de source code en mogelijk aanpassingen gedaan om bugs te verwijderen of performance te verbeteren.
 
 \section{Dagelijkse werkwijze}
-Binnen Eaglesciende wordt er gewerkt middels het scrum principe. Er wordt gestracht om middels een full scrum manier te werken. Dit wil zeggen dat er teams volledig agile aan het werk zijn om iedere sprint van ongeveer 2 weken. een werkend product op te leveren middels een demo. Daarnaast wordt er gebruik gemaakt van een OTAP straat die gebruikt wordt in de verschillende fasen van ontwikkeling. Alle omgevingen worden door Jenkins op een Azure cloud gebuild. Om applicaties op te zetten wordt er gebruik gemaakt van een 'template' waarin veel boilerplate code staat die ervoor zorgt basis instellingen voor het bouwen van een project. Het voordeel is dat veel instellingen het zelfde zijn voor alle projecten en daar dus voor consistentie zorgen. In de template worden waarden aangepast benodigd voor het project.
+Binnen Eaglescience wordt er getracht om "full Scrum" te werken. Dit wil zeggen dat voor ieder project een team van maximaal 9 full-stack developers wordt aangewezen. De sprints duren ongeveer 2 weken afhankelijk van wensen van de klant en beschikbaarheid van ontwikkelaars. Iedere sprint begint met een refinement waarbij de taken die op de backlog staan worden bekeken en ingeschat door het team. Tijdens de sprint vindt de ontwikkeling middels taken plaats die vervolgens worden gereviewd door een ander teamlid. Aan het einde van de sprint vind er een retrospective plaats en eventueel een demo om de voortgang te demonstreren aan de klant, dit is ook het moment dat het team ziet hoe de applicatie in het algemeen werkt. Dit is ook het moment voor de projectmanager en product owner om de taken die op de back-log staan opnieuw te prioriseren waarbij in de refinement van de volgende sprint de taken mee worden genomen.
 
-Projecten worden in taken verdeeld en die worden individueel door een developer ontwikkeld en opgeleverd. het ontwikkelen gebeurt volledig lokaal op eigen machine waarna het getest wordt op een persoonlijke omgeving in Azure cloud. Als de taak voltooid is, wat wil zeggen dat er voldoende code coverage is middels unit tests en de taak is gereviewd door een collega. wordt deze terug gemerged in de een development-branch op git welke een build kan triggeren om een testomgeving te bouwen waar iedereen in het team op kan testen. Als alles volledig en juist is getest wordt er een snapshot genmaakt van deze branch en op een acceptatie platform gebuild, dit platform waarbij getracht wordt een zo correct mogelijke replica van productie te zijn. Op acceptatie kan de klant zelf onderzoeken of de software/ aanpassingen naar wens en requirements zijn. waarna er een deploy wordt gestart naar productie waar het leefd tot een volgende iteratie wordt gedeployed.
+\section{Ontwikkeltalen en tooling binnen EagleScience}
+Binnen Eaglescience worden er in principe drie talen gebruikt voor het ontwikkelen van een applicatie binnen deze talen worden een aantal frameworks gebruikt. Naast de programeer talen maakt eagleScience gebruik van zowel SQL(MySQL) als NoSQL(MongoDB) databases om data in op te slaan.\\
 
-\section{Welke dev-stack wordt op het moment voornamlijk gebruikt binnen eagleScience?}
-
-Binnen Eaglescience worden er in principe drie talen gebruikt voor het ontwikkelen van een applicatie binnen deze talen worden een aantal frameworks gebruikt. Naast de programeer talen maakt eagleScience gebruik van zowel SQL(MySQL) als NoSQL(MongoDB) databases om data in op te slaan.
+\textbf{OntwikkelTalen en frameworks}
 \begin{itemize}
 \item \textbf{Scala 2.xx} gekozen om functioneel programeren te ondersteunen maar ook de mogelijkheid om OOP methodieken te gebruiken. De filosofie binnen Eaglescience is dat functioneel programeren de testbaarheid en daarmee de zekerheid op goede software toeneemt als er puur funtioneel geprogrammeert wordt. Dit wil zeggen dat voor input x in een functie altijd output y is. Zonder enig side effect wat andere waarden muteerd. sterker nog er wordt binnen functioneel programeren bijna altijd gewerkt middels constanten die een waarde toegewezen krijgen. Mocht een veranderde waarde toch aangepast moeten worden wordt deze in een nieuwe constante geplaatst. De filosofie komt uit de wiskunde waarbij een input x nooit veranderd in een functie naar een andere waarde. Een ander voordeel van het gebruik maken van Scala is dat het draait in de Java Virtual Machine(JVM) en dus gebruik kan maken van Java bibliotheken. en Java Sourcecode. Binnen scala maken we gebruik van de volgende bibliotheken
+  \begin{itemize}
+    \item \textbf{PlayFramework 2.xx} Een web framework voor de ontwikkeling van webapplicaties in Scala we gebruikten het vooral als router voor de verschillende microservices die er achterliggen.
+    \item \textbf{archES} is een intern ontwikkeld framework wat de opbouw en de communicatie tussen microservices in scala verbeterd. archES is geinspireerd op Apache KAFKA en werkt middels de zelfde pub -> sub principe.
+    \item \textbf{GraphQL} Niet echt een Scala framework maar wel voor gebruikt door eaglescience als in de backend. GraphQL is een query taal voor API's en een runtime om deze queries te voorzien van bestaande data. GraphQL geeft de mogelijkheid om precies te vragen aan de backend wat er nodig is zonder een heel object en alle metadata op te halen.
+  \end{itemize}
+\item \textbf{TypeScript} TypeScript is een open-source taal wat gebouwd is op JavaScript maar met statische type definities toegevoegd, het voordeel is dat het lijkt op JavaScript echter door Types te gebruiken kunnen veel fouten worden ontdekt en opgelost bij het schrijven van de code in plaats van tijdens Run-time. Typescript is daarom de keuze van EagleScience om front-end applicaties te schrijven. Eaglescience gebruikt voornamelijk Angular voor de ontwikkeling van front-end applicaties.
+\end{itemize}
+\textbf{Tooling}
 \begin{itemize}
-\item \textbf{PlayFramework 2.xx} Een web framework voor de ontwikkeling van webapplicaties in Scala we gebruikten het vooral als router voor de verschillende microservices die er achterliggen.
-\item \textbf{archES} is een intern ontwikkeld framework wat de opbouw en de communicatie tussen microservices in scala verbeterd. archES is geinspireerd op Apache KAFKA en werkt middels de zelfde pub -> sub principe.
-\iutem \textbf{GraphQL} Niet echt een Scala framework maar wel voor gebruikt door eaglescience als in de backend. GraphQL is een query taal voor API's en een runtime om deze queries te voorzien van bestaande data. GraphQL geeft de mogelijkheid om precies te vragen aan de backend wat er nodig is zonder een heel object en alle metadata op te halen.
+\item \textbf{Jira} Is naar eigen zeggen (JiraWebsite ) de nummer 1 software ontwikkel tool voor agile teams. Eaglescience gebruikt het om projecten te plannen volgens de scrum methode. De tool maakt het mogelijk om sprints te plannen, en het bijhouden van projecten worden ondersteunt.
+\item \textbf{Confluence}
+Confluence wordt binnen Eaglsescience gebruikt als samenwerkings tool waarbij de documentatie centraal ligt. De omgeving bied de mogelijk om samen te werken met Jira waardoor documentatie makkelijk te vinden op zowel project als taak niveau.
+\item \textbf{GitLab}
+De Code Repository die Eaglescience gebruikt.
+\item \textbf{Jenkins}
+Jenkins is een open-source automation server wat door Eaglescience gebruikt wordt om projecten te builden voor verschillende doeleinden. Doordat Jenkins Open-source is zijn er veel plugins geschreven die de functionaliteit uitbreiden en het dus bruikbaar maakt voor het bouwen van een pipeline voor veel verschillende talen en frameworks.
+Jenkins kan worden vergeleken als mission control tijdens de lancering van een raket. Voordat de raket(de deploy) gelanceerd kan worden, wordt er een go-nogo sequence uitgevoerd waarbij iedere stap een test of check is waar alleen een go of no-go uit kan komen. Op het moment dat alles op go staat is de build geslaagd en kan er gedeployed worden. WIl niet zeggen dat de deploy altijd geslaagd is met Jenkins. Er zijn nog een aantal andere factoren die meehelpen aan een geslaagde deploy. zoals bijvoorbeeld bugs die niet uit de tests zijn gekomen.
+\item \textbf{Sentry}
+Sentry is een errortracking solution welke Eaglescience gebruikt voor het ik kaart brengen van bugs en fouten die optreden in applicaties op productie en acceptatie omgevingen. Het bied de mogelijkheid om gedetaileerde informatie te krijgen over de fouten die optreden inclusief metadata als frequentie, ernst en gebuikers statistiscs zoals os, device, etc).
+\item \textbf{Nagios}
+Nagios is een intern monitoring systeem die de services die nodig zijn voor het dagelijks werken binnen eaglescience monitored. en meldingen geeft als er iets mis gaat of freigd te gaan. Op basis van gegevens vanuit nagios kan automatisering en devops acties ondernemen om de services draaiend te houden.
+\item \textbf{Azure Cloud}
+Cloud omgeving van Microsoft waar we gebruik maken van verschillende services waaronder de Azure Kubernetes Service. waar we docker containers draaien in pods voor productie. Daarnaast zijn er een aantal VM's waar ontwikkelen test omgevingen draaien. Azure maakt het ook mogelijk om logs bij te houden van de pods die draaien en daar dus metrics op kunnen uitvoeren waardoor we beter inzicht hebben in de performance van de applicaties in productie. Als inzicht in het gebruik ervan. Waardoor we betere service kunnen leveren richting de klant.
 \end{itemize}
-\item \textbf{TypeScript}
+
+\section{Hoe wordt op dit moment software gedeployed?}
+Zoals hierboven berschreven wordt Jenkins gebruikt om software te deployen naar zowel de productie omgevingen alsook de verschillende development en acceptatie omgevingen. Een deploy wordt gedaan op het moment dat er source code naar gitlab gepushed wordt. Doormiddel van Tokens in de Commit message kan gestuurd worden waar de build(als deze slaagt) gedeployed wordt bijv: {-all + portal} build en deployed alleen de portal. [ci-skip] zorgt ervoor dat er alleen een push wordt gedaan en geen build wordt gestart.
+De configuratie die Jenkins gebruikt wordt beschreven in een aantal Jenkins files die meegenomen worden de repo. Naast de deploy geeft Jenkins nog een aantal andere waardevolle Artifacts als test/lint rapportages.
+Een build en deploy gaat volgens de onderstaande afbeelding:
+
+\begin{figure}[H]
+\myfloatalign
+\includegraphics[width=15cm]{gfx/Screenshot 2021-08-18 Jenkins PipeLine}
+\caption{Jenkins(Blue Ocean) pipeline}
+\label{fig:JenkinsPipeLine}
+\end{figure}
+Een Jenkins pipeline werkt in een aantal stappen dat in een .jenkinsFile wordt beschreven. Deze jenkinsFile wordt in de determine stap ingelezen en de benodigde stappen op een rij gezet. De stappen die worden uitgevoerd zijn:
 \begin{itemize}
-\item \textbf{Angular 12 > 14}
-\item \textbf{ReactJS} 
+\item \textbf{determine} Nu wordt bekeken welke stappen er nodig zijn om een succesvolle build en of deploy te kunnen doen. Aan de hand van een JenkinsFile en tokens in een Commit message wordt hier bekeken welke stappen er moeten worden uitgevoerd om tot een goed einde te komen.
+\item \textbf{base} In de base stap worden alle Containers voorbereid die nodig zijn om de applicatie te draaien. Images worden opgehaald en gedeployed De base stap is een parallel lopende stap waarin in dit geval backend, portal en de app worden voorbereid.
+\item \textbf{deploy clair} de clair scanner zoekt op kwetsbaarheden binnen containers die zojuist zijn aangemaakt. Dit is een extra veiligheid die ervoor zorgt dat de images en container veilig zijn er alleen nog door bibliotheken die gebruikt worden voor ontwikkeling kwetsbaarheden kunnen worden toegevoegd
+\item \textbf{Up to deploy}
+in dit geval wordt er voor de backend, portal, en app een parallel process gestart waarin alle drie substappen doorlopen:
+\begin{itemize}
+\item \textbf{prepare} Docker containers worden ingesteld, en klaar gezet voor het ontvangen van de services.
+\item \textbf{builtest} De services worden gebuild en gestest in deze stap. Eaglescience heeft een aantal tresholds opgesteld waaraan tests moeten voldoen om deze te analyseren worden de test resultaten vanuit de docker containers gekopieerd naar de Jenkins Store waar Jenkins de waarden kan analyseren. als alle tests binnen de resultaten vallen wordt de volgende stap uitgevoerd.
+\item \textbf{vulnerability scan} Clair scanner scant nu de containers nogmaals maar nu op de gebruikte software. Als clair iets vind dat eaglescience als verdacht acht dan wordt de build gestaakt.
 \end{itemize}
-\item \textbf{NativeScript}
+\item \textbf{PostBuild(check)}
+Alle bevindingen worden hier gecheckt mocht er iets mis zijn wordt er wederom afgebroken en is de build gefaald en kan er dus niet een deploy plaatsvinden.
+\item \textbf{Deploy \& Upload}
+in dit geval wordt de deploy niet uitgevoerd. deze stap zorgt ervoor dat de gebouwde containers worden overgedragen naar Azure. Iedere container heeft wederom zijn eigen stappen.
+\item \textbf{End}
+Einde van de PipeLine Jenkins geeft de workers die het project heeft gebruikt weer vrij.
 \end{itemize}
 
-\section{Wat wordt er gebruikt op het gebied van SOUP analyses?}
-Op het moment van onderzoeken worden en er aantal tools gebruikt om inzichtelijk te maken welke kwetsbaarheden er
+\section{Welke methoden en tools wordt er nu gebruikt voor een kwetsbaarheden analyse?}
+In de sectie over Jenkins is te zien dat er gebruik gemaakt wordt van een tool dat clair scanner heet. In deze sectie wrdt verder ingegaan op het doel en de werking van dez tool.
 
-
-
-\section{Wat is Software of Unkown Pedigree(SOUP)?}
-Volgens Wikipedia is \'software of unkown pedigree\' software dat niet volgens een software ontwikkel process of methode is ontwikkeld dat bekend is bij de eindgebruiker alsook software dat onbekende veiligheids eigenschappen heeft. De term wordt vooral gebruikt binnen het ontwikkelen van medische software.\\  % Bron: https://en.wikipedia.org/wiki/Software_of_unknown_pedigree
-Door het gebruik van dit soort software kan men er dus nooit van uitgaan dat het veilig is.  SOUP komt veelvuldig voor in Open-source software, echter is closed software ook nooit gegarandeerd 100\% veilig als het van derden komt. Betekende dat eigen software niet altijd 100\% veilig is maar er is wel meer controle dan als er software van derden gebruikt wordt.
-
-Deze definitie geld voor zowel volledige software pakketten als voor bibliotheken. Het gebruik van bibliotheken is iets waar Eaglescience veelvuldig gebruik van maakt. En geeft dit mogelijk problemen bij de veiligheid van de software zelf.
-
-\section{Welk type bibliotheken kunnen onbekende veiligheid eigenschappen hebben of is de methode van ontwikkelen niet bekend?}
-In principe is iedere bibliotheek waarvan niet de ontwikkelmethode of process te herleiden is, software of unkown pedigree. Veelal zijn dit de open-source bibliotheken die als onderdeel worden gebruikt in het ontwikkelen van zowel de frontend als de backend.
-
-\subsection{OpenSource Software}Open-Source software staat er om bekend dat het veelal door een community wordt ontwikkeld waar bij de structuur niet altijd direct zichtbaar is en daarmee dus ook de methode niet altijd duidelijk.  	Eric S. Raymond spreek ook wel van een Bazaar model % Bron:https://en.wikipedia.org/wiki/Open-source_software#Development_model %bron : https://en.wikipedia.org/wiki/The_Cathedral_and_the_Bazaar
-waarbij iedereen toegang heeft tot de source code en er zijn eigen aanpassingen aan doet, dit model stelt ook dat software snel gereleased wordt en er daarna frequente iteraties zijn om de software up-to-date te houden. Soms metd egebruiker als mede ontwikkelaar. Het grote voordeel is dat er meerdere inzichten van veel developers kunnen worden benut. dit geeft gelijk ook het nadeel dat het er vaak op neer komt dat er meerdere methodes gebruikt kunnen worden en daarmee dus niet kan worden vastgesteld hoe een pakket is ontwikkeld.
-
-\subsection{Closed Source Software}% Bron:https://en.wikipedia.org/wiki/Proprietary_software
-Closed source software is software dat is gebouwd onder een licentie, dit wil zeggen dat de gebruiker van de software/ bibliotheek meestal een bedrag moet betallen om het te betalen. Enkele voordelen van closed software is dat je weet wie het onwikkeld heeft en na een beetje onderzoek ook hoe de sotware gebouwd is. Al is dit laatste niet geheel relevant gezien er meestal een binary wordt geleverd zonder dat er aanpassingen vanuit de gebruiker in de source kan worden gedaan. Een nadeel is dat er meestal voor de software moet worden betaald en daarom dus duurder kan worden om het te gebuiken.
-
-\subsection{Conclusie}
-
-% tabel toevoegen https://en.wikipedia.org/wiki/Proprietary_software Types
-het verschil tussen open en closed software zit hem vooral op de manier waarop het vervaardigd is, in een community of door een bedrijf. daarnaast zijn de kosten ook een verschil omdat er bij closes-source altijd een licentie moet worden verkregen en hier vaak (herhaaldelijke kosten) aan zitten. is dit bij open-source meestal
-niet en wordt er vaak een vrijwillige bijdrage geleverd voor het gebruik ervan.
-
-op basis van de kosten zou je kunnen zeggen dat open-source goedkoper is dan closed source bij de aanschaf. echter moet er rekening gehouden worden dat er niet altijd bekend is heo de software gebouwd is en wat de potenti\"ele gevaren hiervan zijn.
-
-\section{Hoe wordt er op het dit moment een SOUP analyse uitgevoerd door Eaglescience en wat zijn de resource die gebruikt worden?}
-
-Interview bouwen....
-
-
-\lipsum[10]
-
-
-\section{deelvraag 2}
-
-\lipsum[10]
-
-\section{deelvraag 3}
-
-\lipsum[10]
-
-\section{deelvraag 4}
-
-\lipsum[10]
-\section{deelvraag 5}
-
-\lipsum[10]
-
-
-\section{deelvraag 6}
-\lipsum[10]
+\section{Welke architectuur wordt er op dit moment gebruikt in de portal?}
+Nu een beetje bekend is hoe Eaglescience werkt en welke tools er gebruikt worden. Wordt het tijd om de omgeving te verkennen waar de daadwerkijke nieuwe module geplaatst moet worden.
