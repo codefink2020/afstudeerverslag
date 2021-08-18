@@ -106,7 +106,6 @@ Einde van de PipeLine Jenkins geeft de workers die het project heeft gebruikt we
 \end{itemize}
 
 \section{Welke methoden en tools wordt er nu gebruikt voor een kwetsbaarheden analyse?}
-In de sectie over Jenkins is te zien dat er gebruik gemaakt wordt van een tool dat clair scanner heet. In deze sectie wrdt verder ingegaan op het doel en de werking van dez tool.
-
-\section{Welke architectuur wordt er op dit moment gebruikt in de portal?}
-Nu een beetje bekend is hoe Eaglescience werkt en welke tools er gebruikt worden. Wordt het tijd om de omgeving te verkennen waar de daadwerkijke nieuwe module geplaatst moet worden.
+In de build pipeline wordt nu al gebruik gemaakt van een methode om kwetsbaarheden in images te onderzoeken en aan te geven.
+\subsection{wat is de clair en wat doet het?}
+clair is een applicatie wat docker images doorzoekt op gerapporteerde kwetsbaarheden. Dit wordt gedaan door een analyse op de inhoud van een image en niet gedurende runtime. (https://quay.github.io/clair/) Het ondersteunt een aantal linux distro's die veel gebruikt worden in docker containers. 
