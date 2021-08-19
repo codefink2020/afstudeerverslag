@@ -26,16 +26,9 @@ Dit onderzoek richt voornamelijk op kwetbaarheden in software en de bestrijding 
 Een instantie dat zich bezighoud met het bestuderen en onderhouden van kwetbaarheden binnen software is OWASP. (OWASP.org) Wat een nonprofit organisatie is dat zich bezig houd met het verbeteren van de veiligheid van software. Het bestaat uit verschillende communities in veel landen en heeft meer dan tientallen duizend leden. OWASP zorgt voor erkenning door training en educatie aan te bieden als ook Tools en resources, maar vooral de community en het netwerk is van groot belang. Een van de zaken die zei doen is het opstellen van een top10 die eens in de 5 jaar wordt geupdate\footnote{Helaas is de laatste versie die aan het einde van 2021 uit moet komen nog niet beschikbaar op het moment van schrijven}. De OWASP-Top10 wordt samengesteld uit data van meer dan 100.000 productie applicaties en APIs wat door meer dan 500 mensen is getest door 40 verschillende bedrijven. De top 10 is een aggegratie van deze data in de meest voorkomende issues met inachtneming van exploitabity, detectability en impact.
 \begin{itemize}
 
-[Bron: https://codebros.nl/blog/wat-is-de-owasp-top-10 , https://owasp.org/www-project-top-ten/ << PDF download]
+%Bron: https://codebros.nl/blog/wat-is-de-owasp-top-10 , https://owasp.org/www-project-top-ten/ << PDF download
+
 \item \textbf{A01:2017 Injection:} \\De mogelijkheid om OS, SQL, NoSQL commandos te injecteren in web applicaties zorgt ervoor dat aanvallers toegang kunnen hebben tot delen van systemen zonder er recht op te hebben. Daarnaast is er ook de mogelijkheid om toegang te krijgen tot data die niet voor hen bedoelt is.
-
-De meest gebruikte injectie om ongewenst toegang te krijgen door hackers, is de SQL injectie. Met een SQL injectie voert de hacker een query direct uit op de database, waarmee diegene zichzelf toegang kan verlenen. Het kan ook zijn dat mede door een SQL injectie de hele applicatie niet meer werkt en alle data verloren is gegaan.
-
-De bekendste injectiemethoden zijn:
-
-    SQL injectie
-    OS commando injectie
-    LDAP injectie
 \item \textbf{A02:2017 Broken Authentication:}\\ Het verkeerd implementeren van authentication en session management kan er voor zorgen dat aanvallers wachtwoorden, sessie tokens aan kunnen passen om zo zich voor te doen als een andere gebruiker.
 
 Wanneer je een webapplicatie met een gebruikersaccount, dan is het zeer aannemelijk om te zeggen dat er een authenticatiesysteem wordt gebruikt. Het terugsturen van foutmeldingen die een hacker potentieel kunnen helpen bij het vaststellen of een gebruikersaccount bestaat vormt een behoorlijk risico.
@@ -44,55 +37,39 @@ Wanneer je een webapplicatie met een gebruikersaccount, dan is het zeer aannemel
 \item \textbf{A03:2017 Sensitive Data Exposure:}\\
 Het verkeerd of niet voldoende afschermen van APIs kunnen ervoor zorgen dat sensitive data makkelijk gevonden kan worden. Zeker als de data niet encrypted verzonden wordt.
 
-Vrijwel alle webapplicaties werken met zeer gevoelige data. Het is dus belangrijk om deze goed af te schermen, door middel van een goede encryptie. Inmiddels hebben wij hier ook een wetgeving dat ons verplicht om goed met gevoelige data om te gaan, genaamd de AVG wetgeving.
-
-
 \item \textbf{A04:2017 XML External Entities (XXE):}\\
 Veel oude of slecht geconfigureerde XM processoren evalueren externe entiteit referenties binnen XML documenten slecht. Hierdoor is het mogelijk om links te cree\"en naar bestanden en/of fileshares waar code staat die slecht is voor de applicatie [that contains malicious code].
-
-Hackers kunnen door middel van een XML bestand zichzelf toegang verlenen tot bestanden en programma’s op het besturingssysteem van de server. Dit komt met name door gedateerde XML verwerkers. Het zou ook mogelijk kunnen zijn dat de hacker data aan koppelingen, zoals bijvoorbeeld met een boekhoudpakket, door kan sturen met foutieve data en daardoor geld kan overmaken naar een bankrekening.
-
 
 \item \textbf{A05:2017 Broken Access Control:}\\
 Restricties op wat een geauthenticeerde gebruikers mogen worden niet altijd nageleefd, Aanvallers kunnend deze fouten gebruiken om toegang te krijgen tot gegevens of functionaliteiten die niet bestemd zijn voor deze gebruikers. Ze kunnen gegevens aanpassen en of toegangsrechten aanpassen.
 
-Wanneer een gebruiker foutieve rechten krijgt bij zijn rol, kan de gebruiker eventueel meer handelingen verrichten dan gewenst is. Het is daarom erg belangrijk dat het rollen- en rechtensysteem goed op elkaar afgestemd en getest wordt.
-
 \item \textbf{A06:2017 Security Misconfiguration:}\\
 Slechte configuratie van de veiligheids instellingen zijn de meest gevonden ??issue??. Dit is meestal het gevolg van het gebruiken van de default, incomplete of ad-hoc configuratie Hierdoor kunnen cloud storages open komen te staan, verkeerd geconfigureerde HTTP headers of foutmeldingen die te veel informatie meegeven ontstaan.
 
-Een ontwikkelaar gebruikt configuratiebestanden om zijn server en frameworks in te stellen, die absoluut niet inzichtelijk mogen zijn voor het openbare publiek. Het komt verrassend vaak genoeg voor dat een ontwikkelaar zijn configuratie niet op orde brengt voor het besturingssysteem van de server en van de gebruikte frameworks, wat de hacker in staat kan stellen om toegang te verlenen.
-
-
 \item \textbf{A07:2017 Cross-Site Scripting (XSS):}\\ middels XSS is het mogelijk om scripts te draaien van een andere bron dan wenselijk. Dit geeft de mogelijkheid om via een browser andere scripts in de applicatie te draaien zo proberen andere functionaliteiten toe te voegen. Wat kan resulteren in een web site dat zich anders gedraagt dan de bedoeling is.
 
-Als een webapplicatie onvoldoende validatie toepast op de te verwerken data, kan het voorkomen dat een hacker code injecteert in de webapplicatie. Hiermee kan de hacker bijvoorbeeld onveilige bestanden plaatsen op de computer van een andere gebruiker, maar ook de webapplicatie volledig vernietigen.
-
-\item \textbf{A08:2017 Insecure Deserialization:}\\ Door het niet veilig deserialiseren van gegevens verzonden naar een webpage kan het voorkomen dat er code mee wordt gestuurd dat uitgevoerd wordt om zo aanvallen uit te voeren. zoals een injection hack(A01:2017) maar ook Broken Authentication hacks(A02:2017).
-
-Er zijn webapplicaties die objecten omzetten naar tekst, al voor deze in de database opgeslagen worden. Wanneer een webapplicatie hiervan gebruik maakt en niet voldoende controles uitvoert op de ingevulde data, kan de hacker commando’s uitvoeren op het besturingssysteem van de gebruikte server.
+\item \textbf{A08:2017 Insecure Deserialization:}\\ Door het niet veilig serialiseren van objecten naar text kan het voorkomen dat er code of commando's mee worden gestuurd welke uitgevoers kunnen worden op de server.
 
 \item \textbf{A09:2017 Using components with Known vulnerabilities:}\\
-Componenten zoals bibliotheken, frameworks en andere software modules die gebruikt worden voor het ontwikkelen van een applicatie kunnen bedoelt en of onbedoeld [malicious code ] bevatten Wat kan resulteren in verschillende mogelijkheden voor de aanvaller binnen te dringen. of data te versturen naar een andere host om zo achter "beveiligide" gegevens te komen.
+Componenten zoals bibliotheken, frameworks en andere software modules die gebruikt worden voor het ontwikkelen van een applicatie kunnen bedoelt en of onbedoeld [malicious code ] bevatten Wat kan resulteren in verschillende mogelijkheden voor de aanvaller binnen te dringen. of data te versturen naar een andere host om zo achter "beveiligde" gegevens te komen.
 
-Vaak maakt een ontwikkelaar gebruik van open-source frameworks of stukken software dat door andere ontwikkelt worden. Als deze niet tijdig geüpdatet worden door de makers en de gebruikers, kunnen veiligheidsrisico’s benut worden door hackers.
 
 \item \textbf{A10:2017 Insuffivient Logging \& Monitoring:}\\
 Logging en monitoring is bijna net zo belangrijk als het ontwikkelen van een veilige applicatie, mocht er toch een aanval plaatsvinden op welke manier dient er de mogelijkheid zijn om terug te zien wat er precies gebeurt is. Logging zorgt hiervoor. Het monitoring deel is het bekijken van de logs om te zien of er iets verdachts plaats heeft gevonden. Er zijn tools beschikbaar die er voor automatische monitoring zorgen( Nagios is dit soort tool)
 
-Feitje, een lek wordt gemiddeld pas na 200 dagen gemeld bij de makers van de webapplicatie. Als de makers van de webapplicatie onvoldoende of zelfs helemaal geen logbestanden bijhoudt, waarin vastgehouden wordt wat er precies is gegaan binnen de applicatie, kan het heel lang duren voor de makers het lek boven water krijgen.
-
-Met behulp van monitoring heeft een ontwikkelaar tevens veel sneller in de gaten of een webapplicatie nog wel bereikbaar is en kan hierop beter reageren wanneer dit niet het geval is.
-
 \end{itemize}
-Binnen Eaglescience wordt er heel goed gekeken naar de manier waarop er veilige software ontwikkeld wordt. Zaken die in de OWASP top-10 staan wordt serieus mee omgegaan en actief tegen gehandeld. zo wordt er ook gegekeken naar het gebruik van bibliotheken van derden. 
+Binnen Eaglescience wordt er heel goed gekeken naar de manier waarop er veilige software ontwikkeld wordt. Zaken die in de OWASP top-10 staan wordt serieus mee omgegaan en actief tegen gehandeld. zo wordt er ook gegekeken naar het gebruik van bibliotheken van derden.
 
-Op plaat 9 is te vinden dat er kwetsbaarheden middels bibliotheken van derden binnen komen. Dit is iets wat deels buiten het bereik van Eaglescience ligt. Om ons hier tegen te beschermen is het wenselijk om dit periodiek en gewenst geautomatiseerd te doen.
+Op plaats A09:2017 is te vinden dat er kwetsbaarheden middels bibliotheken van derden binnen kunnen komen. Dit is iets wat deels buiten het bereik van Eaglescience ligt. Om ons hier tegen te beschermen is het wenselijk om periodiek en geautomatiseerd een analyse naar kwetbaarheden tedoen.
 
+De bibliotheken die gebruikt worden van derden wordt ook wel Software of unkown pedigree genoemd of kortweg SOUP. Dit houdt in dat een bibliotheek wordt ontwikkeld middels een proces of methode wat niet bekend is bij de eindgebruiker. Ook zijn vaak de details niet bekend van de bibliotheek omdat deze niet of nauwelijks wordt gereviewed door de eindgebruiker. Om deze reden is het dus onbekend of er kwetsbaarheden zitten in betreffende bibliotheken.
+De definitie van SOUP blijft niet alleen bij de bibliotheken en frameworks vanuit het open-source gebied. Veelal is ook niet bekend hoe closed-source (Proprietary software) wordt geschreven, echter door reputatie van bedrijven die deze software schrijven wordt veelal , onterecht\footnote{zie: https://www.nu.nl/tech/6097701/waarom-de-hack-bij-solarwinds-ministeries-en-grote-bedrijven-treft.html }, aangenomen dat deze geen lekken bevatten.
 
 
 \section{Zijn er instanties die bijhouden waar zich kwetsbaarheden schuilhouden?}
+Er zijn instanties die bijhouden welke componenten\footnote{Componenten worden in dit onderzoek gezien als bouwstenen van een applicatie dus: besturingssystemen, databases,  programeertalen, frameworks en bibliotheken}  
 \section{Wat zijn methodes om te onderzoeken of er in de bestaande software kwetbaarheden bevinden?}
+
 \section{Is er een mogelijkheid om een third-party pakket in te zetten om dit te doen?}
 
 
