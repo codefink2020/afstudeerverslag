@@ -2,6 +2,10 @@
 
 \chapter{Onderzoek: SOUP analyse} % Chapter title
 
+\begin{itemize}
+\item https://jeremylong.github.io/DependencyCheck/
+\end{itemize}
+
 \label{OndSOUPAnalyse} % For referencing the chapter elsewhere, use \autoref{ch:voorOnderzoek}
 In het vorige hoofdstuk is te lezen dat Eaglescience gebruik maakt van de volgende technologi\"en
 \begin{itemize}
@@ -11,7 +15,7 @@ In het vorige hoofdstuk is te lezen dat Eaglescience gebruik maakt van de volgen
   \item Docker
   \item Azure cloud
 \end{itemize}
-Dit onderzoek richt voornamelijk op kwetbaarheden in software en de bestrijding ervan. En specifiek op de bovenstaande technieken. De hoofdvraag voor dit hoofdstuk luid dan ook: "Met welke kwetsbaarheden hebben we te maken binnen Eaglescience en hoe kunnen we deze opsporen op een geautomatiseerde manier zonder de huidige werkwijze te verstoren?" Uit deze hoofdvraag onstaan de volgende deelvragen die in dit onderzoek beantwoord worden met daarna een conclusie op de hoofdvraag.
+Dit onderzoek richt voornamelijk op kwetbaarheden in bibliotheken  van derden en de bestrijding ervan. En specifiek op de bovenstaande door Eaglescience gebruikte technieken. De hoofdvraag voor dit hoofdstuk luid dan ook: "Met welke kwetsbaarheden hebben we te maken binnen Eaglescience en hoe kunnen we deze opsporen op een geautomatiseerde manier zonder de huidige werkwijze te verstoren?" Uit deze hoofdvraag onstaan de volgende deelvragen die in dit onderzoek beantwoord worden met daarna een conclusie op de hoofdvraag.
 
 \begin{itemize}
 \item Welke soorten kwetsbaarheden zijn er?
@@ -21,40 +25,77 @@ Dit onderzoek richt voornamelijk op kwetbaarheden in software en de bestrijding 
 \item Is er een mogelijkheid om een third-party pakket in te zetten om dit te doen?
 \end{itemize}
 
+\section{Wat zijn applicatie veiligheids risico's}
+Veiligheids risico's binnen applicaties zijn een som van kwetsbaarheden die zich bedoelt of onbedoeld in de applicatie bevinden, de vindbaarheid en de "schade" die er mee aangericht kunnen worden. de componenten van de som worden hieronder verder uitgediept als ook een top-10 uitgegen door de OWASP van de meest voorkomende kwetbaarheden.
+Een applicatie veiligheids risico is een in te schalen risico dat er een veiligheids lek ik de applicatie zit. Om een risico te vormen moeten er aan een aantal voorwaarden worden voldaan:
+
+
+\begin{figure}[h!]
+\myfloatalign
+\includegraphics[width=15cm]{gfx/application security routes}
+\caption{Aanvalllen, en hun gevolg}
+\label{fig:Appliction Security Routes}
+\end{figure}
+
+
+
+\begin{figure}[h!]
+\myfloatalign
+\includegraphics[width=12cm]{gfx/risk tabel}
+\caption{Inschaling van risico's}
+\label{fig:Appliction Security Routes}
+\end{figure}
+
+risk tabel
+
+threat agents = aanvallende entiteit
+exploitabity = exploiteetbaatheid
+weakness prevalance = vookomendheid van de zwakte in een applicatie
+weakness detectability = hoe goed is de zwakte in een applicatie te detecteren
+technical impact = technische impact op de applicaties
+business impacts = (zakelijke impact) impact op de bedrijfsvoering
+
+
+
+
+
+Attackers can potentially use many different paths through your application to do harm to your business or organization. Each of these paths represents a risk that may, or may not, be serious enough to warrant attention.
+
+ Sometimes these paths are trivial to find and exploit, and sometimes they are extremely difficult. Similarly, the harm that is caused may be of no consequence, or it may put you out of business. To determine the risk to your organization, you can evaluate the likelihood associated with each threat agent, attack vector, and security weakness and combine it with an estimate of the technical and business impact to your organization. Together, these factors determine your overall risk.
 
 \section{Welke soorten kwetsbaarheden zijn er, en hoe vinden zei hun weg in de door Eaglescience ontwikkelde software?}
+
+
+
 Een instantie dat zich bezighoud met het bestuderen en onderhouden van kwetbaarheden binnen software is OWASP. (OWASP.org) Wat een nonprofit organisatie is dat zich bezig houd met het verbeteren van de veiligheid van software. Het bestaat uit verschillende communities in veel landen en heeft meer dan tientallen duizend leden. OWASP zorgt voor erkenning door training en educatie aan te bieden als ook Tools en resources, maar vooral de community en het netwerk is van groot belang. Een van de zaken die zei doen is het opstellen van een top10 die eens in de 5 jaar wordt geupdate\footnote{Helaas is de laatste versie die aan het einde van 2021 uit moet komen nog niet beschikbaar op het moment van schrijven}. De OWASP-Top10 wordt samengesteld uit data van meer dan 100.000 productie applicaties en APIs wat door meer dan 500 mensen is getest door 40 verschillende bedrijven. De top 10 is een aggegratie van deze data in de meest voorkomende issues met inachtneming van exploitabity, detectability en impact.
 \begin{itemize}
 
 %Bron: https://codebros.nl/blog/wat-is-de-owasp-top-10 , https://owasp.org/www-project-top-ten/ << PDF download
 
-\item \textbf{A01:2017 Injection:} \\De mogelijkheid om OS, SQL, NoSQL commandos te injecteren in web applicaties zorgt ervoor dat aanvallers toegang kunnen hebben tot delen van systemen zonder er recht op te hebben. Daarnaast is er ook de mogelijkheid om toegang te krijgen tot data die niet voor hen bedoelt is.
-\item \textbf{A02:2017 Broken Authentication:}\\ Het verkeerd implementeren van authentication en session management kan er voor zorgen dat aanvallers wachtwoorden, sessie tokens aan kunnen passen om zo zich voor te doen als een andere gebruiker.
+\item \textbf{A01:2017 Injection [exploitabity: 3, Prevelance: 2, detectability: 3, technical: 3] :} \\De mogelijkheid om OS, SQL, NoSQL commandos te injecteren in web applicaties zorgt ervoor dat aanvallers toegang kunnen hebben tot delen van systemen zonder er recht op te hebben. Daarnaast is er ook de mogelijkheid om toegang te krijgen tot data die niet voor hen bedoelt is.
 
-Wanneer je een webapplicatie met een gebruikersaccount, dan is het zeer aannemelijk om te zeggen dat er een authenticatiesysteem wordt gebruikt. Het terugsturen van foutmeldingen die een hacker potentieel kunnen helpen bij het vaststellen of een gebruikersaccount bestaat vormt een behoorlijk risico.
+\item \textbf{A02:2017 Broken Authentication [exploitabity: 3, Prevelance: 2, detectability: 2, technical: 3]:}\\ Het verkeerd implementeren van authentication en session management kan er voor zorgen dat aanvallers wachtwoorden, sessie tokens aan kunnen passen om zo zich voor te doen als een andere gebruiker.
 
-
-\item \textbf{A03:2017 Sensitive Data Exposure:}\\
+\item \textbf{A03:2017 Sensitive Data Exposure [exploitabity: 2, Prevelance: 3, detectability: 2, technical: 3]:}\\
 Het verkeerd of niet voldoende afschermen van APIs kunnen ervoor zorgen dat sensitive data makkelijk gevonden kan worden. Zeker als de data niet encrypted verzonden wordt.
 
-\item \textbf{A04:2017 XML External Entities (XXE):}\\
+\item \textbf{A04:2017 XML External Entities (XXE) [exploitabity: 2, Prevelance: 2, detectability: 3, technical: 3]:}\\
 Veel oude of slecht geconfigureerde XM processoren evalueren externe entiteit referenties binnen XML documenten slecht. Hierdoor is het mogelijk om links te cree\"en naar bestanden en/of fileshares waar code staat die slecht is voor de applicatie [that contains malicious code].
 
-\item \textbf{A05:2017 Broken Access Control:}\\
+\item \textbf{A05:2017 Broken Access Control [exploitabity: 2, Prevelance: 2, detectability: 2, technical: 3]:}\\
 Restricties op wat een geauthenticeerde gebruikers mogen worden niet altijd nageleefd, Aanvallers kunnend deze fouten gebruiken om toegang te krijgen tot gegevens of functionaliteiten die niet bestemd zijn voor deze gebruikers. Ze kunnen gegevens aanpassen en of toegangsrechten aanpassen.
 
-\item \textbf{A06:2017 Security Misconfiguration:}\\
+\item \textbf{A06:2017 Security Misconfiguration [exploitabity: 3, Prevelance: 3, detectability: 3, technical: 2]:}\\
 Slechte configuratie van de veiligheids instellingen zijn de meest gevonden ??issue??. Dit is meestal het gevolg van het gebruiken van de default, incomplete of ad-hoc configuratie Hierdoor kunnen cloud storages open komen te staan, verkeerd geconfigureerde HTTP headers of foutmeldingen die te veel informatie meegeven ontstaan.
 
-\item \textbf{A07:2017 Cross-Site Scripting (XSS):}\\ middels XSS is het mogelijk om scripts te draaien van een andere bron dan wenselijk. Dit geeft de mogelijkheid om via een browser andere scripts in de applicatie te draaien zo proberen andere functionaliteiten toe te voegen. Wat kan resulteren in een web site dat zich anders gedraagt dan de bedoeling is.
+\item \textbf{A07:2017 Cross-Site Scripting (XSS) [exploitabity: 3, Prevelance: 3, detectability: 3, technical: 2]:}\\ middels XSS is het mogelijk om scripts te draaien van een andere bron dan wenselijk. Dit geeft de mogelijkheid om via een browser andere scripts in de applicatie te draaien zo proberen andere functionaliteiten toe te voegen. Wat kan resulteren in een web site dat zich anders gedraagt dan de bedoeling is.
 
-\item \textbf{A08:2017 Insecure Deserialization:}\\ Door het niet veilig serialiseren van objecten naar text kan het voorkomen dat er code of commando's mee worden gestuurd welke uitgevoers kunnen worden op de server.
+\item \textbf{A08:2017 Insecure Deserialization [exploitabity: 1, Prevelance: 2, detectability: 2, technical: 3]:}\\ Door het niet veilig serialiseren van objecten naar text kan het voorkomen dat er code of commando's mee worden gestuurd welke uitgevoers kunnen worden op de server.
 
-\item \textbf{A09:2017 Using components with Known vulnerabilities:}\\
+\item \textbf{A09:2017 Using components with Known vulnerabilities [exploitabity: 2, Prevelance: 3, detectability: 2, technical: 2]:}\\
 Componenten zoals bibliotheken, frameworks en andere software modules die gebruikt worden voor het ontwikkelen van een applicatie kunnen bedoelt en of onbedoeld [malicious code ] bevatten Wat kan resulteren in verschillende mogelijkheden voor de aanvaller binnen te dringen. of data te versturen naar een andere host om zo achter "beveiligde" gegevens te komen.
 
-
-\item \textbf{A10:2017 Insuffivient Logging \& Monitoring:}\\
+\item \textbf{A10:2017 Insuffivient Logging \& Monitoring[exploitabity: 2, Prevelance: 3, detectability: 1, technical: 2]:}\\
 Logging en monitoring is bijna net zo belangrijk als het ontwikkelen van een veilige applicatie, mocht er toch een aanval plaatsvinden op welke manier dient er de mogelijkheid zijn om terug te zien wat er precies gebeurt is. Logging zorgt hiervoor. Het monitoring deel is het bekijken van de logs om te zien of er iets verdachts plaats heeft gevonden. Er zijn tools beschikbaar die er voor automatische monitoring zorgen( Nagios is dit soort tool)
 
 \end{itemize}
