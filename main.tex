@@ -94,41 +94,41 @@
 
 % Text on the Part 1 page describing  the content in Part 1
 
-\include{Chapters/Inleiding} % inleiding
+\include{Chapters/0000-Inleiding} % inleiding
 
 \ctparttext{}
- \part{Opdracht} % First part of the thesis
-\include{Chapters/Opdrachtgever} % Chapter 1 Eaglescience
-\include{Chapters/Opdracht} % Chapter 2 Opdracht
+\part{Opdracht}\label{prt:opdracht} % First part of the thesis
+\include{Chapters/0101-Opdrachtgever} % Chapter 1 Eaglescience
+\include{Chapters/0102-Opdracht} % Chapter 2 Opdracht
 
-\part{Requirements Analyse en planning}
-\include{Chapters/ReqPlanInl}
-\include{Chapters/RequirementAnalyse}
-\include{Chapters/Planning}
+\part{Requirements Analyse en planning}\label{prt:Requirements}
+\include{Chapters/0201-ReqPlanInl}
+\include{Chapters/0202-RequirementAnalyse}
+\include{Chapters/0203-Planning}
 
 \ctparttext{}
-\part{Onderzoek} % Second part of the thesis
-\include{Chapters/OnderzoekInl}
-\include{Chapters/OnderzoekMethode}
-\include{Chapters/OnderzoekEaglescience}
-\include{Chapters/OnderzoekSOUP}
-\include{Chapters/OnderzoekConc}
+\part{Onderzoek}\label{prt:Onderzoek} % Second part of the thesis
+\include{Chapters/0301-OnderzoekInl}
+\include{Chapters/0302-OnderzoekMethode}
+\include{Chapters/0303-OnderzoekEaglescience}
+\include{Chapters/0304-OnderzoekSOUP}
+\include{Chapters/0305-OnderzoekConc}
 
  \ctparttext{}
- \part{Ontwikkeling van SOUP module}
- \include{Chapters/impInl}
- \include{Chapters/FunctioneelOntwerp}
- \include{Chapters/implarchitectuur}
- \include{Chapters/implImplementatie}
- \include{Chapters/implTesting}
- \include{Chapters/implDeploy}
- \include{Chapters/implResultaat}
+ \part{Ontwikkeling van SOUP module}\label{prt:Impolementatie}
+ \include{Chapters/0401-impInl}
+ \include{Chapters/0402-FunctioneelOntwerp}
+ \include{Chapters/0403-implarchitectuur}
+ \include{Chapters/0404-implImplementatie}
+ \include{Chapters/0405-implTesting}
+ \include{Chapters/0406-implDeploy}
+ \include{Chapters/0407-implResultaat}
 
  \ctparttext{}
 
- \part{Conclussie en andere aflsluitende dingen}
- \include{Chapters/conInl}
- \include{Chapters/conclussie}
+ \part{Conclusie en andere afsluitende dingen}\label{prt:Conclussie}
+ \include{Chapters/0501-conInl}
+ \include{Chapters/0502-conclussie}
 
 \cleardoublepage % Empty page before the start of the next part
 
@@ -146,11 +146,11 @@
 
 \appendix
 
-\part{Appendix} % New part of the thesis for the appendix
+\part{Appendix}\label{prt:Appendix} % New part of the thesis for the appendix
 
-\include{Chapters/Interviews} % Appendix A
-\include{Chapters/VoortgangModule}
-\include{Chapters/begrippenlijst} % Appendix B - empty template
+\include{Chapters/A01-Interviews} % Appendix A
+\include{Chapters/A02-VoortgangModule}
+\include{Chapters/A03-begrippenlijst} % Appendix B - empty template
 
 %----------------------------------------------------------------------------------------
 %	POST-CONTENT THESIS PAGES
