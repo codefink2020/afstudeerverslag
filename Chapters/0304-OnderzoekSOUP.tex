@@ -34,10 +34,12 @@ De impact op de bedrijfsvoering is ook specifiek
   \label{fig:Application Security Routes}
 \end{figure}
 
-Veiligheids risico's kunnen in categori\"en worden geplaatst middels een gradatie systeem die in figuur x te ze zien is.
+Veiligheids risico's kunnen in categoriën worden geplaatst middels een gradatie systeem die in figuur x te ze zien is.
 De OWASP-Top10 die verder in de tekst te vinden is maakt gebruik van dit gradatie systeem om risico's in te schalen.
-OWASP is een instantie die zich bezighouden met het verbeteren van de veiligheid van applicaties. Het doet dit door onder andere training en erkenning te geven aan kwetsbaarheden.
-Zo wordt er eens in de 5 jaar een top-10 samengesteld met de op dat moment meest voorkomende kwetsbaarheden \footnote{Helaas is de laatste versie die aan het einde van 2021 uit moet komen nog niet beschikbaar op het moment van schrijven}.
+OWASP is een instantie die zich bezighouden met het verbeteren van de veiligheid van applicaties.
+Het doet dit door onder andere training en erkenning te geven aan kwetsbaarheden.
+Zo wordt er eens in de 5 jaar een top-10 samengesteld met de op dat moment meest voorkomende kwetsbaarheden.
+\footnote{Helaas is de laatste versie die aan het einde van 2021 uit moet komen nog niet beschikbaar op het moment van schrijven}
 De OWASP-Top10 wordt samengesteld uit data van meer dan 100.000 productie applicaties en APIs wat door meer dan 500 mensen is getest door 40 verschillende bedrijven.
 De top 10 is een aggegratie van deze data in de meest voorkomende issues met inachtneming van exploitabity, detectability en impact.
 
@@ -60,15 +62,16 @@ De top 10 is een aggegratie van deze data in de meest voorkomende issues met ina
 
 %Bron: https://codebros.nl/blog/wat-is-de-owasp-top-10 , https://owasp.org/www-project-top-ten/ << PDF download
 
-  \item \textbf{A01:2017 Injection [exploitabity: 3, Prevelance: 2, detectability: 3, technical: 3] :} \\De mogelijkheid om OS, SQL, NoSQL commandos te injecteren in web applicaties zorgt ervoor dat aanvallers toegang kunnen hebben tot delen van systemen zonder er recht op te hebben. Daarnaast is er ook de mogelijkheid om toegang te krijgen tot data die niet voor hen bedoelt is.
+  \item \textbf{A01:2017 Injection [exploitabity: 3, Prevelance: 2, detectability: 3, technical: 3] :} \\
+  De mogelijkheid om OS, SQL, NoSQL commandos te injecteren in web applicaties zorgt ervoor dat aanvallers toegang kunnen hebben tot delen van systemen zonder er recht op te hebben.\ Daarnaast is er ook de mogelijkheid om toegang te krijgen tot data die niet voor hen bedoelt is.
 
   \item \textbf{A02:2017 Broken Authentication [exploitabity: 3, Prevelance: 2, detectability: 2, technical: 3]:}\\ Het verkeerd implementeren van authentication en session management kan er voor zorgen dat aanvallers wachtwoorden, sessie tokens aan kunnen passen om zo zich voor te doen als een andere gebruiker.
 
   \item \textbf{A03:2017 Sensitive Data Exposure [exploitabity: 2, Prevelance: 3, detectability: 2, technical: 3]:}\\
-  Het verkeerd of niet voldoende afschermen van APIs kunnen ervoor zorgen dat sensitive data makkelijk gevonden kan worden. Zeker als de data niet encrypted verzonden wordt.
+  Het verkeerd of niet voldoende afschermen van APIs kunnen ervoor zorgen dat sensitive data makkelijk gevonden kan worden.\ Zeker als de data niet encrypted verzonden wordt.
 
   \item \textbf{A04:2017 XML External Entities (XXE) [exploitabity: 2, Prevelance: 2, detectability: 3, technical: 3]:}\\
-  Veel oude of slecht geconfigureerde XM processoren evalueren externe entiteit referenties binnen XML documenten slecht. Hierdoor is het mogelijk om links te cree\"en naar bestanden en/of fileshares waar code staat die slecht is voor de applicatie [that contains malicious code].
+  Veel oude of slecht geconfigureerde XML-processoren evalueren externe entiteit referenties binnen XML documenten slecht. Hierdoor is het mogelijk om links te cree\"en naar bestanden en/of fileshares waar code staat die slecht is voor de applicatie [that contains malicious code].
 
   \item \textbf{A05:2017 Broken Access Control [exploitabity: 2, Prevelance: 2, detectability: 2, technical: 3]:}\\
   Restricties op wat een geauthenticeerde gebruikers mogen worden niet altijd nageleefd, Aanvallers kunnend deze fouten gebruiken om toegang te krijgen tot gegevens of functionaliteiten die niet bestemd zijn voor deze gebruikers. Ze kunnen gegevens aanpassen en of toegangsrechten aanpassen.
