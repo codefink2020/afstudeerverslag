@@ -3,3 +3,26 @@
 \chapter{Onderzoek: Application Security begrippen}\label{ch:onderzoek:-application-security-begrippen}
 Dit hoofdstuk beschrijft een literatuur studie die gedaan is om verduidelijking van het onderwerp SOUP en zijn de potentiele gevaren die met zich mee brengen in het gebruik van SOUP. De verduidelijking wordt gegeven in het beantwoorden van een aantal vragen die op komen in de komende onderzoeken.
 En zal de lezer helpen met het begrijpen van de zaken die in de komende hoofdstukken worden beschreven.
+
+\section{Wat is SOUP?}\label{sec:wat-is-soup?}
+De term SOUP komt oorspronkelijk de wereld van de ontwikkeling van medische software en staat voor "Software Of Unkown Provenance".
+SOUP wordt gezien als een software component dat al ontwikkeld is en beschikbaar is gesteld voor gebruik door een instantie anders dan de gebruiker zonder dat de bewijzen zijn over het bouwen van de software.
+Hierdoor is het dus niet duidelijk welk process er is gevolgt tijdens het ontwikkelen en daarmee dus ook de (medische)veiligheid niet is aan te tonen.
+De term wordt nu steeds vaker gebruikt in de algemene software ontwikkel kringen om aan te geven dat er van een betreffent software component(framework, bibliotheek, etc.) niet bekend is hoe het ontwikkeld, getest is.
+Hierdoor is er dus geen zekerheid dat het component kwetsbaarheden kan bevatten.
+Kwetsbaarheden in deze zin zijn dan voornamelijk lekken of veranderingen van functionaliteiten binnen een software.
+
+Bron: "https://johner-institute.com/articles/software-iec-62304/soup-and-ots/"
+
+\section{Hoe kan het gebruik van SOUP gevaarlijk zijn?}\label{sec:hoe-kan-het-gebruik-van-soup-gevaarlijk-zijn?}
+Uit een onderzoek van Contrast Security blijkt dat 80\% van de broncode die vandaag de dag gebruikt wordt om een applicatie te schrijven bestaat uit broncode uit een externe bibliotheek.
+Waarbij een vierde van de gedownloade bibliotheken kwetsbaarheden bevatten.
+De kans dat er dus onbekende kwetsbaarheden in een applicatie sluipen is dus zeker aanwezig.
+
+
+Bron: On the inpact of security vulnerabilities in npm package dependency network - Alexandre Decan, Tom Mens, Eleni Constantinou (2018), The unfortunate reality of insecure Libraries - Contrast security
+
+
+\section{Instanties en SOUP}\label{sec:instanties-en-soup}
+
+\section{Wat is een CVE en wat is verschil met een CVSS?}\label{sec:wat-is-een-cve-en-wat-is-verschil-met-een-cvss?}
