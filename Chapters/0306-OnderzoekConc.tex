@@ -6,6 +6,17 @@
 
 Dit hoofdstuk zal de conclussies van beide onderzoeken samen zetten om samen tot een eind conclussie te komen waarop de ontwikkeling van de module kan worden gebasseerd.
 
+
+\section{Conclussie vooronderzoek SOUP}\label{sec:conclussie-vooronderzoek-soup}
+Als Applicatieontwikkelaars kunnen we eigenlijk niet meer zonder het gebruik van externe bibliotheken.
+De Time-To-Market is zo belangrijk geworden dat er een keuze is gemaakt om op deze manier te werken ondanks de mogelijkheid om onbedoeld kwetsbaarheden in de software te plaatsen.
+Wat op zich weer een risico met zich mee brengt in de applicatie veiligheid.
+Gelukkig zijn er een aantal instanties die helpen met het in kaart brengen van deze kwetsbaarheden door middel van CVE-databases.
+Echter, door het gebruik van externe bibliotheken die ieders weer een eigen set dependencies hebben die nog veel dieper gaan is het onmogelijk om handmatig te scannen en moet er een automatisering plaats vinden.
+Gelukkig zijn hier een aantal tools die dit kunnen doen.
+Voor de opdracht vanuit Eaglescience moet er dus gekeken worden of de tooling die hier besproken wordt ook daadwerklijk geschikt is om in de bestaande ontwikkelpipeline in te zetten.
+
+
 \section{Conclusie Intern onderzoek Eaglescience}
 Eaglescience werkt op project basis aan software voor de klant. Dit wordt gedaan op basis van "full scrum" waarbij er na iedere sprint een poging wordt gedaan om een (deels) werkende applicatie op te leveren. De applicaties die gebouwd worden zijn voornamelijk geschreven in Scala en TypeScript. De keuze voor Scala is voornamelijk gebaseerd op de mogelijkheid om condense, betrouwbare, voorspelbare en makkelijk te testen software te ontwikkelen. TypeScipt wat een superset set is van JavaScipt is gekozen omdat het de mogelijkheid bied om getypeert te programeren wat de foutgevoeligheid niet in de runtime legt maar al op het moment dat de code geschreven wordt.
 
