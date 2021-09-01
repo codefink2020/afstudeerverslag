@@ -1,17 +1,18 @@
 
-\chapter{Requirements Analyse}\label{ch:requirements-analyse} % Chapter title
+\chapter{Requirements Analyse}\label{ch:requirements-analyse}
 
-\label{requirementsAnalyse} % For referencing the chapter elsewhere, use \autoref{ch:InOnderzoek}
-Om inzicht te krijgen in de eisen van de nieuwe module naast de eisen die al vermeld staan in de opdracht.
-is er een intake gesprek geweest met de CTO (Bas Breier), in dit gesprek is aan bod gekomen wie de stakeholders zijn en welke requirements hij heeft naast de requirements die in de opdracht staan.
+\label{requirementsAnalyse}
+Om inzicht te krijgen in de eisen van de nieuwe module naast de eisen die al vermeld staan in de opdracht is er een intake gesprek geweest met de CTO (Bas Breier), in dit gesprek is aan bod gekomen wie de betrokkenen zijn en welke requirements hij heeft naast de requirements die in de opdracht staan.
 In dit gesprek is er meer ingegaan op de details van het functioneren van de module.
-Ook is er een beeld geschets over de huidige situatie en naar welke situatie er gegaan moet worden. % nog ff aanpassenin ABN Het verslag is
-Zie in Appendix A.XX het verslag van dit interview.
-
-
+Ook is er een beeld geschets over de huidige situatie en naar welke situatie er gegaan moet worden. %TODO: nog even aanpassen in ABN Het verslag is
+Zie in Appendix \ref{sec:intake-gesprek} het verslag van dit interview.
+\bigskip
 \section{Huidige situatie}\label{sec:huidige-situatie}
-In de huidige situatie wordt er een SOUP analyse gedaan door de ontwikkelaars op het moment dat een project ontwikkeld wordt.
-dit is veelal handmatig zoeken in online resources op bibliotheken die gebruikt worden.
+In de huidige situatie wordt er een SOUP-analyse gedaan door de ontwikkelaars op het moment dat een project ontwikkeld wordt.
+Dit is vaak handmatig zoeken in online resources op bibliotheken die gebruikt worden.
+En deze worden vervolgen geupdate waar nodig.
+Dit zoeken naar resources is tijdsintensief.
+En daarnaast is de rapportage ook niet centraal terug te vinden.
 Dit neemt veel kostbare tijd in beslag die beter besteed kan worden om nieuwe features toe te voegen.
 Daarnaast worden de bevindingen die gedaan worden niet centraal opgeslagen zodat er een potentie is dat niet iedereen op de hoogte is van de actuele informatie.
 
@@ -19,14 +20,15 @@ Daarnaast worden de bevindingen die gedaan worden niet centraal opgeslagen zodat
 De gewenste situatie is dat projectmanagers, ontwikkelaars en het dagelijks bestuur real-time inzage hebben in de huidige staat van de kwetsbaarheden in de gebruikte externe bibliotheken.
 Dit is te doen door een onderdeel in een portal te bouwen die op een overzichtelijke manier deze informatie weergeeft.
 
-om de informatie weer te kunnen geven moet er een manier worden gevonden om tijdens een bouwprocess de versies van de gebruikte bibliotheken te achterhalen.
+Om de informatie weer te kunnen geven moet er een manier worden gevonden om tijdens een bouwprocess de versies van de gebruikte bibliotheken te achterhalen.
 En deze vervolgens tegen een Vulnerability Database te leggen.
 Deze gegevens dienen in een interne database opgeslagen te worden waarop de het onderdeel in de portal gegevens op kan halen.
 Waarop vervolgens door de stakeholders de gewenste informatie gehaald kan worden.
 
 \section{De stakeholders}\label{sec:de-stakeholders}
-De stakeholders kunnen opgedeelt worden in twee hoofdgroepen(Tabel 1): externe en interne stakeholders.
-De klant is als enige een externe stakeholder en is buiten de analyse gehouden omdat deze staceholder alleen indirect resultaten bemerkt doormiddel van het verkrijgen van verbeterde software.
+
+De stakeholders kunnen opgedeelt worden in twee hoofdgroepen externe en interne stakeholders.
+De klant is als enige een externe stakeholder en is buiten de analyse gehouden omdat deze staceholder alleen indirect resultaten bemerkt door middel van het verkrijgen van verbeterde software.
 De klant als stakeholder is dus passief en zal niet worden geinterviewt.
 Met personen uit de interne stakeholders groepen zijn interviews gehouden om een inzicht te krijgen in hun belang en invloed bij de module.
 Daarnaast is er een eerste lijst met requirements opgesteld waaraan de module dient te voldoen.
@@ -35,8 +37,8 @@ Na iedere tweede sprint zal een evaluatie worden gehouden om inzicht te krijgen 
 De belangen en invloeden worden in de komende subsecties verder toegelicht.
 
 \subsection{Dagelijks bestuur (intern)}\label{subsec:dagelijks-bestuur-(intern)}
-Het dagelijks bestuur ziet vooral voordelen in het inzicht krijgen van kwetsbaarheden op een overzichtelijke manier, zodat ze kunnen sturen in het gebruik van biblioteken of andere technologiën.
-Echter zien zij ook kosten gemoeid met de verandering.
+Het dagelijks bestuur ziet vooral voordelen in het inzicht krijgen van kwetsbaarheden op een overzichtelijke manier, zodat ze kunnen sturen in het gebruik van biblioteken of andere technologiën. Ook al zullen er kosten die niet direct terug te verdienen zijn gemoeit met de ontwikkeling van een nieuwe methode.
+Echter, zien zij ook kosten gemoeid met de verandering.
 Door de manier van werken dienen deze kosten terug verdient te worden door werkzaamheden binnen andere projecten.
 De CTO ziet vooral tijdswinst zodat de time-to-market voor andere projecten hoger ligt en dus meer verdient kan worden.
 \subsection{Projectmanagers (intern)}\label{subsec:projectmanagers-(intern)}
@@ -56,7 +58,7 @@ Als laatste de klant welke een passieve stakeholder is gezien zij niet direct be
 \caption{StakeHolders Analyse}
 \label{fig:StakeholderAnalyse}
 \end{figure}
-Zoals te zien is in figuur[X] zijn de projectmanager, het ontwikkelteam en de klanten het meest gebaad bij een nieuwe module voor de analyse van kwetsbaarheden.
+Zoals te zien is in figuur~\ref{fig:StakeholderAnalyse} zijn de projectmanager, het ontwikkelteam en de klanten het meest gebaad bij een nieuwe module voor de analyse van kwetsbaarheden.
 Echter zijn de klanten niet tot bijna niet betrokken bij de ontwikkeling van de module maar hebben er indirect wel belang bij omdat de software die voor hen ontwikkeld wordt veiliger wordt door het voeren van een geautomatiseerde analyse.
 Door deze analyse worden alleen de requirements meegnomen die intern zijn opgenomen.
 \section{Requirements}\label{sec:requirements}
