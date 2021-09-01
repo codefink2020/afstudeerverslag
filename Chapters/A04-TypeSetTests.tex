@@ -1,0 +1,77 @@
+\chapter{TypeSetting Testst}\label{ch:typesetting-testst}
+
+Een aantal secties met tests om een bepaalde zaak uit te testen in \LaTeX
+\section{mindmap test}\label{sec:mindmap-test}
+Kijken of dit nog waardevol is:
+
+\begin{tikzpicture}[grow cyclic, text width=2.7cm, align=flush center,
+  level 1/.style={level distance=5cm,sibling angle=90},
+  level 2/.style={level distance=3cm,sibling angle=45}]
+
+  \node{ShareLaTeX Tutorial Videos}
+  child { node {Beginners Series}
+  child { node {First Document}}
+  child { node {Sections and Paragraphs}}
+  child { node {Mathematics}}
+  child { node {Images}}
+  child { node {bibliography}}
+  child { node {Tables and Matrices}}
+  child { node {Longer Documents}}
+  }
+  child { node {Thesis Series}
+  child { node {Basic Structure}}
+  child { node {Page Layout}}
+  child { node {Figures, Subfigures and Tables}}
+  child { node {Biblatex}}
+  child { node {Title Page}}
+  }
+  child { node {Beamer Series}
+  child { node {Getting Started}}
+  child { node {Text, Pictures and Tables}}
+  child { node {Blocks, Code and Hyperlinks}}
+  child { node {Overlay Specifications}}
+  child { node {Themes and Handouts}}
+  }
+  child { node {TikZ Series}
+  child { node {Basic Drawing}}
+  child { node {Geogebra}}
+  child { node {Flow Charts}}
+  child { node {Circuit Diagrams}}
+  child { node {Mind Maps}}
+  };
+\end{tikzpicture}
+
+
+\section{GANT CHART test}
+\begin{figure}
+  \begin{ganttchart}[hgrid=true,
+  vgrid={*2{red}, *1{green}, *{10}{blue, dashed}}, x unit=1.2cm, y unit title=.6cm, y unit chart=.6cm]{1}{11}
+  \gantttitle{2021 sprints}{11}\\
+  \gantttitlelist{1,...,11}{1} \\
+  \ganttgroup{Ontwerp}{1}{4}\\
+  \ganttbar{interviews}{1}{2}\\
+  \ganttlinkedbar{uitwerking interviews}{2}{3}\\
+  \ganttlinkedbar{Design plan}{3}{4}\\
+  \ganttmilestone{design approved}{4}\\
+
+  \ganttgroup{Architectuur}{4}{5}\\
+  \ganttbar{onderzoek }{4}{4}\\
+  \ganttlinkedbar{ module integratie}{5}{5}\\
+  \ganttmilestone{Architectuur approved}{5}\\
+  \ganttgroup{Implementatie}{6}{11}\\
+  \ganttmilestone{implementatie done}{11}\\
+
+  \end{ganttchart}
+
+  \begin{ganttchart}[hgrid=true,
+  vgrid={*2{red}, *1{green}, *{10}{blue, dashed}}, x unit=2.4cm, y unit title=.6cm, y unit chart=.6cm]{1}{4}
+  \gantttitle{2022 sprints}{4}\\
+  \gantttitlelist{1,...,4}{1} \\
+  \ganttgroup{Testing}{1}{4}\\
+  \ganttmilestone{testing done approved}{4}\\
+
+  \ganttgroup{Deployment}{2}{4}\\
+  \ganttmilestone{Deployed}{4}\\
+  \end{ganttchart}
+  \caption{Planning}\label{fig:Planning}
+\end{figure}

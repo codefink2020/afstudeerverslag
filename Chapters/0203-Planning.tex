@@ -11,37 +11,6 @@ Welke iedere sprint zal worden gereviewed en aangepast aan de daadwerkelijke sta
 
 \section{Project plannin in grote lijnen.}\label{sec:project-plannin-in-grote-lijnen.}
 % aan werken om de charts gelijk te houden.... Wellicht gedraaid op de volgende pagina.
-\begin{figure}
-\begin{ganttchart}[hgrid=true,
-vgrid={*2{red}, *1{green}, *{10}{blue, dashed}}, x unit=1.2cm, y unit title=.6cm, y unit chart=.6cm]{1}{11}
-  \gantttitle{2021 sprints}{11}\\
-  \gantttitlelist{1,...,11}{1} \\
-  \ganttgroup{Ontwerp}{1}{4}\\
-  \ganttbar{interviews}{1}{2}\\
-  \ganttlinkedbar{uitwerking interviews}{2}{3}\\
-  \ganttlinkedbar{Design plan}{3}{4}\\
-  \ganttmilestone{design approved}{4}\\
 
-  \ganttgroup{Architectuur}{4}{5}\\
-  \ganttbar{onderzoek }{4}{4}\\
-  \ganttlinkedbar{ module integratie}{5}{5}\\
-  \ganttmilestone{Architectuur approved}{5}\\
-  \ganttgroup{Implementatie}{6}{11}\\
-  \ganttmilestone{implementatie done}{11}\\
-
-\end{ganttchart}
-
-\begin{ganttchart}[hgrid=true,
-vgrid={*2{red}, *1{green}, *{10}{blue, dashed}}, x unit=2.4cm, y unit title=.6cm, y unit chart=.6cm]{1}{4}
-  \gantttitle{2022 sprints}{4}\\
-  \gantttitlelist{1,...,4}{1} \\
-  \ganttgroup{Testing}{1}{4}\\
-  \ganttmilestone{testing done approved}{4}\\
-
-  \ganttgroup{Deployment}{2}{4}\\
-  \ganttmilestone{Deployed}{4}\\
-\end{ganttchart}
-\caption{Planning}\label{fig:Planning}
-\end{figure}
 
 test
