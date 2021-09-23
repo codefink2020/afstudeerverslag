@@ -69,7 +69,7 @@
 
 %\cleardoublepage\include{FrontBackMatter/Dedication} % Dedication page
 
-%\cleardoublepage\include{FrontBackMatter/Foreword} % Uncomment and create a Foreword.tex to include a foreword
+\cleardoublepage\include{FrontBackMatter/Foreword} % Uncomment and create a Foreword.tex to include a foreword
 
 \cleardoublepage\include{FrontBackMatter/Abstract} % Abstract page
 
@@ -94,17 +94,17 @@
 
 % Text on the Part 1 page describing  the content in Part 1
 
-\include{Chapters/0000-Inleiding} % inleiding
+\include{Chapters/0000-Inleiding}
 
 \ctparttext{}
-\part{Opdracht}\label{prt:opdracht} % First part of the thesis
-\include{Chapters/0101-Opdrachtgever} % Chapter 1 Eaglescience
-\include{Chapters/0102-Opdracht} % Chapter 2 Opdracht
+\part{Opdracht}\label{prt:opdracht}
+\include{Chapters/0101-Opdrachtgever}
+\include{Chapters/0102-Opdracht}
+\include{Chapters/0103-PlanVanAanpak}
 
-\part{Requirements Analyse en planning}\label{prt:Requirements}
+\part{Requirements Analyse}\label{prt:Requirements}
 \include{Chapters/0201-ReqPlanInl}
 \include{Chapters/0202-RequirementAnalyse}
-\include{Chapters/0203-Planning}
 
 \ctparttext{}
 \part{Onderzoek}\label{prt:Onderzoek} % Second part of the thesis
@@ -149,10 +149,10 @@
 
 \part{Appendix}\label{prt:Appendix} % New part of the thesis for the appendix
 
-\include{Chapters/A01-Interviews} % Appendix A
-\include{Chapters/A02-VoortgangModule}
-\include{Chapters/A03-begrippenlijst} % Appendix B - empty template
-\include{Chapters/A04-TypeSetTests}
+%\include{Chapters/A01-Interviews} % Appendix A
+%\include{Chapters/A02-VoortgangModule}
+%\include{Chapters/A03-begrippenlijst} % Appendix B - empty template
+%\include{Chapters/A04-TypeSetTests}
 
 %----------------------------------------------------------------------------------------
 %	POST-CONTENT THESIS PAGES
