@@ -1,36 +1,40 @@
 
 \chapter{Requirements Analyse}\label{ch:requirements-analyse}
+Dit hoofdstuk beschrijft het probleem binnen het domein van EagleScience. Daarnaast wordt de huidige situatie beschreven waarna er een gewenste situatie wordt geschetst. De stakeholders worden defineert en in kaart gebracht Waarna hun requirements in kaart worden gebracht en middels de MoSCoW methode op prioriteit worden gezet. Het resultaat is een Requirements Specificatie die in zijn geheel is terug te vinden in Appendix~\ref{ch:requirements-specificatie}
 
-\label{requirementsAnalyse}
-Om inzicht te krijgen in de eisen van de nieuwe module naast de eisen die al vermeld staan in de opdracht is er een intake gesprek geweest met de CTO (Bas Breier), in dit gesprek is aan bod gekomen wie de betrokkenen zijn en welke requirements hij heeft naast de requirements die in de opdracht staan.
-In dit gesprek is er meer ingegaan op de details van het functioneren van de module.
-Ook is er een beeld geschets over de huidige situatie en naar welke situatie er gegaan moet worden. %TODO: nog even aanpassen in ABN Het verslag is
-Zie in Appendix \ref{sec:intake-gesprek} het verslag van dit interview.
-\bigskip
 \section{Huidige situatie}\label{sec:huidige-situatie}
-In de huidige situatie wordt er een SOUP-analyse gedaan door de ontwikkelaars op het moment dat een project ontwikkeld wordt.
-Dit is vaak handmatig zoeken in online resources op bibliotheken die gebruikt worden.
-En deze worden vervolgen geupdate waar nodig.
-Dit zoeken naar resources is tijdsintensief.
-En daarnaast is de rapportage ook niet centraal terug te vinden.
-Dit neemt veel kostbare tijd in beslag die beter besteed kan worden om nieuwe features toe te voegen.
-Daarnaast worden de bevindingen die gedaan worden niet centraal opgeslagen zodat er een potentie is dat niet iedereen op de hoogte is van de actuele informatie.
+EagleScience is al een geruime tijd bezig met het fine-tunen van de buildstraat en zaken te automatiseren om zo steeds efficienter software uit te kunnen rollen. Daarnaast is het bouwen van veilige software één van de hoofdpunten van aandacht. Om dit te kunnen garanderen is iedere ontwikkelaar verplicht om te onderzoeken welke gevolgen het gebruik van bepaalde bibliotheken heeft op de ontwikkelde software. Dit onderzoek wordt op dit moment voor een groot deel handmatig gedaan door het uitpluizen van dependency declaraties op verschillende sites. Dit proces is tijdrovend en de resulterende documentatie is vaak alleen op project niveau beschikbaar. Daarnaast zijn er al afgeronde applicaties die niet onder directe aandacht van het team staan, maar wel worden gehost door EagleScience. Met de tijd kunnen er kwetsbaarheben ontstaan die ongemerkt blijven bestaan. En er mogelijk pas actie wordt ondernomen als er middels de applicatie een aanval of inbraak is gedaan.
 
 \section{Gewenste situatie}\label{sec:gewenste-situatie}
-De gewenste situatie is dat projectmanagers, ontwikkelaars en het dagelijks bestuur real-time inzage hebben in de huidige staat van de kwetsbaarheden in de gebruikte externe bibliotheken.
-Dit is te doen door een onderdeel in een portal te bouwen die op een overzichtelijke manier deze informatie weergeeft.
+Een situatie waar EagleScience naar toe wil is dat er periodiek of middels een trigger \footnote{Er kan bijvoorbeeld gedacht worden aan een commit op een branch zodat niet iedere dag een update wordt gedaan op De acceptence branche is een goed voorbeeld hiervoor} wordt onderzocht of er in de huidige dependency tree bibliotheken zitten die mogelijk kwetsbaarheden bevatten. Deze kennis dient gedeelt te worden door middel van een module in de portal die al reeds gebruikt wordt door EagleScience. Door de resultaten weer te geven in de portal ontstaat er een beter inzicht in welke bibliotheken we gebruiken en welke er potentieel kwetsbaarheden bevatten. Wat op zijn beurt weer voor veiligere applicaties kan zorgen. Ook voor de applicaties waar niet meer actief op ontwikkeld wordt. \footnote{Het is natuurlijk wel zo dat er een afhankelijk onstaat van externe bronnen die bekend moeten maken dat er een kwetsbaarheid is.}
 
-Om de informatie weer te kunnen geven moet er een manier worden gevonden om tijdens een bouwprocess de versies van de gebruikte bibliotheken te achterhalen.
-En deze vervolgens tegen een Vulnerability Database te leggen.
-Deze gegevens dienen in een interne database opgeslagen te worden waarop de het onderdeel in de portal gegevens op kan halen.
-Waarop vervolgens door de stakeholders de gewenste informatie gehaald kan worden.
+
+
+%Om inzicht te krijgen in de eisen van de nieuwe module naast de eisen die al vermeld staan in de opdracht is er een intake gesprek geweest met de CTO (Bas Breier), in dit gesprek is aan bod gekomen wie de betrokkenen zijn en welke requirements hij heeft naast de requirements die in de opdracht staan.
+%In dit gesprek is er meer ingegaan op de details van het functioneren van de module.
+%Ook is er een beeld geschets over de huidige situatie en naar welke situatie er gegaan moet worden. %TODO: nog even aanpassen in ABN Het verslag is
+%Zie in Appendix~\ref{sec:intake-gesprek} het verslag van dit interview.
+%\bigskip
+%\section{Huidige situatie}\label{sec:huidige-situatie2}
+%In de huidige situatie wordt er een SOUP-analyse gedaan door de ontwikkelaars op het moment dat een project ontwikkeld wordt.
+%Dit is vaak handmatig zoeken in online resources op bibliotheken die gebruikt worden.
+%En deze worden vervolgen geupdate waar nodig.
+%Dit zoeken naar resources is tijdsintensief.
+%En daarnaast is de rapportage ook niet centraal terug te vinden.
+%Dit neemt veel kostbare tijd in beslag die beter besteed kan worden om nieuwe features toe te voegen.
+%Daarnaast worden de bevindingen die gedaan worden niet centraal opgeslagen zodat er een potentie is dat niet iedereen op de hoogte is van de actuele informatie.
+%
+%\section{Gewenste situatie}\label{sec:gewenste-situatie2}
+%De gewenste situatie is dat projectmanagers, ontwikkelaars en het dagelijks bestuur real-time inzage hebben in de huidige staat van de kwetsbaarheden in de gebruikte externe bibliotheken.
+%Dit is te doen door een onderdeel in een portal te bouwen die op een overzichtelijke manier deze informatie weergeeft.
+%
+%Om de informatie weer te kunnen geven moet er een manier worden gevonden om tijdens een bouwprocess de versies van de gebruikte bibliotheken te achterhalen.
+%En deze vervolgens tegen een Vulnerability Database te leggen.
+%Deze gegevens dienen in een interne database opgeslagen te worden waarop de het onderdeel in de portal gegevens op kan halen.
+%Waarop vervolgens door de stakeholders de gewenste informatie gehaald kan worden.
 
 \section{De stakeholders}\label{sec:de-stakeholders}
-
-De stakeholders kunnen opgedeelt worden in twee hoofdgroepen externe en interne stakeholders.
-De klant is als enige een externe stakeholder en is buiten de analyse gehouden omdat deze staceholder alleen indirect resultaten bemerkt door middel van het verkrijgen van verbeterde software.
-De klant als stakeholder is dus passief en zal niet worden geinterviewt.
-Met personen uit de interne stakeholders groepen zijn interviews gehouden om een inzicht te krijgen in hun belang en invloed bij de module.
+Binnen EagleScience zijn er een aatal stakeholders die belang hebben bij deze nieuwe methode en module.Naast de stakeholders binnen Eaglescience is er nog een stakeholder in de vorm van de klant. Hoewel deze niet actief deelneemt in de ontwikkeling van deze module heeft het er toch baat bij dat deze module tot stand komt met als resultaat dat zij veiligere software geleverd krijgen. Met personen uit de interne stakeholders groepen zijn interviews gehouden om een inzicht te krijgen in hun belang en invloed bij de module.
 Daarnaast is er een eerste lijst met requirements opgesteld waaraan de module dient te voldoen.
 Deze lijst is een start en zal na enkele sprintdemo's worden aangepast of uitgebreid.
 Na iedere tweede sprint zal een evaluatie worden gehouden om inzicht te krijgen of de requirements nog accuraat zijn en eventueel nog moeten worden aangescherpt.
@@ -48,8 +52,8 @@ Op de vraag of het het waard is dat een aantal ontwikkelaars tijd kwijt zijn in 
 \subsection{Ontwikkelteam (intern)}\label{subsec:ontwikkelteam-(intern)}
 Het ontwikkelteam wil graag meedenken en meewerken aan een oplossing, gezien zij de gene waren die handmatig de analyse uitvoerden.
 Zij zien voor een oplossing voor een taak dat veel tijd in beslag nam en afleide van de daadwerkelijke taak.
-\subsection{Klant (extern)}\label{subsec:klant-(extern)}
-Als laatste de klant welke een passieve stakeholder is gezien zij niet direct betrokken zijn bij de ontwikkeling van de module maar wel verbeteringen genieten in de zin van veilige en betrouwbare software.
+%\subsection{Klant (extern)}\label{subsec:klant-(extern)}
+%Als laatste de klant welke een passieve stakeholder is gezien zij niet direct betrokken zijn bij de ontwikkeling van de module maar wel verbeteringen genieten in de zin van veilige en betrouwbare software.
 
 \subsection{Stakeholder analyse}\label{subsec:stakeholder-analyse}
 \begin{figure}[H]
@@ -102,7 +106,6 @@ Als blijkt dat er tussen de won'ts toch low hanging fruit blijkt te hangen kunne
 De requirements worden als epics in een JIRA omgeving gezet om vervolgens een planning te kunnen maken.
 
 
-\section{WerkWijze en planning}\label{sec:werkwijze-en-planning}
-Binnen Eaglescience wordt er scrum gewerkt en ook al ben ik als enig werkzaam op dit project zal er zoveel mogelijk op deze manier worden gewerkt inhoudend dat een sprint 2 weken duurt met aan het begin een springplanning en aan het einde van de sprint een demo en een retrospective zal worden gehouden.
-De daily stand-ups zal worden gehouden met de Product-owner en de reviewers van de code om zo een kortere feedback loop te krijgen.
-Daarnaast staan er verschillende collega's die support kunnen leveren.
+
+\section{kennis vergaring}
+De secties over de huidige en gewenste situaties zijn voornamlijk gebasseerd op eigen observaties en gesprekken die ik heb gehad met enkele ontwikkelaars en de CTO. Uit deze gesprekken kwamen ook een aantal stakeholders naar voren die ook in het project moeten worden meegenomen. Deze zijn geinterviewd om informatie te verkrijgen over de wensen die zij hebben voor de nieuwe module maar ook het belang die zij hebben in de module. Het geen resulteerd in een document dat te lezen is in \ref{ch:requirements-specificatie}
