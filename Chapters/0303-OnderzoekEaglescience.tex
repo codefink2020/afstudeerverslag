@@ -1,85 +1,74 @@
 \chapter{Onderzoek: Architectuur binnen Eaglescience}\label{ch:onderzoek:-architectuur-binnen-eaglescience} % Chapter title
 
 %TODO: MarginPARS zetten
+Dit hoofdstuk geeft het onderzoek weer naar de manier waarop EagleScience software ontwikkeld en uitrold. Er wordt ingegaan op de verschillende programeertalen en frameworks die in gebruikt zijn als ook de tooling die wordt gebruikt om de software daadwerkelijk te ontwikkelen en uitrollen.
 
-Dit is een onderzoek naar de huidige manier van software ontwikkelen binnen EagleScience. Aan bod komen de
-Dit onderzoek is een onderzoek naar de werkwijzen en dev-stack binnen Eaglescience.
-Deze kennis is nodig voor het vinden van een goede methode om een geautomatiseerde soup analyse te doen. In de opdracht werdt ook vermeld dat de gevonden methode geen tot bijna geen impact mocht hebben in de huidige manier van werken om die reden wordt er in dit hoofdstuk ook gekeken naar die manier van werken.
-Een combinatie van de dev-stack en de manier van werken komt samen in de pipeline die wordt gebruikt om de applicatie te deployen en zal ook hier onderzocht worden.
-Dit geeft een inzicht in hoe de informatie in de nieuwe module terecht gaat komen.
-Het resultaat van dit onderzoek moet zijn dat er een beeld is over hoe er nu gewerkt wordt met welke technologiën.
-
-\section{Onderzoeksvraag}\label{sec:onderzoeksvraag}
-
-De onderzoeksvraag luid: "Hoe wordt er binnen EagleScience software uitgerold?"
-Uit deze onderzoeksvraag komen een aantal deelvragen die in dit onderzoek zullen worden beantwoord.
+%TODO: Vraag minder vaag maken denk ik ??
+\section{Onderzoeksvraag}\label{sec:ESOnderzoeksVraag}
+De onderzoeksvraag die als startpunt van dit onderzoek geld is: "Hoe wordt er binnen EagleScience software ontwikkeld en uitgerold en welke tooling wordt er gebruikt?". Deze onderzoeksvraag werpt een deelvragen op waar eerst een onderzoek naar gedaan dient te worden, waaruit vervolgens een conclussie kan worden getrokken en daarmee de hoofdvraag beantwoord.
 \begin{itemize}
   \item Welk proces wordt er binnen Eaglescience gebruikt om software te ontwikkelen?
+  \item Wat zijn de meest gebruikte ontwikkeltalen en frameworks die binnen EagleScience worden toegepast?
   \item Welke tooling wordt er gebruikt binnen EagleScience?
-  \item Hoe wordt de software uitgerold?
+  \item Hoe wordt er binnen EagleScience software uitgerold?
 \end{itemize}
-%De onderzoeksvraag luid: "Hoe levert Eaglescience software, en wat moet er aangepast worden om de huidige manier om te zetten naar een manier waarbij er autmatisch een SOUP-analyse gedaan wordt?"\@ Uit deze onderzoeksvraag komen een aantal deelvragen die verder in dit onderzoek zullen worden beantwoord.
 
-%\begin{itemize}
-%  \item Welk process wordt er gebruikt binnen Eaglescience om software te leveren aan de klant?
-%  \item Welke tooling en Ontwikkeltalen worden er gebruikt binnen eagleScience?
-%  \item Hoe wordt op dit moment de ontwikkelde software gedeployed?
-%  \item Welke architectuur wordt er op dit moment gebruikt in de portal?
-%  \item Waar wordt de software uiteindelijk gedeployed?
-%  \item Welke methoden zijn er buiten Eaglescience om te zien of een bibliotheek kwetsbaarheden bevat?
-%  \item Wat is Software of Unkown Pedigree?
-%\end{itemize}
-
-\section{OnderzoeksMethode}\label{sec:ESOnderzoeksmethode}
-\section{Bronnen}\label{sec:ESBRonnen}
-Om antwoorden te krijgen op de deelvragen en daarmee op de onderzoeksvraag zijn er interviewus gehouden met een aantal collega's binnen EagleScience. De verslagen van deze gesprekken zijn te vinden in bijlage~\ref{sec:dev-stackInterviews} De gespreken zijn verwerkt in de
-Om antwoorden te krijgen op de vragen die hierboven zijn uitgewerkt, zijn er interviews gehouden met een aantal personen binnen eaglescience.
-De gesprekken zijn uitgewerkt in de secties hieronder.
-De verslagen van de interviews zijn te vinden in Appendix A
-
-\section{Hoe wordt er op het moment gewerkt binnen eagleScience?}\label{sec:hoe-wordt-er-op-het-moment-gewerkt-binnen-eaglescience?}
-Eaglescience werkt op project basis met klanten.
-Om project inzichtelijk te maken en beter te kunnen defineren wordt er gebruik gemaakt van een planning middels fasen die doorlopen worden.
-Iedere fase heeft een gedefineerd einde dat in overeenstemming met de klant wordt vastgelegd.
-Er is echter een uitzondering op de fase project maintenance waarbij Eaglescience gewenst onderhoud pleegt op de geleverde applicatie dan al niet met hosting.
-\medskip
-
-\textbf{Phase1: Sales \& acquisition}
-onderzoeksfase waarin vooral de wensen en restricutes vanuit de klant in kaart wordt gebracht.
-Hierbij kan gedacht worden aan: Doel van de applicatie met daarbij de requirements en restraints, planning, budget en hosting.
-Het resultaat is een inschattingsdocument met daarin informatie die het team verder helpt in het vormgeven van het project.
-
-\textbf{Phase2: Project initiation}
-In deze fase wordt het project opgestart.
-Er wordt een team samengesteld die gaat werken aan het ontwikkelen van de software.
-Deze fase is ook cruciaal om alle platform in gereedheid te brengen te denken aan rechten voor de ontwikkelaars op Azure Cloud, Sentri, Jenkins en dergelijke.
-Als alles in gereedheid wordt gebracht is er een project kick-off waarbij hetteam wordt ingelicht over het project en taken die vervult moeten gaan worden.
-
-\textbf{Phase3: Start \& Execution}
-Dit is een iteratieve fase die in sprints doorloopt tot het project gereed is.
-Waarbij na iedere sprint een demo wordt gegeven verdere uitweiding over deze fase is hieronder te vinden onder "Dagelijkse werkwijze"
-
-\textbf{Phase4: Project Warp up}
-In deze fase wordt het project opgeleverd aan de klant en wordt dan al niet door Eaglescience gehost op Azure cloud.
-Er wordt een project retro gehouden waarbij het team terugkijkt op de werkzaamheden en hoe deze verliepen, daarnaast is er een evaluatie met de klant.
-
-\textbf{Phase5: Project maintenance}
-Geen enkel software wordt direct zonder bugs opgeleverd deze fase duurt dan ook zolang de als software lifecycle is of tot het budget van de klant op is :D In deze fase wordt support geleverd door Eaglescience op de source code en mogelijk aanpassingen gedaan om bugs te verwijderen of performance te verbeteren.
+%
+%\section{Hoe wordt er op het moment gewerkt binnen eagleScience?}\label{sec:hoe-wordt-er-op-het-moment-gewerkt-binnen-eaglescience?}
+%Eaglescience werkt op project basis met klanten.
+%Om project inzichtelijk te maken en beter te kunnen defineren wordt er gebruik gemaakt van een planning middels fasen die doorlopen worden.
+%Iedere fase heeft een gedefineerd einde dat in overeenstemming met de klant wordt vastgelegd.
+%Er is echter een uitzondering op de fase project maintenance waarbij Eaglescience gewenst onderhoud pleegt op de geleverde applicatie dan al niet met hosting.
+%\medskip
+%
+%\textbf{Phase1: Sales \& acquisition}
+%onderzoeksfase waarin vooral de wensen en restricutes vanuit de klant in kaart wordt gebracht.
+%Hierbij kan gedacht worden aan: Doel van de applicatie met daarbij de requirements en restraints, planning, budget en hosting.
+%Het resultaat is een inschattingsdocument met daarin informatie die het team verder helpt in het vormgeven van het project.
+%
+%\textbf{Phase2: Project initiation}
+%In deze fase wordt het project opgestart.
+%Er wordt een team samengesteld die gaat werken aan het ontwikkelen van de software.
+%Deze fase is ook cruciaal om alle platform in gereedheid te brengen te denken aan rechten voor de ontwikkelaars op Azure Cloud, Sentri, Jenkins en dergelijke.
+%Als alles in gereedheid wordt gebracht is er een project kick-off waarbij hetteam wordt ingelicht over het project en taken die vervult moeten gaan worden.
+%
+%\textbf{Phase3: Start \& Execution}
+%Dit is een iteratieve fase die in sprints doorloopt tot het project gereed is.
+%Waarbij na iedere sprint een demo wordt gegeven verdere uitweiding over deze fase is hieronder te vinden onder "Dagelijkse werkwijze"
+%
+%\textbf{Phase4: Project Warp up}
+%In deze fase wordt het project opgeleverd aan de klant en wordt dan al niet door Eaglescience gehost op Azure cloud.
+%Er wordt een project retro gehouden waarbij het team terugkijkt op de werkzaamheden en hoe deze verliepen, daarnaast is er een evaluatie met de klant.
+%
+%\textbf{Phase5: Project maintenance}
+%Geen enkel software wordt direct zonder bugs opgeleverd deze fase duurt dan ook zolang de als software lifecycle is of tot het budget van de klant op is :D In deze fase wordt support geleverd door Eaglescience op de source code en mogelijk aanpassingen gedaan om bugs te verwijderen of performance te verbeteren.
 
 \section{Dagelijkse werkwijze}\label{sec:dagelijkse-werkwijze}
-Binnen Eaglescience wordt er getracht om "full Scrum" te werken.
-Dit wil zeggen dat voor ieder project een team van maximaal 9 full-stack developers wordt aangewezen.
-De sprints duren ongeveer 2 weken afhankelijk van wensen van de klant en beschikbaarheid van ontwikkelaars.
-Iedere sprint begint met een refinement waarbij de taken die op de backlog staan worden bekeken en ingeschat door het team.
-Tijdens de sprint vindt de ontwikkeling middels taken plaats die vervolgens worden gereviewd door een ander teamlid.
-Aan het einde van de sprint vind er een retrospective plaats en eventueel een demo om de voortgang te demonstreren aan de klant, dit is ook het moment dat het team ziet hoe de applicatie in het algemeen werkt.
-Dit is ook het moment voor de projectmanager en product owner om de taken die op de back-log staan opnieuw te prioriseren waarbij in de refinement van de volgende sprint de taken mee worden genomen.
+Binnen Eaglescience wordt er getracht om "full Scrum" te werken. Dit wil zeggen dat voor ieder project een team van maximaal 9 full-stack developers wordt aangewezen. De sprints duren ongeveer 2 á 3 weken afhankelijk van wensen van de klant en beschikbaarheid van ontwikkelaars. Iedere sprint begint met een refinement waarbij de taken die op de backlog staan worden bekeken en ingeschat door het team. Tijdens de sprint vindt de ontwikkeling middels taken plaats die vervolgens worden gereviewd door een ander teamlid. Aan het einde van de sprint vind er een retrospective plaats en eventueel een demo om de voortgang te demonstreren aan de klant, dit is ook het moment dat het team ziet hoe de applicatie in het algemeen werkt. Dit is ook het moment voor de projectmanager en product owner om de taken die op de back-log staan opnieuw te prioriseren waarbij in de refinement van de volgende sprint de taken mee worden genomen.
 
+Om deze werkwijze te ondersteunen maakt EagleScience gebruik van de een PO(T)AP(Personal, Development, (Test), Acceptence, Production) buildstraat. Alle genoemde omgevingen worden gehost in Azure Kubernetes en maken gebruik van docker containers. Iedere ontwikkelaar heeft zijn eigen omgeving die hij kan bouwen om te testen of aanpassingen werken zoals verwacht. Er is per project een Ontwikkelomgeving waarin getest wordt of alle aanpassingen van de ontwikkelaars met elkaar werken. De acceptatie omgeving is er voor de projectmanagers en testers vanuit de klant of desgewenst externe testers om de ontwikkelde applicatie te testen zoals hij naar productie zou gaan. De productie omgeving host alle applicaties die 'live' zijn. Gezien alle omgevingen in docker containers draaien zijn deze volitile en kunnen dus "makkelijk" worden vervangen. zeker voor de personal en development omgeving wordt dit gezien als een voordeel vanwege het vele bouwen van deze omgevingen.
 \section{Ontwikkeltalen en tooling binnen EagleScience}\label{sec:ontwikkeltalen-en-tooling-binnen-eaglescience}
-Binnen Eaglescience worden er in principe drie talen gebruikt voor het ontwikkelen van een applicatie binnen deze talen worden een aantal frameworks gebruikt.
-Naast de programeer talen maakt eagleScience gebruik van zowel SQL(MySQL) als NoSQL(MongoDB) databases om data in op te slaan.
+EagleScience maakt volledige full stack oplossingen. Er wordt dus zowel front-end, backend, en database oplossingen ontwikkelt binnen projecten. Er wordt dan gebruik gemaakt van een aantal ontwikkeltalen en frameworks om deze oplossingen te kunnen ontwikkelen. Naast de ontwikkeltalen zijn er ook een aantal tools die worden gebruikt door eaglescience om support te kunnen leveren en projecten te kunnen managen.
 
-\textbf{OntwikkelTalen en frameworks}
+\subsection{OntwikkelTalen en frameworks}\label{subsec:ontwikkeltalen-en-frameworks}
+\marginpar{backend} \marginpar{Scala}
+De voornamelijkst taal voor het ontwikkelen van de backend binnen EagleScience is Scala. De keuze voor deze taal is de mogelijkheid om functioneel te kunnen programmeren en dat het in de Java Virtual Machine (JVM) draait. Dat laatste zorgt ervoor dat bibliotheken die geschreven zijn in talen die ook ondersteunt worden door de JVM gebruikt kunnen worden ongeacht of deze in Scala, Java, Groovy of Kotlin geschreven zijn. Daarnaast is Scala zeer geschikt om kleine applicaties te schrijven die vervolgens groeien. De naam Scala is een samenraapsel van 'Scalable Language'. Het feit dat binnen EagleScience functioneel geprogrameert. heeft te maken met een aantal eigenschappen van de op deze manier programeren:
+\smallskip %TODO: Wellicht iets verder uitweiden over de beweegredenen van het gebruik van Scala en Play.
+\begin{enumerate}
+  \item functioneel programeren stelt de programeur in staat om code te schrijven dat voorspelbaarder is.
+  \item makkelijker te testen is door het feit dat bij een pure functie de output altijd zeker is vanuit de input
+\end{enumerate}
+Binnen Scala worden er in bijna alle projecten een aantal frameworks/bibliotheken gebruikt die het ontwikkelen van microsaervice web applicaties makkelijk maakt:
+\begin{itemize}
+  \item \textbf{PlayFramework 2.xx} Een web framework voor de ontwikkeling van webapplicaties in Scala we gebruikten het vooral als router voor de verschillende microservices die er achterliggen.
+  \item \textbf{ArchES} is een intern ontwikkeld framework wat de opbouw en de communicatie tussen microservices in scala verbeterd.\ ArchES is geinspireerd op Apache KAFKA en werkt middels hetzelfde pub -> sub principe.
+\end{itemize}
+
+B
+Voor de front-end wordt gebruik gemaakt van Typescript
+
+
+
 \begin{itemize}
 \item \textbf{Scala 2.xx} is gekozen om functioneel programeren te ondersteunen maar ook de mogelijkheid om OOP methodieken te gebruiken.\ Daarnaast maakt scala gebruik van de JVM wat op zichzelf voordelen heeft in portabiliteit( code once run everywhere).\ Door op de JVM te draaien kan Scala ook gebruik maken van bibliotheken die op diezelfde JVM draaien gebruiken en daarmee dus ook bibliotheken die geschreven zijn in Java, Groovy of Kotlin.\\
 Functioneel programeren is een manier van programeren dat zijn basis heeft in de wiskunde.\ Neem bijvoorbeeldde volgende functie: \(y = func(x)\) waarbij \(x\) de input voor een functie is.\ Uit deze functie komt altijd \(y\) bijvoorbeeld als de functie \(x+1\) is dan zal de waarde van \(y\) altijd 3 zijn als \(x\) 2 is.\ Dit is een zekerheid alsook de zekerheid dat er geen andere waarden als output zijn dan \(y\).\ Dit fenomeen wordt een pure functie\footnote{Pure functies hebben geen side-effects wat betekend dat het niets anders doet dan de output geven van de functie. een Console.log wordt gezien als een side-effect omdat dit naast de output ook een andere output heeft(namelijk naar het scherm). Meestal bestaat de kern (business logic) van een applicatie uit pure functies en is er een schil omheen gebouwd die niet puur is maar zorgt voor de I/O van de applicatie} genoemd.\ Enkele voordelen van het functioneel programeren zijn:
@@ -90,13 +79,12 @@ Functioneel programeren is een manier van programeren dat zijn basis heeft in de
 Daarnaast bestaat ook door een effect uit de wiskunde de muterende variable niet een waarde van een variable is altijd het zelfde en mocht deze toch gewijzigd moeten worden ( bijv.\ een e-mail adres van een gebruiker ) dan wordt de data in het programma opgeslagen in een nieuwe variabele waar vervolgens verder mee gewerkt wordt.\ Hiermee komt gelijk een nadeel van functioneel programeren.\ Als de applicatie veel data tegelijk muteerd dat kan de geheugen footprint groter worden dan bij een soort gelijke applicatie dat volgens het OOP principe is geschreven.\ Een ander nadeel is dat OOP op dit moment de defacto methode is om applicaties te schrijven en het omscholen naar functioneel programeren tijd kost.
 
 De filosofie binnen Eaglescience is dat Scala helpt bij het bouwen van software waarbij de output vast staat aan de input en dus veel betrouwbaarder en voorspelbaarder wordt.\ Daarnaast wordt het testen, wat een eis is in alle projecten binnen Eaglescience, veel inzichtelijker wordt.
-  \begin{itemize}
-    \item \textbf{PlayFramework 2.xx} Een web framework voor de ontwikkeling van webapplicaties in Scala we gebruikten het vooral als router voor de verschillende microservices die er achterliggen.
-    \item \textbf{archES} is een intern ontwikkeld framework wat de opbouw en de communicatie tussen microservices in scala verbeterd.\ ArchES is geinspireerd op Apache KAFKA en werkt middels hetzelfde pub -> sub principe.
-  \end{itemize}
+
 \item \textbf{TypeScript} TypeScript is een open-source taal wat gebouwd is op JavaScript maar met statische type definities toegevoegd, het voordeel is dat het lijkt op JavaScript echter door Types te gebruiken kunnen veel fouten worden ontdekt en opgelost bij het schrijven van de code in plaats van tijdens Run-time.\ Typescript is daarom de keuze van EagleScience om front-end applicaties te schrijven.\ Eaglescience gebruikt voornamelijk Angular voor de ontwikkeling van front-end applicaties.
 \end{itemize}
-\textbf{Tooling}
+
+
+\subsection{Tooling}
 \begin{itemize}
 \item \textbf{Jira} Is naar eigen zeggen (JiraWebsite ) de nummer 1 software ontwikkel tool voor agile teams.\ Eaglescience gebruikt het om projecten te plannen volgens de scrum methode.\ De tool maakt het mogelijk om sprints te plannen, en het bijhouden van projecten worden ondersteunt.
 \item \textbf{Confluence}

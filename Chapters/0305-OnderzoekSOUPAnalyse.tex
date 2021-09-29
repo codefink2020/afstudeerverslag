@@ -1,123 +1,73 @@
 % Chapter X
 
+Bronnen:
+
+\begin{itemize}
+    \item https://medium.com/@manjula.aw/nodejs-security-tools-de0d0c937ec0
+    \item
+\end{itemize}
+
+
+
 \chapter{Onderzoek: SOUP analyse}\label{ch:onderzoek:-soup-analyse} % Chapter title
-
-%TODO: MarginPARS zetten
 \begin{itemize}
-\item https://jeremylong.github.io/DependencyCheck/
+    \item Javascript     https://github.com/RetireJS/retire.js
+    \item SBT https://github.com/albuch/sbt-dependency-check
+    \item
 \end{itemize}
 
-Voordat we verder kijken naar mogelijkheden om kwetsbaarheden in een externe bibliotheek te onderzoeken en te verhelpen moeten we eerst kijken naar een aantal kernbegrippen om te begrijpen waar het om gaat.
+%TODO: MarginPars zetten
+Dit hoofdstuk geeft het onderzoek naar een methode om vanuit de projecten inzicht te krijgen in bekende kwetsbaarheden binnen gebruikte bibliotheken, en platformen. Er wordt ingegaan op welke tooling er beschikbaar is voor de verschillende onderdelen die we als EagleScience maken: Backend, frontend, Databases, Docker(containers). Daarna wordt er een selectie gemaakt voor de meest geschikte tool binnen de huidige buildstraat. Als laatst wordt er met de geselecteerde tooling een methode opgezet die het mogelijk maakt om gegevens uit de tooling in de portal te krijgen.
 
-Dit onderzoek heeft daarom ook twee hoofdvragen die ieders weer een aantal deelvragen opwerpen.
-Als eeste is de vraag "Welke kwetsbaarheden bestaan er hoe is het gebruik van externe bibliotheken hier aan gecorreleerd?
-De deelvragen die hier uit voorkomen luiden:
+\section{requirements}
+De Opdracht luid dat er gescanned moet worden op actieve en niet actieve projecten op kwetsbaarheden. ER moet dus een methode komen die zowel periodiek een scan kan uitvoeren op projecten die niet meer actief in ontwikkeling zijn en een 'getriggerde' scan op het moment dat er bij een actief project code wordt toegevoegd en/of gewijzigd. Daarnaast moet de output van een suite te integreren zijn in de portal voor een ieder die hier belang bij heeft en de rechten bezit.
+
+
+
+\section{Zoeken naar tooling}
+Er zijn veel tools beschikbaar die helpen met het veiliger maken van software. De tools zijn te verdelen in twee typen:
+\begin{enumerate}
+    \item Suites zijn volledige pakketen die de gebruiker is staat stelt om inzicht te krijgen in de huidige staat van de geschreven source code. Hier kan worden gedacht aan slechte geschreven code(codesmells), linting maar ook security issues. Suites maken gebruik van plugins om verschillende taken te kunnen uitvoeren en of te scannen. en dit maakt ze hoog configureerbaar op het moment dat er een plugin bestaat voor de te analyseren ontwikkeltaal/systeem.
+    \item Command line tools die specifiek op een onderwerp scannen. De voodelen van deze manier is dat het makkelijk ergens in een bestaande oplossing is in te bouwen en dat deze tools over het algemeen goed configureerbaar zijn. Een nadeel kan zijn dat het tijd kan kosten om de gewenste output te verkrijgen en deze vervolgens 'mooi' weer te geven in een applicatie.
+\end{enumerate}
+Gezien er deze twee smaken zijn moet er gekeken worden welke van de twee het beste past is de workflow van EagleScience met in achtneming de requirements die opgelegd zijn door de opdrachtgever.
+
+\subsubsection{suites}
+Veel bedrijven houden zich bezig met het veiliger maken van software en er is een ware markt ontstaan in suites om hierbij te helpen. Bedrijven als Snyk, SonarSource, Veracode, Synopsis brengen suites uit die het mogelijk maken om applciaties te annalyseren met gebruik van zowel source als compiles code. Een naardeel is zoals eerder genoemd is dat veel van deze suites gespecialiseerd zijn in een enkele taal of middels plugins andere talen kunnen ondersteunen. En vaak zijn dan niet alle features 100\% beschikbaar doordat ook de plugins niet volledig toegespitst zijn op de Ontwikkeltalen. Een ander nadeel is dat veel van deze pakketen onder en license vallen en er vaak veel voor betaald moet worden. En gezien het budget voor EagleScience niet heel groot is lijkt het voor de hand liggend om een andere weg te kiezen.
+\subsection{Commandline tooling (CLI's)}
+Commandline tooling is een manier van tooling dat zich zeer geschikt maakt om te integreren in een bestaande build pipeline. Veelal zijn CLI's ook configureerbaar in de mate hoever ze moeten scannen en welke output ze waar moeten geven. Omdat CLi's makkelijker te ontwikkelen zijn dan complete suites zijn er vaak voor iedere ontwikkeltaal wel een scanning tool beschikbaar.
+
+
+In feite zijn er twee soorten tooling die ingezet kan worden: ten eerste zijn er suites die volledige analyses doen op geschreven code. deze analyses kunnen varieren van linting tot codesmells. Vaak kunnen deze suites ook security issues opsporen door te kijken naar de manier waarop iets is geimplementeerd. Deze laatst feature maakt het zo dat deze suites vaak gespecialiseerd is een handvol aantal talen. En dan met name C++, C#, Java en Python. Omdat we ontwikkelen in Scala moet er vaak een plugin worden geinstalleerd om enigzins gebruik te kunnen maken van de features in zo\'n suite. En dan is het vaak zo dat veelal niet gekeken wordt naar de gebruikte dependencies.
+
+Een andere mogelijkheid is om gebruik te maken van commanline tooling die in te zetten is als onderdeel
+
+
+
+Als we gaan kijken naar de applicaties die EagleScience uitrolt hebben ze allemaal een aantal componenten gemeen:
 \begin{itemize}
-  \item Wat zijn applicatie veiligheidsrisico's?
-  \item Welke komen het meest voor?
-  \item
+    \item \textbf{Backend} geschreven in Scala
+    \item \textbf{Portal} geschreven in Javascript gebruikmakend van dan al niet Angular CLI of React.
+    \item \textbf{Database} MySQL of MongoDB in verschillende versie nagelang de requirements
+    \item \textbf{App} geschreven in Nativescript.
+\end{itemize}
+Op de app na draaien alle componenten in een Docker container welke gehost worden op Azure. Er moet dus een analyse tool worden gevonden die we kunnen inzetten om dependencies voor Scala, JavaScript(NPM) en Docker images te kunnen analyseren.
+
+Vulnerability scan is een 'hot' topic op het internet en een google search geeft al snel veel applicaties en tools die er voor kunnen zorgen dat er gescanned kan worden naar kwetsbaarheden in applicaties. Bij EagleScience zijn we op zoek naar een tool die we in projecten kunnen inzetten en er vervolgens zelf een applicatie omheen maken om intern de resultaten te kunnen gebruiken. We zijn dus opzoek naar plugin en of commandline tools die een output kunnen genereren in een bekend formaat zoals JSON of CSV.
+
+
+
+
+
+\section{Security suites}
+Op het moment van schrijven is de aanbod van security suites enorm veel bedrijven in de software security branch zien kansen om hier op in te spingen. Veel tools zetten in op het scannen van code welke geschreven worden door de teams zelf. Een enkele kan ook zoeken naar kwetsbaarheden die gemeld zijn als CVE echter zijn dit veelal plugins.
+Een aantal voorbeelden van deze applicaties zijn:
+\begin{itemize}
+    \item \textbf{SonarQube} een suite dat veel analyses kan doen op code. Zoals codesmells, bugs, en security issues. Echter heeft deze suite welke wel geschikt is voor Java geen volledige ondersteuning voor Scala. Daarnaast komt er weer een applicatie bij die beheert moet worden.
+    \item \textbf{}
 \end{itemize}
 
-\section{Wat zijn applicatie veiligheidsrisico's}\label{sec:wat-zijn-applicatie-veiligheids-risico's}
-Veiligheids risico's binnen applicaties zijn een som van kwetsbaarheden die zich bedoeld of onbedoeld in de applicatie bevinden, de vindbaarheid en de "schade" die er mee aangericht kunnen worden.
-De termen van de som worden hieronder verder uitgediept als ook een top-10 uitgeven door de OWASP van de meest voorkomende kwetbaarheden.
+\section{Backend scanning op kwetsbaarheden}
+Binnen Eaglescience worden backend gebouwd in de taal Scala en op basis van een microservice architectuur. Daarnaast worden de dependencies die gebruikt worden in een file genaamd dependencies.scala. Er moet dus een tool komen die voor
 
-Een aanvaller kan op meerdere manier in een applicatie komen(figuur X).
-Vaak gebeurt dit door een kwetsbaarheid van een applicatie te zoeken en deze te exploiteren.
-Als er vervolgens geen maatregeling genomen zijn om de aanvaller te weerhouden kunnen er zaken als data in een database, assets van het bedrijf of zelfs functionaliteit aangetast worden.
-Wat op zijn beurt weer voor een impact in de bedrijfsvoering kan veroorzaken.
-Hoe aanvallers een applicatie kunnen aanvallen is applicatie specifiek
-De impact op de bedrijfsvoering is ook specifiek
-\begin{figure}[H]
-  \myfloatalign
-  \includegraphics[width=15cm]{gfx/application security routes}
-  \caption{Aanvalllen, en hun gevolg}
-  \label{fig:Application Security Routes}
-\end{figure}
-
-Veiligheids risico's kunnen in categoriën worden geplaatst middels een gradatie systeem die in figuur x te ze zien is.
-De OWASP-Top10 die verder in de tekst te vinden is maakt gebruik van dit gradatie systeem om risico's in te schalen.
-OWASP is een instantie die zich bezighouden met het verbeteren van de veiligheid van applicaties.
-Het doet dit door onder andere training en erkenning te geven aan kwetsbaarheden.
-Zo wordt er eens in de 5 jaar een top-10 samengesteld met de op dat moment meest voorkomende kwetsbaarheden.
-\footnote{Helaas is de laatste versie die aan het einde van 2021 uit moet komen nog niet beschikbaar op het moment van schrijven}
-De OWASP-Top10 wordt samengesteld uit data van meer dan 100.000 productie applicaties en APIs wat door meer dan 500 mensen is getest door 40 verschillende bedrijven.
-De top 10 is een aggegratie van deze data in de meest voorkomende issues met inachtneming van exploitabity, detectability en impact.
-
-
-%\begin{figure}[H]
-%  \myfloatalign
-%  \includegraphics[width=12cm]{gfx/risk tabel}
-%  \caption{Inschaling van risico's}
-%  \label{fig:risico inschaling}
-%\end{figure}
-
-%threat agents = aanvallende entiteit
-%exploitabity = exploiteetbaatheid
-%weakness prevalance = vookomendheid van de zwakte in een applicatie
-%weakness detectability = hoe goed is de zwakte in een applicatie te detecteren
-%technical impact = technische impact op de applicaties
-%business impacts = (zakelijke impact) impact op de bedrijfsvoering
-
-
-
-
-In het vorige hoofdstuk is te lezen dat Eaglescience gebruik maakt van de volgende technologi\"en: Scala 2.XX, TypeScript, Jenkins, Docker ,Azure cloud.
-
-Dit onderzoek richt voornamelijk op kwetbaarheden in bibliotheken  van derden en de bestrijding ervan.
-En specifiek op de bovenstaande door Eaglescience gebruikte technieken.
-De hoofdvraag voor dit hoofdstuk luid dan ook: "Met welke kwetsbaarheden hebben we te maken binnen Eaglescience en hoe kunnen we deze opsporen op een automatiseerde manier zonder de huidige werkwijze te verstoren?" Uit deze hoofdvraag onstaan de volgende deelvragen die in dit onderzoek beantwoord worden met daarna een conclusie op de hoofdvraag.
-
-\begin{itemize}
-\item Welke soorten kwetsbaarheden zijn er?
-\item Hoe kunnen deze kwetbaarheden hun weg vinden in onze gebouwde software?
-\item Zijn er instanties die bijhouden waar zich kwetsbaarheden schuilhouden?
-\item Wat zijn methodes om te onderzoeken of er in de bestaande software kwetbaarheden bevinden?
-\item Is er een mogelijkheid om een third-party pakket in te zetten om dit te doen?
-\end{itemize}
-
-\
-
-Binnen Eaglescience wordt er heel goed gekeken naar de manier waarop er veilige software ontwikkeld wordt.
-Zaken die in de OWASP top-10 staan wordt serieus mee omgegaan en actief tegen gehandeld. zo wordt er ook gegekeken naar het gebruik van bibliotheken van derden.
-
-Op plaats A09:2017 is te vinden dat er kwetsbaarheden middels bibliotheken van derden binnen kunnen komen. Dit is iets wat deels buiten het bereik van Eaglescience ligt. Om ons hier tegen te beschermen is het wenselijk om periodiek en geautomatiseerd een analyse naar kwetbaarheden tedoen.
-
-De bibliotheken die gebruikt worden van derden wordt ook wel Software of unkown pedigree genoemd of kortweg SOUP. Dit houdt in dat een bibliotheek wordt ontwikkeld middels een proces of methode wat niet bekend is bij de eindgebruiker. Ook zijn vaak de details niet bekend van de bibliotheek omdat deze niet of nauwelijks wordt gereviewed door de eindgebruiker. Om deze reden is het dus onbekend of er kwetsbaarheden zitten in betreffende bibliotheken.
-De definitie van SOUP blijft niet alleen bij de bibliotheken en frameworks vanuit het open-source gebied. Veelal is ook niet bekend hoe closed-source (Proprietary software) wordt geschreven, echter door reputatie van bedrijven die deze software schrijven wordt veelal , onterecht\footnote{zie: https://www.nu.nl/tech/6097701/waarom-de-hack-bij-solarwinds-ministeries-en-grote-bedrijven-treft.html } aangenomen dat deze geen lekken bevatten.
-
-\section{CVE}
-in de appliction security wordt er gesproken van een CVE(Common Vulnerability en Exposures) als een kewtsbaarheid bekend is deze wordt in een database geplaatst zodat \'e\'en ieder die geintreseerd is hier kan vinden welke software(os, applicatie, framework, bibliotheek) mogelijk niet veilig is. Deze Database wordt in stand en bijgehouden door een aantal instanties waarbij de belangrijksten zijn:
-\begin{itemize}
-  \item \textbf{NIST-CSRC} Computer Security Research Center van het National Institute of Standards and Technology) is een centrum dat onderzoek doet namens de Amerikaanse regering naar veiligheden in software. De database die het NIST-CSRC bijhoud heet het NVD(National Vulnerability Database) waarin CVE's worden bijgehouden.
-  \item \textbf{CVE-Mitre} is een community driven effort wat CVE's logt in een lijst die vervolgens de NVD voedt met hun gevondendata.
-  \item \textbf{cvedetails.com/}
-  \item \textbf{vuldb.com/}
-  \item \textbf{https://www.exploit-db.com/}
-\end{itemize}
-
-\section{}
-
-https://www.security.nl/posting/666663/Van+CVE+tot+CVSS\%3A+wegwijs+in+het+woud+van+kwetsbaarheden
-
-
-
-
-
-
-
-
-
-
-\section{Zijn er instanties die bijhouden waar zich kwetsbaarheden schuilhouden?}
-
-Naast OWASP zijn er nog een aantal instanties dit bijhouden welke software\footnote{zoals hier gebruikt in de bereedste? zin van het woord dus: (Operating systems, ontwikkeltalen/databases, ontwikkelframeworks,bibliotheken) }
-mogelijk kwetsbaarheden kunnen bevatten.
-\begin{itemize}
-\item test
-\end{itemize}
-
-
-\section{Wat zijn methodes om te onderzoeken of er in de bestaande software kwetbaarheden bevinden?}
-
-\section{Is er een mogelijkheid om een third-party pakket in te zetten om dit te doen?}
+Zoals gezegt wordt de backend voor applicaties geschreven in Scala. Daarnaast zijn de meeste backend binnen Eaglescience opgebouwd als multi-project Microservices Scala maakt gebruik van een dependencies.scala file om dependencies in aan te geven die in het gehele project ge
