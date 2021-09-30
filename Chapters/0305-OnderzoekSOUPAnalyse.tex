@@ -1,9 +1,4 @@
-% Chapter X
-
-
-
-
-
+%TODO: MarginPars zetten
 \chapter{Onderzoek: SOUP analyse}\label{ch:onderzoek:-soup-analyse} % Chapter title
 Bronnen:
 
@@ -17,32 +12,53 @@ Bronnen:
     \item
 \end{itemize}
 
-%TODO: MarginPars zetten
-Dit hoofdstuk geeft het onderzoek naar een methode om vanuit de projecten inzicht te krijgen in bekende kwetsbaarheden binnen gebruikte bibliotheken, en platformen. Er wordt ingegaan op welke tooling er beschikbaar is voor de verschillende onderdelen die we als EagleScience maken: Backend, frontend, Databases, Docker(containers). Daarna wordt er een selectie gemaakt voor de meest geschikte tool binnen de huidige buildstraat. Als laatst wordt er met de geselecteerde tooling een methode opgezet die het mogelijk maakt om gegevens uit de tooling in de portal te krijgen.
+Dit hoofdstuk geeft het onderzoek naar een methode om vanuit de projecten inzicht te krijgen in bekende kwetsbaarheden binnen gebruikte bibliotheken, en platformen. Er wordt ingegaan op welke tooling er beschikbaar is voor de verschillende onderdelen die we als EagleScience maken: Backend, frontend, Databases, Docker(containers). Daarna wordt er een selectie gemaakt voor de meest geschikte tool binnen de huidige buildstraat. Als laatst wordt er met de geselecteerde tooling een methode opgezet die het mogelijk maakt om gegevens uit de tooling te verkrijgen op een reproduceerbare manier.
 
 \section{Onderzoeksvraag}\label{sec:onderzoeksvraag}
-De hoofdvraag in dit onderzoek is:  "Welke methodes zijn er beschikbaar voor het analyseren van kwetsbaarheden in bibliotheken van derden en welke het meest geschikt is voor het doel dat de opdrachtgever voor ogen heeft? ". Uit deze vraag komen een aantal deelvragen die ieders in een sectie hieronder wordt beantwoord.
-Deelvragen:
-\smallskip
+De hoofdvraag in dit onderzoek is: "Welke methodes zijn er beschikbaar voor het analyseren van kwetsbaarheden in bibliotheken van derden en welke het meest geschikt is voor het doel dat de opdrachtgever voor ogen heeft? ". Uit deze vraag komen een aantal deelvragen die ieders in een sectie hieronder wordt beantwoord.
 \begin{itemize}
     \item Wat zijn de eisen waaraan de tool moet voldoen?
     \item Welke soorten tooling bestaan er?
     \item Welke tooling is er beschikbaar, wat zijn de voor en nadelen?
     \item Uit de gevonden tooling welke is het beste te integreren in de huidige pipeline/workflow?
-
 \end{itemize}
 
 \section{requirements}
-De Opdracht luid dat er gescanned moet worden op actieve en niet actieve projecten op kwetsbaarheden. ER moet dus een methode komen die zowel periodiek een scan kan uitvoeren op projecten die niet meer actief in ontwikkeling zijn en een 'getriggerde' scan op het moment dat er bij een actief project code wordt toegevoegd en/of gewijzigd. Daarnaast moet de output van een suite te integreren zijn in de portal voor een ieder die hier belang bij heeft en de rechten bezit.
+De Opdracht luid dat er gescanned moet worden op actieve en niet actieve projecten op kwetsbaarheden. ER moet dus een methode komen die zowel periodiek een scan kan uitvoeren op projecten die niet meer actief in ontwikkeling zijn en een 'getriggerde' scan op het moment dat er bij een actief project code wordt toegevoegd en/of gewijzigd. Daarnaast moet de output van een suite te integreren zijn in de portal voor eenieder die hier belang bij heeft en de rechten bezit.
+
+\subsection{Eisen aan de tool}
+Om bruikbaar te zijn moet de tool aan een aantal eisen voldoen. De eisen die hier genoemd worden moet aan voldaan worden.
+\begin{itemize}
+    \item Tool moet output leveren op een reproduceerbare manier in een vaste vorm.
+    \item Tool moet makkelijk te integreren zijn in de huide pipeline.
+    \item Tool moet configureerbaar zijn, onderandere aangeven welke dependencies er overgeslagen moeten worden.
+\end{itemize}
+Deze eisen dienen te worden behaald anders kan de tool niet ingezet worden voor het doel dat voor ogen is.
 
 
 
-\section{Zoeken naar tooling}
+\section{Beschikbare tools}
 Er zijn veel tools beschikbaar die helpen met het veiliger maken van software. De tools zijn te verdelen in twee typen:
+
+\subsection{Suites}
+Suites zijn samengestelde pakketen vanuit meerdere tools die samen een volledige oplossing bieden op het gebied van software kwaliteit. Zo zijn er tools die checken of er herkenbare bugs zijn in een applicatie of dat er een bepaalde ingestelde coding wordt toegepast. Ook zijn er tools voor het zoeken naar kwetsbaarheden in geschreven code. De resulaten van deze tools worden samengevat in een rapport dat men inkan zien middels een web interface. Sommige suites geven ook de mogelijkheid om de evolutie van een project weer te geven zodat er een voortgang te zien in de ontwikkeling van veiligheid. Meeste van deze tools werken op basis van het maken van een snapshot tijdens een commit op een repository waardoor er gekeken wordt naar hoe de software gebouwd is op het moment van een oplevermoment.
+
+
+\subsection{Commandline Tools}
+Commandline tools worden in tegenstelling tot suites ontwikkeld voor een specifieke taak en doen deze taak volledig. zei genereren een output in textvorm welke dan al niet in een vast format(JSON, CSV) kan worden opgeslagen.
+Commandline tools kunnen onderdeel zijn van suitesmaar veelal zijn dit open-source tools die de community heeft gemaakt om in een bestaande pipeline te integreren.
+
 \begin{enumerate}
     \item Suites zijn volledige pakketen die de gebruiker is staat stelt om inzicht te krijgen in de huidige staat van de geschreven source code. Hier kan worden gedacht aan slechte geschreven code(codesmells), linting maar ook security issues. Suites maken gebruik van plugins om verschillende taken te kunnen uitvoeren en of te scannen. en dit maakt ze hoog configureerbaar op het moment dat er een plugin bestaat voor de te analyseren ontwikkeltaal/systeem.
     \item Command line tools die specifiek op een onderwerp scannen. De voodelen van deze manier is dat het makkelijk ergens in een bestaande oplossing is in te bouwen en dat deze tools over het algemeen goed configureerbaar zijn. Een nadeel kan zijn dat het tijd kan kosten om de gewenste output te verkrijgen en deze vervolgens 'mooi' weer te geven in een applicatie.
 \end{enumerate}
+
+
+
+
+Op basis van de bevindingen hierboven
+
+
 Gezien er deze twee smaken zijn moet er gekeken worden welke van de twee het beste past is de workflow van EagleScience met in achtneming de requirements die opgelegd zijn door de opdrachtgever.
 
 \subsection{suites}
