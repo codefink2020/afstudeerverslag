@@ -48,53 +48,28 @@ Suites zijn samengestelde pakketen vanuit meerdere tools die samen een volledige
 Commandline tools worden in tegenstelling tot suites ontwikkeld voor een specifieke taak en doen deze taak volledig. zei genereren een output in textvorm welke dan al niet in een vast format(JSON, CSV) kan worden opgeslagen.
 Commandline tools kunnen onderdeel zijn van suitesmaar veelal zijn dit open-source tools die de community heeft gemaakt om in een bestaande pipeline te integreren.
 
-\begin{enumerate}
-    \item Suites zijn volledige pakketen die de gebruiker is staat stelt om inzicht te krijgen in de huidige staat van de geschreven source code. Hier kan worden gedacht aan slechte geschreven code(codesmells), linting maar ook security issues. Suites maken gebruik van plugins om verschillende taken te kunnen uitvoeren en of te scannen. en dit maakt ze hoog configureerbaar op het moment dat er een plugin bestaat voor de te analyseren ontwikkeltaal/systeem.
-    \item Command line tools die specifiek op een onderwerp scannen. De voodelen van deze manier is dat het makkelijk ergens in een bestaande oplossing is in te bouwen en dat deze tools over het algemeen goed configureerbaar zijn. Een nadeel kan zijn dat het tijd kan kosten om de gewenste output te verkrijgen en deze vervolgens 'mooi' weer te geven in een applicatie.
-\end{enumerate}
 
 
+\subsection{voor en nadelen}
+Beide soorten tools hebben voor en nadelen. Suites zorgen voor een algehele oplossing voor het beter maken van software maar focussen zich vooral op de kwaliteit van geschreven code, Met plugins kan er ook worden gekeken naar code toevoegingen vanuit bibliotheken van derden. Een nadeel is echter dat voor de ontwikkeltalen die EagleScience gebruikt er niet echt een defacto tool bestaat.
+
+De voordelen van Commandline tools is dat deze makkelijker te integreren zijn in de huidige pipeline. Wat inhoud dat de werkwijze in principe niet veel hoeft te veranderen. Commandline tools worden ook vaak ontwikkeltaal specifiek uitgebracht. Wat in het geval van Scala een voordeel is gezien deze taal niet heel populair is vergeleken met Java, Java/TypeScript en C\#.
 
 
-Op basis van de bevindingen hierboven
-
-
-Gezien er deze twee smaken zijn moet er gekeken worden welke van de twee het beste past is de workflow van EagleScience met in achtneming de requirements die opgelegd zijn door de opdrachtgever.
-
-\subsection{suites}
-Veel bedrijven houden zich bezig met het veiliger maken van software en er is een ware markt ontstaan in suites om hierbij te helpen. Bedrijven als Snyk, SonarSource, Veracode, Synopsis brengen suites uit die het mogelijk maken om applciaties te annalyseren met gebruik van zowel source als compiles code. Een naardeel is zoals eerder genoemd is dat veel van deze suites gespecialiseerd zijn in een enkele taal of middels plugins andere talen kunnen ondersteunen. Daarnaast zijn veel bedoelt om code quality omhoog te brengen om op die manier veiliger en betere software te maken. Het zoeken naar kwetsbaarheden in bibliotheken van derden is meestal een extra feature. Een ander nadeel is dat veel van deze pakketen onder een license vallen en er vaak veel voor betaald moet worden. En gezien het budget voor EagleScience niet heel groot is lijkt het voor de hand liggend om een andere weg te kiezen.
-\subsection{Commandline tooling (CLI's)}
-Commandline tooling is een manier van tooling dat zich zeer geschikt maakt om te integreren in een bestaande build pipeline. Veelal zijn CLI's ook configureerbaar in de mate hoever ze moeten scannen en welke output ze waar moeten geven. Omdat CLi's makkelijker te ontwikkelen zijn dan complete suites zijn er vaak voor iedere ontwikkeltaal wel een scanning tool beschikbaar.
 \subsection{Conclussie}
-Uit de voor en nadelen die hierboven zijn genoemd kan worden geconcludeerd dat er een voorkeur is voor het gebruiken avn een Commandline Tool om de gewenste informatie te verkrijgen. Resulterende in een zoektocht naar een commandline tool die voor ieder component van de applicatie de gewenste resultaten kan geven.
-
-
-
-
-
+Uit de voor en nadelen die hierboven zijn genoemd kan worden geconcludeerd dat er een voorkeur is voor het gebruiken avn een Commandline Tool om de gewenste informatie te verkrijgen. Resulterende in een zoektocht naar een commandline tool die voor ieder component van de applicatie de gewenste resultaten kan geven. Zoals gemeld wordt er binnen EagleScience gebruik gemaakt van de volgende platformen / ontwikkeltalen.
 \begin{itemize}
+    \item \textbf{Development en productie platform} Docker containers in Kubernetes ( AKS van Azure)
     \item \textbf{Backend} geschreven in Scala
     \item \textbf{Portal} geschreven in Javascript gebruikmakend van dan al niet Angular CLI of React.
     \item \textbf{Database} MySQL of MongoDB in verschillende versie nagelang de requirements
     \item \textbf{App} geschreven in Nativescript.
 \end{itemize}
+
+
+\section{Welke tooling is geschikt voor het integreren met de huidige pipeline? }
+Zoals hierboven gezegt is een Commandline tool handiger om te integreren in de huidige pipline.
+
 Op de app na draaien alle componenten in een Docker container welke gehost worden op Azure. Er moet dus een analyse tool worden gevonden die we kunnen inzetten om dependencies voor Scala, JavaScript(NPM) en Docker images te kunnen analyseren.
 
 Vulnerability scan is een 'hot' topic op het internet en een google search geeft al snel veel applicaties en tools die er voor kunnen zorgen dat er gescanned kan worden naar kwetsbaarheden in applicaties. Bij EagleScience zijn we op zoek naar een tool die we in projecten kunnen inzetten en er vervolgens zelf een applicatie omheen maken om intern de resultaten te kunnen gebruiken. We zijn dus opzoek naar plugin en of commandline tools die een output kunnen genereren in een bekend formaat zoals JSON of CSV.
-
-
-
-
-
-\section{Security suites}
-Op het moment van schrijven is de aanbod van security suites enorm veel bedrijven in de software security branch zien kansen om hier op in te spingen. Veel tools zetten in op het scannen van code welke geschreven worden door de teams zelf. Een enkele kan ook zoeken naar kwetsbaarheden die gemeld zijn als CVE echter zijn dit veelal plugins.
-Een aantal voorbeelden van deze applicaties zijn:
-\begin{itemize}
-    \item \textbf{SonarQube} een suite dat veel analyses kan doen op code. Zoals codesmells, bugs, en security issues. Echter heeft deze suite welke wel geschikt is voor Java geen volledige ondersteuning voor Scala. Daarnaast komt er weer een applicatie bij die beheert moet worden.
-    \item \textbf{}
-\end{itemize}
-
-\section{Backend scanning op kwetsbaarheden}
-Binnen Eaglescience worden backend gebouwd in de taal Scala en op basis van een microservice architectuur. Daarnaast worden de dependencies die gebruikt worden in een file genaamd dependencies.scala. Er moet dus een tool komen die voor
-
-Zoals gezegt wordt de backend voor applicaties geschreven in Scala. Daarnaast zijn de meeste backend binnen Eaglescience opgebouwd als multi-project Microservices Scala maakt gebruik van een dependencies.scala file om dependencies in aan te geven die in het gehele project ge
