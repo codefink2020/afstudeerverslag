@@ -1,20 +1,33 @@
 % Todo Goede titel vinden voor Onderzoek Application Security
 
-\chapter{Onderzoek: Application Security}\label{ch:onderzoek:-application-security}
+\chapter{Onderzoek: SOUP analyse}\label{ch:onderzoek:-SOUP-analyse}
+
+Dit hoofdstuk beschrijft het onderzoek wat gedaan is om meer inzicht te krijgen in het doen van een SOUP-analyse. Als eerst wordt de onderzoeksvraag ontleed in te beantwoorden deelvragen. Daarna zal er wordt iedere deelvraag beantwoord om vervolgens tot een conclusie te komen welke de onderzoeksvraag beantwoord.
+
+
+\section{Onderzoeksvragen} \label{sec:SOUPOnderzoeksvragen}
+De onderzoeksvraag die als startpunt van dit onderzoek geld is:"Hoe kan SOUP op een effectieve manier worden geanalyseerd en hoe maakt dit software veiliger?". Uit deze hoofdvraag kunnen de volgende deelvragen worden ontleed:
+\begin{itemize}
+    \item Wat is SOUP?
+    \item Wat draagt SOUP bij aan de ontwikkeling van software?
+    \item Wat zijn de gevaren van het gebruik van SOUP?
+    \item Hoe kan een applicatie welke gebruik maken van SOUP effectief worden geanalyseerd om zo inzicht te krijgen of er kwetsbaarheden bevinden in deze bibliotheken?
+\end{itemize}
 
 Goed verhaal over supplychain Attacks : https://learning.oreilly.com/library/view/alice-and-bob/9781119687351/c01.xhtml#head-2-27
 
+Cyber security is een steeds belangrijker wordend onderwerp binnen het ontwikkelen van software. In het nieuws is geregeld te lezen dat er een instantie gegijzeld wordt middels ransomware. Of dat er door inadequate beveiligde systemen gegevens worden ontvreemd. De kans dat dit soort misdaden kunnen voorkomen is deels te danken dat er een steeds groter wordend doel is omdat steeds meer bedrijven gegevens verzamelen en deze in een cloud omgeving wegzetten. Een ander feit is dat software steeds sneller ontwikkeld dient te worden en dat er steeds meer software hergebruikt wordt. In de zin van hte hergebruiken van software kan deze software intern of extern ontwikkeld zijn. Van intern ontwikkelde software is meestal bekend hoe deze is gemaakt en welke zwakheden er in kunnen zitten. Van externe software is meestal geen kennis over de methodes van het fabriceren van software. Om deze reden wordt deze software "Software Of Unkown Pedigree" in het kort SOUP genoemd.
 
-
-Cyber security wordt steeds belangrijker bij het ontwikkelen van web applicaties.
-
-Met name omdat er een shift gaande is van monolitische applicaties die op personal computers draaien naar (micro) web services die op een server draaien.
-De COVID-19 pandemie heeft hier extra in meegeholpen omdat in het bedrijfsleven mensen steeds meer thuis gaan werken en dus ook de applicaties overal beschikbaar moet zijn.
-En als we naar het nieuws kijken lijkt het er ook op dat criminelen en spionage diensten hier gretig gebruik van maken door informatie te zoeken om vervolgens te gebruiken tegen een bedrijf of nog erger tegen een natie.
-Om deze reden is het goed om goed te kijken naar de manieren waarop applicaties beveiligd moeten worden. En te kijken waar er eventueel nog verbeteringen zijn
-
-
-Om applicaties te kunnen beschermen tegen vals gebruik moet er vanaf het moment dat er aan ontwikkeld wordt gekeken worden hoe de beveiliging op orde gemaakt moet worden.
+%
+%Cyber security wordt steeds belangrijker bij het ontwikkelen van web applicaties.
+%Met name omdat steeds meer bedrijven overgaan tot intern draaiende applicaties
+%van monolitische applicaties die op personal computers draaien naar (micro) web services die op een server draaien.
+%De COVID-19 pandemie heeft hier extra in meegeholpen omdat in het bedrijfsleven mensen steeds meer thuis gaan werken en dus ook de applicaties overal beschikbaar moet zijn.
+%En als we naar het nieuws kijken lijkt het er ook op dat criminelen en spionage diensten hier gretig gebruik van maken door informatie te zoeken om vervolgens te gebruiken tegen een bedrijf of nog erger tegen een natie.
+%Om deze reden is het goed om goed te kijken naar de manieren waarop applicaties beveiligd moeten worden. En te kijken waar er eventueel nog verbeteringen zijn
+%
+%
+%Om applicaties te kunnen beschermen tegen vals gebruik moet er vanaf het moment dat er aan ontwikkeld wordt gekeken worden hoe de beveiliging op orde gemaakt moet worden.
 
 Binnen Eaglescience is iedereen zich ervan bewust dat er veilige software gemaakt moet worden. In het onderzoek hiervoor is te lezen wat Eaglescience op het moment van schrijven doet aan preventie en monitoring binnen het ontwikkelen en hosten van een applicatie. Echter, is het goed om eens langs alle mogelijke manier te gaan waarop een applicatie kwetsbaar kan worden. Aan de hand van de OWASP-top10 kan gekeken worden welke zaken er nog missen en waar aangewerkt kan worden.
 
