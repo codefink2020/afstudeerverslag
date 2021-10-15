@@ -1,11 +1,11 @@
 \chapter{Onderzoek: Architectuur binnen Eaglescience}\label{ch:onderzoek:-architectuur-binnen-eaglescience} % Chapter title
 
 
-Dit hoofdstuk geeft het onderzoek weer naar de manier waarop EagleScience software ontwikkeld en uitrold. Er wordt ingegaan op de verschillende programeertalen en frameworks die in gebruikt zijn als ook de tooling die wordt gebruikt om de software daadwerkelijk te ontwikkelen en uitrollen.
-
+Dit hoofdstuk geeft het onderzoek weer naar de manier waarop EagleScience software ontwikkeld en uitrold. Als eersy wordt de onderzoeksvraag ontleed in te beantwoorden deelvragen. Daarna zal er wordt iedere deelvraag beantwoord om vervolgens tot een conclusie te komen welke de onderzoeksvraag beantwoord.
 %TODO: Vraag minder vaag maken denk ik ??
-\section{Onderzoeksvraag}\label{sec:ESOnderzoeksVraag}
-De onderzoeksvraag die als startpunt van dit onderzoek geld is: "Hoe wordt er binnen EagleScience software ontwikkeld en uitgerold en welke tooling wordt er gebruikt?". Deze onderzoeksvraag werpt een deelvragen op waar eerst een onderzoek naar gedaan dient te worden, waaruit vervolgens een conclussie kan worden getrokken en daarmee de hoofdvraag beantwoord.
+\section{Onderzoeksvragen}\label{sec:ESOnderzoeksVraag}
+De onderzoeksvraag die als startpunt van dit onderzoek geld is: "Welke methode en ontwikkeltalen worden er gebruikt om binnen EagleScience software te ontwikkelen en uit te rollen?". Deze vraag kan worden opgedeeld worden in de volgende deelvragen:
+
 \begin{itemize}
   \item Welk proces wordt er binnen Eaglescience gebruikt om software te ontwikkelen?
   \item Wat zijn de meest gebruikte ontwikkeltalen en frameworks die binnen EagleScience worden toegepast?
@@ -13,42 +13,13 @@ De onderzoeksvraag die als startpunt van dit onderzoek geld is: "Hoe wordt er bi
   \item Hoe wordt er binnen EagleScience software uitgerold?
 \end{itemize}
 
-\section{Requirements}
-Blaat over requirements.
-%
-%\section{Hoe wordt er op het moment gewerkt binnen eagleScience?}\label{sec:hoe-wordt-er-op-het-moment-gewerkt-binnen-eaglescience?}
-%Eaglescience werkt op project basis met klanten.
-%Om project inzichtelijk te maken en beter te kunnen defineren wordt er gebruik gemaakt van een planning middels fasen die doorlopen worden.
-%Iedere fase heeft een gedefineerd einde dat in overeenstemming met de klant wordt vastgelegd.
-%Er is echter een uitzondering op de fase project maintenance waarbij Eaglescience gewenst onderhoud pleegt op de geleverde applicatie dan al niet met hosting.
-%\medskip
-%
-%\textbf{Phase1: Sales \& acquisition}
-%onderzoeksfase waarin vooral de wensen en restricutes vanuit de klant in kaart wordt gebracht.
-%Hierbij kan gedacht worden aan: Doel van de applicatie met daarbij de requirements en restraints, planning, budget en hosting.
-%Het resultaat is een inschattingsdocument met daarin informatie die het team verder helpt in het vormgeven van het project.
-%
-%\textbf{Phase2: Project initiation}
-%In deze fase wordt het project opgestart.
-%Er wordt een team samengesteld die gaat werken aan het ontwikkelen van de software.
-%Deze fase is ook cruciaal om alle platform in gereedheid te brengen te denken aan rechten voor de ontwikkelaars op Azure Cloud, Sentri, Jenkins en dergelijke.
-%Als alles in gereedheid wordt gebracht is er een project kick-off waarbij hetteam wordt ingelicht over het project en taken die vervult moeten gaan worden.
-%
-%\textbf{Phase3: Start \& Execution}
-%Dit is een iteratieve fase die in sprints doorloopt tot het project gereed is.
-%Waarbij na iedere sprint een demo wordt gegeven verdere uitweiding over deze fase is hieronder te vinden onder "Dagelijkse werkwijze"
-%
-%\textbf{Phase4: Project Warp up}
-%In deze fase wordt het project opgeleverd aan de klant en wordt dan al niet door Eaglescience gehost op Azure cloud.
-%Er wordt een project retro gehouden waarbij het team terugkijkt op de werkzaamheden en hoe deze verliepen, daarnaast is er een evaluatie met de klant.
-%
-%\textbf{Phase5: Project maintenance}
-%Geen enkel software wordt direct zonder bugs opgeleverd deze fase duurt dan ook zolang de als software lifecycle is of tot het budget van de klant op is :D In deze fase wordt support geleverd door Eaglescience op de source code en mogelijk aanpassingen gedaan om bugs te verwijderen of performance te verbeteren.
 
 \section{Dagelijkse werkwijze}\label{sec:dagelijkse-werkwijze}
+Om antwoord te krijgen op de vraag: "Welk proces wordt er binnen Eaglescience gebruikt om software te ontwikkelen?" Moet er gekeken worden hoe EagleScience werkt op dagelijkse basis.
+
 Binnen Eaglescience wordt er getracht om "full Scrum" te werken. Dit wil zeggen dat voor ieder project een team van maximaal 9 full-stack developers wordt aangewezen. De sprints duren ongeveer 2 á 3 weken afhankelijk van wensen van de klant en beschikbaarheid van ontwikkelaars. Iedere sprint begint met een refinement waarbij de taken die op de backlog staan worden bekeken en ingeschat door het team. Tijdens de sprint vindt de ontwikkeling middels taken plaats die vervolgens worden gereviewd door een ander teamlid. Aan het einde van de sprint vind er een retrospective plaats en eventueel een demo om de voortgang te demonstreren aan de klant, dit is ook het moment dat het team ziet hoe de applicatie in het algemeen werkt. Dit is ook het moment voor de projectmanager en product owner om de taken die op de back-log staan opnieuw te prioriseren waarbij in de refinement van de volgende sprint de taken mee worden genomen.
 
-Om deze werkwijze te ondersteunen maakt EagleScience gebruik van de een PO(T)AP(Personal, Development, (Test), Acceptence, Production) buildstraat. Alle genoemde omgevingen worden gehost in Azure Kubernetes en maken gebruik van docker containers. Iedere ontwikkelaar heeft zijn eigen omgeving die hij kan bouwen om te testen of aanpassingen werken zoals verwacht. Er is per project een Ontwikkelomgeving waarin getest wordt of alle aanpassingen van de ontwikkelaars met elkaar werken. De acceptatie omgeving is er voor de projectmanagers en testers vanuit de klant of desgewenst externe testers om de ontwikkelde applicatie te testen zoals hij naar productie zou gaan. De productie omgeving host alle applicaties die 'live' zijn. Gezien alle omgevingen in docker containers draaien zijn deze volitile en kunnen dus "makkelijk" worden vervangen. zeker voor de personal en development omgeving wordt dit gezien als een voordeel vanwege het vele bouwen van deze omgevingen.
+Om deze werkwijze te ondersteunen maakt EagleScience gebruik van de een PO(T)AP(Personal, Development, (Test), Acceptence, Production) omgevingen die middels Jenkins worden gebuild naar de desbetreffende Omgeving. Alle genoemde omgevingen worden gehost in Azure. Development en production maken gebruik van Kubernetes en maken gebruik van docker containers. Iedere ontwikkelaar heeft zijn eigen omgeving die hij kan bouwen om te testen of aanpassingen werken zoals verwacht. Er is per project een Ontwikkelomgeving waarin getest wordt of alle aanpassingen van de ontwikkelaars met elkaar werken. De acceptatie omgeving is er voor de projectmanagers en testers vanuit de klant of desgewenst externe testers om de ontwikkelde applicatie te testen zoals hij naar productie zou gaan. De productie omgeving host alle applicaties die 'live' zijn. Gezien alle omgevingen in docker containers draaien zijn deze volitile en kunnen dus "makkelijk" worden vervangen. zeker voor de personal en development omgeving wordt dit gezien als een voordeel vanwege het vele bouwen van deze omgevingen.
 \section{Ontwikkeltalen en tooling binnen EagleScience}\label{sec:ontwikkeltalen-en-tooling-binnen-eaglescience}
 EagleScience maakt volledige full stack oplossingen. Er wordt dus zowel front-end, backend, en database oplossingen ontwikkelt binnen projecten. Er wordt dan gebruik gemaakt van een aantal ontwikkeltalen en frameworks om deze oplossingen te kunnen ontwikkelen. Naast de ontwikkeltalen zijn er ook een aantal tools die worden gebruikt door eaglescience om support te kunnen leveren en projecten te kunnen managen.
 
@@ -108,7 +79,8 @@ Cloud omgeving van Microsoft waar we gebruik maken van verschillende services wa
 Zoals hierboven berschreven wordt Jenkins gebruikt om software te deployen naar zowel de productie omgevingen alsook de verschillende development en acceptatie omgevingen.
 Een deploy wordt gedaan op het moment dat er source code naar gitlab gepushed wordt.
 Doormiddel van Tokens in de Commit message kan gestuurd worden waar de build(als deze slaagt) gedeployed wordt bijv: {-all + portal} build en deployed alleen de portal. [ci-skip] zorgt ervoor dat er alleen een push wordt gedaan en geen build wordt gestart.
-De configuratie die Jenkins gebruikt wordt beschreven in een aantal Jenkins files die meegenomen worden de repo.
+De configuratie die Jenkins gebruikt wordt beschreven in een aantal Jenkins files die meegenomen worden de repo. Middels parameters meegegeven in de commit kan er worden beslist of er een build moet plaatsvinden en zo ja waar en welke delen van de applicatie. Op deze manier is er een flexibiliteit voor de ontwikkelaar.
+[NOTE Illustratie maken.....]
 Naast de deploy geeft Jenkins nog een aantal andere waardevolle Artifacts als test/lint rapportages.
 Een build en deploy gaat volgens de onderstaande afbeelding:
 
@@ -139,3 +111,7 @@ in dit geval wordt de deploy niet uitgevoerd.\ Deze stap zorgt ervoor dat de geb
 \item \textbf{End}
 Einde van de PipeLine Jenkins geeft de workers die het project heeft gebruikt weer vrij.
 \end{itemize}
+
+
+\section{Conclussie}
+Binnen EagleScience wordt er gewerkt middels de SCRUM methode om software te ontwikkelen. De meest gebruikte talen binnen EagleScience zijn Scala en TypeScript. Tijdens ontwikkeling worden er build uitgerold naar Azure om de werking te controlleren. Aan het einde van een sprint wordt een werkende applicatie opgeleverd en uitgerold naar een Azure kubernetes cluster. De uitrollen worden uitgevoerd middels Jenkins waarbij de er een custom script wordt uitgevoerd na gelang de parameters die meegegeven worden met een commit
