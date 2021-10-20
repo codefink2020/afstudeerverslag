@@ -2,48 +2,46 @@
 \chapter{Plan van Aanpak}\label{ch:planvanaanpak} % Chapter title
 %TODO: verder uitwerken wat er precies in elke stap gaat gebeuren.
 
-Gezien deze module een zekere impact heeft op de manier van werken binnen EagleScience is het goed om een solide plan van aanpak te hebben voor er daadwerkelijk begonnen wordt aan het ontwikkelen en uitrollen van de module. Hieronder is in sectie de vershillende fasen van het project beschreven met daarbij de geschatte tijd die het gaat duren. De onderstaande onderdelen van het project zijn allemaal te vinden in verdere hoofdstukken
-
-De oplevering van de module wordt gezet op eind januari 2022. Om deze milestone te halen moeten er een aantal voorgaande milestones gedefineerd worden om een garantie te hebben dat de oplevering binnen de tijd plaatsvinf in onderstaande secties is een globale beschrijving van de milestone, oplevering, en methodes die gebruikt worden om de milestone te halen.
+Gezien de te ontwikkelen module een zekere impact zal hebben op de manier van werken binnen EagleScience is het goed om een solide plan van aanpak te hebben voor er daadwerkelijk begonnen wordt aan het ontwikkelen en uitrollen van de module. Hieronder worden de vershillende fasen van het project beschreven met daarbij de geschatte tijd die het gaat duren. Het project vangt aan in september 2021 aan en de oplevering van de module is gepland voor wordt gezet op eind januari 2022. Om hieraan te kunnen voldoen moeten er een aantal milestones worden gedefinieerd. Hieronder volgt een globale beschrijving van de milestones, opleveringen, en methodes die gebruikt worden om de milestone te halen.
 
 \section{Requirements analyse \textbf{september 2021}}\label{sec:requirements-analyse}
-Na het ontvangen van de opdracht dient er onderzocht te worden of er naast de eisen die door de CTO in de opdracht zijn gezet nog andere eisen binnen Eaglescience. Hiervoor moet er onderzocht worden welke stakeholders er zijn met welke belangen en wensen. Na het houden van interviews worden alle wensen tegen elkaar afgeweegt. Het resultaat van is een document waarin alle belangrijke requirments worden geprioriseerd volgens de MoSCoW-methode.
+Na het ontvangen van de opdracht dient er onderzocht te worden of er naast de eisen die door de CTO in de opdracht zijn gezet nog andere eisen zijn binnen EagleScience. Hiervoor zal er onderzocht worden welke betrokkenen er zijn en welke belangen en wensen zij hebben. Na het houden van interviews zullen alle wensen tegen elkaar worden afgewogen. Dit zal leiden tot een document waarin alle belangrijke requirements worden geprioriteerd volgens de MoSCoW-methode.
 
-\textbf{Methode:} Intake gesprek met Opdrachtgever, Interviews met stakeholders, Enquete voor ontwikkelaars.
+\textbf{Methode:} Intake gesprek met opdrachtgever, interviews met betrokkenen, enquete voor ontwikkelaars.
 
-\textbf{Resultaat:} Applicatie requirements document. %TODO: Goede titel zoeken
+\textbf{Resultaat:} Applicatie requirements document. %TODO: Goede titel zoeken aanmaken
 
-\section{Voor onderzoek \textbf{september 2021 - oktober 2021 }}\label{sec:onderzoek}
-Om de requirements om te kunnen zetten naar een ontwerp moet er onderzoek gedaan worden naar de huidige manier van ontwikkelen en compileren van de software. Een onderzoek naar begrippen binnen het domein SOUP is een voorwaarde om vervolgens onderzoek te kunnen doen naar methodes om analyses te kunnen doen op software die EagleScience maakt ten opzichte van SOUP. De resultaten van het vooronderzoek worden gebruikt als in put
-Om meer kennis en verdieping te krijgen in de materie rondom de nieuwe module moeten er een aantal onderzoeken worden uitgevoerd.
+\section{Vooronderzoek \textbf{september 2021 - oktober 2021 }}\label{sec:onderzoek}
+Om de requirements om te kunnen zetten naar een ontwerp zal er onderzoek gedaan worden naar de huidige manier van ontwikkelen en compileren van de software. Een onderzoek naar begrippen binnen het domein SOUP is een voorwaarde om vervolgens onderzoek te kunnen doen naar methodes om analyses te kunnen doen op software die EagleScience maakt ten opzichte van SOUP. De resultaten van het vooronderzoek zullen worden gebruikt als input.
+Om meer kennis en verdieping te krijgen in de materie rondom de nieuwe module zullen er een aantal onderzoeken worden uitgevoerd.
 
 
 Er is onderzoek nodig naar de volgende onderwerpen:
 \begin{itemize}
-    \item \textbf{Architectuur binnen EagleScience} werkwijze en ontwikkel stack van EagleScience met daarin specifiek onderzocht hoe er omgegaan wordt met het voorkomen van onveiligheden in de geleverde software
-    \item \textbf{Application Security} Onderzoek naar Application Security en manier waarop er tegen geweerdt wordt Daarnaast worden de efforts van EagleScience op dit uitgelicht
-    \item \textbf{Soup Analyse} Door te kijken naar de kwetsbaarheden in de externe bibliotheken kan er beter worden nagegaan of er kwetsbaarheden in de software zitten. Dit onderzoek gaat in op het bestaan van methodes om SOUP analyses te doen. En een mogelijkheid om dit (deels) geautomatiseerde te doen.
+    \item \textbf{Architectuur binnen EagleScience} Werkwijze en ontwikkel stack van EagleScience met daarin specifiek onderzocht hoe er omgegaan wordt met het voorkomen van onveiligheden in de geleverde software
+    \item \textbf{Externe bibliotheken gebruik en het gevaar} Onderzoek naar waarom er externe bibliotheken worden gebruikt en het gevaar hiervan.
+    \item \textbf{Soup Analyse} Door te kijken naar de kwetsbaarheden in de externe bibliotheken kan er beter worden nagegaan of er kwetsbaarheden in de software zitten. Dit onderzoek zal in gaan op het bestaan van methodes om SOUP analyses te doen. En een mogelijkheid om dit (deels) geautomatiseerde te doen.
 \end{itemize}
 
-\textbf{Methode:} Bureau onderzoek, Interviews met specialisten , meedoen aan en/of terugkijken van conferenties
+\textbf{Methode:} Bureau onderzoek, interviews met specialisten, meedoen aan en/of terugkijken van conferenties
 
-\textbf{Resultaat:} Inzicht in het begrip SOUP en software veiligheid als ook een idee voor een mogelijke implementatie van de oplossing die voor EagleScience de beste is zonder veel impact op de huidige manier van werken.
+\textbf{Resultaat:} Inzicht in het begrip SOUP en software veiligheid als ook een idee voor een mogelijke implementatie van de oplossing die voor EagleScience de beste is zonder veel impact op de huidige manier van werken te hebben.
 
-\section{Initieel ontwerp \textbf{oktober 2021 }}\label{sec:initieel-ontwerp}
-Een ontwerp waarinvastgelegd staat welke requirements er beslist in de module moeten zitten en de uitwerking van deze. Als ook de een ontwerp van de architectuur en het datamodel. Naast de module dient er ook een ontwerp gemaakt worden voor een ontwikkel/test omgeving om de module continue te kunnen testen zonder dat er invloed is op de huidige buildstraat. Dit laatste is van belang om zo min mogelijke storing te veroorzaken in de dagelijkse gang van zaken bij al lopende projecten. Let wel het initiele ontwerp is een leidraad voor de implementatie waarin afgeweken kan worden als dit nodig blijkt tijdens de implementatie sprints.
+\section{Initieel ontwerp \textbf{oktober 2021 - november 2021 }}\label{sec:initieel-ontwerp}
+Er zal een ontwerp worden gemaakt waarin vast gelegd is welke requirements er beslist in de module moeten zitten en de uitwerking van deze. Evenals een ontwerp van de architectuur en het datamodel. Naast de module zal er ook een ontwerp gemaakt worden voor een ontwikkel/test omgeving om de module continue te kunnen testen zonder dat dit de huidige buildstraat beinvloed. Dit laatste is van belang om zo min mogelijk storingen te veroorzaken in de dagelijkse gang van zaken bij al lopende projecten. Het initiële ontwerp zal als leidraad dienen voor de implementatie waarin afgeweken kan worden als dit nodig blijkt tijdens de implementatie sprints.
 
-\textbf{Methode:} Overleggen met senior developers, etc..
+\textbf{Methode:} Overleggen met developers, huidige omgeving onderzoeken op mogelijkheden en architectuur.
 
 \textbf{Resultaat:} Initieel ontwerp in de vorm van een functioneel ontwerp en een datamodel.
 
-\section{Implementatie en Testing \textbf{oktober 2021 - januari 2022 }}\label{sec:implementatie-en-testing}
-Om te kunnen beginnen aan de implementatie is er eerst een ontwikkel/ test omgeving nodig die het mogelijk maakt om zonder invloed op de dagelijkse werkzaamheden van EagleScience een module te kunnen ontwikkelen. Als test projecten worden snapshots gebruikt van de daadwerkelijke projecten dit om een zo accuraat mogelijke test omgeving te hebben. Zoals in de opdracht beschreven dient de nieuwe module een onderdeel te zijn van de bestaande portal. Er zal dan ook een samenwerking plaats gaan vinden met het team die daar op het moment mee aan het ontwikkelen is. Tijdens de implementatie is het van belang dat er gedocumenteerd wordt hoe de module werkt en welke procedures hier in worden gevolgt. Dit om toekomstige ontwikkelaars de mogelijkheid te geven om dit door te nemen als on-boarding en reference.
+\section{Implementatie en Testen \textbf{november 2021 - januari 2022 }}\label{sec:implementatie-en-testen}
+Om te kunnen beginnen aan de implementatie is er een ontwikkel/ test omgeving nodig die het mogelijk maakt om zonder invloed op de dagelijkse werkzaamheden van EagleScience een module te kunnen ontwikkelen. Deze zal eerst worden opgezet. Als test projecten zullen snapshots worden gebruikt van de daadwerkelijke projecten dit om een zo accuraat mogelijke test omgeving te hebben. Zoals in de opdracht beschreven dient de nieuwe module een onderdeel te zijn van de bestaande portal. Er zal dan ook direct samen worden gewerkt met het team die daar op het moment mee aan het ontwikkelen is. Tijdens de implementatie zal er ook worden gedocumenteerd wordt hoe de module werkt en welke procedures hier in worden gevolgd. Dit document biedt ontwikkelaars de mogelijkheid om dit door te nemen als on-boarding en referentie.
 
 \textbf{Methode:} Agile scrum sprints met iedere 2 weken een oplevermoment en demo als ook een reflectie op de sprint.
 \textbf{Resultaat:} Werkende en geteste applicatie die klaar is om uitgerold te worden.
 
 \section{Uitrollen en documentatie \textbf{januari 2022 - februari 2022 }}\label{sec:uitrollen-en-documentatie}
-Nadat de implementatie van de meest kritische requirements is afgerond kan er worden begonnen aan het uitrollen van de module en het testen door een geselecteerde groep gebruikers. De feedback wordt bekeken en meegenomen in de evaluatie. mocht het nodig zijn dat kan er accuut actie worden ondernomen om deze wijzigingen aan te passen. Mochten er wensen zijn die kunnen wachten dan zal er worden overwogen om deze mee te nemen in de volgende iteratue van het project. (de verwachting is dat de module die hier beschreven wordt verder zal worden uitgebreid met de diverse mogelijkheden om betere en veiligere software te ontwikkelen.) Daarnaast is de documentatie een belangrijk punt die hier verder dient te worden afgerond.
-\textbf{Methode:} Interviews met stakeholders,
+Nadat de implementatie van de meest kritische requirements is afgerond zal er worden begonnen met het uitrollen van de module en het testen door een geselecteerde groep gebruikers. De feedback wordt bekeken en meegenomen in de evaluatie. Mocht het nodig zijn dat zal er accuut actie worden ondernomen om deze wijzigingen aan te passen. Mochten er wensen zijn die kunnen wachten dan zal er worden overwogen om deze mee te nemen in de volgende iteratie van het project. (de verwachting is dat de module die hier beschreven wordt verder zal worden uitgebreid met de diverse mogelijkheden om betere en veiligere software te ontwikkelen.) Daarnaast zal ook de documentatie verder worden afgerond.
+\textbf{Methode:} Interviews met stakeholders met een analyse over de nieuwe requirements.
 
 \textbf{Resultaat:} Uitegrolde en gedocumenteerde applicatie
