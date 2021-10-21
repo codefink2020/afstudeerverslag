@@ -1,46 +1,44 @@
 
 \chapter{Requirements Analyse}\label{ch:requirements-analyse}
+Dit hoofdstuk beschrijft de methode en stappen die zijn ondernomen om de requirements voor de nieuwe module te analyseren. De analyse heeft als resultaat een document dat in Appendix \ref{ch:requirements-specificatie} te vinden is. Daarnaast zal hier een samenvating te vinden zijn van dit document die als input geldt voor de volgende hoofdstukken.
+
+\section{Analyse stappen}\label{sec:analyse-stappen}
+Om een goede analyse te kunnen doen zullen er een aantal stappen  moeten worden doorlopen.
+\textbf{Stap 1: Probleem analyse}
+In deze stap dient het probleem dat gesteld wordt in de opdracht te worden geanalyseerd. Door als eerste te kijken naar de huidige methode, die gehanteerd wordt om een SOUP analyse te doen, is er inzicht in hoe het probleem dat gesteld is op dit moment wordt opgelost. Er kan bijvoorbeeld gekeken worden naar de tijd die ontwikkelaars nodig hebben om een analyse te doen en vervolgens de resultaten te publiseren. Daarnaast is een onderzoek naar de betrokkenen gewenst om in te zien wie er baat heeft bij verbeteringen. Daarnaast kunnen betrokkenen ook gewensten en ongewenste input geven in een mogelijke oplossing.
+\textbf{Stap 2: Onderzoek naar verbeteringen.}
+Door interviews te houden met de verschillende betrokkenen wordt er inzicht verkregen in een mogelijke oplossing voor het gestelde probleem. Daarnaast door te kijken naar de resultaten die door de huidige manier wordt gegenereerd kan er een manier worden bedacht om deze resultaten te evenaren al dan niet te verbeteren.
+
+\textbf{Stap 3: Opstellen van de user-requirments en stories.}
+De bevindingen uit de analyse van de opdracht en het onderzoek beschreven in stap 2 geven input voor het opstellen van requirements en userstories waaraan de nieuwe methode moet voldoen.
+
+\section{Samenvating Requirements specificatie.}
+
+
+
+Problem Analysis
+
+The most straightforward (and probably the most commonly used) requirements-analysis technique is problem analysis. Problem analysis means asking the users and managers to identify problems with the as-is system and to describe how to solve them in the to-be system. Most users have a very good idea of the changes they would like to see, and most are quite vocal about suggesting them. Most changes tend to solve problems rather than capitalize on opportunities, but the latter is possible as well. Improvements from problem analysis tend to be small and incremental (e.g., provide more space in which to type the customer’s address; provide a new report that currently does not exist).
+This type of improvement often is very effective at improving a system’s efficiency or ease of use. However, it often provides only minor improvements in business value—the new system is better than the old, but it may be hard to identify significant monetary benefits from the new system.
+
+
+
+
+
+
+
+Om een goede requirements analyse te doen moet er gekeken worden naar de huidige situatie en waar mogelijk verbeteringen zijn. Om deze verbeteringen te onderzoeken zijn er interviews gehouden met ber
+
+
+
+
+
+
+Om inzicht te krijgen in de huidige en gewenste situatie zijn er interviews
+
 
 Dit hoofdstuk beschrijft het probleem binnen het domein van EagleScience. Daarnaast wordt de huidige situatie beschreven waarna er een gewenste situatie wordt geschetst. De stakeholders worden defineert en in kaart gebracht Waarna hun requirements in kaart worden gebracht en middels de MoSCoW methode op prioriteit worden gezet. Het resultaat is een Requirements Specificatie die in zijn geheel is terug te vinden in Appendix~\ref{ch:requirements-specificatie}
 
-\section{Huidige situatie}\label{sec:huidige-situatie}
-EagleScience is al een geruime tijd bezig met het fine-tunen van de buildstraat en zaken te automatiseren om zo steeds efficienter software uit te kunnen rollen. Daarnaast is het bouwen van veilige software één van de hoofdpunten van aandacht. Om dit te kunnen garanderen is iedere ontwikkelaar verplicht om te onderzoeken welke gevolgen het gebruik van bepaalde bibliotheken heeft op de ontwikkelde software. Dit onderzoek wordt op dit moment voor een groot deel handmatig gedaan door het uitpluizen van dependency declaraties op verschillende sites. Dit proces is tijdrovend en de resulterende documentatie is vaak alleen op project niveau beschikbaar. Daarnaast zijn er al afgeronde applicaties die niet onder directe aandacht van het team staan, maar wel worden gehost door EagleScience. Met de tijd kunnen er kwetsbaarheben ontstaan die ongemerkt blijven bestaan. En er mogelijk pas actie wordt ondernomen als er middels de applicatie een aanval of inbraak is gedaan.
-
-\section{Gewenste situatie}\label{sec:gewenste-situatie}
-Een situatie waar EagleScience naar toe wil is dat er periodiek of door middel van een trigger \footnote{Er kan bijvoorbeeld gedacht worden aan een commit op een branch zodat niet iedere dag een update wordt gedaan op De acceptence branche is een goed voorbeeld hiervoor} wordt onderzocht of er in de huidige dependency tree bibliotheken zitten die mogelijk kwetsbaarheden bevatten. Deze kennis dient gedeelt te worden door middel van een module in de portal die al reeds gebruikt wordt door EagleScience. Door de resultaten weer te geven in de portal ontstaat er een beter inzicht in welke bibliotheken we gebruiken en welke er potentieel kwetsbaarheden bevatten. Wat op zijn beurt weer voor veiligere applicaties kan zorgen. Ook voor de applicaties waar niet meer actief op ontwikkeld wordt. \footnote{Het is natuurlijk wel zo dat er een afhankelijk onstaat van externe bronnen die bekend moeten maken dat er een kwetsbaarheid is.}
-
-\section{De stakeholders}\label{sec:de-stakeholders}
-Binnen EagleScience zijn er een aatal stakeholders die belang hebben bij deze nieuwe methode en module. Naast de stakeholders binnen Eaglescience is er nog een stakeholder in de vorm van de klant. Hoewel de klant niet actief is in de ontwikkeling van deze methode/module. Zij hebben er wel degelijk belang bij het resultaat en dienen ook genoemd te worden.
-\subsection{Dagelijks bestuur (intern)}\label{subsec:dagelijks-bestuur-(intern)}
-Het dagelijks bestuur ziet vooral voordelen in het inzicht krijgen van kwetsbaarheden op een overzichtelijke manier, zodat ze kunnen sturen in het gebruik van biblioteken of andere technologiën. Ook al zullen er kosten die niet direct terug te verdienen zijn gemoeit met de ontwikkeling van een nieuwe methode.
-Echter, zien zij ook kosten gemoeid met de verandering.
-Door de manier van werken dienen deze kosten terug verdient te worden door werkzaamheden binnen andere projecten.
-De CTO ziet vooral tijdswinst zodat de time-to-market voor andere projecten hoger ligt en dus meer verdient kan worden.
-\subsection{Projectmanagers (intern)}\label{subsec:projectmanagers-(intern)}
-Project managers krijgen op dit moment een update over de staat van kwetsbaarheden tijdens stand-ups en aan het einde van een sprint tijdens de sprint demo's.
-De nieuwe module biedt ze de mogelijkheid om up-to-date informatie on-demand te verkrijgen.
-Op de vraag of het het waard is dat een aantal ontwikkelaars tijd kwijt zijn in testen en meedenken over de module weegt volgens hen op tegen de voordelen die de module in de toekomst kan brengen.
-\subsection{Ontwikkelteam (intern)}\label{subsec:ontwikkelteam-(intern)}
-Het ontwikkelteam wil graag meedenken en meewerken aan een oplossing, gezien zij de gene waren die handmatig de analyse uitvoerden.
-Zij zien voor een oplossing voor een taak dat veel tijd in beslag nam en afleide van de daadwerkelijke taak.
-\subsection{Klant (extern)}\label{subsec:klant-(extern)}
-Als laatste de klant welke een passieve stakeholder is gezien zij niet direct betrokken zijn bij de ontwikkeling van de module maar wel verbeteringen genieten in de zin van veilige en betrouwbare software.
-
-\subsection{Stakeholder analyse}\label{subsec:stakeholder-analyse}
-\begin{figure}[H]
-\myfloatalign
-\includegraphics[width=10cm]{gfx/stakeholderanalyse}
-\caption{StakeHolders Analyse}
-\label{fig:StakeholderAnalyse}
-\end{figure}
-Zoals te zien is in figuur~\ref{fig:StakeholderAnalyse} zijn de projectmanager, het ontwikkelteam en de klanten het meest gebaad bij een nieuwe module voor de analyse van kwetsbaarheden.
-Echter zijn de klanten niet tot bijna niet betrokken bij de ontwikkeling van de module maar hebben er indirect wel belang bij omdat de software die voor hen ontwikkeld wordt veiliger wordt door het voeren van een geautomatiseerde analyse.
-Door deze analyse worden alleen de requirements meegnomen die intern zijn opgenomen.
-\section{Requirements}\label{sec:requirements}
-Naast het analyseren van de betrokkenheid en belang van de stakeholders is er ook gevraagd welke requirements ze terug wilden zien in de applicatie en welke prioriteit er aan gesteld werdt.
-Om een leidraad te verschaffen is de MoSCoW-methode gebruikt.
-Hieronder is een lijst geformuleert met de belangrijkset requirements vanuit de stakeholders.
-Deze lijst is niet volledig en wordt na iedere sprint aangepast aan de resultaten van de sprint ervoor.
 
 \textbf{Must Have Moet nog onderverdeeld worden in MoSCoW}
 \begin{itemize}

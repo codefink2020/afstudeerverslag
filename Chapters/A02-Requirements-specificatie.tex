@@ -2,15 +2,53 @@
 
 \chapter{Requirements Specificatie}\label{ch:requirements-specificatie}
 
-%TODO: MarginPARS zetten
 
 \section{Inleiding}\label{sec:RS_inleiding}
-Voor u ligt ...
 \lipsum[01]
 
-\lipsum[02]
+De basis van deze analyse is de opdracht die is uitgegeven in deze opdracht zijn een aantal requirement gespecificeerd en deze zullen worden overgenomen. Daarnaast zullen er nog een aantal andere requirements zijn die door andere betrokkenen worden aangedragen. Deze zullen ook worden geanalyseeerd en desgwenest mee worden genomen in de ontwikkeling van de de nieuwe module.
 
-\section{Huidige situatie}
-H
 
-\section{Gewenste situatie}
+\section{Huidige situatie}\label{sec:huidige-situatie}
+EagleScience is al een geruime tijd bezig met het fine-tunen van de buildstraat en zaken te automatiseren om zo steeds efficienter software uit te kunnen rollen. Daarnaast is het bouwen van veilige software één van de hoofdpunten waar bij EagleScience veel aandacht aan wordt besteed. Om dit te kunnen garanderen is iedere ontwikkelaar verplicht om te onderzoeken welke gevolgen het gebruik van bepaalde bibliotheken heeft op de ontwikkelde software. Dit onderzoek wordt op dit moment voor een groot deel handmatig gedaan door het uitpluizen van documentatie en registaties in een Vulnerability database op basis van de dependency declaraties in de ontwikkelde applicaties.
+
+Dit proces is tijdrovend en de resulterende documentatie is vaak alleen op project niveau beschikbaar. Daarnaast zijn er al afgeronde applicaties die niet onder directe aandacht van het team staan, maar wel worden gehost door EagleScience. Met de tijd kunnen er kwetsbaarheben ontstaan die ongemerkt blijven bestaan. En er mogelijk pas actie wordt ondernomen als er een update van de applicatie wordt uitgevoerd door EagleScience of als er een aanval is gedaan op één van de applicaties ontwikkeld door EagleScience.
+
+\section{De stakeholders}\label{sec:de-stakeholders}
+Binnen EagleScience zijn er een aatal stakeholders die belang hebben bij deze nieuwe methode en module. Naast de stakeholders binnen Eaglescience is er nog een stakeholder in de vorm van de klant. Hoewel de klant niet actief is in de ontwikkeling van deze methode/module. Zij hebben er wel degelijk belang bij het resultaat en dienen ook genoemd te worden.
+\subsection{Dagelijks bestuur (intern)}\label{subsec:dagelijks-bestuur-(intern)}
+Het dagelijks bestuur ziet vooral voordelen in het inzicht krijgen van kwetsbaarheden op een overzichtelijke manier, zodat ze kunnen sturen in het gebruik van biblioteken of andere technologiën. Ook al zullen er kosten die niet direct terug te verdienen zijn gemoeit met de ontwikkeling van een nieuwe methode.
+Echter, zien zij ook kosten gemoeid met de verandering.
+Door de manier van werken dienen deze kosten terug verdient te worden door werkzaamheden binnen andere projecten.
+De CTO ziet vooral tijdswinst zodat de time-to-market voor andere projecten hoger ligt en dus meer verdient kan worden.
+\subsection{Projectmanagers (intern)}\label{subsec:projectmanagers-(intern)}
+Project managers krijgen op dit moment een update over de staat van kwetsbaarheden tijdens stand-ups en aan het einde van een sprint tijdens de sprint demo's.
+De nieuwe module biedt ze de mogelijkheid om up-to-date informatie on-demand te verkrijgen.
+Op de vraag of het het waard is dat een aantal ontwikkelaars tijd kwijt zijn in testen en meedenken over de module weegt volgens hen op tegen de voordelen die de module in de toekomst kan brengen.
+\subsection{Ontwikkelteam (intern)}\label{subsec:ontwikkelteam-(intern)}
+Het ontwikkelteam wil graag meedenken en meewerken aan een oplossing, gezien zij de gene waren die handmatig de analyse uitvoerden.
+Zij zien voor een oplossing voor een taak dat veel tijd in beslag nam en afleide van de daadwerkelijke taak.
+\subsection{Klant (extern)}\label{subsec:klant-(extern)}
+Als laatste de klant welke een passieve stakeholder is gezien zij niet direct betrokken zijn bij de ontwikkeling van de module maar wel verbeteringen genieten in de zin van veilige en betrouwbare software.
+\subsection{Stakeholder analyse}\label{subsec:stakeholder-analyse}
+\begin{figure}[H]
+    \myfloatalign
+    \includegraphics[width=10cm]{gfx/stakeholderanalyse}
+    \caption{StakeHolders Analyse}
+    \label{fig:StakeholderAnalyse}
+\end{figure}
+Zoals te zien is in figuur~\ref{fig:StakeholderAnalyse} zijn de projectmanager, het ontwikkelteam en de klanten het meest gebaad bij een nieuwe module voor de analyse van kwetsbaarheden.
+Echter zijn de klanten niet tot bijna niet betrokken bij de ontwikkeling van de module maar hebben er indirect wel belang bij omdat de software die voor hen ontwikkeld wordt veiliger wordt door het voeren van een geautomatiseerde analyse.
+Door deze analyse worden alleen de requirements meegnomen die intern zijn opgenomen.
+
+
+\section{Gewenste situatie}\label{sec:gewenste-situatie}
+Een situatie waar EagleScience naar toe wil is dat er periodiek of door middel van een trigger \footnote{Er kan bijvoorbeeld gedacht worden aan een commit op een branch zodat niet iedere dag een update wordt gedaan op De acceptence branche is een goed voorbeeld hiervoor} wordt onderzocht of er in de huidige dependency tree bibliotheken zitten die mogelijk kwetsbaarheden bevatten. Deze kennis dient gedeelt te worden door middel van een module in de portal die al reeds gebruikt wordt door EagleScience. Door de resultaten weer te geven in de portal ontstaat er een beter inzicht in welke bibliotheken we gebruiken en welke er potentieel kwetsbaarheden bevatten. Wat op zijn beurt weer voor veiligere applicaties kan zorgen. Ook voor de applicaties waar niet meer actief op ontwikkeld wordt. \footnote{Het is natuurlijk wel zo dat er een afhankelijk onstaat van externe bronnen die bekend moeten maken dat er een kwetsbaarheid is.}
+
+
+
+\section{Requirements}\label{sec:requirements}
+Naast het analyseren van de betrokkenheid en belang van de stakeholders is er ook gevraagd welke requirements ze terug wilden zien in de applicatie en welke prioriteit er aan gesteld werdt.
+Om een leidraad te verschaffen is de MoSCoW-methode gebruikt.
+Hieronder is een lijst geformuleert met de belangrijkset requirements vanuit de stakeholders.
+Deze lijst is niet volledig en wordt na iedere sprint aangepast aan de resultaten van de sprint ervoor.
