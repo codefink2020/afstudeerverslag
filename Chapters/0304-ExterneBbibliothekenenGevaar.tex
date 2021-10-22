@@ -1,13 +1,13 @@
-% Todo Goede titel vinden voor Onderzoek Application Security
-
-\chapter{Onderzoek: Externe bibliotheken gebruik en het gevaar}\label{ch:onderzoek:-SOUP-analyse}
+% Todo Betere titel vinden
+\chapter{Onderzoek: Externe bibliotheken gebruiken en het gevaar hiervan}\label{ch:onderzoek:-SOUP-analyse}
 Dit hoofdstuk beschrijft het onderzoek wat gedaan is om meer inzicht te krijgen in het doen van een SOUP-analyse. Als eerst wordt de onderzoeksvraag ontleed in te beantwoorden deelvragen. Daarna zal er wordt iedere deelvraag beantwoord om vervolgens tot een conclusie te komen welke de onderzoeksvraag beantwoord.
 
 
 \section{Onderzoeksvragen} \label{sec:SOUPOnderzoeksvragen}
-De onderzoeksvraag die als startpunt van dit onderzoek geld is:"Hoe kan SOUP op een effectieve manier worden geanalyseerd en hoe maakt dit software veiliger?". Uit deze hoofdvraag kunnen de volgende deelvragen worden ontleed:
+De onderzoeksvraag die als startpunt van dit onderzoek geld is:"Hoe kunnen we externe bibliotheken op een veilige manier gebruiken?" of "Hoe kan SOUP op een effectieve manier worden geanalyseerd en hoe maakt dit software veiliger?". Uit deze hoofdvraag kunnen de volgende deelvragen worden ontleed:
 \begin{itemize}
     \item Wat is SOUP?
+    \item Wat relateert SOUP tot software veiligheid?
     \item Wat draagt SOUP bij aan de ontwikkeling van software?
     \item Wat zijn de gevaren van het gebruik van SOUP?
     \item Hoe kan een applicatie welke gebruik maken van SOUP effectief worden geanalyseerd om zo inzicht te krijgen of er kwetsbaarheden bevinden in deze bibliotheken?
@@ -16,54 +16,25 @@ De onderzoeksvraag die als startpunt van dit onderzoek geld is:"Hoe kan SOUP op 
 %Goed verhaal over supplychain Attacks : https://learning.oreilly.com/library/view/alice-and-bob/9781119687351/c01.xhtml#head-2-27
 
 \section{Inleiding?}
-Cyber security is een steeds belangrijker wordend onderwerp binnen het ontwikkelen van software. In het nieuws is geregeld te lezen dat er een instantie gegijzeld wordt middels ransomware. Of dat er door inadequate beveiligde systemen gegevens worden ontvreemd. De kans dat dit soort misdaden kunnen voorkomen is deels te danken dat er een steeds groter wordend doel is omdat steeds meer bedrijven gegevens verzamelen en deze in een cloud omgeving wegzetten. Een ander feit is dat software steeds sneller ontwikkeld dient te worden en dat er steeds meer software hergebruikt wordt. In de zin van hte hergebruiken van software kan deze software intern of extern ontwikkeld zijn. Van intern ontwikkelde software is meestal bekend hoe deze is gemaakt en welke zwakheden er in kunnen zitten. Van externe software is meestal geen kennis over de methodes van het fabriceren van software. Om deze reden wordt deze software "Software Of Unkown Pedigree" in het kort SOUP genoemd.
-
-%
-%Cyber security wordt steeds belangrijker bij het ontwikkelen van web applicaties.
-%Met name omdat steeds meer bedrijven overgaan tot intern draaiende applicaties
-%van monolitische applicaties die op personal computers draaien naar (micro) web services die op een server draaien.
-%De COVID-19 pandemie heeft hier extra in meegeholpen omdat in het bedrijfsleven mensen steeds meer thuis gaan werken en dus ook de applicaties overal beschikbaar moet zijn.
-%En als we naar het nieuws kijken lijkt het er ook op dat criminelen en spionage diensten hier gretig gebruik van maken door informatie te zoeken om vervolgens te gebruiken tegen een bedrijf of nog erger tegen een natie.
-%Om deze reden is het goed om goed te kijken naar de manieren waarop applicaties beveiligd moeten worden. En te kijken waar er eventueel nog verbeteringen zijn
-%
-%
-%Om applicaties te kunnen beschermen tegen vals gebruik moet er vanaf het moment dat er aan ontwikkeld wordt gekeken worden hoe de beveiliging op orde gemaakt moet worden.
-
-Binnen Eaglescience is iedereen zich ervan bewust dat er veilige software gemaakt moet worden. In het onderzoek hiervoor is te lezen wat Eaglescience op het moment van schrijven doet aan preventie en monitoring binnen het ontwikkelen en hosten van een applicatie. Echter, is het goed om eens langs alle mogelijke manier te gaan waarop een applicatie kwetsbaar kan worden. Aan de hand van de OWASP-top10 kan gekeken worden welke zaken er nog missen en waar aangewerkt kan worden.
-
-
-
-
-
-Dit hoofdstuk beschrijft een literatuur studie die gedaan is om verduidelijking van het onderwerp SOUP en zijn de potentiele gevaren die met zich mee brengen in het gebruik van SOUP. De verduidelijking wordt gegeven in het beantwoorden van een aantal vragen die op komen in de komende onderzoeken.
-En zal de lezer helpen met het begrijpen van de zaken die in de komende hoofdstukken worden beschreven.
-
-
-In het Cybersecuritybeeld Nederland 2020 (CSBN-2020) is te lezen dat de digitale weerbaarheid nog niet overal op orde is.
-Wat in feite inhoud dat bedrijven nog niet het vermogen hebben om digitale risico's in voldoende mate te kunnen beheersen.
-Dit komt vooral omdat veel systemen( hardware en software) met elkaar verbonden zijn.
-En de bijbehorende configuratie niet op orde is.
-Een ander feit is dat aanvallers tegenwoordig rondzoeken naar kwetbaarheden in software om zo een mogelijk doelwit te benadelen.
-Een goed voorbeeld is het citrix incident op de universiteit van Maastricht eind 2019, waar via een phisingmail toegang werd verleend op servers die vervolgens door lekken software onopgemerkt bleven.
-Vervolgens werd er ransomware geplaatst die een groot aantal bestanden versleutelde.
-De buit was uiteindelijk € 197.000.
-
-
-
-Dit voorbeeld geeft aan dat het niet alleen belangrijk is om de hardware goed te configureren tegen aanvallen.
-Maar dat er ook zeker goed gekeken moet worden naar het gebruik van software en hoe deze is opgebouwd.
-Software wordt tegenwoordig vaak gebouwd met het gebruik van bibliotheken die SOUP, Software of Unkown Provenance worden genoemd, Contrast Security steld zelfs dat 80\% van de vandaag de dag ontwikkelde software gebruikt maakt van SOUP-bibliotheken.
-Waarbij een vierde bekende kwetsbaarheden bevatten.
-Het is dus zaak om te onderzoeken of de bibliotheken die gebruikt worden veilig zijn en hier vervolgens desgewenst actie op te nemen als dit nodig is.
-%Bron: WhitePaper: The unfortunate reality of insecure Libraries - Contrast security
-
-\section{Wat is Software of Unkown Provenance?}\label{sec:wat-is-soup?}
+\section{Software of unkown provenance}
+\subsection{Wat is Software of Unkown Provenance(SOUP)?}\label{sec:wat-is-soup?}
 De term SOUP komt oorspronkelijk de wereld van de ontwikkeling van medische software en staat voor "Software Of Unkown Provenance".
-SOUP wordt gezien als een software component dat al ontwikkeld is en beschikbaar is gesteld voor gebruik door een instantie anders dan de gebruiker zonder dat de bewijzen zijn over het bouwen van de software.
+SOUP wordt gezien als een software component dat al ontwikkeld is en beschikbaar is gesteld voor gebruik door een instantie anders dan de gebruiker zonder dat de bewijzen zijn over de manier van ontwikkeling als de kwaliteit van de software.
 Hierdoor is het dus niet duidelijk welk process er is gevolgt tijdens het ontwikkelen en daarmee dus ook de (medische)veiligheid niet is aan te tonen.
 De term wordt nu steeds vaker gebruikt in de algemene software ontwikkel kringen om aan te geven dat er van een betreffent software component(framework, bibliotheek, etc.) niet bekend is hoe het ontwikkeld, getest is.
 Hierdoor is er dus geen zekerheid dat het component kwetsbaarheden kan bevatten.
 Kwetsbaarheden in deze zin zijn dan voornamelijk lekken of veranderingen van functionaliteiten binnen een software.
+\subsection{Hoe relateert SOUP zich met het ontwikkelen van veilige software?}
+Om deze vraag te kunnen beantwoorden moeten we eigenlijk twee zaken onderzoeken als eerste  Waarom gebruiken we soup en ten tweede wat wordt er gedaan om veilige software te ontwikkelen.
+
+De voornaamste redenen om bibliotheken te gebruiken is het verminderen van het herhaaldelijk schrijven van code om basis functionaliteiten in een applicatie te krijgen. En Daarmee wordt de ontwikkeltijd verminderd. Het gebruik van bibliotheken is tegenwoordig niet meer weg te denken uit de ontwikkelstrategie van een bedrijf. Deels omdat er een standaard is waarmee gewerkt wordt, wat op zijn beurt het aannemen en opleiden van personeel vergemakkelijkt. Daarnaast hebben veel gebruikte bibliotheken een 'community' waar vragen gesteld kunnen worden om zo moeilijkheden te verminderen. Een nadeel zoals hierboven is beschreven is dat het niet altijd duidelijk is hoe veilig een bibliotheek is.
+
+\section{Veilig software schrijven?}
+veilig software schrijven is niet altijd even makkelijk. Er zijn meerdere redenen waarom er niet veilige software wordt geschreven. Tijd en budget zijn vaak de oorzaak omdat software snel op de markt moet komen en er dus niet genoeg tijd gereserveerd wordt om te onderzoeken of er bugs en kwetsbaarheden bevinden. Een tweede mogelijkheid is dat er niet genoeg kennis is om daadwerkelijk veilige software te schrijven. Een andere mogelijkheid is dat er kwaadwillend bewust kwetsbaarheden in bibliotheken worden geschreven om zo een achterdeur te hebben om aanvallen of diefstallen te doen.
+In het tweede geval zijn er meerdere instanties die het bouwen van veilige software als doelstelling hebben en er veel aan doen om ontwikkelaars wereldwijd te onderwijzen in goed gebruiken. Eén van de belangrijkste is de OWASP(OWASP.org) de OWASP heeft een aantal projecten die ontwikkelaars in staat stellen om veiligere software te ontwikkelen. Eén daarvan is de OWASP top 20 die ongeveer iedere 5 jaar uitkomt. Dit jaar is er een nieuwe top 10
+
+omlaag brengen van ontwikkeltijd. En het herhaaldelijk moeten schrijven van code. Voor veel basis taken die een applicatie zou moeten uitvoeren is veelal een bibliotheek geschreven die deze taken prima uit kan voeren.
+
 
 %Bron: "https://johner-institute.com/articles/software-iec-62304/soup-and-ots/"
 
@@ -186,8 +157,6 @@ Maar ook voor Java en .NET bestaat er een dependency checker ontwikkeld door de 
 
 [NOTE Volgende komt uit SOUP ANALYSE hoofdstuk]
 
-
-%TODO: MarginPARS zetten
 \begin{itemize}
     \item https://jeremylong.github.io/DependencyCheck/
 \end{itemize}
