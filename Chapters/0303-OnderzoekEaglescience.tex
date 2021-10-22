@@ -3,14 +3,15 @@
 
 Dit hoofdstuk beschrijft het onderzoek naar de manier waarop EagleScience software ontwikkeld en uitrold. Als eerst wordt de onderzoeksvraag ontleed in te beantwoorden deelvragen. Daarna zal er wordt iedere deelvraag beantwoord om vervolgens tot een conclusie te komen welke de onderzoeksvraag beantwoord.
 %TODO: Vraag minder vaag maken denk ik ??
-\section{Onderzoeksvragen}\label{sec:ESOnderzoeksVraag}
-De onderzoeksvraag die als startpunt van dit onderzoek geld is: "Welke methode en ontwikkeltalen worden er gebruikt om binnen EagleScience software te ontwikkelen en uit te rollen?". Deze vraag kan worden opgedeeld worden in de volgende deelvragen:
 
+
+\section{Onderzoeksvragen}\label{sec:ESOnderzoeksVraag}
+De onderzoeksvraag die als startpunt van dit onderzoek geld is: "Welke methode en ontwikkeltalen worden er binnen EagleScience gebruikt om software te ontwikkelen en uit te rollen?". Om deze vraag volledig te kunnen beantwoorden is deze in de volgende deelvragen opgedeeld:
 \begin{itemize}
-  \item Welk proces wordt er binnen Eaglescience gebruikt om software te ontwikkelen?
-  \item Wat zijn de meest gebruikte ontwikkeltalen en frameworks die binnen EagleScience worden toegepast?
-  \item Welke tooling wordt er gebruikt binnen EagleScience?
-  \item Hoe wordt er binnen EagleScience software uitgerold?
+    \item Welk proces wordt er binnen Eaglescience gebruikt om software te ontwikkelen en hoe resulteert dit is een dagelijkse werkwijze?
+    \item Wat zijn de meest gebruikte ontwikkeltalen en frameworks die binnen EagleScience worden toegepast?
+    \item Welke tooling wordt er gebruikt binnen EagleScience? [NOTE relevant?]
+    \item Hoe wordt er binnen EagleScience software uitgerold?
 \end{itemize}
 
 
@@ -20,45 +21,36 @@ Om antwoord te krijgen op de vraag: "Welk proces wordt er binnen Eaglescience ge
 Binnen Eaglescience wordt er getracht om "full Scrum" te werken. Dit wil zeggen dat voor ieder project een team van maximaal 9 full-stack developers wordt aangewezen. De sprints duren ongeveer 2 á 3 weken afhankelijk van wensen van de klant en beschikbaarheid van ontwikkelaars. Iedere sprint begint met een refinement waarbij de taken die op de backlog staan worden bekeken en ingeschat door het team. Tijdens de sprint vindt de ontwikkeling middels taken plaats die vervolgens worden gereviewd door een ander teamlid. Aan het einde van de sprint vind er een retrospective plaats en eventueel een demo om de voortgang te demonstreren aan de klant, dit is ook het moment dat het team ziet hoe de applicatie in het algemeen werkt. Dit is ook het moment voor de projectmanager en product owner om de taken die op de back-log staan opnieuw te prioriseren waarbij in de refinement van de volgende sprint de taken mee worden genomen.
 
 Om deze werkwijze te ondersteunen maakt EagleScience gebruik van de een PO(T)AP(Personal, Development, (Test), Acceptence, Production) omgevingen die middels Jenkins worden gebuild naar de desbetreffende Omgeving. Alle genoemde omgevingen worden gehost in Azure. Development en production maken gebruik van Kubernetes en maken gebruik van docker containers. Iedere ontwikkelaar heeft zijn eigen omgeving die hij kan bouwen om te testen of aanpassingen werken zoals verwacht. Er is per project een Ontwikkelomgeving waarin getest wordt of alle aanpassingen van de ontwikkelaars met elkaar werken. De acceptatie omgeving is er voor de projectmanagers en testers vanuit de klant of desgewenst externe testers om de ontwikkelde applicatie te testen zoals hij naar productie zou gaan. De productie omgeving host alle applicaties die 'live' zijn. Gezien alle omgevingen in docker containers draaien zijn deze volitile en kunnen dus "makkelijk" worden vervangen. zeker voor de personal en development omgeving wordt dit gezien als een voordeel vanwege het vele bouwen van deze omgevingen.
+
+
 \section{Ontwikkeltalen en tooling binnen EagleScience}\label{sec:ontwikkeltalen-en-tooling-binnen-eaglescience}
 EagleScience maakt volledige full stack oplossingen. Er wordt dus zowel front-end, backend, en database oplossingen ontwikkelt binnen projecten. Er wordt dan gebruik gemaakt van een aantal ontwikkeltalen en frameworks om deze oplossingen te kunnen ontwikkelen. Naast de ontwikkeltalen zijn er ook een aantal tools die worden gebruikt door eaglescience om support te kunnen leveren en projecten te kunnen managen.
 
 \subsection{OntwikkelTalen en frameworks}\label{subsec:ontwikkeltalen-en-frameworks}
-\marginpar{backend}
 Doordat EagleScience werkt op project basis kunnen de ontwikkeltalen die gebruikt worden varieren(Er zijn projecten ontwikkeld on verschillende C varianten, Python, Java). Echter is er een voorkeur voor twee talen binnen EagleScience waarin er ontwikkeld wordt.
-De voornamelijkst taal voor het ontwikkelen van de backend binnen EagleScience is Scala. De keuze voor deze taal is de mogelijkheid om functioneel te kunnen programmeren en dat het in de Java Virtual Machine (JVM) draait. Dat laatste zorgt ervoor dat bibliotheken die geschreven zijn in talen die ook ondersteunt worden door de JVM gebruikt kunnen worden ongeacht of deze in Scala, Java, Groovy of Kotlin geschreven zijn. Daarnaast is Scala zeer geschikt om kleine applicaties te schrijven die vervolgens groeien. De naam Scala is een samenraapsel van 'Scalable Language'. Het feit dat binnen EagleScience functioneel geprogrameert. heeft te maken met een aantal eigenschappen van de op deze manier programeren:
-\smallskip %TODO: Wellicht iets verder uitweiden over de beweegredenen van het gebruik van Scala en Play.
-\begin{enumerate}
-  \item functioneel programeren stelt de programeur in staat om code te schrijven dat voorspelbaarder is.
-  \item makkelijker te testen is door het feit dat bij een pure functie de output altijd zeker is vanuit de input
-\end{enumerate}
-Binnen Scala worden er in bijna alle projecten een aantal frameworks/bibliotheken gebruikt die het ontwikkelen van microsaervice web applicaties makkelijk maakt:
 \begin{itemize}
-  \item \textbf{PlayFramework 2.xx} Een web framework voor de ontwikkeling van webapplicaties in Scala we gebruikten het vooral als router voor de verschillende microservices die er achterliggen.
-  \item \textbf{ArchES} is een intern ontwikkeld framework wat de opbouw en de communicatie tussen microservices in scala verbeterd.\ ArchES is geinspireerd op Apache KAFKA en werkt middels hetzelfde pub -> sub principe.
-\end{itemize}
-
-B
-Voor de front-end wordt gebruik gemaakt van Typescript
-
-
-
-\begin{itemize}
-\item \textbf{Scala 2.xx} is gekozen om functioneel programeren te ondersteunen maar ook de mogelijkheid om OOP methodieken te gebruiken.\ Daarnaast maakt scala gebruik van de JVM wat op zichzelf voordelen heeft in portabiliteit( code once run everywhere).\ Door op de JVM te draaien kan Scala ook gebruik maken van bibliotheken die op diezelfde JVM draaien gebruiken en daarmee dus ook bibliotheken die geschreven zijn in Java, Groovy of Kotlin.\\
+    \item \textbf{Scala 2.XX} De voornamelijkst taal voor het ontwikkelen van de backend binnen EagleScience is Scala. De keuze voor deze taal is de mogelijkheid om functioneel te kunnen programmeren in de Java Virtual Machine(JVM) draait. Dat laatste zorgt ervoor dat bibliotheken die geschreven zijn in talen die ook ondersteunt worden door de JVM gebruikt kunnen worden ongeacht of deze in Scala, Java, Groovy of Kotlin geschreven zijn. Naast dit feit is Scala uiterst geschikt om software te bouwen dat schaalbaar is. Scala heeft de mogelijkheid om mee te groeien met het project. En heeft dus de mogelijkheid om zowel in gezet te worden als script taal dan al niet in Java applicaties als ook de mogelijkheid om production ready applicaties te bouwen die mee schalen in het gebruik. De naam Scala is dan ook een samenraapsel van de woorden scalable en language.
+    EagleScience maakt gebruik van deze taal omdat Scala de mogelijkheid geeft om een applicatie makkelijk uit te breiden als dit nodig is. De ondersteuning voor functioneel programeren geeft het voordeel dat de geschreven code makkelijker te testen valt. (pure)functies hebben de eigenschap deterministisch te zijn wat wil zeggen dat iedere keer als een bepaalde input in een functie komt er altijd dezelfde output verwacht kan worden. Deze eigenschap maakt het mogelijk om applicaties sneller en makkelijker te testen. Binnen EagleScience worden er in bijna alle projecten een aantal frameworks/bibliotheken gebruikt die het ontwikkelen van microservice web applicaties in Scala makkelijker maakt:
+    \begin{itemize}
+        \item \textbf{PlayFramework 2.xx} Een web framework voor de ontwikkeling van webapplicaties in Scala we gebruikten het vooral als router voor de verschillende microservices die er achterliggen.
+        \item \textbf{ArchES} is een intern ontwikkeld framework wat de opbouw en de communicatie tussen microservices in scala verbeterd.\ ArchES is geinspireerd op Apache KAFKA en werkt middels hetzelfde pub -> sub principe.
+    \end{itemize}
+    Scala 2.xx} is gekozen om functioneel programeren te ondersteunen maar ook de mogelijkheid om OOP methodieken te gebruiken.\ Daarnaast maakt scala gebruik van de JVM wat op zichzelf voordelen heeft in portabiliteit( code once run everywhere).\ Door op de JVM te draaien kan Scala ook gebruik maken van bibliotheken die op diezelfde JVM draaien gebruiken en daarmee dus ook bibliotheken die geschreven zijn in Java, Groovy of Kotlin.\\
 Functioneel programeren is een manier van programeren dat zijn basis heeft in de wiskunde.\ Neem bijvoorbeeldde volgende functie: \(y = func(x)\) waarbij \(x\) de input voor een functie is.\ Uit deze functie komt altijd \(y\) bijvoorbeeld als de functie \(x+1\) is dan zal de waarde van \(y\) altijd 3 zijn als \(x\) 2 is.\ Dit is een zekerheid alsook de zekerheid dat er geen andere waarden als output zijn dan \(y\).\ Dit fenomeen wordt een pure functie\footnote{Pure functies hebben geen side-effects wat betekend dat het niets anders doet dan de output geven van de functie. een Console.log wordt gezien als een side-effect omdat dit naast de output ook een andere output heeft(namelijk naar het scherm). Meestal bestaat de kern (business logic) van een applicatie uit pure functies en is er een schil omheen gebouwd die niet puur is maar zorgt voor de I/O van de applicatie} genoemd.\ Enkele voordelen van het functioneel programeren zijn:
 \begin{enumerate}
-  \item functioneel programeren stelt de programeur in staat om code te schrijven dat voorspelbaarder is.
-  \item makkelijker te testen is door het feit dat bij een pure functie de output altijd zeker is vanuit de input
+\item functioneel programeren stelt de programeur in staat om code te schrijven dat voorspelbaarder is.
+\item makkelijker te testen is door het feit dat bij een pure functie de output altijd zeker is vanuit de input
 \end{enumerate}
 Daarnaast bestaat ook door een effect uit de wiskunde de muterende variable niet een waarde van een variable is altijd het zelfde en mocht deze toch gewijzigd moeten worden ( bijv.\ een e-mail adres van een gebruiker ) dan wordt de data in het programma opgeslagen in een nieuwe variabele waar vervolgens verder mee gewerkt wordt.\ Hiermee komt gelijk een nadeel van functioneel programeren.\ Als de applicatie veel data tegelijk muteerd dat kan de geheugen footprint groter worden dan bij een soort gelijke applicatie dat volgens het OOP principe is geschreven.\ Een ander nadeel is dat OOP op dit moment de defacto methode is om applicaties te schrijven en het omscholen naar functioneel programeren tijd kost.
 
 De filosofie binnen Eaglescience is dat Scala helpt bij het bouwen van software waarbij de output vast staat aan de input en dus veel betrouwbaarder en voorspelbaarder wordt.\ Daarnaast wordt het testen, wat een eis is in alle projecten binnen Eaglescience, veel inzichtelijker wordt.
+\item \textbf{TypeScript} TypeScript is een open-source taal wat gebouwd is op JavaScript maar met statische type definities toegevoegd, het voordeel is dat het lijkt op JavaScript echter door Types te gebruiken kunnen veel fouten worden ontdekt en opgelost bij het schrijven van de code in plaats van tijdens Run-time.\ Typescript is daarom de keuze van EagleScience om front-end applicaties te schrijven.\ Eaglescience gebruikt voornamelijk \textbf{Angular} voor de ontwikkeling van front-end applicaties.
 
-\item \textbf{TypeScript} TypeScript is een open-source taal wat gebouwd is op JavaScript maar met statische type definities toegevoegd, het voordeel is dat het lijkt op JavaScript echter door Types te gebruiken kunnen veel fouten worden ontdekt en opgelost bij het schrijven van de code in plaats van tijdens Run-time.\ Typescript is daarom de keuze van EagleScience om front-end applicaties te schrijven.\ Eaglescience gebruikt voornamelijk Angular voor de ontwikkeling van front-end applicaties.
 \end{itemize}
 
-
 \subsection{Tooling}
+Naast ontwikkeltalen gebruikt EagleScience een aantal tools om dagelijkse werkzaamheden te stroomlijnen en software uit te rollen voor de klant. De tools zijn ieder op zijn beurt verantwoordelijk voor een specifieke taak en alle projecten dienen gebruik te maken van deze tools waar gepast.
+
 \begin{itemize}
 \item \textbf{Jira} Is naar eigen zeggen (JiraWebsite ) de nummer 1 software ontwikkel tool voor agile teams.\ Eaglescience gebruikt het om projecten te plannen volgens de scrum methode.\ De tool maakt het mogelijk om sprints te plannen. Daarnaast maakt EagleScience gebruik van Jira om workflows te beheren. zoals interne zaken als toegangverlenen. Maar ook vastlegging van meldingen van klanten welke vervolgens door de ontwikkelaars worden opgepakt en onderzocht.
 \item \textbf{Confluence}
