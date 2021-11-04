@@ -50,17 +50,22 @@ Naast het analyseren van de betrokkenheid en belang van de stakeholders is er oo
 Requirements kunnen worden opgedeeld in twee categoriën: "Functionele requirements" en niet-functionele requirements.
 
 \subsection{niet functionele requirements}\label{subsec:niet-functionele-requirements}
-Deze requirements
+Requirements voor de module die niet direct met de functionaliteit te maken hebben maar meer over omgevingen en dergelijke gaan.
 \begin{itemize}
     \item Operationele requirements
         \begin{itemize}
             \item De methode moet zonder veel aanpassingen passen in de huidige werkstroom voor het ontwikkelen van software.
         \end{itemize}
-    \item omgeving requirements
+    \item Omgeving requirements
         \begin{itemize}
             \item De module dient te worden ontwikkeld in Angular en Play(Scala), overeenkomstig met bestaande portal.
             \item De module dient gescheiden componenten te bevatten: Frontend(Angular), Backend(Play, Scala), API.
             \item De module dient in het Azure cluster te kunnen draaien binnen het huidige portal project.
+        \end{itemize}
+    \item Performance requirements
+        \begin{itemize}
+            \item De module moet op een zo efficient mogelijke manier een raport genereren.
+            \item De module mag geen invloed hebben op de performance van de buildstraat.
         \end{itemize}
     \item security requirements
         \begin{itemize}
@@ -73,22 +78,22 @@ Deze requirements
 \begin{itemize}
     \item De module dient eenvoudig gebruikt te kunnen worden in de huidige CI/CD pipeline voor bestaande en nieuwe projecten.
     \item De module dient ondersteuning te bieden voor meerdere omgevingen (OTAP)
-    \item De module dient met een instelbare interval een analyse uit te voeren op bestaande projecten.
+    \item De module dient met een instelbaar interval een analyse uit te voeren op bestaande projecten.
     \item De module moet op project en omgevings niveau te rapporteren over bekende kwetsbaarheden.
     \item De module dient kwetsbaarheden op minimaal drie niveau's in te schalen(Kritish, gemiddeld en laag)
-    \item De module dient ondersteuning te bieden voor het instellen van quality gates ten aanzien van meldingen die het vind op ieder niveau, per project, per omgeving.
+    \item De module dient ondersteuning te bieden voor het instellen van quality gates over meldingen die het vind op ieder niveau, per project, per omgeving.
 \end{itemize}
 
 
+\section{User stories}\label{sec:user-stories}
+Naast de requirements uit de vorige sectie zijn er de volgende userstories opgetekend welke aangeven dat als deze geimplementeerd worden de module bruikbaar is voor de verschillende belanghebbenden. De userstories zijn onderverdeeld middels het MoSCoW principe.
 
-Om priorisering aan te brengen in de requirements is de MoSCoW methode toegepast.
-
-\textbf{Must Have Moet nog onderverdeeld worden in MoSCoW}
+\textbf{Must Have}
 \begin{itemize}
-    \item Als \textit{gebruiker} wil ik dat de SOUP module in de portal te vinden is zodat alle tools die gebruikt worden binnen Eaglescience op een enkele plek te vinden zijn.
+    \item Als \textit{gebruiker} wil ik dat de SOUP-module in de portal te vinden is zodat alle tools die gebruikt worden binnen Eaglescience op een enkele plek te vinden zijn.
     \item Als \textit{gebruiker} wil ik een overzicht per project kunnen zien met daarin de gebruikte bibliotheken zodat ik inzage heb ik wat er gebruikt wordt voor ontwikkeling.
     \item Als \textit{gebruiker} wil ik een overzicht per project zien welke kwetsbaarheden er zich in bibliotheken bevinden, zodat ik actie kan ondernemen om de software nog veiliger te maken.
-    \item Als \textit{gebruiker} wil ik in kunnen loggen met mijn LDAP? account zodat ik niet nog een keer een username/wachtwoord combinatie hoe te leren.
+    \item Als \textit{gebruiker} wil ik in kunnen loggen met mijn LDAP account zodat ik niet nog een keer een username/wachtwoord combinatie hoe te leren.
     \item Als \textit{gebruiker} wil ik een project kunnen toevoegen zodat ik ook van dat project de kwetsbaarheden in kan zien en deze software ook veilger wordt.
     \item Als \textit{Module} wil ik een update krijgen van de laatste build met specifiek de laatste kwetsbaarheden, zodat ik deze kan weergeven in de portal.
     \item Als \textit{module} wil ik
@@ -96,7 +101,7 @@ Om priorisering aan te brengen in de requirements is de MoSCoW methode toegepast
     \item Als \textit{gebruiker} wil ik zelf een analyse kunnen starten voor een project zodat ik een up-to-date versie heb van de resultaten.
     \item Als \textit{Project manager} wil ik projecten kunnen toevoegen aan de module, zodat ook deze mee genomen worden in de automatische analyse.
     \item Als \textit{Project manager} wil ik ontwikkelaars kunnen toevoegen aan een project zodat deze ook inzicht krijgen in de huidige stand van zaken.
-    \item Als \textit{Project manager} wil ik een notificatie( via mail/rocketchat) ontvangen als er een
+    \item Als \textit{Project manager} wil ik een notificatie( via mail/rocketchat) ontvangen als er een kritieke kwetsbaarheid gevonden is.
 \end{itemize}
 
 \textbf{Should Have}
@@ -115,6 +120,6 @@ Om priorisering aan te brengen in de requirements is de MoSCoW methode toegepast
 \end{itemize}
 De Won't haves staan hierbij genoemd als leidraad voor eventueel updates in de toekomst.
 Als blijkt dat er tussen de won'ts toch low hanging fruit blijkt te hangen kunnen deze meegenomen worden in de sprints.
-De requirements worden als epics in een JIRA omgeving gezet om vervolgens een planning te kunnen maken.
+De requirements worden als epics in een JIRA-omgeving gezet om vervolgens een planning te kunnen maken.
 
 
