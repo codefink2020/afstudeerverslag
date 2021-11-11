@@ -1,16 +1,31 @@
-\chapter{Onderzoeksmethode}\label{ch:onderzoeksmethode} % Chapter title
+\chapter{Onderzoeksmethode}\label{ch:onderzoeksmethode}
+Dit hoofdstuk zal het voorwerk voor het onderzoek beschrijven. Aan bod zal de onderzoeksvraag, methoden van onderzoeken voorbij komen. met als resultaat een plan voor het verdere onderzoek naar een oplossing voor de opdracht die gegeven is.
 
-Op basis van de requirements analyse beschreven in het vorige hoofdstuk zijn er een aantal vragen ontstaan die verder onderzoek behoeven. Er is gekozen om het vooronderzoek op te delen in drie delen, waarbij iedere deel in een eigen hoofdstuk wordt beschreven. De onderwerpen zijn gekozen omdat ze kennis verschaffen in de materie wat vervolgens gebruikt kan worden in het uiteindelijke ontwerp.
-Als eerste dient er gekeken worden hoe er binnen EagleScience software ontwikkeld en uitgerold wordt. Deze kennis is nodig om te zien hoe er op dit moment een applicatie wordt uitgerold en/of er aanpassingen gedaan moeten worden binnen die methode. Ook geeft het inzicht in de gebruikte dev-stack welke op zijn beurt weer beperkingen oplegt in de mogelijk te gebruiken tools. Naast vragen binnen EagleScience dient er ook een onderzoek gedaan te worden over het fenomeen SOUP en de gevaren die het mogelijk met zich meebrengt. Met daarop volgend een onderzoek naar tooling die ingezet kan worden om kwetsbaarheden binnen SOUP op te sporen binnen de huidige manier van uitrollen.
 
-Dit hoofdstuk beschrijft een plan van aanpak hoe de onderzoeken gedaan gaan worden met in het bijzonder aandacht voor het doel, scope en de methode die gehanteerd wordt om het gezette doel te bereiken.
+\section{Onderzoeksvraag en deelvragen}
+Op basis van de opdracht de gesteld is door het management team is de onderzoeksvraag als volgt: "Hoe kan EagleScience middels een dan al niet geautomtiseerde methode inzicht krijgen in potentiële kwetsbaarheden van gebruikte bibliotheken binnen zowel lopende als niet lopende projecten?"
+
+Door deze vraag te ontleden komen zijn er verschillende domeinen waar er onderzocht moet worden:
+Het eerste domein is EagleScience, waar we de deelvraag kunnen stellen: "Welke methode en dev-stack (zie ~\ref{ch:begrippenlijst:}) worden er gebruikt om binnen EagleScience software te ontwikkelen en uit te rollen?". Het volgende domein is softwareveiligheid en dan met name invloeden van externe bibliotheken. Dit geeft de volgende deelvraag van het onderzoek namelijk: "Wat is het effect van gebruik van externe bibliotheken bij het ontwikkelen van software, welke gevaren brengt dit met zich mee en wat kan er gedaan worden om deze gevaren te minimaliseren?". Als laatste domein is er de methode om geautomatiseerd analyses te doen om de veiligheid binnen software te verbeteren, De deelvraag hierbij geldt:"Hoe kan er gebruik gemaakt worden van de huidige buildstraat om een analyse te doen op " Deze deelvraag maakt gebruik van uitkomsten van de deelvragen die hiervoor zijn beantwoord.
+
+\begin{figure}[htbp]
+    \myfloatalign
+    \includegraphics[width=10cm]{gfx/Onderzoekmodel}
+    \caption{Onderzoeksmodel}
+    \label{fig:OnderzoeksModel}
+\end{figure}
+In figuur\ref{fig:OnderzoeksModel} is te zien hoe de deelvragen in relatie staan met elkaar om samen tot een antwoord te komen op de vraag "Hoe kan EagleScience middels een dan al niet geautomtiseerde methode inzicht krijgen in potentiële kwetsbaarheden van gebruikte bibliotheken binnen zowel lopende als niet lopende projecten?". Om het overzicht en de scope te bewaren is er gekozen om iedere deelvraag apart te onderzoeken. In de komende secties is te lezen hoe deze aparte onderzoeken gedaan worden. In de hoofdstukken die volgen zullen de onderzoeken te lezen zijn en wat de conclussies zijn uit deze onderzoeken.
 
 \section{Scope}\label{sec:Scope}
-Het veiliger maken van software is een breed gebied met veel relevante onderwerpen. Deze opdracht beperkt zich tot het analyseren van bibliotheken van derden (SOUP-bibliotheken). Het voor onderzoek dat gedaan moet worden zal zich dan ook beperken tot deze analyse. Daarnaast is het noodzaak om alleen een onderzoek te doen naar methode die passen binnen de huidige manier van softwareontwikkeling binnen EagleScience. Dit geeft dus een beperking in het onderzoek naar de beste methode om kwetsbaarheden te zoeken in software.
-[Garage]
-Software veiligheid is een breed gebied met veel relevante onderwerpen binnen het ontwikkelen van software.
-Het onderzoek zal zich beperken tot de benodigde informatie voor het implementeren van de nieuwe oplossing voor een geautomatiseerde SOUP-analyse. Hierdoor zullen andere onderwerpen binnen het veilig ontwerpen van software niet worden onderzocht. Zo zullen ook niet alle bedrijfprocessen binnen EagleScience worden onderzocht en alleen gekeken worden naar de processen binenn het uitrollen van de software. EagleScience doet veel aan het veilig ontwerpen van zijn eigen ontwikkelde software waardoor de noodzaak op het moment van het geven van de opdracht niet hoog ligt.
-[Garage]
+De wereld van software ontwikkeling is enorm en groeit met de dag Als ook de kennis en manieren om steeds veiliger software te maken. Om er voor te zorgen dat de onderzoeken relevant zijn voor de opdracht dient de volgende scope in acht te worden genomen:
+\begin{itemize}
+    \item Alleen de dev-stack van EagleScience is relevant. Oplossing die bestaan voor andere ontwikkeltalen en tooling wordt genoemd maar niet verder onderzocht.
+    \item Sotware veiligheid is een breed veld en er wordt in dit onderzoek alleen gekeken naar het onderdeel wat gaat over het gebruik van externe bibliotheken. Om een relatie te bieden van dit onderdeel te opzichte van de rest worden andere onderdelen genoemd maar niet verder ingegaan.
+    \item Er is veel beweging in het doen van analyses op source code. en er zijn inmiddels een aantal tools beschikbaar die deze analyses kunnen doen. Echter veel van deze tools zijn niet opensource en vragen een dergelijke aanpassing in de huidige manier van werken dat er voor gekozen is deze buiten beschouwing te laten. Er worden alleen tools meegenomen die "makkelijk" te integreren zijn in de huidige buildstraat.
+\end{itemize}
+
+\section{Het onderzoek}\label{sec:methodeonderzoek}
+Zoals hierboven is aangegeven zullen er een drietal onderzoeken worden uitgevoerd die ieders een deel van de gestelde onderzoeksvraag zullen beantwoorden. De conclussie van de eeste twee onderzoeken is input voor het laatste onderzoek wat een zoektocht is naar een methode die in te passen is in de huidige buildstraat conform de opdracht van de oprdrachtgever.
 \section{Vooronderzoeken}\label{sec:vooronderzoeken}
 De vooronderzoeken hebben ieders een eigen onderwerp, doel, onderzoeksvraag en methode
 \subsection{Onderzoek 1: Architectuur binnen EagleScience}\label{subsec:onderzoeksmethode-architectuur-binnen-eaglescience}
@@ -28,6 +43,7 @@ De \textbf{bronnen} die voornamelijk gebruikt worden zijn interne documenten waa
 
 
 \subsection{Onderzoek 2: Literatuur studie veiligere software door SOUP analyse}\label{subsec:onderzoek-literatuur-studie-soup}
+nieuwe vraag: "Wat is het effect van gebruik van externe bibliotheken bij het ontwikkelen van software, welke gevaren brengt dit met zich mee en wat kan er gedaan worden om deze gevaren te minimaliseren?"
 Het \textbf{doel} van dit onderzoek is om inzicht te krijgen wat een SOUP-analyse is en hoe relevant het is om dit te doen. Daarnaast wordt er gekeken wat de SOUP-analyse toevoegd aan de veiligheid van de software die EagleScience levert. Met dit doel is de \textbf{scope} dat er alleen gekeken wordt naar soup-analyses en dat andere methoden die software veiliger maken wel aanbod komen als referentie. Maar niet verder worden uitgezocht.  De \textbf{onderzoeksvraag} luid: "Hoe kan SOUP op een effectieve manier worden geanalyseerd en hoe maakt dit software veiliger?". De gebruikte \textbf{methodes} zullen deskresearch zijn aangevuld met interviews. Interviews met collega's zullen inzicht brengen in methodes die al worden toegepast om software veiliger te maken. Daarnaast zijn een aantal conferenties die gehouden worden met software veiligheid als onderwerp. Deze conferenties staan nu door de huidige wereld situatie online en zijn vaak terug te kijken. Het onderzoeksmodel welke te zien is in figuur~\ref{fig:OnderzoeksModelNoodZaakSOUP} geeft een beeld hoe de methoden worden toegepast om tot een eindresultaat te komen. De \textbf{bronnen} die gebruikt zullen worden zullen online bronnen zijn aangevuld met vraaggesprekken met collega's en medewerkers van instanties die zich bezighouden met het veiliger maken van software. Daarnaast worden relevante presentaties van conferenties terug gekeken voor verdere informatie.
 \begin{figure}[htbp]
     \myfloatalign

@@ -25,12 +25,19 @@ Door het beantwoorden van de vragen kan er een conclussie worden getrokken over 
 
 
 \section{Welke tools bestaan er on dependency analyses uit te voeren op dev-stack van Eaglescience.}
-Zoals eerder onderzocht zijn er drie belangrijke onderdelen binnen de dev stack waarop gecontroleerd dient te worden: docker, sbt voor Scala backend projecten en NPM voor de node frontend projecten. Als we de dev-stack systematisch van gebruiker naar platform aflopen is eerst NPM aan de beurt en vervolgens SBT als laatst zal Docker worden bekeken.
+Zoals eerder onderzocht zijn er drie belangrijke onderdelen binnen de dev stack waarop gecontroleerd dient te worden: docker, sbt voor Scala backend projecten en NPM voor de node.js 'frontend' projecten. Als we de dev-stack systematisch van gebruiker naar platform aflopen is eerst NPM aan de beurt en vervolgens SBT als laatst zal Docker worden bekeken. Zoals in het vorige onderzoek naar boven is gekomen heeft de OWASP als doel software veiliger te maken. Te lezen was dat ze dit deels doen door awareness middels de top-10 en symposia te houden. Echter zijn er ook proactievere projecten binnen OWASP, zoals de ontwikkeling van een dependency check. (https://owasp.org/www-project-dependency-check/). Deze dependency check is geschikt voor de meest voorkomende talen die gebruikt worden, echter is Scala niet veel gebruikt en wordt dus niet direct ondersteunt. Verder onderzoek binnen het project geeft weer dat het voor Node projecten wel ondersteuning bied middels de NPM -audit tool die al in NPM ingebouwd is op dependencies te scannen. Dit project lijkt dus niet voor de hand liggend om te gebruken. Maar bied wel mogelijkheden om als startpunt te gebruiken.
 
 Binnen de OWASP bestaat er een werkgroep die zich bezig houden met het scannen van kwetbaarheden in dependencies: https://owasp.org/www-project-dependency-check/  De OWASP is als uitgangspunt genomen voor het zoeken naar tooling die gebruikt kan worden voor het analyseren van de projecten.
 
 
 \subsection{NPM}\label{subsec:npm}
+Als de OWASP Dependency check documentatie na wordt gelezen bestaat er geen directe module voor het checken van NPM packages. (https://jeremylong.github.io/DependencyCheck/analyzers/index.html). Er wordt zelfs aangegeven dat het gebruik maakt van een tool ingebouwd in NPM genaamd NPM-audit.
+Uit de documentatie van deze tool is het in staat om alle dependencies die in de package.json en de package-lock.json te kunnen nagaan op kwetsbaarheden zonder dat een project daadwerkelijk gebouwd hoeft te worden. Het is dus in staat om kwetsbaarheden te vinden zonder dat er source code wordt doorzocht.
+Dit heeft zowel voor als nadelen. Een voordeel is de tijd die het duurt om een analyse uit te voeren. gezien het niet gebouwd hoeft te worden zal er geen tijd worden opgeslokt voor een build die mogelijk niet gebruikt kan worden. Een nadeel zou kunnen zijn dat een analyse op alleen de dependencies en het gebruik ervan buiten beschouwing laten wellicht keuzes voorschotelen voor updates die wellicht helemaal niet nodig zijn omdat de kwetsbare code toch niet gebruikt wordt.
+
+Er bestaan zoal met zoveel zaken pakketten die deze analyse doen en goed doen. echter is hier veelal een kosten plaatje die niet altijd te verdedigen is.
+
+
 Voor het scannen van dependencies binnen node.js zijn er veel succesvolle en minder succesvolle projecten die de mogelijkheid geven om
 Voor NPM bestaat er al een tool die reeds is ingebouwd die het mogelijk maakt om dependecies te scannen op kwetsbaarheden. Deze tool genaamd NPM audit stelt in staat om een uitslag te generen over huidige stand van zaken binnen een NPM project. De output van deze tool kan zowel uitgelezen worden op console als in een JSON file die genereert wordt door de tool.
 
