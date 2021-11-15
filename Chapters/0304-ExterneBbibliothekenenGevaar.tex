@@ -5,15 +5,50 @@ Dit hoofdstuk beschrijft het onderzoek wat gedaan is om meer inzicht te krijgen 
 \section{Onderzoeksvragen} \label{sec:SOUPOnderzoeksvragen}
 De onderzoeksvraag die als startpunt van dit onderzoek geld is:"Hoe kunnen we externe bibliotheken op een veilige manier gebruiken?" of "Hoe kan SOUP op een effectieve manier worden geanalyseerd en hoe maakt dit software veiliger?". Uit deze hoofdvraag kunnen de volgende deelvragen worden ontleed:
 \begin{itemize}
+    \item Wat is veilige software?
     \item Wat is SOUP?
     \item Wat dragen externe bibliotheken en dus ook potentieel SOUP bij aan de ontwikkeling van software?
     \item Wat zijn de gevaren van het gebruik van SOUP?
+    \item Wordt er ergens bijgehouden of een dependency/component) een kwetsbaaheid bevat?
     \item Wat relateert SOUP tot software veiligheid binnen EagleScience?
 \end{itemize}
 
 %Goed verhaal over supplychain Attacks : https://learning.oreilly.com/library/view/alice-and-bob/9781119687351/c01.xhtml#head-2-27
 
-\section{Software of unkown provenance}\label{sec:software-of-unkown-provenance}
+\section{Wat is veilige software?}
+Veilige software is een applicatie dat ontworpen is met de CIA Triad(confidentiality(vertrouwelijkheid), integrity(integriteit), and availability(beschikbaarheid)) in het oog. Dit wil zeggen dat de informatie binnen een applicatie aan de volgende zaken moet voldoen.( figuure:~\ref{fig:CIA}[H])
+\begin{figure}
+    \centering
+    \includegraphics[width=6cm]{gfx/CIA}
+    \caption{C.I.A Triad}
+    \label{fig:CIA}
+\end{figure}
+
+\begin{itemize}
+    \item \textbf{vertrouwelijk}: Alleen degene die het recht hebben om de informatie in te zien kunnen deze informatie inzien.
+    \item \textbf{integer}: De informatie welke opgeslagen en gebruikt wordt is daadwerkelijk de juiste informatie
+    \item \textbf{beschikbaar}: De informatie is beschikbaar op het moment dat het nodig is.
+\end{itemize}
+Deze drie kernwoorden zorgen ervoor dat als er goed over nagedacht is tijdens de ontwerpfase een goed beeld kan ontstaan hoe een goede applicatie ontwikkeld dient te worden.
+
+Daarnaast zijn er nog een aantal lagen van veiligheid die in een applicatie gebouwd kunnen worden een binnen EagleScience toegepast voorbeeld zou zijn(zie figuur~\ref{fig:veiligheidslagen}):
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=6cm]{gfx/veiligheids lagen}
+    \caption{Veiligheids lagen}
+    \label{fig:veiligheidslagen}
+\end{figure}
+
+\begin{itemize}
+    \item \textbf{Tijdens de ontwikkeling van software} is het van belang om de juiste security requirements op te nemen in de requirements documentatie, En dat deze middels, veilige ontwerp concepten worden toegepast,'secure coding tactics', (penetration)testing door verschillende personen en tools worden nageleefd.
+    \item \textbf{Tijdens de levensduur van de applicatie} dient de monitoring, op netwerkverkeer en events goed in de gaten gehouden worden dan al niet middels tools en triggers.
+    \item \textbf{fysieke beveiliging} De laatste vorm van beveiging zijn daadwerkelijk sleutels op fysieke sloten van de server ruimte en de beslissingen wie deze sleutels heeft.
+\item \end{itemize}
+Door deze drie lagen te hanteren heeft EagleScience het ontwikkelen van veilige software in de hand. Als guideline wordt er gebruik gemaakt van de OWASP TOP-10 waarin de meest voorkomende veiligheids fouten genoemd staan. (zie appendix ~\ref{ch:owasp-top-10}) Op plaats 6 staat ,A06:2021-Vulnerable and Outdated Components. Dit onderdeel beschrijft de mogelijkheid tot kwetsbaarheden geintroduceerd door modules/componenten die verouderd zijn en/of kwetsbaarheden bevatten. Gezien de opdracht zal het verdere onderzoek ingaan op dit item in de OWASP-TOP10.
+
+\section{Externe Componenten}\label{sec:software-of-unkown-provenance}
+Binnen EagleScience bestaat er geen applicatie dit op enig manier gebruik maakt van extern ontwikkelde componenten. Componenten in deze zin zijn ook de runtime-omgevingen die aangemaakt worden door Docker, de kubernetes service waar we gebruik van maken, Zelfs de cloud service is niet van onze maar wordt aangeboden door Microsoft in de vorm van Azure. En zelfs in de componenten binnen de applicaties maakt EagleScience gebruik van externe bronnen(zie Hoofdstuk~\ref{ch:onderzoek:-architectuur-binnen-eaglescience}). Dit Laatste onderdeel is onderwerp van dit onderzoek waarbij er verder ingegaan wordt in het gebruik van externe bibliotheken, ook wel SOUP genoemd, alsook het gevaar hiervan.
 
 \subsection{Wat is Software of Unkown Provenance(SOUP)?}\label{subsec:wat-is-soup?2}
 De term SOUP komt oorspronkelijk de wereld van de ontwikkeling van medische software en staat voor "Software Of Unkown Provenance".
@@ -22,36 +57,42 @@ Hierdoor is het dus niet duidelijk welk process er is gevolgt tijdens het ontwik
 De term wordt nu steeds vaker gebruikt in de algemene software ontwikkel kringen om aan te geven dat er van een betreffent software component(framework, bibliotheek, etc.) niet bekend is hoe het ontwikkeld, getest is.
 Hierdoor is er dus geen zekerheid dat het component kwetsbaarheden kan bevatten.
 Kwetsbaarheden in deze zin zijn dan voornamelijk lekken of veranderingen van functionaliteiten binnen een software.
-\subsection{Hoe relateert SOUP zich met het ontwikkelen van veilige software?}
+
+\sebsection{Wat dragen externe bibliotheken en dus ook potentieel SOUP bij aan de ontwikkeling van software??}
+Als het over het algemeen niet bekend is hoe een bibliotheek of framework gemaakt wordt, waarom zouden we dan het risico lopen om deze dan toch te gebruiken? Het antwoord is vrij simpel: Tijd en Geld. Een applicatie ontwikkelen kost nou eenmaal tijd en dus geld. Op het moment dat er software hergebruikt kan worden levert dit potentieel een tijdswinst op.
+
+Als we een framework genaamd Angular CLI als voorbeeld nemen, neemt dit veel van de taken en mechanismen over in het ontwikkelen van een frontend. Het is wordt dan makkelijker om steeds de zelfde zaken in een frontend voor elkaar te krijgen. Daarnaast zeker in het geval van Angular wat veel gebruikt worden en daarmee een grote community heeft is de supprt vaak snel en doeltreffend. Een ander meekomend voordeel is dat als er 'defacto' frameworks gebruikt worden het intwerken van nieuwe ontwikkelaars minder tijd in beslag neemt omdat de kans dat er elders met in dit geval Angular gewerkt wordt groot is.
+
+Met het overnemen van herhalende taken, makkelijkere opleiden van personeel in acht genomen kan er dus een kortere tim-to-market gehaald worden. ondanks het feit dat er potentieel kwetsbaarheden in de applicatie worden genomen.
+
+\subsection{Hoe relateert SOUP zich met het ontwikkelen van veilige software?}\label{subsec:hoe-relateert-soup-zich-met-het-ontwikkelen-van-veilige-software?}
+%Bron: Contrast Security >> https://cdn2.hubspot.net/hub/203759/file-1100864196-pdf/docs/Contrast_-_Insecure_Libraries_2014.pdf
+
+%STATE OF SOFTWARE SECURITY
+%Open Source Edition https://www.veracode.com/sites/default/files/pdf/resources/reports/state-of-software-security-open-source-edition-veracode-report.pdf
+Uit onderzoek van veraCode blijkt dat 96\% van software ontwikkelende bedrijven gebuik maakt van opensource software. En dat 70,5\% van de applicaties die daadwerkelijk voor het eerst gescanned zijn kwetsbaarheden bevat middels bibliotheken van buitenaf. Het probleem ligt hier niet zozeer in de kwetsbaarheden van een bibliotheek. Maat meer in de kwetsbaarheden in bibliotheken die door de eerste bibliotheken wordt gebruikt. de zogenaamde translative bibliotheken.
+
+
 Om deze vraag te kunnen beantwoorden moeten we eigenlijk twee zaken onderzoeken als eerste  Waarom gebruiken we soup en ten tweede wat wordt er gedaan om veilige software te ontwikkelen.
 
 De voornaamste redenen om bibliotheken te gebruiken is het verminderen van het herhaaldelijk schrijven van code om basis functionaliteiten in een applicatie te krijgen. En Daarmee wordt de ontwikkeltijd verminderd. Het gebruik van bibliotheken is tegenwoordig niet meer weg te denken uit de ontwikkelstrategie van een bedrijf. Deels omdat er een standaard is waarmee gewerkt wordt, wat op zijn beurt het aannemen en opleiden van personeel vergemakkelijkt. Daarnaast hebben veel gebruikte bibliotheken een 'community' waar vragen gesteld kunnen worden om zo moeilijkheden te verminderen. Een nadeel zoals hierboven is beschreven is dat het niet altijd duidelijk is hoe veilig een bibliotheek is.
-
-\section{Veilig software schrijven?}
-veilig software schrijven is niet altijd even makkelijk. Er zijn meerdere redenen waarom er niet veilige software wordt geschreven. Tijd en budget zijn vaak de oorzaak omdat software snel op de markt moet komen en er dus niet genoeg tijd gereserveerd wordt om te onderzoeken of er bugs en kwetsbaarheden bevinden. Een tweede mogelijkheid is dat er niet genoeg kennis is om daadwerkelijk veilige software te schrijven. Een andere mogelijkheid is dat er kwaadwillend bewust kwetsbaarheden in bibliotheken worden geschreven om zo een achterdeur te hebben om aanvallen of diefstallen te doen.
-In het tweede geval zijn er meerdere instanties die het bouwen van veilige software als doelstelling hebben en er veel aan doen om ontwikkelaars wereldwijd te onderwijzen in goed gebruiken. Eén van de belangrijkste is de OWASP(OWASP.org) de OWASP heeft een aantal projecten die ontwikkelaars in staat stellen om veiligere software te ontwikkelen. Eén daarvan is de OWASP top 20 die ongeveer iedere 5 jaar uitkomt. Dit jaar is er een nieuwe top 10
-
-omlaag brengen van ontwikkeltijd. En het herhaaldelijk moeten schrijven van code. Voor veel basis taken die een applicatie zou moeten uitvoeren is veelal een bibliotheek geschreven die deze taken prima uit kan voeren.
 
 
 %Bron: "https://johner-institute.com/articles/software-iec-62304/soup-and-ots/"
 
 \section{Hoe kan het gebruik van SOUP gevaarlijk zijn?}\label{sec:hoe-kan-het-gebruik-van-soup-gevaarlijk-zijn?}
-Uit een onderzoek van Contrast Security blijkt dat 80\% van de broncode die vandaag de dag gebruikt wordt om een applicatie te schrijven bestaat uit broncode uit een externe bibliotheek.
-Waarbij een vierde van de gedownloade bibliotheken kwetsbaarheden bevatten.
-De kans dat er dus onbekende kwetsbaarheden in een applicatie sluipen is dus zeker aanwezig.
-Een van de redenen dat dit kan gebeuren is een fenomeen dat een package dependency network wordt genoemd.
-Wat in het kort betekend dat een dependency die je als ontwikkelaar gebruikt zelf ook een aantal dependencies heeft, welke op zijn beurt ook weer dependecies heeft.
-[verder uitwerken]
-Dit kan in theorie vele lagen bevatten waardoor de structuur minder inzichtelijk wordt omdat er voor iedere dependency in het netwerk een assesment gedaan moet worden naar kwetsbaarheden.
-In verschillende artikelen(Bronnen) wordt gewaarschuwd voor het gevaar van het gebruik deze constructie, echter lijkt het erop dat er binnenkort niet echt verandering komt in de manier waarop dependencies worden gelinkt.
-Een andere oplossing zou dan zijn om iedere depenency te checken op kwetsbaarheden tegen een database
-Bron: On the inpact of security vulnerabilities in npm package dependency network - Alexandre Decan, Tom Mens, Eleni Constantinou (2018), Structure and Evolution of package dependency networks.
+Zoals inmiddels duidelijk bestaat een software component uit een mix van eigen geschreven source code en source code die geschreven staat in bibliotheken dan al niet van derden, zogenoemde depenencies. Deze regel geldt dus niet alleen voor de applicaties die door EagleScience is geschreven, maar dan ook voor de dependencies die gebruikt worden voor de geimporteerde dependency. Dit gaat resursief door totdat we bij dependencies aankomen die zelf geen dependencies gebruiken om hun taak te voltooien. Dit wordt ook wel een dependency tree genoemd. figuur ~\ref{fig:dependency-tree} geeft een verkapte versie weer waarin geillusteerd wordt hoe snel het aantal dependencies optelt.
+\begin{figure}[H]
+    \myfloatalign
+    \includegraphics[width=12cm]{gfx/dependency-tree}
+    \caption{Dependency tree}\label{fig:dependency-tree}
+\end{figure}
 
-\section{Instanties en SOUP}\label{sec:instanties-en-soup}
-Kwetsbaarheden binnen softwareontwikkeling is niet iets van de laatste tijd en er zijn gelukkig instanties die zich bezig houden met het veilighouden van software door middel van trainingen, lezingen en andere manieren van awareness opwekken.
-Sommige instanties houden bij welke kwetsbaarheden er gevonden zijn en plaatsen dit in een CVE-database.
-Anderen melden veel voorkomende kwetsbaarhden in een top-10
+
+
+
+\section{Wordt er ergens bijgehouden of een (dependency/component) een kwetsbaaheid bevat?}\label{sec:item-wordt-er-ergens-bijgehouden-of-een-dependency/component)-een-kwetsbaaheid-bevat?}
+Naast de OWASP zijn er nog een aantal instanties die zich bezighouden met het veilighouden van software. Veelal is dit het verzamelen van kwetsbaarheden en deze vind en kenbaar maken aan het publiek. Een enkele
 
 \subsection{CVE Databases, MITRE, NIST, NVD}\label{subsec:mitre-nist-nvd}
 CVE staat voor Common Vulenerabilities en Exposures wat een database waarin kwetsbaarheden staan die gevonden zijn in de verschillende systemen.
@@ -61,7 +102,7 @@ Zowel de database van MITRE (https://cve.mitre.org) als NIST (https://nvd.nist.g
 
 \subsection{OWASP}\label{subsec:owasp}
 Naast het bijhouden van CVE's in database is het creëren van awareness net zo belangrijk.
-Een instantie die zich bezig houd hier mee is OWASP(Open Web Application Security Project) die awareness creëert door ideree 5 jaar\footnote{helaas is op het moment van schrijven de laatste versie(2021) nog niet uitgebracht en staat hier de versie uit 2017} een Top-10 uit te brengen met daarin de meest voorkomende en dreigende kwetsbaarheden die ze gevonden hebben in een dataset wat opgebouwd is uit inzendingen van 500+ onderzoekers van 40+ bedrijven die samen meer dan 100.000 API's en web applicaties hebben onderzocht.
+Een instantie die zich bezig houd hier mee is OWASP(Open Web Application Security Project) die awareness creëert door ideree 5 jaar een Top-10 uit te brengen met daarin de meest voorkomende en dreigende kwetsbaarheden die ze gevonden hebben in een dataset wat opgebouwd is uit inzendingen van 500+ onderzoekers van 40+ bedrijven die samen meer dan 100.000 API's en web applicaties hebben onderzocht.
 In de top 10 die hieronder samengevat weer wordt gegeven wordt er een score meegegeven over hoe makkelijk een lek is te ontdekken en welk mate van risico de kwetsbaarheid heeft.
 
 \begin{figure}[H]
@@ -71,52 +112,6 @@ In de top 10 die hieronder samengevat weer wordt gegeven wordt er een score meeg
     \label{fig:risico inschaling}
 \end{figure}
 
-\begin{itemize}
-%Bron: https://codebros.nl/blog/wat-is-de-owasp-top-10 , https://owasp.org/www-project-top-ten/ << PDF download
-
-    \item \textbf{A01:2017 Injection[exploitabity: 3, Prevelance: 2, detectability: 3, technical: 3]:}
-
-    De mogelijkheid om OS, SQL, NoSQL commandos te injecteren in web applicaties zorgt ervoor dat aanvallers toegang kunnen hebben tot delen van systemen zonder er recht op te hebben.
-    Daarnaast is er ook de mogelijkheid om toegang te krijgen tot data die niet voor hen bedoelt is.
-
-
-    \item \textbf{A02:2017 Broken Authentication[exploitabity: 3, Prevelance: 2, detectability: 2, technical: 3]:}
-
-    Het verkeerd implementeren van authentication en session management kan er voor zorgen dat aanvallers wachtwoorden, sessie tokens aan kunnen passen om zo zich voor te doen als een andere gebruiker.
-
-    \item \textbf{A03:2017 Sensitive Data Exposure[exploitabity: 2, Prevelance: 3, detectability: 2, technical: 3]:}
-
-    Het verkeerd of niet voldoende afschermen van API's kunnen ervoor zorgen dat sensitive data makkelijk gevonden kan worden.\ Zeker als de data niet encrypted verzonden wordt.
-
-    \item \textbf{A04:2017 XML External Entities (XXE)[exploitabity: 2, Prevelance: 2, detectability: 3, technical: 3]:}
-
-    Veel oude of slecht geconfigureerde XML-processoren evalueren externe entiteit referenties binnen XML-documenten slecht.\ Hierdoor is het mogelijk om links te creeën naar bestanden en/of fileshares waar code staat die slecht is voor de applicatie [that contains malicious code].
-
-    \item \textbf{A05:2017 Broken Access Control[exploitabity: 2, Prevelance: 2, detectability: 2, technical: 3]:}
-
-    Beperkingen op wat een geauthenticeerde gebruikers mogen worden niet altijd nageleefd, Aanvallers kunnend deze fouten gebruiken om toegang te krijgen tot gegevens of functionaliteiten die niet bestemd zijn voor deze gebruikers.\ Ze kunnen gegevens aanpassen en / of toegangsrechten aanpassen.
-
-    \item \textbf{A06:2017 Security Misconfiguration[exploitabity: 3, Prevelance: 3, detectability: 3, technical: 2]:}
-
-    Slechte configuratie van de veiligheids instellingen zijn de meest gevonden probleem.\ Dit is meestal het gevolg van het gebruiken van de default, incomplete of ad hoc configuratie Hierdoor kunnen cloud storages open komen te staan, verkeerd geconfigureerde HTTP-headers of foutmeldingen die te veel informatie meegeven ontstaan.
-
-    \item \textbf{A07:2017 Cross-Site Scripting (XSS)[exploitabity: 3, Prevelance: 3, detectability: 3, technical: 2]:}
-
-    Middels XSS is het mogelijk om scripts te draaien van een andere bron dan wenselijk.\ Dit geeft de mogelijkheid om via een browser andere scripts in de applicatie te draaien zo proberen andere functionaliteiten toe te voegen.\ Wat kan leiden tot een web-site dat zich anders gedraagt dan de bedoeling is.
-
-    \item \textbf{A08:2017 Insecure Deserialization[exploitabity: 1, Prevelance: 2, detectability: 2, technical: 3]:}
-
-    Door het niet veilig serialiseren van objecten naar text kan het voorkomen dat er code of commando's mee worden gestuurd welke uitgevoers kunnen worden op de server.
-
-    \item \textbf{A09:2017 Using components with Known vulnerabilities[exploitabity: 2, Prevelance: 3, detectability: 2, technical: 2]:}
-
-    Componenten zoals bibliotheken, frameworks en andere software modules die gebruikt worden voor het ontwikkelen van een applicatie kunnen bedoeld of onbedoeld kwaadaardige code bevatten Wat kan leiden tot verschillende mogelijkheden voor de aanvaller binnen te dringen.\ Of data te versturen naar een andere host om zo achter "beveiligde" gegevens te komen.
-
-    \item \textbf{A10:2017 Insuffivient Logging \& Monitoring[exploitabity: 2, Prevelance: 3, detectability: 1, technical: 2]:}
-
-    Logging en monitoring is bijna net zo belangrijk als het ontwikkelen van een veilige applicatie, mocht er toch een aanval plaatsvinden op welke manier dient er de mogelijkheid zijn om terug te zien wat er precies gebeurt is.\ Logging zorgt hiervoor.\ Het monitoring deel is het bekijken van de logs om te zien of er iets verdachts plaats heeft gevonden.\ Er zijn tools beschikbaar die er voor automatische monitoring zorgen( Nagios is dit soort tool)
-
-\end{itemize}
 
 %Bronnen:
 %https://www.imperva.com/learn/application-security/cve-cvss-vulnerability/
@@ -135,22 +130,7 @@ En er vervolgens actief mee om te gaan door bibliotheken up-to-date te houden.
 %Bron: https://www.theregister.com/2018/11/26/npm_repo_bitcoin_stealer/
 
 \section{Dependency trees?}\label{sec:dependency-trees?}
-Een dependency tree is een boom structuur waarin staat welke bibliotheken er gebruikt worden door een applicatie en kan beschikken over meerdere lagen.
-Laten we als voorbeeld het boven genoemde "event-stream" npm package nemen.
-Op de npm website staat vermeld dat deze package ondersteuning biedt aan 1895 andere pakketten en zelf 7 dependencies heeft.
-Nu moet je als je zeker wil weten of er kwaadwillende broncode deze ook scannen.
-Als we kijken hoeveel dependencies deze weer hebben komen op 4 depenendies die ieders weer dependencies hebben.
-De tree van Event-stream is hier te vinden, de kwaadaardige package waar het mis mee ging is verwijderd uit de dependency tree door waarschijnlijk een andere oplossing te vinden.
 
-\begin{figure}[H]
-    \myfloatalign
-    \includegraphics[width=12cm]{gfx/dependency-tree}
-    \caption{Dependency tree}\label{fig:dependency-tree}
-\end{figure}
-Een applicatie heeft niet één zo'n boom maar voor iedere package in de eerste kolom bestaat zo'n boom die dus nog dieper kan gaan dan de hier afgebeelde.
-Handmatig scannen is dus geen optie.
-Dus moet de oplossing gezocht worden in het autmatisch scannen, gelukkig bestaan er een aantal scanners voor NPM depencies, zxoals versions en retire.js.
-Maar ook voor Java en .NET bestaat er een dependency checker ontwikkeld door de OWASP\@.
 
 
 [NOTE Volgende komt uit SOUP ANALYSE hoofdstuk]
@@ -214,19 +194,6 @@ De top 10 is een aggegratie van deze data in de meest voorkomende issues met ina
 
 
 
-In het vorige hoofdstuk is te lezen dat Eaglescience gebruik maakt van de volgende technologi\"en: Scala 2.XX, TypeScript, Jenkins, Docker ,Azure cloud.
-
-Dit onderzoek richt voornamelijk op kwetbaarheden in bibliotheken  van derden en de bestrijding ervan.
-En specifiek op de bovenstaande door Eaglescience gebruikte technieken.
-De hoofdvraag voor dit hoofdstuk luid dan ook: "Met welke kwetsbaarheden hebben we te maken binnen Eaglescience en hoe kunnen we deze opsporen op een automatiseerde manier zonder de huidige werkwijze te verstoren?" Uit deze hoofdvraag onstaan de volgende deelvragen die in dit onderzoek beantwoord worden met daarna een conclusie op de hoofdvraag.
-
-\begin{itemize}
-    \item Welke soorten kwetsbaarheden zijn er?
-    \item Hoe kunnen deze kwetbaarheden hun weg vinden in onze gebouwde software?
-    \item Zijn er instanties die bijhouden waar zich kwetsbaarheden schuilhouden?
-    \item Wat zijn methodes om te onderzoeken of er in de bestaande software kwetbaarheden bevinden?
-    \item Is er een mogelijkheid om een third-party pakket in te zetten om dit te doen?
-\end{itemize}
 
 \
 
@@ -261,15 +228,5 @@ https://www.security.nl/posting/666663/Van+CVE+tot+CVSS\%3A+wegwijs+in+het+woud+
 
 
 
-\section{Zijn er instanties die bijhouden waar zich kwetsbaarheden schuilhouden?}
 
-Naast OWASP zijn er nog een aantal instanties dit bijhouden welke software\footnote{zoals hier gebruikt in de bereedste? zin van het woord dus: (Operating systems, ontwikkeltalen/databases, ontwikkelframeworks,bibliotheken) }
-mogelijk kwetsbaarheden kunnen bevatten.
-\begin{itemize}
-    \item test
-\end{itemize}
-
-
-\section{Wat zijn methodes om te onderzoeken of er in de bestaande software kwetbaarheden bevinden?}
-
-\section{Is er een mogelijkheid om een third-party pakket in te zetten om dit te doen?}
+\s

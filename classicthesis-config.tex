@@ -164,7 +164,6 @@ natbib=true % natbib compatibility mode (\citep and \citet still work)
 %	CODE LISTINGS SETUP
 %----------------------------------------------------------------------------------------
 
-\usepackage{listings}
 %\lstset{emph={trueIndex,root},emphstyle=\color{BlueViolet}}%\underbar} % For special keywords
 \lstset{language=[LaTeX]Tex,%C++ % Specify the language(s) for listings here
 morekeywords={PassOptionsToPackage,selectlanguage},
@@ -189,7 +188,6 @@ belowcaptionskip=.75\baselineskip % Space after the "Listing #: Desciption" text
 %----------------------------------------------------------------------------------------
 
 \PassOptionsToPackage{pdftex,hyperfootnotes=false,pdfpagelabels}{hyperref}
-\usepackage{hyperref}  % backref linktocpage pagebackref
 \pdfcompresslevel=9
 \pdfadjustspacing=1
 
@@ -259,8 +257,8 @@ pdfproducer={LaTeX with hyperref and classicthesis}
 %	CHANGING TEXT AREA
 %----------------------------------------------------------------------------------------
 
-\linespread{1.05} % a bit more for Palatino
-\areaset[current]{440pt}{761pt} % 686 (factor 2.2) + 33 head + 42 head \the\footskip
+\linespread{1.2} % a bit more for Palatino
+\areaset[current]{445pt}{761pt} % 686 (factor 2.2) + 33 head + 42 head \the\footskip
 \setlength{\marginparwidth}{7em}%
 \setlength{\marginparsep}{2em}%
 
