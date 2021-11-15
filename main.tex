@@ -63,9 +63,9 @@
 %	PRE-CONTENT THESIS PAGES
 %----------------------------------------------------------------------------------------
 
-\include{FrontBackMatter/Titlepage} % Main title page
+%\include{FrontBackMatter/Titlepage} % Main title page
 
-\include{FrontBackMatter/Titleback} % Back of the title page
+%\include{FrontBackMatter/Titleback} % Back of the title page
 
 %\cleardoublepage\include{FrontBackMatter/Dedication} % Dedication page
 
@@ -79,7 +79,7 @@
 
 \pagestyle{scrheadings} % Show chapter titles as headings
 
-\cleardoublepage\include{FrontBackMatter/Contents} % Contents, list of figures/tables/listings and acronyms
+%\cleardoublepage\include{FrontBackMatter/Contents} % Contents, list of figures/tables/listings and acronyms
 
 \cleardoublepage
 
@@ -97,36 +97,37 @@
 %Todo: Kijken of hoofdstuk nummer noodzakelijk is.
 %\include{FrontBackMatter/0000-Inleiding}
 
-\ctparttext{}
+
+\ctparttext{In dit deel zijn er een aantal kleine aanpassingen gedaan..\\ Voor de rest moet hier nog een inleiding komen over het deel en de tot standkoming van de opdracht}
+
 \part{Opdracht}\label{prt:opdracht}
 \include{Chapters/0101-Opdrachtgever}
 \include{Chapters/0102-Opdracht}
 \include{Chapters/0103-PlanVanAanpak}
-
-\ctparttext{}
+\ctparttext{Ben hier nog mee bezig Req analyse en onderzoeksmethode is soort van af en staat in wat ik wil }
 \part{Onderzoek}\label{prt:Onderzoek} % Second part of the thesis
 \include{Chapters/0300-OnderzoekInl}
 \include{Chapters/0301-RequirementAnalyse}
 \include{Chapters/0302-OnderzoekMethode}
-\include{Chapters/0303-OnderzoekEaglescience}
-\include{Chapters/0304-ExterneBbibliothekenenGevaar}
-\include{Chapters/0305-OnderzoekSOUPAnalyse}
-\include{Chapters/0306-OnderzoekConc}
+%\include{Chapters/0303-OnderzoekEaglescience}
+%\include{Chapters/0304-ExterneBbibliothekenenGevaar}
+%\include{Chapters/0305-OnderzoekSOUPAnalyse}
+%\include{Chapters/0306-OnderzoekConc}
 
- \ctparttext{}
- \part{Ontwikkeling van SOUP module}\label{prt:Implementatie}
- \include{Chapters/0401-impInl}
- \include{Chapters/0402-FunctioneelOntwerp}
- \include{Chapters/0403-implarchitectuur}
- \include{Chapters/0404-implImplementatie}
- \include{Chapters/0405-implTesting}
- \include{Chapters/0406-implDeploy}
- \include{Chapters/0407-implResultaat}
-
- \ctparttext{}
- \part{Conclusie en andere afsluitende dingen}\label{prt:Conclussie}
- \include{Chapters/0501-conInl}
- \include{Chapters/0502-conclussie}
+% \ctparttext{}
+% \part{Ontwikkeling van SOUP module}\label{prt:Implementatie}
+% \include{Chapters/0401-impInl}
+% \include{Chapters/0402-FunctioneelOntwerp}
+% \include{Chapters/0403-implarchitectuur}
+% \include{Chapters/0404-implImplementatie}
+% \include{Chapters/0405-implTesting}
+% \include{Chapters/0406-implDeploy}
+% \include{Chapters/0407-implResultaat}
+%
+% \ctparttext{}
+% \part{Conclusie en andere afsluitende dingen}\label{prt:Conclussie}
+% \include{Chapters/0501-conInl}
+% \include{Chapters/0502-conclussie}
 
 \cleardoublepage % Empty page before the start of the next part
 
@@ -138,12 +139,12 @@
 \part{Appendix}\label{prt:Appendix} % New part of the thesis for the appendix%
 
 
-\include{Chapters/appendixes/A01-Interviews}
+%\include{Chapters/appendixes/A01-Interviews}
 \include{Chapters/appendixes/A02-Requirements-specificatie}
 \include{Chapters/appendixes/A03-OWASPTop10}
-\include{Chapters/appendixes/A04-VoortgangModule}
+%\include{Chapters/appendixes/A04-VoortgangModule}
 \include{Chapters/appendixes/A09-begrippenlijst}
-\include{Chapters/appendixes/Axx-TypeSetTests}
+%\include{Chapters/appendixes/Axx-TypeSetTests}
 
 %----------------------------------------------------------------------------------------
 %	POST-CONTENT THESIS PAGES
@@ -156,7 +157,7 @@
 \cleardoublepage\include{FrontBackMatter/Colophon} % Colophon
 
 %----------------------------------------------------------------------------------------
-\begin{thebibliography}{9}
+\begin{thebibliography}{4}
 
     \bibitem{lamport94}
     Leslie Lamport,
@@ -170,6 +171,17 @@
     \textit{Praktijkgericht onderzoek in bedrijg},
     Tweede druk 2017,
     Uitgeverij coutinho, Bussum,
+
+    \bibitem{wiki:SOUP}
+    Wikipedia, auteur onbekend,
+    \textit{https://en.wikipedia.org/wiki/Software\_of\_unknown\_pedigree}
+    bezocht op 11-10-2021
+
+    \bibitem{Kohnfelder2021}
+    Loren Kohnfelder
+    \textit{Designing Secure Software}
+    november 2021
+
 \end{thebibliography}
 
 
