@@ -38,9 +38,9 @@
 % Includes the file which contains all the document configurations and packages - make sure to edit this file
 \input{classicthesis-config}
 
-\addbibresource{Bibliography.bib} % The file housing your bibliography
+%\addbibresource{Bibliography.bib} % The file housing your bibliography
 %\addbibresource[label=ownpubs]{Self_Publications.bib} % Uncomment for optional self-publications
-\bibliography{Bibliography}
+%\bibliography{Bibliography}
 %\hyphenation{Put special hyphenation here}
 
 
@@ -63,9 +63,9 @@
 %	PRE-CONTENT THESIS PAGES
 %----------------------------------------------------------------------------------------
 
-\include{FrontBackMatter/Titlepage} % Main title page
+%\include{FrontBackMatter/Titlepage} % Main title page
 
-\include{FrontBackMatter/Titleback} % Back of the title page
+%\include{FrontBackMatter/Titleback} % Back of the title page
 
 %\cleardoublepage\include{FrontBackMatter/Dedication} % Dedication page
 
@@ -95,15 +95,17 @@
 % Text on the Part 1 page describing  the content in Part 1
 %Todo: Inleiding en Leeswijzer schrijven
 %Todo: Kijken of hoofdstuk nummer noodzakelijk is.
-%\include{FrontBackMatter/0000-Inleiding}
+\include{FrontBackMatter/0000-Inleiding}
 
 \ctparttext{}
 \part{Opdracht}\label{prt:opdracht}
 \include{Chapters/0101-Opdrachtgever}
 \include{Chapters/0102-Opdracht}
-\include{Chapters/0103-PlanVanAanpak}
+\include{Chapters/0103-OnderzoeksPlan}
 
 \ctparttext{}
+
+\ctparttext{Ben hier nog mee bezig Req analyse en onderzoeksmethode is soort van af en staat in wat ik wil }
 \part{Onderzoek}\label{prt:Onderzoek} % Second part of the thesis
 \include{Chapters/0300-OnderzoekInl}
 \include{Chapters/0301-RequirementAnalyse}
@@ -166,10 +168,21 @@
     1994.
 
     \bibitem{JanLeen2017}
-    Jan Leen & Jef Mertens,
+    Jan Leen \& Jef Mertens,
     \textit{Praktijkgericht onderzoek in bedrijg},
     Tweede druk 2017,
     Uitgeverij coutinho, Bussum,
+
+    \bibitem{wiki:SOUP}
+    Wikipedia, auteur onbekend,
+    \textit{https://en.wikipedia.org/wiki/Software\_of\_unknown\_pedigree}
+    bezocht op 11-10-2021
+
+    \bibitem{Kohnfelder2021}
+    Loren Kohnfelder
+    \textit{Designing Secure Software}
+    november 2021
+
 \end{thebibliography}
 
 
