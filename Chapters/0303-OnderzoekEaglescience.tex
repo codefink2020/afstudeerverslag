@@ -44,19 +44,22 @@ Zoals eerder beschreven ontwikkelend EagleScience software full-stack. Er wordt 
         \item \textbf{ArchES} is een intern ontwikkeld framework wat de opbouw en de communicatie tussen microservices in scala verbeterd.\ ArchES is geinspireerd op Apache KAFKA en werkt middels hetzelfde pub -> sub principe.
     \end{itemize}
 \end{itemize}
+Binnen Scala kan er gebruik genaakt worden van enkele buildtools zoals Mavem, gradle en SBT. Binnen EagleScience wordt ABT gebruikt. Veelal omdat dit de defacto tool is voor Scala.
+[NOTE:] uitbreiden met dependency declaraties
+\subsection{TypeScript}
+blaat over typescript, node en NPM en hoe dependencies worden gedeclareerd
 
-\subsection{Tooling}
+\subsection{Tooling}\label{subsec:tooling}
 Naast ontwikkeltalen gebruikt EagleScience een aantal tools om dagelijkse werkzaamheden te stroomlijnen en software uit te rollen voor de klant. De tools zijn ieder op zijn beurt verantwoordelijk voor een specifieke taak en alle projecten dienen gebruik te maken van deze tools waar gepast. Hoe de tools samenwerken en uitgerold zijn is te zien in figuur~\ref{fig:es-tooling}
 
 \begin{itemize}
-    \item \textbf{Jira} Is naar eigen zeggen (JiraWebsite ) de nummer 1 software ontwikkel tool voor agile teams.\ Eaglescience gebruikt het om projecten te plannen volgens de scrum methode.\ De tool maakt het mogelijk om sprints te plannen. Daarnaast maakt EagleScience gebruik van Jira om workflows te beheren. zoals interne zaken als toegangverlenen. Maar ook vastlegging van meldingen van klanten welke vervolgens door de ontwikkelaars worden opgepakt en onderzocht.
+    \item \textbf{Jira} Binnen EagleScience wordt Jira gebruikt om taken binnen projecten te beheren. Hier worden taken aan projecten toegevoegd welke vervolgens in een spring wordt opgenomen. Deze sprints worden ook beheert middels Jira
     \item \textbf{Confluence}
-    Confluence wordt binnen Eaglsescience gebruikt als samenwerkings tool waarbij de documentatie centraal ligt.\ De omgeving bied de mogelijk om samen te werken met Jira waardoor documentatie makkelijk te vinden op zowel project als taak niveau.
+    Confluence wordt gebruikt voor het documenteren van de verschillende projecten waar EagleScience aan werkt. Confluence en Jira zijn beiden van Atlassian wat ervoor zorgt dat deze met elkaar kunnen communiceren wat op zijn beurt de documentatie verbeterd. Op dit moment lijkt het erop dat Confluence een end of life heeft on 2023 en dat voor dit systeem een vervanging moet worden gevonden.
     \item \textbf{GitLab}
-    De Code Repository die Eaglescience gebruikt.
+    Gitlab wordt binnen EagleScience gebruikt als Version control systeem. Er is voor gekozen om deze on premise te gebruiken op een server in eigen beheer op locatie. Gitlab biedt naast version control ook andere tooling aan die het mogelijk maken om vanuit gitlab te builden en/of uit te rollen echter wordt dit binnen EagleScience gedaan middels een andere tool genaamd Jenkins.
     \item \textbf{Jenkins}
-    Jenkins is een open-source automation server wat door Eaglescience gebruikt wordt om projecten te builden voor verschillende doeleinden.\ Doordat Jenkins Open-source is zijn er veel plugins geschreven die de functionaliteit uitbreiden en het dus bruikbaar maakt voor het bouwen van een pipeline voor veel verschillende talen en frameworks.
-    Jenkins kan worden vergeleken als mission control tijdens de lancering van een raket\ Voordat de raket(de deploy) gelanceerd kan worden, wordt er een go-nogo sequence uitgevoerd waarbij iedere stap een test of check is waar alleen een go of no-go uit kan komen.\ Op het moment dat alles op go staat is de build geslaagd en kan er gedeployed worden.\ Wil niet zeggen dat de deploy altijd geslaagd is met Jenkins.\ Er zijn nog een aantal andere factoren die meehelpen aan een geslaagde deploy zoals bijvoorbeeld bugs die niet uit de tests zijn gekomen.
+    Jenkins is een open-source automation server wat door Eaglescience gebruikt wordt om projecten te builden, testen, en deployen. Jenkins is gebouwd op een Java omgeving en is daarom uitermate geschikt om met gradle, Maven en SBT projecten om te gaan. Daarnaast kan het middels diverse Shellscripts (Bash, SH, PowerShell) aanverwante taken uitvoeren. Als laatst kan het middels plugins ook uitrollen op cloud omgevingen. Om deze redenenen heeft EagleScience gekozen om Jenkins te gebruiken. In een sectie hieronder wordt uitvoerig uitgewijd over hoe Jenkins binnen EagleScience een project build, test en uitrold.
 \end{itemize}
 
 
@@ -98,5 +101,7 @@ De stappen die worden uitgevoerd zijn:
 \end{itemize}
 
 
-\section{Conclussie}
-Binnen EagleScience wordt er gewerkt middels de SCRUM methode om software te ontwikkelen. Er vind dus op gezette tijden een uitrol plaats welke door Jenkins wordt uitgevoerd. De applicaties die uitgerold worden, zijn ontwikkeld in Scala en TypeScript met gebruik van zowel externe als interne bibliotheken om ontwikkeling te vergemakkelijken. Het lijkt dan ook voor de hand liggend om binnen Jenkins een mogelijkheid te hebben om gegevens over een build naar de nieuwe SOUP module over te brengen. Er zal daarnaast dus gezocht moeten worden naar een analyse tool die het mogelijk maakt om binnen NPM(package manager voor Node projecten) en SBT(Scala Build Tool) gegevens te generenen die in een module geplaatst kunnen worden.
+\section{Conclussie}\label{sec:ESconclussie}
+Binnen EagleScience wordt er gewerkt middels de SCRUM methode om software te ontwikkelen. Waarbij Jira en Confluence worden gebruikt voor de documentatie van de projecten. Het zou voor de hand kunnen liggen om informatie over de SOUP analyses in Confluence op te slaan zodat er mee gelift kan worden op dit systeem. Echter doordat de end of life van Confluence is aangekondigd dient er een alternatief worden gezocht. Welke al in de opdracht is meegenomen.
+
+EagleScience ontwikkeld haar projecten over het algemeen in Scala en TypeScript met enkele daarbij behorende (build) tooling en wel SBT voor Scala en NPM voor node projecten. Het is dus noodzaak om voor deze twee tools en methode te vinden waarmee SOUP analyses gedaan kan worden. Daarnaast Jenkins de ideale mogelijkheid om of informatie te winnen over de staat van projecten die op dat moment uitgerold zijn. Dit kan zijn door de nog te onderzoeken methode direct door Jenkins te laten uitvoeren over door de dependency declaraties van projecten op te slaan in een omgeving waar mee extern de analyse kan woden uitvoerd.

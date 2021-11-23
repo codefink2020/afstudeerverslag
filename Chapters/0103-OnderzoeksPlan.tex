@@ -1,3 +1,6 @@
+\usepackage{graphicx}
+
+
 \chapter{Onderzoeks plan}\label{ch:onderzoekPlan}
 
 
@@ -27,13 +30,17 @@ Hoewel veilige software ontwikkelen niet alleen hangt aan een analyse van extern
 
 
 \section{Doelstellingen}\label{sec:doelstellingen}
-De doelstellingen voor dit onderzoek is dan ook om een methode te vinden die voldoet aan het oplossen van bovenstaand probleem. zonder dat deze in de weg zit van de huidige manier van werken.
+De doelstellingen voor dit onderzoek is dan ook om een methode te vinden die voldoet aan het oplossen van bovenstaand probleem zonder dat deze in de weg zit van de huidige manier van werken. Ook moet de methode passen bij de huidige dev-stack die binnen EagleScience wordt gehanteerd.
+
+[NOTE: Verder uitbreiden en anders samenvoegen met Probleemstelling]
 
 
 \section{Centrale vraagstelling}\label{sec:centrale-vraagstelling}
 
 De centrale vraag in het onderzoek moet zijn: "Welke methode is het meest geschikt voor het geautomatiseerd en periodiek uitvoeren van een SOUP analyse?
 Verder uitbreiden.
+
+
 \section{Stakeholdersanalyse}\label{sec:stakeholdersanalyse}
 Binnen EagleScience zijn er een aatal stakeholders die belang hebben bij deze nieuwe methode en module. Naast de stakeholders binnen Eaglescience is er nog een stakeholder in de vorm van de klant. Hoewel de klant niet actief is in de ontwikkeling van deze methode/module. Zij hebben er wel degelijk belang bij het resultaat en dienen ook genoemd te worden.
 
@@ -62,6 +69,7 @@ Als laatste de klant welke een passieve stakeholder is gezien zij niet direct be
     \caption{StakeHolders Analyse}
     \label{fig:StakeholderAnalyse1}
 \end{figure}
+[NOTE]Figuur stakeholder analyse nog aanpassen.
 Zoals te zien is in figuur~\ref{fig:StakeholderAnalyse1} zijn de projectmanager, het ontwikkelteam en de klanten het meest gebaad bij een nieuwe module voor de analyse van kwetsbaarheden.
 Echter zijn de klanten niet tot bijna niet betrokken bij de ontwikkeling van de module maar hebben er indirect wel belang bij omdat de software die voor hen ontwikkeld wordt veiliger wordt door het voeren van een geautomatiseerde analyse.
 Door deze analyse worden alleen de requirements meegnomen die intern zijn opgenomen.
@@ -69,83 +77,132 @@ Door deze analyse worden alleen de requirements meegnomen die intern zijn opgeno
 
 
 \section{Theoretisch kader}\label{sec:theoretisch-kader}
-Het theoretisch kader waarmee in dit onderzoek gewerkt wordt bestaat uit een aandal hoofdelen. Het eerste hoofdeel is de huidige situatie binnen EagleScience hierbij wordt inbegrepen de dagelijkse werkwijze, de gebrukte dev-stack en de manier waarop er op dit moment wordt uitgerold. Het tweede hoofddeel is zijn artikelen(uitzoeken welke ) waarin bestpractices, adviezen vanuit ervaringsdeskundigen en erkende methoden om SOUP analyses te doen beschreven staan. Het laatste hoofddeel is de theorie waarin beschreven wordt waarom het wenselijk is om uberhaubt analyses te doen. In de laatste sectie van dit hoofdstuk staat een literatuurlijst met de beoogde gebruikte literatuur.
+Het theoretisch kader waarmee in dit onderzoek wordt gewerkt bestaat uit een aandal hoofdelen. Het eerste hoofdeel is de huidige situatie binnen EagleScience hierbij wordt inbegrepen de dagelijkse werkwijze, de gebrukte dev-stack en de manier waarop er op dit moment wordt uitgerold. Het tweede hoofddeel is zijn artikelen(uitzoeken welke ) waarin bestpractices, adviezen vanuit ervaringsdeskundigen en erkende methoden om SOUP analyses te doen beschreven staan. Het laatste hoofddeel is de theorie waarin beschreven wordt waarom het wenselijk is om uberhaubt analyses te doen. In de laatste sectie van dit hoofdstuk staat een literatuurlijst met de beoogde gebruikte literatuur.
+
 
 \section{Conceptueel model}\label{sec:conceptueel-model}
 In figuur () is het conceptueel model opgenomen dat behoordt bij dit onderzoek. Dit model beoogt om de validaliteit van het onderzoek transparant te maken, en geeft de samenhang tussen de verschillende begrippen weer.
 
-Het kernbegrip van het conceptueelmodel is "de implementatie van een methode
+Het kernbegrip van het conceptueelmodel is "de implementatie van een methode voor het geautomatiseerd uitvoeren van een SOUP analyse op de gebruikte bibluitheken door EagleScience" Binnen het kernbegrip zijn sub begrippen te ontleden die van belang zijn binnen het onderzoek. Allereest dient het begrip "gebruikte bibliotheken door EagleScience worden bekeken, dit om een kader te verschaffen in welke talen en tools gebruikt worden. Het begrip SOUP analyse is een onderdeel van het onderzoek om theoretische kennis te verkrijgen over het begrip en daarmee input te geven over het laatste begrip "de implementatie van een methode voor een geautomatiseerde SOUP analyse. De twee eerst genoemde begrippen geven een input voor het laatste begrip.
 
-Het kernbegrip van het conceptueel model is het aanpassen van de uitrolstrategie bij CS Solutions. Allereerst wordt hiervoor de methode van uitrollen als begrip genoemd. Dit kan op 3 manieren plaatsvinden (handmatig, semiautomatisch en automatisch), en dit zijn tevens de aspecten van dit begrip. Daarnaast zijn als aspect ook de voor- en nadelen voor de organisatie opgenomen. Als 2e begrip is de keuze voor softwarepakketten om mee uit te rollen opgenomen. De aspecten die hiervoor onderzocht moeten worden zijn; welke pakketten zijn er, wat zijn hiervan de voor-en nadelen en wat wordt gezien als de best practice?
-Een belangrijk aspect naast de methodiek van uitrollen zijn de implicaties voor de medewerkers, met name die werkzaam zijn bij CS Solutions en direct te maken krijgen met een mogelijke werkwijze wijziging. Het begrip is hier de implicaties van de implementatie, met daarbij de aspecten change management en de kosten. Het aspect change management is opgenomen omdat de kans van slagen grotendeels af zal hangen van de bereidheid van medewerkers binnen CS Solutions om hun werkwijze aan te passen, wanneer dit noodzakelijk wordt geacht, aan de mogelijk nieuwe methodiek van uitrollen. Het aspect kosten is opgenomen omdat de keuze op een tooling af zal hangen van het hiervoor beschikbare budget.
 
 \section{Deelvragen}\label{sec:deelvragen}
-Aan de hand van het conceptueel model zijn de volgende deelvragen voor dit onderzoek opgesteld:
+Aan de hand van het conceptueel model en de hoofdvraag zijn er de volgende deelvragen voor dit onderzoek opgesteld:
+\textbf{Dev-stack binnen Eaglescience}
+\begin{itemize}
+    \item Welk proces wordt er binnen Eaglescience gebruikt om software te ontwikkelen en hoe resulteert dit is een dagelijkse werkwijze?
+    \item Wat zijn de meest gebruikte ontwikkeltalen en frameworks die binnen EagleScience worden toegepast?
+    \item Welke tooling wordt er gebruikt binnen EagleScience? [NOTE relevant?]
+    \item Hoe wordt er binnen EagleScience software uitgerold?
+\end{itemize}
 
+\textbf{Theorie over SOUP}
+\begin{itemize}
+    \item Wat is veilige software?
+    \item Wat is SOUP?
+    \item Wat dragen externe bibliotheken en dus ook potentieel SOUP bij aan de ontwikkeling van software?
+    \item Wat zijn de gevaren van het gebruik van SOUP?
+    \item Wordt er ergens bijgehouden of een dependency/component) een kwetsbaaheid bevat?
+    \item Wat relateert SOUP tot software veiligheid binnen EagleScience?
+\end{itemize}
+
+
+\textbf{Methodes om een SOUP analyse te doen binnen de Dev-stack van EagleScience}
+\begin{itemize}
+    \item Welke tools bestaan er om dependency informatie uit een sbt en npm project te halen?
+    \item Hoe zijn de tools in te zetten in de huidige projecten?
+    \item Welke output wordt er verkregen van de tools?
+    \item Welke manieren zijn er om uit de huidige pipeline informatie over de deploy te halen?
+    \item Wat zijn hier de voor en nadelen van?
+\end{itemize}
 
 
 \section{Onderzoeksontwerp}\label{sec:onderzoeksontwerp}
-\subsection{onderzoekseenheden}\label{subsec:onderzoekseenheden}
+Gezien de grote hoeveelheid deelvragen die benoemd zijn op basis van de onderzoeksvraag en het conceptueel model is het verstandig om het onderzoek in kleinere onderzoeken te verdelen. Door het op te delen in deelonderzoeken kan het kader beter worden vastgesteld en zal er minder snel "teveel" worden onderzocht. De deel onderzoeken zal op de volgende manier worden opgesplitst:
+\begin{enumerate}
+    \item \textbf{Werkwijze en dev-stack Eaglescience} Dit onderzoek moet inzicht geven in de dagelijkse manier van werken binnen EagleScience en de daarbij gebruikte dev-stack. Het resultaat is inzicht in hoe EagleScience applicaties ontwikkeld en hoe deze uitgerold wordt. Daarnaast is er inzicht in hoe er op dit moment een SOUP analyse wordt gedaan.
+    \item \textbf{Theorie SOUP analyses} Om een methode te kunnen ontwikkelen is er een theoretische basis nodig. Dit onderzoek geeft inzicht in de theoretische basis en het belang om een analyse te doen. Daarnaast wordt er uitgezocht hoe er het beste een analyse gedaan kan worden.
+    \item \textbf{Methode voor Soup analyse binnen EagleSciende} Door inzichten uit voorgaande onderzoeken te combineren en nieuwe kennis toe te voegen is er een ontwerp voor een implementatie die aan de opdracht voldoet.
+\end{enumerate}
 
-\subsection{strategie}\label{subsec:strategie2}
+\subsection{strategie}\label{subsec:opstrategie}
+Om de drie onderzoeken die hierboven beschreven zijn goed uit te kunnen voeren zijn er de volgende strategien bedacht die ervoor zorgen dat er een betrouwbaar resultaat is waar verder mee gewerkt kan worden.
+Voor het onderzoek binnen de huidige situatie binnen EagleScience wordt interne documentatie geraadpleegd aangevuld met vraag gesprekken met collega's die met het onderwerp te maken hebben. Deze gespreken zullen worden gehouden in delen gezien de manier waarop er binnen EagleScience gewerkt wordt. (heeft te maken met het aantal niet declarabele uren die ieder persoon wel of niet heeft). Het onderzoek naar de theorie van SOUP analyses wordt uitgevoerd middels een deskresearch waarbij in literatuur gezocht wordt naar methoden om de analyse te doen. Daarnaast wordt er een selectie gemaakt in tools die al ontwikkeld zijn die bruikbaar zijn voor het einddoel van de opdracht. In het laatste onderzoek wordt gekeken naar een method die past bij de huidige manier van werken binnen eaglescience, en de tools die gevonden zijn. Ook wordt er een ontwerp gemaakt hoe de methode eruit komt te zien er welke data dit oplevert waarna er een module ontwikkeld kan worden die deze data inzichtelijk maakt voor de stakeholders.
 
-\subsection{methoden (per deelvraag)}\label{subsec:methoden-(per-deelvraag)}
-\subsection{bronnen}\label{subsec:bronnen}
 
-\subsection{afbakening}\label{subsec:afbakening}
+\section{bronnen}\label{subsec:bronnen}
+De bronnen die gebruikt zijn voor de onderzoeken zijn in de komende subsecties per onderzoek genoemd
 
-\subsection{planning}\label{subsec:planning}
+\subsection{Onderzoek EagleScience}
+\begin{itemize}
+    \item \textbf{151030 F04B Proces Flow Chart ES\_V1.0\_TN.pdf} een document dat de workflow beschrijft die binnen EagleScience gehanteerd wordt.
+    \item \textbf{200121\_Policy Manual\_ES\_V6 signed.pdf} ISO handboek waarin de bedrijfsvoering binnen EagleScience wordt beschreven.
+    \item \textbf{https://www.scala-lang.org} Website met informatie over de taal gebruikt door EagleScience
+    \item \textbf{https://angular.io} Website van Angular gebruikt door EagleScience om frontends te ontwikkelen
+    \item \textbf{https://about.gitlab.com} Gitlab website
+    \item \textbf{https://www.atlassian.com/software/jira} Jira Website
+    \item \textbf{https://www.atlassian.com/software/confluence} Confluence website
+    \item \texbf{https://Jenkins.io} Website van Jenkisn welke door EagleScience wordt gebruikt als build tool.
+    \item \textbf{Collega's} Interviews met collega's over het gebruik van de verschillende tooling binnen EagleScience
+\end{itemize}
 
-\subsubsection{Requirements analyse \textbf{september 2021}}\label{sec:requirements-analyse}
+\subsection{Onderzoek SOUP theorie}
+
+\subsection{Onderzoek implementatie SOUP analyse}
+
+
+\section{planning}\label{subsec:planning}
+
+\subsection{Requirements analyse \textbf{september 2021}}\label{sec:requirements-analyse}
 Na het ontvangen van de opdracht dient er onderzocht te worden of er naast de eisen die door de CTO in de opdracht zijn gezet nog andere eisen zijn binnen EagleScience. Hiervoor zal er onderzocht worden welke betrokkenen er zijn en welke belangen en wensen zij hebben. Na het houden van interviews zullen alle wensen tegen elkaar worden afgewogen. Dit zal leiden tot een document waarin alle belangrijke requirements worden geprioriteerd volgens de MoSCoW-methode.
 
 \textbf{Methode:} Intake gesprek met opdrachtgever, interviews met betrokkenen, enquete voor ontwikkelaars.
 
 \textbf{Resultaat:} Applicatie requirements document.
 
-\subsubsection{Vooronderzoek \textbf{september 2021 - oktober 2021 }}\label{sec:onderzoek}
+\subsection{Vooronderzoek \textbf{september 2021 - oktober 2021 }}\label{sec:onderzoek}
 Om de requirements om te kunnen zetten naar een ontwerp zal er onderzoek gedaan worden naar de huidige manier van ontwikkelen en compileren van de software. Een onderzoek naar begrippen binnen het domein SOUP is een voorwaarde om vervolgens onderzoek te kunnen doen naar methodes om analyses te kunnen doen op software die EagleScience maakt ten opzichte van SOUP. De resultaten van het vooronderzoek zullen worden gebruikt als input.
 Om meer kennis en verdieping te krijgen in de materie rondom de nieuwe module zullen er een aantal onderzoeken worden uitgevoerd.
 
 
 Er is onderzoek nodig naar de volgende onderwerpen:
-    \begin{itemize}
-        \item \textbf{Architectuur binnen EagleScience} Werkwijze en ontwikkel stack van EagleScience met daarin specifiek onderzocht hoe er omgegaan wordt met het voorkomen van onveiligheden in de geleverde software
-        \item \textbf{Externe bibliotheken gebruik en het gevaar} Onderzoek naar waarom er externe bibliotheken worden gebruikt en het gevaar hiervan.
-        \item \textbf{Soup Analyse} Door te kijken naar de kwetsbaarheden in de externe bibliotheken kan er beter worden nagegaan of er kwetsbaarheden in de software zitten. Dit onderzoek zal in gaan op het bestaan van methodes om SOUP analyses te doen. En een mogelijkheid om dit (deels) geautomatiseerde te doen.
-    \end{itemize}
+\begin{itemize}
+    \item \textbf{Architectuur binnen EagleScience} Werkwijze en ontwikkel stack van EagleScience met daarin specifiek onderzocht hoe er omgegaan wordt met het voorkomen van onveiligheden in de geleverde software
+    \item \textbf{Externe bibliotheken gebruik en het gevaar} Onderzoek naar waarom er externe bibliotheken worden gebruikt en het gevaar hiervan.
+    \item \textbf{Soup Analyse} Door te kijken naar de kwetsbaarheden in de externe bibliotheken kan er beter worden nagegaan of er kwetsbaarheden in de software zitten. Dit onderzoek zal in gaan op het bestaan van methodes om SOUP analyses te doen. En een mogelijkheid om dit (deels) geautomatiseerde te doen.
+\end{itemize}
 
-    \textbf{Methode:} Bureau onderzoek, interviews met specialisten, meedoen aan en/of terugkijken van conferenties
+\textbf{Methode:} Bureau onderzoek, interviews met specialisten, meedoen aan en/of terugkijken van conferenties
 
-    \textbf{Resultaat:} Inzicht in het begrip SOUP en software veiligheid als ook een idee voor een mogelijke implementatie van de oplossing die voor EagleScience de beste is zonder veel impact op de huidige manier van werken te hebben.
+\textbf{Resultaat:} Inzicht in het begrip SOUP en software veiligheid als ook een idee voor een mogelijke implementatie van de oplossing die voor EagleScience de beste is zonder veel impact op de huidige manier van werken te hebben.
 
-    \subsubsection{Initieel ontwerp \textbf{oktober 2021 - november 2021 }}\label{sec:initieel-ontwerp}
-    Er zal een ontwerp worden gemaakt waarin vast gelegd is welke requirements er beslist in de module moeten zitten en de uitwerking van deze. Evenals een ontwerp van de architectuur en het datamodel. Naast de module zal er ook een ontwerp gemaakt worden voor een ontwikkel/test omgeving om de module continue te kunnen testen zonder dat dit de huidige buildstraat beinvloed. Dit laatste is van belang om zo min mogelijk storingen te veroorzaken in de dagelijkse gang van zaken bij al lopende projecten. Het eerste ontwerp zal als leidraad dienen voor de implementatie waarin afgeweken kan worden als dit nodig blijkt tijdens de implementatie sprints.
+\subsection{Initieel ontwerp \textbf{oktober 2021 - november 2021 }}\label{sec:initieel-ontwerp}
+Er zal een ontwerp worden gemaakt waarin vast gelegd is welke requirements er beslist in de module moeten zitten en de uitwerking van deze. Evenals een ontwerp van de architectuur en het datamodel. Naast de module zal er ook een ontwerp gemaakt worden voor een ontwikkel/test omgeving om de module continue te kunnen testen zonder dat dit de huidige buildstraat beinvloed. Dit laatste is van belang om zo min mogelijk storingen te veroorzaken in de dagelijkse gang van zaken bij al lopende projecten. Het eerste ontwerp zal als leidraad dienen voor de implementatie waarin afgeweken kan worden als dit nodig blijkt tijdens de implementatie sprints.
 
-    \textbf{Methode:} Overleggen met ontwikkelaars, huidige omgeving onderzoeken op mogelijkheden en architectuur.
-    \textit{wellicht nog toevoegen als resultaten: blokdiagram van oplossing/architectuur; sequence diagram om te komen van analyse tot rapportage (er is een handig tooltje om deze diagrammen te tekenen: https://bramp.github.io/js-sequence-diagrams/)}
-    \textbf{Resultaat:} Eerste ontwerp in de vorm van een datamodel, blokdiagram van architectuur voor de oplossing, als ook een sequence diagram om van analyse tot rapportage te komen.
+\textbf{Methode:} Overleggen met ontwikkelaars, huidige omgeving onderzoeken op mogelijkheden en architectuur.
+\textit{wellicht nog toevoegen als resultaten: blokdiagram van oplossing/architectuur; sequence diagram om te komen van analyse tot rapportage (er is een handig tooltje om deze diagrammen te tekenen: https://bramp.github.io/js-sequence-diagrams/)}
+\textbf{Resultaat:} Eerste ontwerp in de vorm van een datamodel, blokdiagram van architectuur voor de oplossing, als ook een sequence diagram om van analyse tot rapportage te komen.
 
-    \textit{4.4: Gebruik hier of de template ontwikkel omgeving voor (aparte branch/taak); of de portal ontwikkelomgeving
-    4.4: Voeg rij resultaat toe: klaar voor review of gereviewde}
+\textit{4.4: Gebruik hier of de template ontwikkel omgeving voor (aparte branch/taak); of de portal ontwikkelomgeving
+4.4: Voeg rij resultaat toe: klaar voor review of gereviewde}
 
-    \subsubsection{Implementatie en Testen \textbf{november 2021 - januari 2022 }}\label{sec:implementatie-en-testen}
-    Om te kunnen beginnen aan de implementatie is er een ontwikkel/ test omgeving nodig die het mogelijk maakt om zonder invloed op de dagelijkse werkzaamheden van EagleScience een module te kunnen ontwikkelen. Deze zal eerst worden opgezet. Als test projecten zullen snapshots worden gebruikt van de daadwerkelijke projecten dit om een zo accuraat mogelijke test omgeving te hebben. Zoals in de opdracht beschreven dient de nieuwe module een onderdeel te zijn van de bestaande portal. Er zal dan ook direct samen worden gewerkt met het team die daar op het moment mee aan het ontwikkelen is. Tijdens de implementatie zal er ook worden gedocumenteerd wordt hoe de module werkt en welke procedures hier in worden gevolgd. Dit document biedt ontwikkelaars de mogelijkheid om dit door te nemen als on-boarding en referentie.
+\subsection{Implementatie en Testen \textbf{november 2021 - januari 2022 }}\label{sec:implementatie-en-testen}
+Om te kunnen beginnen aan de implementatie is er een ontwikkel/ test omgeving nodig die het mogelijk maakt om zonder invloed op de dagelijkse werkzaamheden van EagleScience een module te kunnen ontwikkelen. Deze zal eerst worden opgezet. Als test projecten zullen snapshots worden gebruikt van de daadwerkelijke projecten dit om een zo accuraat mogelijke test omgeving te hebben. Zoals in de opdracht beschreven dient de nieuwe module een onderdeel te zijn van de bestaande portal. Er zal dan ook direct samen worden gewerkt met het team die daar op het moment mee aan het ontwikkelen is. Tijdens de implementatie zal er ook worden gedocumenteerd wordt hoe de module werkt en welke procedures hier in worden gevolgd. Dit document biedt ontwikkelaars de mogelijkheid om dit door te nemen als on-boarding en referentie.
 
-    \textbf{Methode:} Agile scrum sprints met iedere 2 weken een oplevermoment en demo als ook een reflectie op de sprint.
-    \textbf{Resultaat:} Werkende en geteste applicatie die klaar is om uitgerold te worden.
+\textbf{Methode:} Agile scrum sprints met iedere 2 weken een oplevermoment en demo als ook een reflectie op de sprint.
+\textbf{Resultaat:} Werkende en geteste applicatie die klaar is om uitgerold te worden.
 
-    \subsubsection{Uitrollen en documentatie \textbf{januari 2022 - februari 2022 }}\label{sec:uitrollen-en-documentatie}
-    Nadat de implementatie van de meest kritische requirements is afgerond zal er worden begonnen met het uitrollen van de module en het testen door een geselecteerde groep gebruikers. De feedback wordt bekeken en meegenomen in de evaluatie. Mocht het nodig zijn dan zal er accuut actie worden ondernomen om deze wijzigingen aan te passen. Mochten er wensen zijn die kunnen wachten dan zal er worden overwogen om deze mee te nemen in de volgende iteratie van het project. (de verwachting is dat de module die hier beschreven wordt verder zal worden uitgebreid met de diverse mogelijkheden om betere en veiligere software te ontwikkelen.) Daarnaast zal ook de documentatie verder worden afgerond.
-    \textbf{Methode:} Interviews met stakeholders met een analyse over de nieuwe requirements.
+\subsection{Uitrollen en documentatie \textbf{januari 2022 - februari 2022 }}\label{sec:uitrollen-en-documentatie}
+Nadat de implementatie van de meest kritische requirements is afgerond zal er worden begonnen met het uitrollen van de module en het testen door een geselecteerde groep gebruikers. De feedback wordt bekeken en meegenomen in de evaluatie. Mocht het nodig zijn dan zal er accuut actie worden ondernomen om deze wijzigingen aan te passen. Mochten er wensen zijn die kunnen wachten dan zal er worden overwogen om deze mee te nemen in de volgende iteratie van het project. (de verwachting is dat de module die hier beschreven wordt verder zal worden uitgebreid met de diverse mogelijkheden om betere en veiligere software te ontwikkelen.) Daarnaast zal ook de documentatie verder worden afgerond.
+\textbf{Methode:} Interviews met stakeholders met een analyse over de nieuwe requirements.
 
-    \textbf{Resultaat:} Uitegrolde en gedocumenteerde applicatie
+\textbf{Resultaat:} Uitegrolde en gedocumenteerde applicatie
 
 
-    \section{Literatuurlijst (APA)}
+\section{Literatuurlijst (APA)}
 
-    zie : https://www.topscriptie.nl/plan-aanpak-stappenplan-en-structuur/
-    In het vorige hoogdstuk is de opdracht die is meegegeven vanuit de CTO uitvoerig te lezen. in de
+zie : https://www.topscriptie.nl/plan-aanpak-stappenplan-en-structuur/
+In het vorige hoogdstuk is de opdracht die is meegegeven vanuit de CTO uitvoerig te lezen. in de
 
 
 
