@@ -28,12 +28,12 @@
 %----------------------------------------------------------------------------------------
 
 \documentclass[
-		twoside,openright,titlepage,numbers=noenddot,headinclude,%1headlines,
-	 	footinclude=true,cleardoublepage=empty,
-		dottedtoc, % Make page numbers in the table of contents flushed right with dots leading to them
-		BCOR=0mm,paper=a4,fontsize=10pt, % Binding correction, paper type and font size
-		ngerman,dutch, % Languages, change this to your language(s)
-		]{scrreprt}
+    twoside,openright,titlepage,numbers=noenddot,headinclude,%1headlines,
+    footinclude=true,cleardoublepage=empty,
+    dottedtoc, % Make page numbers in the table of contents flushed right with dots leading to them
+    BCOR=0mm,paper=a4,fontsize=10pt, % Binding correction, paper type and font size
+    ngerman,dutch, % Languages, change this to your language(s)
+]{scrreprt}
 
 % Includes the file which contains all the document configurations and packages - make sure to edit this file
 \input{classicthesis-config}
@@ -46,18 +46,18 @@
 
 \begin{document}
 
-\frenchspacing % Reduces space after periods to make text more compact
+    \frenchspacing % Reduces space after periods to make text more compact
 
-\raggedbottom % Makes all pages the height of the text on that page
+    \raggedbottom % Makes all pages the height of the text on that page
 
-\selectlanguage{dutch} % Select your default language - e.g. american or ngerman
+    \selectlanguage{dutch} % Select your default language - e.g. american or ngerman
 
 %\renewcommand*{\bibname}{new name} % Uncomment to change the name of the bibliography
 %\setbibpreamble{} % Uncomment to include a preamble to the bibliography - some text before the reference list starts
 
-\pagenumbering{roman} % Roman page numbering prior to the start of the thesis content (i, ii, iii, etc)
+    \pagenumbering{roman} % Roman page numbering prior to the start of the thesis content (i, ii, iii, etc)
 
-\pagestyle{plain} % Suppress headers for the pre-content pages
+    \pagestyle{plain} % Suppress headers for the pre-content pages
 
 %----------------------------------------------------------------------------------------
 %	PRE-CONTENT THESIS PAGES
@@ -77,16 +77,16 @@
 
 %\cleardoublepage\include{FrontBackMatter/Acknowledgments} % Acknowledgements page
 
-\pagestyle{scrheadings} % Show chapter titles as headings
+    \pagestyle{scrheadings} % Show chapter titles as headings
 
-\cleardoublepage\include{FrontBackMatter/Contents} % Contents, list of figures/tables/listings and acronyms
+    \cleardoublepage\include{FrontBackMatter/Contents} % Contents, list of figures/tables/listings and acronyms
 
-\cleardoublepage
+    \cleardoublepage
 
-\pagenumbering{arabic} % Arabic page numbering for thesis content (1, 2, 3, etc)
+    \pagenumbering{arabic} % Arabic page numbering for thesis content (1, 2, 3, etc)
 %\setcounter{page}{90} % Uncomment to manually start the page counter at an arbitrary value (for example if you wish to count the pre-content pages in the page count)
 
-\cleardoublepage % Avoids problems with pdfbookmark
+    \cleardoublepage % Avoids problems with pdfbookmark
 
 %----------------------------------------------------------------------------------------
 %	THESIS CONTENT - CHAPTERS
@@ -95,95 +95,95 @@
 % Text on the Part 1 page describing  the content in Part 1
 %Todo: Inleiding en Leeswijzer schrijven
 %Todo: Kijken of hoofdstuk nummer noodzakelijk is.
-\include{FrontBackMatter/0000-Inleiding}
+    \include{FrontBackMatter/0000-Inleiding}
 
-\ctparttext{}
-\part{Opdracht}\label{prt:opdracht}
-\include{Chapters/0101-Opdrachtgever}
-\include{Chapters/0102-Opdracht}
-\include{Chapters/0103-OnderzoeksPlan}
 
-\ctparttext{}
+    %Opdracht en vooronderzoek
+    \ctparttext{}
+    \part{Opdracht}\label{prt:opdracht}
+    \include{Chapters/0101-Opdrachtgever}
+    \include{Chapters/0102-Opdracht}
+    \include{Chapters/0103-OnderzoeksPlan}
 
-\ctparttext{Ben hier nog mee bezig Req analyse en onderzoeksmethode is soort van af en staat in wat ik wil }
-\part{Onderzoek}\label{prt:Onderzoek} % Second part of the thesis
-\include{Chapters/0300-OnderzoekInl}
-\include{Chapters/0301-RequirementAnalyse}
-\include{Chapters/0302-OnderzoekMethode}
-\include{Chapters/0303-OnderzoekEaglescience}
-\include{Chapters/0304-ExterneBbibliothekenenGevaar}
-\include{Chapters/0305-OnderzoekSOUPAnalyse}
-\include{Chapters/0306-OnderzoekConc}
+    % onderzoek
+    \ctparttext{Ben hier nog mee bezig Req analyse en onderzoeksmethode is soort van af en staat in wat ik wil }
+    \part{Onderzoek}\label{prt:Onderzoek} % Second part of the thesis
+    \include{Chapters/0300-OnderzoekInl}
+    \include{Chapters/0302-OnderzoekMethode}
+    \include{Chapters/0303-OnderzoekEaglescience}
+    \include{Chapters/0304-ExterneBbibliothekenenGevaar}
+    \include{Chapters/0305-OnderzoekSOUPAnalyse}
+    \include{Chapters/0306-OnderzoekConc}
 
- \ctparttext{}
- \part{Ontwikkeling van SOUP module}\label{prt:Implementatie}
- \include{Chapters/0401-impInl}
- \include{Chapters/0402-FunctioneelOntwerp}
- \include{Chapters/0403-implarchitectuur}
- \include{Chapters/0404-implImplementatie}
- \include{Chapters/0405-implTesting}
- \include{Chapters/0406-implDeploy}
- \include{Chapters/0407-implResultaat}
 
- \ctparttext{}
- \part{Conclusie en andere afsluitende dingen}\label{prt:Conclussie}
- \include{Chapters/0501-conInl}
- \include{Chapters/0502-conclussie}
+    %Ontwerp en implementatie
+    \ctparttext{}
+    \part{Ontwikkeling van SOUP module}\label{prt:Implementatie}
+    \include{Chapters/0400-impInl}
 
-\cleardoublepage % Empty page before the start of the next part
+    \include{Chapters/0401-RequirementAnalyse}
+    \include{Chapters/0402-FunctioneelOntwerp}
+    \include{Chapters/0403-implarchitectuur}
+    \include{Chapters/0404-implImplementatie}
+    \include{Chapters/0405-implTesting}
+    \include{Chapters/0406-implDeploy}
+    \include{Chapters/0407-implResultaat}
+
+    \ctparttext{}
+
+
+    \part{Conclusie en andere afsluitende dingen}\label{prt:Conclussie}
+    \include{Chapters/0501-conInl}
+    \include{Chapters/0502-conclussie}
+
+    \cleardoublepage % Empty page before the start of the next part
 
 %----------------------------------------------------------------------------------------
 %	THESIS CONTENT - APPENDICES
 %----------------------------------------------------------------------------------------
 
-\appendix
-\part{Appendix}\label{prt:Appendix} % New part of the thesis for the appendix%
-
-
-\include{Chapters/appendixes/A01-Interviews}
-\include{Chapters/appendixes/A02-Requirements-specificatie}
-\include{Chapters/appendixes/A03-OWASPTop10}
-\include{Chapters/appendixes/A04-VoortgangModule}
-\include{Chapters/appendixes/A09-begrippenlijst}
-\include{Chapters/appendixes/Axx-TypeSetTests}
+    \appendix
+    \part{Appendix}\label{prt:Appendix} % New part of the thesis for the appendix%
+    \include{Chapters/appendixes/A01-Interviews}
+    \include{Chapters/appendixes/A02-Requirements-specificatie}
+    \include{Chapters/appendixes/A03-OWASPTop10}
+    \include{Chapters/appendixes/A04-VoortgangModule}
+    \include{Chapters/appendixes/A09-begrippenlijst}
+    \include{Chapters/appendixes/Axx-TypeSetTests}
 
 %----------------------------------------------------------------------------------------
 %	POST-CONTENT THESIS PAGES
 %----------------------------------------------------------------------------------------
-
-\cleardoublepage\include{FrontBackMatter/Bibliography} % Bibliography
-%
-\cleardoublepage\include{FrontBackMatter/Declaration} % Declaration
-%
-\cleardoublepage\include{FrontBackMatter/Colophon} % Colophon
-
+    \cleardoublepage\include{FrontBackMatter/Bibliography} % Bibliography
+    \cleardoublepage\include{FrontBackMatter/Declaration} % Declaration
+    \cleardoublepage\include{FrontBackMatter/Colophon} % Colophon
 %----------------------------------------------------------------------------------------
-\begin{thebibliography}{9}
+    \begin{thebibliography}{9}
 
-    \bibitem{lamport94}
-    Leslie Lamport,
-    \textit{\LaTeX: a document preparation system},
-    Addison Wesley, Massachusetts,
-    2nd edition,
-    1994.
+        \bibitem{lamport94}\label{}
+        Leslie Lamport,
+        \textit{\LaTeX: a document preparation system},
+        Addison Wesley, Massachusetts,
+        2nd edition,
+        1994.
 
-    \bibitem{JanLeen2017}
-    Jan Leen \& Jef Mertens,
-    \textit{Praktijkgericht onderzoek in bedrijg},
-    Tweede druk 2017,
-    Uitgeverij coutinho, Bussum,
+        \bibitem{JanLeen2017}
+        Jan Leen \& Jef Mertens,
+        \textit{Praktijkgericht onderzoek in bedrijg},
+        Tweede druk 2017,
+        Uitgeverij coutinho, Bussum,
 
-    \bibitem{wiki:SOUP}
-    Wikipedia, auteur onbekend,
-    \textit{https://en.wikipedia.org/wiki/Software\_of\_unknown\_pedigree}
-    bezocht op 11-10-2021
+        \bibitem{wiki:SOUP}
+        Wikipedia, auteur onbekend,
+        \textit{https://en.wikipedia.org/wiki/Software\_of\_unknown\_pedigree}
+        bezocht op 11-10-2021
 
-    \bibitem{Kohnfelder2021}
-    Loren Kohnfelder
-    \textit{Designing Secure Software}
-    november 2021
+        \bibitem{Kohnfelder2021}
+        Loren Kohnfelder
+        \textit{Designing Secure Software}
+        november 2021
 
-\end{thebibliography}
+    \end{thebibliography}
 
 
 \end{document}

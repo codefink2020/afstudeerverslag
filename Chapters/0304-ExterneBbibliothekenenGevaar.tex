@@ -11,14 +11,13 @@ De onderzoeksvraag die als startpunt van dit onderzoek geld is:"Hoe kunnen we ex
     \item Wat dragen externe bibliotheken en dus ook potentieel SOUP bij aan de ontwikkeling van software?
     \item Wat zijn de gevaren van het gebruik van SOUP?
     \item Wordt er ergens bijgehouden of een dependency/component) een kwetsbaaheid bevat?
-    \item Wat relateert SOUP tot software veiligheid binnen EagleScience?
 \end{itemize}
 
 %Goed verhaal over supplychain Attacks : https://learning.oreilly.com/library/view/alice-and-bob/9781119687351/c01.xhtml#head-2-27
 
 
 \section{Wat is veilige software?}
-Veilige software is een applicatie dat ontworpen is met onder andere de CIA Triad(confidentiality(vertrouwelijkheid), integrity(integriteit), and availability(beschikbaarheid)) figuure:~\ref{fig:CIA}) in het oog. Dit wil zeggen dat de informatie binnen een applicatie aan de volgende zaken moet voldoen.
+Veilige software is software dat ontworpen is met onder andere de CIA Triad(confidentiality(vertrouwelijkheid), integrity(integriteit), and availability(beschikbaarheid)) figuure:~\ref{fig:CIA}) in het oog. Dit wil zeggen dat de informatie binnen een applicatie aan de volgende zaken moet voldoen.
 \begin{figure}[H]
     \centering
     \includegraphics[width=6cm]{gfx/CIA}
@@ -48,11 +47,11 @@ Een binnen EagleScience toegepast voorbeeld zou zijn(zie figuur~\ref{fig:veiligh
     \item \textbf{Tijdens de levensduur van de applicatie} dient de monitoring, op netwerkverkeer en events goed in de gaten gehouden worden dan al niet middels tools en triggers.
     \item \textbf{fysieke beveiliging} De laatste vorm van beveiging zijn daadwerkelijk sleutels op fysieke sloten van de server ruimte en de beslissingen wie deze sleutels heeft.
 \end{itemize}
-Door deze drie lagen te hanteren heeft EagleScience het ontwikkelen van veilige software in de hand. Daarnaast wordt de OWASP TOP-10 als guideline gebruikt om te zien op welke zaken er gelet dient te worden. De OWASP Top-10 wordt iedere 5 jaar uitgegeven en geeft een beeld van de meest vookomende veiligheidslekken. in 2021 staat op plaats 6 een item over kwetsbare en oude componenten.
+Door deze drie lagen te hanteren heeft EagleScience het ontwikkelen van veilige software in de hand. Daarnaast wordt de OWASP TOP-10 als guideline gebruikt om te zien op welke zaken er gelet dient te worden. De OWASP Top-10 wordt iedere 5 jaar uitgegeven en geeft een beeld van de meest vookomende veiligheidslekken. in 2021 staat op plaats 6 een item over kwetsbare en oude componenten. \cite{Kohnfelder2021}
 
 
 \section{Externe Componenten}\label{sec:software-of-unkown-provenance}
-Binnen EagleScience bestaat er geen applicatie dit op enig manier gebruik maakt van extern ontwikkelde componenten. Componenten in deze zin zijn ook de runtime-omgevingen die aangemaakt worden door Docker, de kubernetes service waar we gebruik van maken, Zelfs de cloud service is niet van onze maar wordt aangeboden door Microsoft in de vorm van Azure. En zelfs in de componenten binnen de applicaties maakt EagleScience gebruik van externe bronnen(zie Hoofdstuk~\ref{ch:onderzoek:-architectuur-binnen-eaglescience}). Dit Laatste onderdeel is onderwerp van dit onderzoek waarbij er verder ingegaan wordt in het gebruik van externe bibliotheken, ook wel SOUP genoemd, alsook het gevaar hiervan.
+Binnen EagleScience bestaat er geen applicatie dit op enig manier gebruik maakt van extern ontwikkelde componenten. Componenten in deze zin zijn ook de runtime\-omgevingen zoals Operatingsystems dan al niet middels een docker container en programeertalen. Echter de componenten waar het in dit onderzoek over gaat zijn de packeges en dependencies die gebruikt worden voor de door EagleScience ontwikkelde applicaties. Met name bibliotheken die veel gebruikte taken vergemakkelijken worden veel ingezet. Hierbij kan gedacht worden aan frameworks voor de frontend als Angular of een framework als Play welke gebruikt wordt als basis voor onze backend applicaties. Vaak bestaan dependencies uit meerdere lagen dus een dependency die direct gebruikt wordt door een applicatie kan zelf ook weer dependencies hebben Wat het doorzoeken van kwetsbaarheden lastiger maakt. Gebruikte dependencies wordt in sommige velden ook SOUP genoemd.
 
 \subsection{Wat is Software of Unkown Provenance(SOUP)?}\label{subsec:wat-is-soup?2}
 De term SOUP komt oorspronkelijk de wereld van de ontwikkeling van medische software en staat voor "Software Of Unkown Provenance".
@@ -62,27 +61,15 @@ De term wordt nu steeds vaker gebruikt in de algemene software ontwikkel kringen
 Hierdoor is er dus geen zekerheid dat het component kwetsbaarheden kan bevatten.
 Kwetsbaarheden in deze zin zijn dan voornamelijk lekken of veranderingen van functionaliteiten binnen een software.
 
-\sebsection{Wat dragen externe bibliotheken en dus ook potentieel SOUP bij aan de ontwikkeling van software??}
-Als het over het algemeen niet bekend is hoe een bibliotheek of framework gemaakt wordt, waarom zouden we dan het risico lopen om deze dan toch te gebruiken? Het antwoord is vrij simpel: Tijd en Geld. Een applicatie ontwikkelen kost nou eenmaal tijd en dus geld. Op het moment dat er software hergebruikt kan worden levert dit potentieel een tijdswinst op.
-
-Als we een framework genaamd Angular CLI als voorbeeld nemen, neemt dit veel van de taken en mechanismen over in het ontwikkelen van een frontend. Het is wordt dan makkelijker om steeds de zelfde zaken in een frontend voor elkaar te krijgen. Daarnaast zeker in het geval van Angular wat veel gebruikt worden en daarmee een grote community heeft is de supprt vaak snel en doeltreffend. Een ander meekomend voordeel is dat als er 'defacto' frameworks gebruikt worden het intwerken van nieuwe ontwikkelaars minder tijd in beslag neemt omdat de kans dat er elders met in dit geval Angular gewerkt wordt groot is.
-
-Met het overnemen van herhalende taken, makkelijkere opleiden van personeel in acht genomen kan er dus een kortere tim-to-market gehaald worden. ondanks het feit dat er potentieel kwetsbaarheden in de applicatie worden genomen.
-
-\subsection{Hoe relateert SOUP zich met het ontwikkelen van veilige software?}\label{subsec:hoe-relateert-soup-zich-met-het-ontwikkelen-van-veilige-software?}
-%Bron: Contrast Security >> https://cdn2.hubspot.net/hub/203759/file-1100864196-pdf/docs/Contrast_-_Insecure_Libraries_2014.pdf
-
-%STATE OF SOFTWARE SECURITY
-%Open Source Edition https://www.veracode.com/sites/default/files/pdf/resources/reports/state-of-software-security-open-source-edition-veracode-report.pdf
-Uit onderzoek van veraCode blijkt dat 96\% van software ontwikkelende bedrijven gebuik maakt van opensource software. En dat 70,5\% van de applicaties die daadwerkelijk voor het eerst gescanned zijn kwetsbaarheden bevat middels bibliotheken van buitenaf. Het probleem ligt hier niet zozeer in de kwetsbaarheden van een bibliotheek. Maat meer in de kwetsbaarheden in bibliotheken die door de eerste bibliotheken wordt gebruikt. de zogenaamde translative bibliotheken.
-
-
-Om deze vraag te kunnen beantwoorden moeten we eigenlijk twee zaken onderzoeken als eerste Waarom gebruiken we soup en ten tweede wat wordt er gedaan om veilige software te ontwikkelen.
-
+\sebsection{Wat dragen externe bibliotheken bij aan de ontwikkeling van software??}
+Zoals hierboven beschreven zorgen externe bibliotheken ervoor dat veel gebruikte functies niet opnieuw geschreven hoeven te worden. Wat mits er een goede documentatie voor bestaat veel tijd en dus geld kan besparen. Een ander voordeel kan zijn dat als een veelgebruikte framework wordt gebruikt nieuwe collega's makkelijker aan een project kan werken zonder een lang inwerk traject.
 De voornaamste redenen om bibliotheken te gebruiken is het verminderen van het herhaaldelijk schrijven van code om basis functionaliteiten in een applicatie te krijgen. En Daarmee wordt de ontwikkeltijd verminderd. Het gebruik van bibliotheken is tegenwoordig niet meer weg te denken uit de ontwikkelstrategie van een bedrijf. Deels omdat er een standaard is waarmee gewerkt wordt, wat op zijn beurt het aannemen en opleiden van personeel vergemakkelijkt. Daarnaast hebben veel gebruikte bibliotheken een 'community' waar vragen gesteld kunnen worden om zo moeilijkheden te verminderen. Een nadeel zoals hierboven is beschreven is dat het niet altijd duidelijk is hoe veilig een bibliotheek is.
 
 
-%Bron: "https://johner-institute.com/articles/software-iec-62304/soup-and-ots/"
+\subsection{Hoe relateert SOUP zich met het ontwikkelen van veilige software?}\label{subsec:hoe-relateert-soup-zich-met-het-ontwikkelen-van-veilige-software?}
+%Bron: Contrast Security >> https://cdn2.hubspot.net/hub/203759/file-1100864196-pdf/docs/Contrast_-_Insecure_Libraries_2014.pdf
+%Bron: https://www.veracode.com/sites/default/files/pdf/resources/reports/state-of-software-security-open-source-edition-veracode-report.pdf
+externe bibliotheken worden veelvuldig gebruikt. Uit een onderzoek van VeraCode, een bedrijf dat een platform aanbied om software te ontwikkelen, kan opgemaakt worden dat 96\% van alle ontwikkelende bedrijven gebruik maakt van opensource componenten. Uit hetzelfde onderzoek komt naar boven dat het probleem van kwetsbaarhden niet zozeer in de direct gebruikte frameworks zitten maar eerder in de dependencies van deze frameworks de zogenaamde translative bibliotheken.
 
 
 \section{Hoe kan het gebruik van SOUP gevaarlijk zijn?}\label{sec:hoe-kan-het-gebruik-van-soup-gevaarlijk-zijn?}
@@ -92,7 +79,6 @@ Zoals inmiddels duidelijk bestaat een software component uit een mix van eigen g
     \includegraphics[width=12cm]{gfx/dependency-tree}
     \caption{Dependency tree}\label{fig:dependency-tree}
 \end{figure}
-
 
 \section{Wordt er ergens bijgehouden of een (dependency/component) een kwetsbaaheid bevat?}\label{sec:item-wordt-er-ergens-bijgehouden-of-een-dependency/component)-een-kwetsbaaheid-bevat?}
 Naast de OWASP zijn er nog een aantal instanties die zich bezighouden met het veilighouden van software. Vaak is dit het verzamelen van kwetsbaarheden en deze vind en kenbaar maken aan het publiek. Twee instituten die samenwerken zijn MITRE en Information TechnologyLab van het NIST\footnote{National Institute of Standards and Technology: Instituur onder amerikaanse regering die verschillende onderzoeken doen op het het gebied van technologie}TL van
@@ -107,133 +93,7 @@ Zowel de database van MITRE (https://cve.mitre.org) als NIST (https://nvd.nist.g
 Naast het bijhouden van CVE's in database is het creëren van awareness net zo belangrijk.
 Een instantie die zich bezig houd hier mee is OWASP(Open Web Application Security Project) die awareness creëert door ideree 5 jaar een Top-10 uit te brengen met daarin de meest voorkomende en dreigende kwetsbaarheden die ze gevonden hebben in een dataset wat opgebouwd is uit inzendingen van 500+ onderzoekers van 40+ bedrijven die samen meer dan 100.000 API's en web applicaties hebben onderzocht.
 In de top 10 die hieronder samengevat weer wordt gegeven wordt er een score meegegeven over hoe makkelijk een lek is te ontdekken en welk mate van risico de kwetsbaarheid heeft.
-
-\begin{figure}[H]
-    \myfloatalign
-    \includegraphics[width=12cm]{gfx/risk tabel}
-    \caption{Inschaling van risico's door OWASP}
-    \label{fig:risico inschaling}
-\end{figure}
-
-
 %Bronnen:
 %https://www.imperva.com/learn/application-security/cve-cvss-vulnerability/
 %http://owasp.org
-
-
-\section{Invloed van SOUP op veiligheid van software}\label{sec:invloed-van-soup-op-veiligheid-van-software}
-In de OWASP top-10 staat op plaats 9 "Using components with known vulnerabilities" wat aangeeft dat het op het moment van schrijven aandacht nodig heeft.
-Eén van de redenen dat dit probleem in de top 10 staat is omdat het gebruik van bibliotheken bijna niet te vermijden is in de ontwikkeling van applicaties wat vooral te danken is aan het steeds sneller moet leveren van een product.
-Ontwikkelaars zijn nooit volledig op de hoogte van de werking laat staan wie de onwikkelaar is van een externe bibliotheek.
-Een goed voorbeeld hiervan is de "event-stream vulnerability" waarbij de bibliotheek voorzien werd van crypto-coin-stealing malware.
-Dit kon gebeuren omdat de bibliotheek niet meer actief werd onderhouden en een persoon zich aanmelde om de ontwikkeling over te nemen.
-Vervolgens werd een dependency omgezet van versie en functionaliteit waardoor er toegang werd, verleent om crypto coins te stelen.
-Event-stream is een bibliotheek dat veel gebruikt werd als dependency voor applicaties de stream-functionaliteiten van nodejs gebruikten daardoor heeft het de potentie gehad om veel schade aan te richten.
-Het is niet geheel duidelijk hoeveel schade er is gelden echter laat dit voorbeeld duidelijk zien wat het probleem is en hoe snel je kan verdwalen in dependency tree's.
-Een oplossing is om regelmatig te scannen naar verdachte bibliotheken in de dependency tree.
-En er vervolgens actief mee om te gaan door bibliotheken up-to-date te houden.
-%Bron: https://www.theregister.com/2018/11/26/npm_repo_bitcoin_stealer/
-
-
-\section{Dependency trees?}\label{sec:dependency-trees?}
-
-
-
-[NOTE Volgende komt uit SOUP ANALYSE hoofdstuk]
-
-\begin{itemize}
-    \item https://jeremylong.github.io/DependencyCheck/
-\end{itemize}
-
-Voordat we verder kijken naar mogelijkheden om kwetsbaarheden in een externe bibliotheek te onderzoeken en te verhelpen moeten we eerst kijken naar een aantal kernbegrippen om te begrijpen waar het om gaat.
-
-Dit onderzoek heeft daarom ook twee hoofdvragen die ieders weer een aantal deelvragen opwerpen.
-Als eeste is de vraag "Welke kwetsbaarheden bestaan er hoe is het gebruik van externe bibliotheken hier aan gecorreleerd?
-De deelvragen die hier uit voorkomen luiden:
-\begin{itemize}
-    \item Wat zijn applicatie veiligheidsrisico's?
-    \item Welke komen het meest voor?
-    \item
-\end{itemize}
-
-
-\section{Wat zijn applicatie veiligheidsrisico's}\label{sec:wat-zijn-applicatie-veiligheids-risico's}
-Veiligheids risico's binnen applicaties zijn een som van kwetsbaarheden die zich bedoeld of onbedoeld in de applicatie bevinden, de vindbaarheid en de "schade" die er mee aangericht kunnen worden.
-De termen van de som worden hieronder verder uitgediept als ook een top-10 uitgeven door de OWASP van de meest voorkomende kwetbaarheden.
-
-Een aanvaller kan op meerdere manier in een applicatie komen(figuur X).
-Vaak gebeurt dit door een kwetsbaarheid van een applicatie te zoeken en deze te exploiteren.
-Als er vervolgens geen maatregeling genomen zijn om de aanvaller te weerhouden kunnen er zaken als data in een database, assets van het bedrijf of zelfs functionaliteit aangetast worden.
-Wat op zijn beurt weer voor een impact in de bedrijfsvoering kan veroorzaken.
-Hoe aanvallers een applicatie kunnen aanvallen is applicatie specifiek
-De impact op de bedrijfsvoering is ook specifiek
-\begin{figure}[H]
-    \myfloatalign
-    \includegraphics[width=15cm]{gfx/application security routes}
-    \caption{Aanvalllen, en hun gevolg}
-    \label{fig:Application Security Routes}
-\end{figure}
-
-Veiligheids risico's kunnen in categoriën worden geplaatst middels een gradatie systeem die in figuur x te ze zien is.
-De OWASP-Top10 die verder in de tekst te vinden is maakt gebruik van dit gradatie systeem om risico's in te schalen.
-OWASP is een instantie die zich bezighouden met het verbeteren van de veiligheid van applicaties.
-Het doet dit door onder andere training en erkenning te geven aan kwetsbaarheden.
-Zo wordt er eens in de 5 jaar een top-10 samengesteld met de op dat moment meest voorkomende kwetsbaarheden.
-\footnote{Helaas is de laatste versie die aan het einde van 2021 uit moet komen nog niet beschikbaar op het moment van schrijven}
-De OWASP-Top10 wordt samengesteld uit data van meer dan 100.000 productie applicaties en APIs wat door meer dan 500 mensen is getest door 40 verschillende bedrijven.
-De top 10 is een aggegratie van deze data in de meest voorkomende issues met inachtneming van exploitabity, detectability en impact.
-
-
-%\begin{figure}[H]
-%  \myfloatalign
-%  \includegraphics[width=12cm]{gfx/risk tabel}
-%  \caption{Inschaling van risico's}
-%  \label{fig:risico inschaling}
-%\end{figure}
-
-%threat agents = aanvallende entiteit
-%exploitabity = exploiteetbaatheid
-%weakness prevalance = vookomendheid van de zwakte in een applicatie
-%weakness detectability = hoe goed is de zwakte in een applicatie te detecteren
-%technical impact = technische impact op de applicaties
-%business impacts = (zakelijke impact) impact op de bedrijfsvoering
-
-
-
-
-
-\
-
-Binnen Eaglescience wordt er heel goed gekeken naar de manier waarop er veilige software ontwikkeld wordt.
-Zaken die in de OWASP top-10 staan wordt serieus mee omgegaan en actief tegen gehandeld. zo wordt er ook gegekeken naar het gebruik van bibliotheken van derden.
-
-Op plaats A09:2017 is te vinden dat er kwetsbaarheden middels bibliotheken van derden binnen kunnen komen. Dit is iets wat deels buiten het bereik van Eaglescience ligt. Om ons hier tegen te beschermen is het wenselijk om periodiek en geautomatiseerd een analyse naar kwetbaarheden tedoen.
-
-De bibliotheken die gebruikt worden van derden wordt ook wel Software of unkown pedigree genoemd of kortweg SOUP. Dit houdt in dat een bibliotheek wordt ontwikkeld middels een proces of methode wat niet bekend is bij de eindgebruiker. Ook zijn vaak de details niet bekend van de bibliotheek omdat deze niet of nauwelijks wordt gereviewed door de eindgebruiker. Om deze reden is het dus onbekend of er kwetsbaarheden zitten in betreffende bibliotheken.
-De definitie van SOUP blijft niet alleen bij de bibliotheken en frameworks vanuit het open-source gebied. Veelal is ook niet bekend hoe closed-source (Proprietary software) wordt geschreven, echter door reputatie van bedrijven die deze software schrijven wordt veelal , onterecht\footnote{zie: https://www.nu.nl/tech/6097701/waarom-de-hack-bij-solarwinds-ministeries-en-grote-bedrijven-treft.html } aangenomen dat deze geen lekken bevatten.
-
-
-\section{CVE}
-in de appliction security wordt er gesproken van een CVE(Common Vulnerability en Exposures) als een kewtsbaarheid bekend is deze wordt in een database geplaatst zodat \'e\'en ieder die geintreseerd is hier kan vinden welke software(os, applicatie, framework, bibliotheek) mogelijk niet veilig is. Deze Database wordt in stand en bijgehouden door een aantal instanties waarbij de belangrijksten zijn:
-\begin{itemize}
-    \item \textbf{NIST-CSRC} Computer Security Research Center van het National Institute of Standards and Technology) is een centrum dat onderzoek doet namens de Amerikaanse regering naar veiligheden in software. De database die het NIST-CSRC bijhoud heet het NVD(National Vulnerability Database) waarin CVE's worden bijgehouden.
-    \item \textbf{CVE-Mitre} is een community driven effort wat CVE's logt in een lijst die vervolgens de NVD voedt met hun gevondendata.
-    \item \textbf{cvedetails.com/}
-    \item \textbf{vuldb.com/}
-    \item \textbf{https://www.exploit-db.com/}
-\end{itemize}
-
-
-\section{}
-
-https://www.security.nl/posting/666663/Van+CVE+tot+CVSS\%3A+wegwijs+in+het+woud+van+kwetsbaarheden
-
-
-
-
-
-
-
-
-
 
