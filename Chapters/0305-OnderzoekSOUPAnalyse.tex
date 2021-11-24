@@ -24,7 +24,7 @@ Door het beantwoorden van de vragen kan er een conclussie worden getrokken over 
 
 
 
-\section{Welke tools bestaan er on dependency analyses uit te voeren op dev-stack van Eaglescience.}
+\section{Welke tools bestaan er on dependency analyses uit te voeren op dev-stack van Eaglescience.}\label{sec:welke-tools-bestaan-er-on-dependency-analyses-uit-te-voeren-op-dev-stack-van-eaglescience.}
 Zoals eerder onderzocht zijn er drie belangrijke onderdelen binnen de dev stack waarop gecontroleerd dient te worden: SBT voor Scala backend projecten en NPM voor de node.js 'frontend' projecten. Als we de dev\-stack systematisch van gebruiker naar platform aflopen is eerst NPM aan de beurt en vervolgens SBT. Zoals in het vorige onderzoek naar boven is gekomen heeft de OWASP als doel software veiliger te maken. Te lezen was dat ze dit deels doen door awareness middels de top-10 en symposia te houden. Echter zijn er ook proactievere projecten binnen OWASP, zoals de ontwikkeling van een dependency check. (https://owasp.org/www-project-dependency-check/). Deze dependency check is geschikt voor de meest voorkomende talen die gebruikt worden, echter is Scala niet veel gebruikt en wordt dus niet direct ondersteunt. Verder onderzoek binnen het project geeft weer dat het voor Node projecten wel ondersteuning bied middels de NPM -audit tool die al in NPM ingebouwd is op dependencies te scannen. Dit project lijkt dus niet voor de hand liggend om te gebruken. Maar bied wel mogelijkheden om als startpunt te gebruiken.
 
 Binnen de OWASP bestaat er een werkgroep die zich bezig houden met het scannen van kwetbaarheden in dependencies: https://owasp.org/www-project-dependency-check/  De OWASP is als uitgangspunt genomen voor het zoeken naar tooling die gebruikt kan worden voor het analyseren van de projecten.
@@ -78,7 +78,7 @@ Nu we methodes hebben voor het verkrijgen van SOUP-analyse resultaten. Moet er o
 \end{enumerate}
 
 
-\section{uitkomst bespreking donderdag 04-11-2021 met wessel en basbre}
+\section{uitkomst bespreking donderdag 04-11-2021 met wessel en basbre}\label{sec:uitkomst-bespreking-donderdag-04-11-2021-met-wessel-en-basbre}
 
 voorgestelde manier is het brengen van dependency gegevens naar een tijdelijke build waar analyse op gedaan wordt. dus: 1: dependencsies van zowel sbt, npm als docker verzamelen en deze samen met meta data over het project te sturen naar de api  2: die vervolgens een "dummy" project opzet met deze dependencies en daar een analyse op doet en deze vervolgens verwijderd. 3: De analyse wordt ingelezen en in een database gezet en als deze is gelukt wordt de "dummy" verwijderd.
 
@@ -86,13 +86,13 @@ Een andere manier is de hash van het commit te versturen op basis van deze hash 
 
 Beide hebben voor en nadelen:
 
-\subsection{dependency gegevens versturen: [VOORKEUR vanuit basbre]}
+\subsection{dependency gegevens versturen: [VOORKEUR vanuit basbre]}\label{subsec:dependency-gegevens-versturen:-[voorkeur-vanuit-basbre]}
 \textbf{voordelen:}
 versie gegevens van de gebouwde deploy geeft een veilige aanname van de gebruikte versies in een project.
 \textbf{nadelen:}
-er moet een tool komen die de gegevens uit de dependency declaraties haalt en deze in een schema (JSON) vorm post naar de API.
+er moet een tool komen die de gegevens uit de dependency declaraties haalt en deze in een schema (JSON) vorm post naar de API\@.
 
-\subsection{hash versturen}
+\subsection{hash versturen}\label{subsec:hash-versturen}
 \textbf{voordelen:}
 Alleen een hash meesturen naar de API is makkelijker te doen dan een volledige JSON opbouwen vergeleken met optie 1.
 \textbf{nadelen:}
