@@ -1,41 +1,25 @@
 
-\chapter{Onderzoek: SOUP analyse}\label{ch:onderzoek:-soup-analyse} % Chapter title
-Bronnen:
+\chapter{Onderzoek: Methode extactie project dependency informatie}\label{ch:onderzoek:-methode-extactie-project-dependency-informatie}
 
-\begin{itemize}
-    \item https://medium.com/@manjula.aw/nodejs-security-tools-de0d0c937ec0
-    \item
-\end{itemize}
-\begin{itemize}
-    \item Javascript     https://github.com/RetireJS/retire.js
-    \item SBT https://github.com/albuch/sbt-dependency-check
-    \item
-\end{itemize}
-Dit hoofdstuk geeft het onderzoek weer naar tools die binnen EagleScience ingezet kunnen worden voor het analyseren van de dependencies. De hoofdvraag in dit onderzoek is dan ook: "Welke tools kunnen er ingezet worden om binnen de dev-stack van EagleScience een analyse te doen op kwetsbaarheden in externe biblotheken?" Om deze vraag te kunnen beantwoorden zijn de volgende deelvragen opgesteld die samen een conclussie opleveren die gebruikt kan worden in het ontwerp van de module.
+Nu er een selectie is gemaakt in tooling om analyses te doen op dependencies binnen projecten moet er uitgezocht worden welke methode er het beste past om deze tools te gebruiken.
+Dit hoofdstuk geeft het onderzoek weer naar een methode om gegevens over dependencies vanuit de bestaande jenkins pipeline in de module te krijgen. De conclussie van het onderzoek moet weergeven wat de beste methode is met in achtneming van de voor en nadelen.
 
-De deelvragen opgesteld voor dit onderzoek zijn:\\
+
+Waarbij rekening gehouden wordt met zowel het ontwerp en functionaliteit van de huidige pipeline en de informatie behoefte van de module. Om tot een resultaat te komen in dit onderzoek is de volgende onderzoeksvraag opgesteld: "Welke methoden zijn er om gegevens over depenendencies binnen bestaande projecten te verkrijgen, en wat zijn de implicaties die deze methoden mee brengen?" Uit deze onderzoekvraag komen de volgende deelvragen:
 \begin{itemize}
     \item Welke tools bestaan er om dependency informatie uit een sbt en npm project te halen?
     \item Hoe zijn de tools in te zetten in de huidige projecten?
     \item Welke output wordt er verkregen van de tools?
-    \item Is er de mogelijkheid om geautomatiseerd data uit deze tools te halen om deze vervolgens te kunnen weergeven.
+    \item Welke manieren zijn er om uit de huidige pipeline informatie over de deploy te halen?
+    \item Wat zijn hier de voor en nadelen van
 \end{itemize}
-
-\section{Bronnen voor dit onderzoek}
-https://www.softwaretestinghelp.com/tools/top-40-static-code-analysis-tools/
-
+De deelvragen worden ieders in een eigen sectie beantwoord. Hierdoor is er voldoende informatie om een juiste conclussie te trekken
+Door het beantwoorden van de vragen kan er een conclussie worden getrokken over de manier van het verkrijgen van de benodigde informatie de vervolgens door module verwerkt kan worden om op die manier inzichten in veilige software te verkrijgen.
+De conclusie van het onderzoek moet zijn welke methode de beste manier is om informatie te verkrijgen uit de jenkinsPipeline
 
 
 \section{Welke tools bestaan er on dependency analyses uit te voeren op dev-stack van Eaglescience.}\label{sec:welke-tools-bestaan-er-on-dependency-analyses-uit-te-voeren-op-dev-stack-van-eaglescience.}
-Er zijn verschillende tools beschikbaar die helpen om applicaties veiliger en/of beter te maken. De tools kunnen worden opgedeeld in twee categoriën aan de ene kant zijn er tool suites die beloven dat door goed gebruik te maken van deze tools de software die uitgerold beter en veiliger wordt. Deze tools kijken veelal naar de opbouw van geschreven sourcecode en het gebruik van externe bibliotheken. Een aantal bekende voorbeelden zijn: "Sonarqube", "embold", "Snyk.io". Hoewel veel van deze tools veel ontwikkeltalen kan onderzoeken, missen de meeste ondersteuning voor Scala. Wat op dit moment de go-to taal is van EagleScience. Als er al ondersteuning is wordt dit meestal middels een comunity plugin geintroduceerd. Een andere aspect is dat veel van deze toolsuite een lictentie nodig hebben om alle onderdelen te kunnen gebruiken. De manier waarop deze toolsuites werken is dat er een snapshot wordt gemaakt van een repo waar vervolgens een analyse op gedaan wordt.
-
-Een andere vorm van tooling is tooling dat ingebouwd kan worden in bestaande pipelines. Veel aanbieders van Source control systemen die ook een mogelijkheid hebben om een CI-CD pipe line te bouwen op deze structuren bieden mogelijkheden om analyses te doen op source-code. Een enkele voorbeelden zijn Github, GitLab en Bitbucket. Ook al maakt eaglescience gebruik van gitlab deze vorm van analyseren in gitlab gaat niet werken gezien Eaglescience deze alleen gebruikt voor version control. Als CI-CD pipeline wordt op het moment de automatiserings server Jenkins gebruikt.
-
-Vanuit EagleScience is aangegeven dat de huidige pipeline niet of zo weinig mogelijk aangepast mag worden. En dat een nieuwe toolsuite op het moment niet in de budgetering past. Er moet dus gezocht worden naar een "open source" oplossing die binnen Jenkins past. Door deze restricties is het dus niet mogelijk om een toolsuite te gaan gebruiken. Een optie is om zelf middels andere tooling welke voor in het geval van EagleScience geschikt is voor het analyseren van Scala(SBT) en Typescript(Node.js/NPM) te vinden en deze te integreren in Jenkins. Om vervolgens zelf de resultaten te publiseren in de portal.
-
-
-\section{Tooling voor de door EagleScience gebruikte buildtools, SBT en NPM}
-Gezien tool suites niet de juiste oplossing zijn moet er gezocht worden naar een manier om alsnog de analyse uit te kunnen voeren. Eén van de belangrijkste schakels om dit te kunnen doen is de analyse van de dependency files binnen de projecten. Zoals eerder onderzocht zijn er drie belangrijke onderdelen binnen de dev stack waarop gecontroleerd dient te worden: SBT voor Scala backend projecten en NPM voor de node.js 'frontend' projecten. Als we de dev\-stack systematisch van gebruiker naar platform aflopen is eerst NPM aan de beurt en vervolgens SBT. Zoals in het vorige onderzoek naar boven is gekomen heeft de OWASP als doel software veiliger te maken. Te lezen was dat ze dit deels doen door awareness middels de top-10 en symposia te houden. Echter zijn er ook proactievere projecten binnen OWASP, zoals de ontwikkeling van een dependency check. (https://owasp.org/www-project-dependency-check/). Deze dependency check is geschikt voor de meest voorkomende talen die gebruikt worden, echter is Scala niet veel gebruikt en wordt dus niet direct ondersteunt. Verder onderzoek binnen het project geeft weer dat het voor Node projecten wel ondersteuning bied middels de NPM -audit tool die al in NPM ingebouwd is op dependencies te scannen. Dit project lijkt dus niet voor de hand liggend om te gebruken. Maar bied wel mogelijkheden om als startpunt te gebruiken.
+Zoals eerder onderzocht zijn er drie belangrijke onderdelen binnen de dev stack waarop gecontroleerd dient te worden: SBT voor Scala backend projecten en NPM voor de node.js 'frontend' projecten. Als we de dev\-stack systematisch van gebruiker naar platform aflopen is eerst NPM aan de beurt en vervolgens SBT. Zoals in het vorige onderzoek naar boven is gekomen heeft de OWASP als doel software veiliger te maken. Te lezen was dat ze dit deels doen door awareness middels de top-10 en symposia te houden. Echter zijn er ook proactievere projecten binnen OWASP, zoals de ontwikkeling van een dependency check. (https://owasp.org/www-project-dependency-check/). Deze dependency check is geschikt voor de meest voorkomende talen die gebruikt worden, echter is Scala niet veel gebruikt en wordt dus niet direct ondersteunt. Verder onderzoek binnen het project geeft weer dat het voor Node projecten wel ondersteuning bied middels de NPM -audit tool die al in NPM ingebouwd is op dependencies te scannen. Dit project lijkt dus niet voor de hand liggend om te gebruken. Maar bied wel mogelijkheden om als startpunt te gebruiken.
 
 Binnen de OWASP bestaat er een werkgroep die zich bezig houden met het scannen van kwetbaarheden in dependencies: https://owasp.org/www-project-dependency-check/  De OWASP is als uitgangspunt genomen voor het zoeken naar tooling die gebruikt kan worden voor het analyseren van de projecten.
 
@@ -87,10 +71,47 @@ Nu we methodes hebben voor het verkrijgen van SOUP-analyse resultaten. Moet er o
     \end{itemize}
 \end{enumerate}
 
-\section{Conclusie}\label{sec:conclusie}
-Er zijn door restricties vanuit eaglescience twee potentiele candidaten die dependency informatie kunnen verkrijgen en daar een analyse op kunnen doen:
 
-voor SBT is dit sbt-depenency-check geschreven door Alexander v. BuchHoltz(Albuch op Github)
-En voor het scannen van NPM packages bestaat er al een tool binnen NPM die ook output kan leveren.
+\section{uitkomst bespreking donderdag 04-11-2021 met wessel en basbre}\label{sec:uitkomst-bespreking-donderdag-04-11-2021-met-wessel-en-basbre}
 
-In het onderzoek beschreven in het volgende hoofdstuk zal worden onderzocht of deze twee tools daadwerkelijk de gewenste output geven. En zal er worden onderzocht hoe deze tools de gewenste resultaten kan opleveren.
+voorgestelde manier is het brengen van dependency gegevens naar een tijdelijke build waar analyse op gedaan wordt. dus: 1: dependencsies van zowel sbt, npm als docker verzamelen en deze samen met meta data over het project te sturen naar de api  2: die vervolgens een "dummy" project opzet met deze dependencies en daar een analyse op doet en deze vervolgens verwijderd. 3: De analyse wordt ingelezen en in een database gezet en als deze is gelukt wordt de "dummy" verwijderd.
+
+Een andere manier is de hash van het commit te versturen op basis van deze hash een project aan te maken, builden en vervolgens een analyse op los te laten door de tools.
+
+Beide hebben voor en nadelen:
+
+\subsection{dependency gegevens versturen: [VOORKEUR vanuit basbre]}\label{subsec:dependency-gegevens-versturen:-[voorkeur-vanuit-basbre]}
+\textbf{voordelen:}
+versie gegevens van de gebouwde deploy geeft een veilige aanname van de gebruikte versies in een project.
+\textbf{nadelen:}
+er moet een tool komen die de gegevens uit de dependency declaraties haalt en deze in een schema (JSON) vorm post naar de API\@.
+
+\subsection{hash versturen}\label{subsec:hash-versturen}
+\textbf{voordelen:}
+Alleen een hash meesturen naar de API is makkelijker te doen dan een volledige JSON opbouwen vergeleken met optie 1.
+\textbf{nadelen:}
+Niet geheel zeker welke versies er zijn gebouwd.??
+
+
+
+
+
+\section{uitkomst bespreking donderdag 04-11-2021 met wessel en basbre}\label{sec:uitkomst-bespreking-donderdag-04-11-2021-met-wessel-en-basbre}
+
+voorgestelde manier is het brengen van dependency gegevens naar een tijdelijke build waar analyse op gedaan wordt. dus: 1: dependencsies van zowel sbt, npm als docker verzamelen en deze samen met meta data over het project te sturen naar de api  2: die vervolgens een "dummy" project opzet met deze dependencies en daar een analyse op doet en deze vervolgens verwijderd. 3: De analyse wordt ingelezen en in een database gezet en als deze is gelukt wordt de "dummy" verwijderd.
+
+Een andere manier is de hash van het commit te versturen op basis van deze hash een project aan te maken, builden en vervolgens een analyse op los te laten door de tools.
+
+Beide hebben voor en nadelen:
+
+\subsection{dependency gegevens versturen: [VOORKEUR vanuit basbre]}\label{subsec:dependency-gegevens-versturen:-[voorkeur-vanuit-basbre]}
+\textbf{voordelen:}
+versie gegevens van de gebouwde deploy geeft een veilige aanname van de gebruikte versies in een project.
+\textbf{nadelen:}
+er moet een tool komen die de gegevens uit de dependency declaraties haalt en deze in een schema (JSON) vorm post naar de API\@.
+
+\subsection{hash versturen}\label{subsec:hash-versturen}
+\textbf{voordelen:}
+Alleen een hash meesturen naar de API is makkelijker te doen dan een volledige JSON opbouwen vergeleken met optie 1.
+\textbf{nadelen:}
+Niet geheel zeker welke versies er zijn gebouwd.??
