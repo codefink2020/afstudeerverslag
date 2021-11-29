@@ -34,9 +34,9 @@ Zoals eerder vermeld dient het project representatief te zijn voor de projecten 
 
 \subsection{Opzetten van een SBT project}\label{subsec:opzetten-van-een-project}
 middels inteliJ is een nieuwe play project opgezet:
-\begin{figure}
+\begin{figure}[H]
     \centering
-    \includegraphics{gfx/sbtplaysetup}
+    \includegraphics[width=10cm]{gfx/sbtplaysetup}
     \caption{SBT PlayFramework2.x setup screen 1}
     \label{fig:sbtplaysetupscreen1}
 \end{figure}
@@ -84,9 +84,18 @@ Het resultaat is een JSON bestand welke gegevens bevat van alle dependencies wel
 
 
 \section{NPM -audit voor Node/AngularProjecten}\label{sec:npm--audit-voor-node/angularprojecten}
+Angular project opgezet middels de IntelliJ wizard.
 
 \subsection{Opzetten van een Angular project}\label{subsec:opzetten-van-een-project-ang}
 
 \subsection{setup NPM-audit}\label{subsec:setup-npm-audit}
+NPM audit is al inbegrepen in de toolset van NPM dus kan ieder moment aangeroepen worden middels \texttt{npm -audit} als we een JSON output willen dienen we de glad \texttt{--json toe te voegen. }
+Het probleem is alleen dat deze manier van werken geen artifact opleverd in een bestand maar alleen een screendump.
+Door deze te "pipen" naar een bestand kunnen we de dump veilig stellen.
 \subsection{resultaten}\label{subsec:ang-resultaten}
+De resulataten van Json zijn ook in Json en goed te gebruiken om in een database te zetten.
 
+
+
+\section{Test API}\label{sec:test-api}
+De volgende stap om te kijken of er op een manier getriggerd kan worden wanneer een sbt wordt opgehaald.
