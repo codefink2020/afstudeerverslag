@@ -1,13 +1,46 @@
 
 \chapter{Onderzoek: Methode extactie project dependency informatie}\label{ch:onderzoek:-methode-extactie-project-dependency-informatie}
-
-Nu er een selectie is gemaakt in tooling om analyses te doen op dependencies binnen projecten moet er uitgezocht worden welke methode er het beste past om deze tools te gebruiken. In dit hoofdstuk wordt dan ook de onderzoeksvraag: "Hoe kan er middels de in het vorige onderzoek gevonden methoden gegevens over dependencies worden opgeslagen?"
-Deze hoofdvraag roept een aantal deelvragen op die ieders beantwoord dienen te worden:
+Voordat er een ontwerp gemaakt kan worden voor de nieuwe module moet er uitgezocht worden of de data die uit de geselecteerde tools komen relevant en bruikbaar zijn. Om dit uit te zoeken wordt er een test opstelling gemaakt die het mogelijk maakt om de output te analyseren op een bestaand project. Daarnaast moet er op basis van deze gegevens worden onderzocht welke manier het beste is om de projecten vervolgens te analyseren gezien we hier kunnen kiezen om dit in de pipeline te doen of door de nieuwe module op basis van gegevens die geleverd worden door de pipeline. De hoofdvraag voor dit onderzoek is dan ook: "Welke methode is het meest efficiënt om projecten te analyseren, zonder dat de Jenkins pipeline hier invloed van ondervindt en de gegevens niet correct zijn. Deze hoofdvraag roept een aantal deelvragen op die ieders beantwoord dienen te worden:
 \begin{itemize}
-    \item Hoe kunnen de methodes worden geimplementeerd, en welke output kunnen we verwachten?
-    \item Welke data kan er verwacht worden uit de resultaten en hoe kan deze het beste worden opgeslagen.
-    \item Wat is de meest efficiente manier om dependencies in een project te analyseren in?
+    \item Welke output komt er uit de gelecteerde tools en is deze bruikbaar voor het doel van de opdracht?
+    \item Op welke manier kunnen de tools worden ingezet?
+    \item Wat is de meeste efficiënte manier om de projecten te analyseren?
+    \item Hoe wordt er gegarandeerd dat de gegevens correct zijn?
 \end{itemize}
+Met de resultaten kan uiteindelijk besloten worden op welk moment er een analyse gedaan wordt: Tijdens de build op de Jenkins server of op een later moment(zelfde dag) middels de API van de module.
+
+\section{Methode}\label{sec:methode}
+Om de juiste resultaten in dit onderzoek te krijgen is er gekozen om een test omgeving op te zetten waarbij een dependency analyse wordt gesimuleert. Een testomgeving bied de mogelijkheid om in een gecontroleerde situatie metingen te verichten. Te denken aan de tijd die het kost om een analyse uit te voeren op projecten van verschillende grote. Een mogelijkheid om op verschillende manieren informatie over dependencies uit projecten te verkrijgen.
+\subsection{opzet testomgeving}\label{subsec:opzet-testomgeving}
+Als eerste dient er een "sandbox" Scala play applicatie opgezet te worden. deze applicatie dient de volgende zaken te kunnen doen:
+\begin{itemize}
+    \item Meten hoelang een analyse duurt.
+    \item Verschillende methoden om intern en extern een analyse te doen.
+    \item Omgaan met GitLab Repo's om dan al niet de dependency info te verkrijgen of het complete project op basis van een hashcode van de commit
+\end{itemize}
+
+\subsection{}
+
+\subsection{test projecten}
+Om een beeld te verkrijgen in de verschillen in projecten moeten er meerdere projecten worden gebruikt. Dit zijn projecten die al door EagleScience worden ontwikkeld en zijn geselecteerd op basis van de hoeveelheid gebruikte externe bibliotheken.
+De selectie is nu:
+\begin{itemize}
+    \item GroeiGids
+    \item SAM
+    \item PTX
+\end{itemize}
+
+
+\section{Hoe zijn de geselecteerde tools te implementeren, en wat is het resultaat?}
+Om te kijken hoe de tools kunnen worden geimplementeerd dient er een testopstelling gebouwd worden die een bijna identieke omgeving nabootst in de projecten die geanalyseerd dienen te worden. Er worden twee projecten geselecteerd op basis van het formaat van de aantal dependencies om deze redenen kunnen we nagaan of er tijd verloren gaat in de analyse.
+
+
+
+\begin{itemize}
+    \item snelheid meten met system time?
+    \item is caching een
+\end{itemize}
+
 Gezien dit onderzoek gaat over twee tools worden deze apart van elkaar behandeld en zal iedere hoofdvraag 2 keer worden beantwoord. De conclussie van dit hoofdstuk zal als basis worden gelegd voor het ontwerp dat in het volgende deel wordt getoont. De manier van onderzoeken is het verkrijgen van inzichten en resultaten middels het bouwen van een prototype. In deze prototype wordt gekeken hoe de tools zich gedragen en welke instellingen er nodig zijn om de tools voor de module inzetbaar te maken.
 
 \section{Test opstelling}\label{sec:test-opstelling}
