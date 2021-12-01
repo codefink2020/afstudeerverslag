@@ -1,5 +1,5 @@
 
-\chapter{Onderzoek: SOUP analyse}\label{ch:onderzoek:-soup-analyse} % Chapter title
+\chapter{Onderzoek: Tooling om analyses te doen op externe bibliotheken}
 Bronnen:
 
 \begin{itemize}
@@ -11,6 +11,39 @@ Bronnen:
     \item SBT https://github.com/albuch/sbt-dependency-check
     \item
 \end{itemize}
+De eerste inzet om de opdracht tot een goed einde te brengen is het vinden van tooling om analyses te kunnen doen op externe bibliotheken. Voor nu is het zoeken naar een oplossing voor Scala en Typescript(Node.js) voldoende. In eerdere onderzoeken is naar boven gekomen dat de OWASP zich bezig houd met het veilig houden van geschreven software. Een van de projecten die de OWASp is "Dependency-check". Dit is een Software Composition Tool wat mogelijk maakt om openbaar gemaakte kwetsbaarheden te detecteren door te kijken of er voor dependencies een Common Platform Enumeration(CPE) bestaat. Als deze CPE bestaat kan er gekeken worden of er een CVE voor bestaat en vervolgens worden weergegeven in resultaten. Als geen van beiden bekend zijn wordt er door de tool vanuit gegaan dat er op het moment van checken geen kwetsbaarheid gevonden is. Hoewel dit op het oog een goede tool is om SOUP te analyseren is het in het project ontwikkelde versie niet mogelijk om te scannen op SBT en NPM dependencies. Op de website van het project is echter een link naar een versie die SBT projecten kan analyseren. En na een andere google search is een versie die voor NPM geschikt is ook gevonden.
+
+In dit onderzoek worden deze twee tools getest om te achterhalen of deze tools daadwerkelijk geschikt zijn voor de doeleinden van het project. Dit wordt gedaan door de tools te gebruiken in een sandbox project die specifiek voor dit onderzoek is opgezet om de werking van de tool te achterhalen en vervolgens in een groot bestaand project om te kijken of de bevindingen in de sandbox ook te zien zijn in een echte situatie.
+De onderzoeksvraag voor dit onderzoek luid dan ook: "Hoe zijn de gevonden tools te integreren in de methode om dependencies te analyseren en zijn de resultaten bruikbaar voor verder gebruik in de module?" Deze hoofdvraag geeft een aantal deelvragen die in de conclussie beantwoord dienen te zijn.
+\begin{itemize}
+    \item Hoe kan de tool worden gebruikt in huidige projecten?
+    \item Komen de resultaten die gepubliseerd worden vanuit de projecten overeen met elkaar, Zijn de structuren vergelijkbaar?
+    \item Wat doet de tool op de performance van de huidige Jenkins buildstraat, Hoelang heeft de tool nodig om resulaten te genereren?
+    \item Zijn de resulaten voldoende om er daadwerkelijk een raport van te genereren die door de gebruikers gelezen kunnen worden.
+    \item Hoeveel kennis van het project hebben de tools nodig om te functioneren? is de dependency declaratie voldoende of is het gehele project nodig voor de analyse.
+\end{itemize}
+
+
+\section{methode}
+Om de bovenstaande deelvragen te beantwoorden is er gekozen om in drie situaties te testen. Iedere situatie wordt opgezet voor zowel de SBT(Scala) tools als die voor NPM(TypeScript).
+\begin{enumerate}
+    \item \textbf{sandbox omgeving} Dit is een omgeving waarbij een standaard project wordt opgezet met alleen de basis logica om het project te kunnen draaien. In het geval van Scala zal dit een playframework project zijn met daarin enkele database dependencies. Voor NPM zal dit een Angular Applicatie zijn met een UI framework.
+    \item \textbf{Bestaand EagleScience Project}. Een project wat zowel een SBT-project bevat als een NPM(node.js) Project bevat.
+    \item \textbf{ALleen de dependency declaraties} In het geval van SBT is dit dus de build.sbt en voor NPM is dit  een package.json en wellicht ook de package.json.lock.
+\end{enumerate}
+
+\section{Sandbox}
+Het doel van deze test is om te kijken of de tooling überhaubt werkt en dat er bruikbare resultaten komen. De InteliJ wizards zijn gebruikt om een basis project op te zetten waar vervolgens volgens de documentatie de tooling is geimplementeerd.
+
+Het resultaat is:
+
+De gegenereerde JSON files zijn in opmaak identiek dus er kanmakkelijk een plugin geschreven worden die beide files in de database kan zetten
+\section{}
+
+https://github.com/etnetera/owasp-dependency-check for Node.js /NPM
+https://github.com/albuch/sbt-dependency-check for SBT
+
+
 Dit hoofdstuk geeft het onderzoek weer naar tools die binnen EagleScience ingezet kunnen worden voor het analyseren van de dependencies. De hoofdvraag in dit onderzoek is dan ook: "Welke tools kunnen er ingezet worden om binnen de dev-stack van EagleScience een analyse te doen op kwetsbaarheden in externe biblotheken?" Om deze vraag te kunnen beantwoorden zijn de volgende deelvragen opgesteld die samen een conclussie opleveren die gebruikt kan worden in het ontwerp van de module.
 
 De deelvragen opgesteld voor dit onderzoek zijn:\\
@@ -23,9 +56,6 @@ De deelvragen opgesteld voor dit onderzoek zijn:\\
 
 \section{Bronnen voor dit onderzoek}
 https://www.softwaretestinghelp.com/tools/top-40-static-code-analysis-tools/
-
-
-
 \section{Welke tools bestaan er on dependency analyses uit te voeren op dev-stack van Eaglescience.}\label{sec:welke-tools-bestaan-er-on-dependency-analyses-uit-te-voeren-op-dev-stack-van-eaglescience.}
 Er zijn verschillende tools beschikbaar die helpen om applicaties veiliger en/of beter te maken. De tools kunnen worden opgedeeld in twee categoriën aan de ene kant zijn er tool suites die beloven dat door goed gebruik te maken van deze tools de software die uitgerold beter en veiliger wordt. Deze tools kijken veelal naar de opbouw van geschreven sourcecode en het gebruik van externe bibliotheken. Een aantal bekende voorbeelden zijn: "Sonarqube", "embold", "Snyk.io". Hoewel veel van deze tools veel ontwikkeltalen kan onderzoeken, missen de meeste ondersteuning voor Scala. Wat op dit moment de go-to taal is van EagleScience. Als er al ondersteuning is wordt dit meestal middels een comunity plugin geintroduceerd. Een andere aspect is dat veel van deze toolsuite een lictentie nodig hebben om alle onderdelen te kunnen gebruiken. De manier waarop deze toolsuites werken is dat er een snapshot wordt gemaakt van een repo waar vervolgens een analyse op gedaan wordt.
 
