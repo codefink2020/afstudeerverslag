@@ -22,30 +22,26 @@ De huidige handmatig uitgevoerde SOUP-analyses zijn tijdrovend waardoor ontwikke
 De probleemstelling geeft de volgende Centrale vraag: "Welke methode is het meest geschikt voor het geautomatiseerd en periodiek uitvoeren van een SOUP analyse voor alle in beheer zijnde projecten binnen EagleScience?
 
 
-
 \section{Doelstellingen}\label{sec:doelstellingen}
 Het doel van dit onderzoek is het ontwikkelen van een methode om een SOUP-analyse te doen binnen de dev-stack van EagleScience. Hierbij moet rekening gehouden worden met de in de opdracht gegeven criteria, waarvan de belangrijkste is dat er zo min mogelijk impact moet zijn op de huidige werkwijze. Aan het einde van het onderzoek moet dus een methode worden gepresenteerd die vervolgens bewezen kan worden middels een implementantie van een  analyse op de twee meest gebruikte technologiën binnen EagleScience. De implementatie wordt dan ook in deel \ref{prt:Implementatie} beschreven.
 
-
-%TODO: Checken of de stakeholders analyse wel in dit deel moet komen. of toch in een eigen deel van het ontwerp.
 
 
 \section{Stakeholdersanalyse}\label{sec:stakeholdersanalyse}
 Om te kijken naar het draagvlak voor dit onderzoek dient er een stakeholders analyse gedaan te worden. Op deze manier moet het duidelijk worden wie de stakeholders zijn en welke belangen zei hebben bij het doen van een onderzoek naar een geautomatiseerde SOUP-Analyse en de resultaten hiervan.
 
 \subsection{Dagelijks bestuur (intern)}\label{subsec:dagelijks-bestuur-(intern)1}
-Het dagelijks bestuur ziet vooral voordelen in het op een overzichtelijke manier verkrijgen van inzichten in kwetsbaarheden. Zij beogen dat ze hierdoor beter kunnen aansturen in het gebruik van bibliotheken en/of andere technologiëen. Ondanks dat de ontwikkeling van de beoogde nieuwe module vooral geld zal kosten, is de huidige manier van werken ook niet kosten-effectief. Daarnaast voorziet de CTO dat de nieuwe module tijdswinst zal opleveren waardoor de time-to-market voor andere projecten hoger kan komen te liggen en er dus op lange termijn meer verdiend kan worden.
+Het dagelijks bestuur ziet vooral voordelen in het op een overzichtelijke manier verkrijgen van inzichten in kwetsbaarheden. Zij beogen dat ze hierdoor beter kunnen aansturen in het gebruik van bibliotheken en/of andere technologiëen. Ondanks dat de ontwikkeling van de beoogde nieuwe module vooral geld zal kosten, is de huidige manier van werken ook niet kosten-effectief. Daarnaast voorziet de CTO dat de nieuwe module tijdswinst zal opleveren waardoor de time-to-market voor andere projecten hoger kan komen te liggen en er dus op langer termijn meer verdiend kan worden.
 
 \subsection{Projectmanagers (intern)}\label{subsec:projectmanagers-(intern)1}
-Project managers krijgen op dit moment een update over de staat van kwetsbaarheden tijdens stand-ups en aan het einde van een sprint tijdens de sprint demo's.
-De nieuwe module zal ze echter de mogelijkheid bieden om up-to-date informatie on-demand te verkrijgen.
+Project managers krijgen op dit moment een update over de staat van kwetsbaarheden op het moment dat een analyse gedaan is. Veelal na een deploy of als er naar gevraagt is. De nieuwe module zal ze echter de mogelijkheid bieden om up-to-date informatie on-demand te verkrijgen.
 De tijdsinvestering die nodig is van ontwikkelaars voor de ontwikkeling van de module weegt volgens hen op tegen de voordelen die de module in de toekomst kan brengen.
 
 \subsection{Ontwikkelteam (intern)}\label{subsec:ontwikkelteam-(intern)1}
-Het handmatig testen van kwetsbaarheden werd tot op heden gedaan door het ontwikkelteam. Dit is een tijdrovende taak, welke ten koste gaat aan de ontwikkeling van software voor klanten. Het ontwikkelteam heeft doorom direct baat bij de ontwikkeling van de beoogte module en wil daarom graag hieraan meedenken en meewerken.
+Het handmatig testen van kwetsbaarheden werd tot op heden gedaan door het ontwikkelteam. Dit is een tijdrovende taak, welke ten koste gaat aan de ontwikkeling van software voor klanten. Het ontwikkelteam heeft daarrom direct baat bij de ontwikkeling van de beoogte module en wil daarom graag hieraan meedenken en meewerken.
 
 \subsection{Klant (extern)}\label{subsec:klant-(extern)1}
-De enige externe stakeholder is de klant. Dit is tevens een passieve stakeholder gezien zij niet direct betrokken zijn bij de ontwikkeling van de module, maar wel baat hebben bij de uitkomst hiervan, namelijk in de vorm van veiligere en betrouwbaardere software.
+De enige externe stakeholder is de klant. Dit is tevens een passieve stakeholder gezien zij niet direct betrokken zijn bij de ontwikkeling van de module, maar wel baat hebben bij de uitkomst hiervan, namelijk in de vorm van veiligere en betrouwbaardere software tegen potentieel lagere kosten.
 
 \subsection{Stakeholder analyse}\label{subsec:stakeholder-analyse1}
 \begin{figure}[H]
@@ -72,6 +68,7 @@ Het tweede hoofddeel is de theorie over externe bibliotheken. Het richt zich op 
 \begin{itemize}
     \item \textbf{OWASP top 10 (https://owasp.org/Top10/)} hierin staan de belangrijkste aandachtspunten die door een onderzoek vanuit de OWASP aan het licht zijn gekomen. Op A06:2021 staat een melding over kwetsbaarheden en outdated Components.
     \item \textbf{Detail pagina OWASP A06:2021(https://owasp.org/Top10/A06_2021-Vulnerable_and_Outdated_Components/)} OP deze pagina zijn details te vinden over item A06:2021 waaronder een beschrijving, Hoe het te voorkomen is en een aantal voorbeeld scenario's waarbij een aanval wordt geillustreerd.
+    \item \textbf{OWASP dependency-check (https://owasp.org/www-project-dependency-check/)} Pagina over het project binnen de OWASP voor het analyseren van componenten in Applicaties
     \item \textbf{Justifying the use of software of uncertain pedigree (SOUP) in safety-related applications} P.G.\ Bishop, R.E.\ Bloomfield and P.K.D.\  Froome for Adelard 2001. Hoewel dit document verouderd lijkt staat er wel degelijk interessante informatie over waarom je SOUP zou gebruiken en hoe je de risico's kan verminderen.
     \item \textbf{Backstabber’s Knife Collection: A Review of Open Source Software Supply Chain Attacks} Marc Ohm, Henrik Plate, Arnold Sykosch, and Michael Meier: 2020: Dit artikel bevat informatie over een mogelijke vorm van aanvallen die middels SOUP uitgevoerd zouden kunnen worden. Daarnaast geeft het artikel inzicht in hoe de onderzoekers packages voor NPM, Python, en Ruby hebben onderzocht.
 \end{itemize}
