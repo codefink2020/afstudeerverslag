@@ -1,6 +1,5 @@
 \chapter{Functioneel Ontwerp}\label{ch:functioneel-ontwerp} % Chapter title
 
-%TODO: MarginPARS zetten
 \label{funtioneelOntwerp} % For referencing the chapter elsewhere, use \autoref{ch:InOnderzoek}
 
 Uit het onderzoek naar de tooling om de analyses te doen is naar voren gekomen dat de analyses tijd op de build server in beslag nemen die er eigenlijk niet is. Hiervoor is gekozen om van de build een snapshot te maken met daarin een lijst van de dependencies binnen het project met daarbij meta data als projectnaam, type, timestamp, GitHash. Deze snapshots kunnen in een later stadium worden geannalyseerd op een moment dat de server hier de tijd voor heeft.
