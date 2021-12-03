@@ -1,32 +1,37 @@
 \chapter{Onderzoeksplan}\label{ch:onderzoekPlan}
 
+In het vorige hoofdstuk is de opdracht voor dit onderzoek duidelijk uitgeschreven. In dit hoofdstuk wordt uitgewijd over hoe deze opdracht wordt uitgevoerd, welke bronnen er gebruikt worden en hoe het onderzoek gedaan zal worden. Het resultaat is het een onderzoeksplan voor een onderzoek naar analyses op kwetsbaarheden op externe bibliotheken(SOUP) binnen EagleScience. Als leidraad voor dit hoofdstuk is gekozen voor \cite{JanLeen2017}
 
-\section{Inleiding en aanleiding}\label{sec:inleiding-en-aanleiding}% TODO: Wellicht weglaten en inleiding kaal laten beginnen
-% todo: opnieuw schrijven
-In het vorige hoofdstuk is de opdracht voor dit onderzoek duidelijk uitgeschreven. In dit hoofdstuk wordt uitgewijd over hoe deze opdracht wordt uitgevoerd met als resultaat een methode voor de analyse van externe bibliotheken die geïmplementeerd kan worden. Als leidraad voor dit hoofdstuk is gekozen voor \cite{JanLeen2017}
-
+\section{Aanleiding}\label{sec:OP_aanleiding}
+EagleScience heeft de ambitie om te groeien in zowel het aantal projecten dat het aanneemt als in het aantal medewerkers. Daarnaast is het bezig met het integreren van het software lifecycle management paradigma in het kwaliteitssysteem om zo een gerichte-, transparante en traceerbare aanpak te hebben over de kwaliteit en daarmee de veiligheid van de te leveren software. Vooral de groei in projecten heeft geleid tot deze opdracht. Het feit dat EagleScience aanbied om de door ons ontwikkelde applicaties te hosten voor de klant zullen deze in de komende tijd ook aannemen. Hierdoor neemt de druk op het DevOps team binnen EagleScience toe. Om deze druk te verminderen wordt er gezocht naar manieren om taken die veel voorkomen en bijdragen aan de kwaliteit te automatiseren om op die manier een traceerbare en transparante aanpak te hebben.
 
 \section{Probleemanalyse}\label{sec:probleemanalyse}
-EagleScience heeft de ambitie om te groeien in zowel het aantal projecten dat het aanneemt als in het aantal medewerkers. Daarnaast is het bezig met het integreren van het software lifecycle management paradigma in het kwaliteitssysteem om zo een gerichte-, transparante en traceerbare aanpak te hebben ten aanzien van de kwaliteit en daarmee de veiligheid van de te leveren software. Om deze redenen wordt er gezocht naar manieren om taken die veel voorkomen en bijdragen aan de kwaliteit te automatiseren om op die manier een traceerbare en transparante aanpak te hebben. Eén van de taken die geautomatiseerd moet worden is het analyseren van externe applicatie componenten\footnote{componenten die gebruikt worden om een applicatie op te bouwen, gedacht kan worden aan: operatingsystems, ontwikkeltalen, bibliotheken en frameworks. (dit onderzoek gaat voornamelijk over externe bibliotheken en frameworks)}, en dan met name de bibliotheken en frameworks, ookwel Software of Unkown Provenance (SOUP) genoemd.
+[NOTE: WIE< WAT< WAAR< WAAROM< WANNEER< WAARDOOR]
+EagleScience doet veel om veilige applicaties te leveren voor haar klanten. Tijdens het ontwikkelproces wordt er door de ontwikkelaars continue afgewogen welke maatregelen, in architectuur en/of code, moeten worden genomen applicaties veilig op te leveren. Deze afwegingen zijn onderdeel van het ontwerpproces en worden door de klant gezien als declarabele uren en zijn ook bereid voor deze werkzaamheden te betalen. Op het moment dat een project "klaar" is over gaat van ontwikkeling naar hosting. Wordt er onderhoud gedaan volgens afspraken in de SLA. In diezelfde SLA wordt niet altijd ruimte opgenomen voor het analyseren van de applicatie op kwetsbaarheden. Vaak komt dit doordat de klant er geen budget voor heeft, of het niet belangrijk vindt. Gezien EagleScience alleen een advies kan uitbrengen over support en de klant de eindbeslissing heeft. Maar omdat EagleScience wel zo "veel mogelijk" wil garanderen dat de software die gehost wordt veilig is dient de applicatie in hosting periodiek geannalyseerd worden op kwetsbaarhebeb. Op dit moment is dit een tijdrovend handmatig process waarbij een teamlid ongeveer 8 tot 12 bezig om iedere dependency te bekijken of er updates zijn en welke mogelijke kwetsbaarhden er zijn. Door de groei die EagleScience binnenkort wil maken is er de wens om bovestaand proces te automatiseren.
 
-Deze SOUP analyses worden nu geheel met de hand gedaan door een projectontwikkelaar en heeft als resultaat een document in confluence met de bevindingen. Na de analyse dienen de componenten die out-of-date en/of bewezen kwetsbaarheden bevatten geupdate te worden. Dit proces dient gezien de complexiteit van de projecten ook na een geautomatiseerde oplossing met de hand gedaan te worden. Doordat de analyse met de hand wordt gedaan dient deze ingeplanned te worden bij een ontwikkelaar die op zijn beurt hier tijd aan moet besteden die niet altijd door de klant betaald kan worden, vaak door SLA-afspraken. Onder andere om deze reden wordt deze analyse minder vaak uitgevoerd dan gewenst.
+Er moet dus een methode worden ontwikkeld die het mogelijk maakt om geautomatiseerd en periodiek een analyse te doen op dependencies die gedeclareerd zijn in het project. De analyses moeten inzichtelijk maken welke componenten er genanalyseerd zijn inclusief versie nummer. En of er kwetsbaarheden zijn gevonden in deze bibliotheken. De methode moet voor alle platformen(Docker, Programmeertalen, Databases etc.) dezelfde resultaten geven.
+
+Door de analyses te automatiseren wordt beoogd dat er minder tijd wordt besteed aan de analyse. Deze tijd kan dan worden besteed door de ontwikkelaar aan taken die declarabel zijn en voor beide partijen winstgevend zijn.
+
 
 %Probleem stelling
-De huidige handmatig uitgevoerde SOUP-analyses zijn tijdrovend waardoor ontwikkelaars andere taken moeten laten vallen. Daarnaast wordt de analyse niet frequent genoeg gedaan en veelal enkel op inplanbare momenten. De probleemstelling luidt: "Ontwikkel een methode die automatisch en periodiek een SOUP-analyse doet op de projecten die EagleScience in haar beheer heeft".
+Samengevat is het probleem als volgt: "Handmatig SOUP-analyses doen kost tijd die niet declarabel zijn. Om deze reden is de wens dat er een geautomatiseerde oplossing komt die periodiek de projecten die in ontwikkeling zijn en/of gehost worden door EagleScience geanalyseerd wordt op kwetsbaarheden in gebruikte externe bibliotheken. Door deze automatische oplossing wordt ingeschat dat de (niet declarabele) uren die normaal gebruikt worden voor analyseren van de projecten gebruikt kunnen worden voor andere wel declarabale uren.
+
+De huidige handmatig uitgevoerde SOUP-analyses zijn tijdrovend waardoor ontwikkelaars andere taken moeten laten vallen. Daarnaast wordt de analyse niet frequent genoeg gedaan en vaak enkel op inplanbare momenten. De probleemstelling luidt: "Ontwikkel een methode die automatisch en periodiek een SOUP-analyse doet op de projecten die EagleScience in haar beheer heeft".
 
 De probleemstelling geeft de volgende Centrale vraag: "Welke methode is het meest geschikt voor het geautomatiseerd en periodiek uitvoeren van een SOUP analyse voor alle in beheer zijnde projecten binnen EagleScience?
 
 
+
 \section{Doelstellingen}\label{sec:doelstellingen}
-Het doel van dit onderzoek is inzicht te verkrijgen in methodes om een SOUP analyse te doen binnen de dev-stack van EagleScience. Hierbij moet rekening gehouden worden met de in de opdracht gegeven criteria, waarvan de belangrijkste is dat er zo min mogelijk impact moet zijn op de huidige werkwijze.
-%TODO: uitbreiden en anders samenvoegen met probleemstelling
+Het doel van dit onderzoek is het ontwikkelen van een methode om een SOUP-analyse te doen binnen de dev-stack van EagleScience. Hierbij moet rekening gehouden worden met de in de opdracht gegeven criteria, waarvan de belangrijkste is dat er zo min mogelijk impact moet zijn op de huidige werkwijze. Aan het einde van het onderzoek moet dus een methode worden gepresenteerd die vervolgens bewezen kan worden middels een implementantie van een  analyse op de twee meest gebruikte technologiën binnen EagleScience. De implementatie wordt dan ook in deel \ref{prt:Implementatie} beschreven.
 
 
 %TODO: Checken of de stakeholders analyse wel in dit deel moet komen. of toch in een eigen deel van het ontwerp.
 
 
 \section{Stakeholdersanalyse}\label{sec:stakeholdersanalyse}
-Dit project kent een aantal verschillende interne en een externe stakeholders die belang hebben bij de uitkomst van dit onderzoek en daarmee een nieuwe methode/module voor SOUP-analyses.
+Om te kijken naar het draagvlak voor dit onderzoek dient er een stakeholders analyse gedaan te worden. Op deze manier moet het duidelijk worden wie de stakeholders zijn en welke belangen zei hebben bij het doen van een onderzoek naar een geautomatiseerde SOUP-Analyse en de resultaten hiervan.
 
 \subsection{Dagelijks bestuur (intern)}\label{subsec:dagelijks-bestuur-(intern)1}
 Het dagelijks bestuur ziet vooral voordelen in het op een overzichtelijke manier verkrijgen van inzichten in kwetsbaarheden. Zij beogen dat ze hierdoor beter kunnen aansturen in het gebruik van bibliotheken en/of andere technologiëen. Ondanks dat de ontwikkeling van de beoogde nieuwe module vooral geld zal kosten, is de huidige manier van werken ook niet kosten-effectief. Daarnaast voorziet de CTO dat de nieuwe module tijdswinst zal opleveren waardoor de time-to-market voor andere projecten hoger kan komen te liggen en er dus op lange termijn meer verdiend kan worden.
@@ -63,23 +68,21 @@ Het theoretisch kader waarmee gewerkt wordt bestaat uit twee hoofddelen. Het eer
 \end{itemize}
 Deze documenten vormen de basis over de werkwijze van EagleScience en zal als input gelden voor het ontwerp dat plaats gaat vinden na het onderzoek.
 
-Het tweede hoofddeel is de theorie omtrent externe bibliotheken. Het richt zich op het gebruik hiervan, de potentiële gevaren en methoden om deze bibliotheken te analyseren. Als ingangspunt is de OWASP Top-10 gekozen omdat de inhoud van dit document binnen EagleScience geldt als aandachtspunten voor het ontwikkelen van veilige software. De basis voor dit onderzoek wordt beschreven in punt "A06:2021-Vulnerable and Outdated Components". Hier wordt beschreven welke gevaren er potentieel dreigen als op dit punt niets gedaan wordt. Andere bronnen zijn:
+Het tweede hoofddeel is de theorie over externe bibliotheken. Het richt zich op het gebruik hiervan, de potentiële gevaren en methoden om deze bibliotheken te analyseren. Als ingangspunt is de OWASP Top-10 gekozen omdat de inhoud van dit document binnen EagleScience geldt als aandachtspunten voor het ontwikkelen van veilige software. De basis voor dit onderzoek wordt beschreven in punt "A06:2021-Vulnerable and Outdated Components". Hier wordt beschreven welke gevaren er potentieel dreigen als op dit punt niets gedaan wordt. Andere bronnen zijn:
 \begin{itemize}
+    \item \textbf{OWASP top 10 (https://owasp.org/Top10/)} hierin staan de belangrijkste aandachtspunten die door een onderzoek vanuit de OWASP aan het licht zijn gekomen. Op A06:2021 staat een melding over kwetsbaarheden en outdated Components.
+    \item \textbf{Detail pagina OWASP A06:2021(https://owasp.org/Top10/A06_2021-Vulnerable_and_Outdated_Components/)} OP deze pagina zijn details te vinden over item A06:2021 waaronder een beschrijving, Hoe het te voorkomen is en een aantal voorbeeld scenario's waarbij een aanval wordt geillustreerd.
     \item \textbf{Justifying the use of software of uncertain pedigree (SOUP) in safety-related applications} P.G.\ Bishop, R.E.\ Bloomfield and P.K.D.\  Froome for Adelard 2001. Hoewel dit document verouderd lijkt staat er wel degelijk interessante informatie over waarom je SOUP zou gebruiken en hoe je de risico's kan verminderen.
     \item \textbf{Backstabber’s Knife Collection: A Review of Open Source Software Supply Chain Attacks} Marc Ohm, Henrik Plate, Arnold Sykosch, and Michael Meier: 2020: Dit artikel bevat informatie over een mogelijke vorm van aanvallen die middels SOUP uitgevoerd zouden kunnen worden. Daarnaast geeft het artikel inzicht in hoe de onderzoekers packages voor NPM, Python, en Ruby hebben onderzocht.
-    \item \textbf{https://www.owasp.org}Naast de bovenstaande artikelen is de website van OWASP een bron van informatie op het gebied van tooling en methodes.
 \end{itemize}
 Het laatste hoofddeel bestaat uit de resultaten van de bovengenoemde onderdelen waarmee een voor EagleScience geschikte methode wordt gevonden. Naast de resultaten van de twee voorgaande hoofddelen worden de volgende bronnen geraadpleegd als leidraad voor het ontwerp:
-\begin{itemize}
-    \item \textbf{System Analysis \& Design An Object-Oriented Approach with UML 5th Edition}Alan Dennis, Barbara Haley Wixom, David Tegarden: Boek over het ontwerp van software in het algemeen. De hoofdstukken over requirements analyse en gathering zijn met name van belang voor het onderzoek.
-    \item
-\end{itemize}
-\newpage
+
+\newpage %TODO: Echt nodig?
 \section{Conceptueel model}\label{sec:conceptueel-model}
-Om de verschillende onderzoeken in goede banen te leiden is er een conceptueel model opgesteld die de relaties van de verschillende onderzoeken waarborgt.
+Om de relevantie en relatie van de verschillende onderzoeken te waarborgen is het volgende conceptueel model opgesteld.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=10cm]{gfx/Conceptueel Model}
+    \includegraphics[width=12cm]{gfx/Conceptueel Model}
     \caption{Conceptueel Model}
     \label{fig:ConceptueelModel}
 \end{figure}
