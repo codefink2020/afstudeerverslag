@@ -62,7 +62,7 @@ Het tweede deel omvat de werkwijze van EagleScience en de door hun gebruikte tec
     \item \textbf{151030 F04B Proces Flow Chart ES\_V1.0\_TN.pdf} Een document dat de workflow beschrijft die binnen EagleScience gehanteerd wordt.
     \item \textbf{200121\_Policy Manual\_ES\_V6 signed.pdf} ISO handboek waarin de bedrijfsvoering binnen EagleScience wordt beschreven.
 \end{itemize}
-% TODO maaike Conceptueel model tekst
+
 \section{Conceptueel model}\label{sec:conceptueel-model}
 Om de relevantie en relatie van de verschillende onderzoeken te waarborgen is het volgende conceptueel model opgesteld.
 \begin{figure}[H]
@@ -74,18 +74,18 @@ Om de relevantie en relatie van de verschillende onderzoeken te waarborgen is he
 
 In figuur~\ref{fig:ConceptueelModel} is het conceptueel model opgenomen dat voor deze opdracht is opgesteld. Dit model maakt de samenhang van de verschillende begrippen inzichtelijk.
 
-Het kernbegrip is "Automatische methode SOUP analyse" welke staat voor de eindconclusie die het onderzoek moet opleveren in de zin van een conclusie over tools en een methode die gebruikt kunnen worden in het ontwerp van de module. Om tot deze conclussie te komen zijn er vier begrippen die ieders een eigen domein binnen de probleemstelling belichten. Zo zal "werkwijze EagleScience" de manier van werken binnen Eaglescience belichten als ook de manier van uitrollen en de dev-stack die gebruikt gaat worden. Ook komt hier de Software Lifecycle Managment aan bod gezien dit één van de aanleidingen is van deze opdracht. Het theoretische deel van het onderzoek wordt onderzocht in "veilig gebruik externe bibliotheken" waarin wordt gekeken waarom er bibliotheken van buitenaf worden gebruikt en wat de potentiële gevaren zijn die dit met zich meebrengt. Het begrip methoden en tools zal ingaan op de beschikbare tools die gebruikt kunnen worden om een analyse te doen. Met deze tools wordt een methode onderzocht die het mogelijk maakt met de constraints die EagleScience heeft om een SOUP-analyse te doen. Met als resultaaat een theoretische methode die als input kan gelden voor het ontwerp voor de nieuwe module die in de opdracht staat beschreven. Deze nieuwe module dient in de EagleScience Portal opgenomen te worden en om die reden is het begrip "Huidig architctuur EagleScience Portal" waarin wordt onderzocht hoe de portal ontworpen is en welke dev-stack er is gebruikt.
+Het kernbegrip is "Automatische methode SOUP-analyse" welke dit onderzoek uiteindelijk moet opleveren. Om hiertoe te komen zijn er drie begrippen die ieders een eigen domein binnen de probleemstelling belichten. In het theoretisch deel "Veilig gebruik externe bibliotheken" wordt onderzocht waarom er bibliotheken van buitenaf worden gebruikt en wat de potentiële gevaren zijn die dit met zich meebrengt, en eventuele remedies hiervoor. Daarna zal "Werkwijze EagleScience" de manier van werken binnen EagleScience belichten als ook de manier van uitrollen en de algehele dev-stack die EagleScience gebruikt. Ook komt hier de Software Lifecycle Managment aan bod gezien dit één van de aanleidingen is van deze opdracht. Het begrip "Methoden en tools SOUP-analyse" zal ingaan op de beschikbare tools die gebruikt kunnen worden om een analyse te doen. Met deze tools wordt een methode onderzocht die SOUP-analyses mogelijk maakt binnen de dev-stack van EagleScience. Tesamen zal dit onderzoek resulteren in een theoretische methode die als input kan gelden voor het ontwerp voor de nieuwe module die in de opdracht staat beschreven.
 
 
 \section{Onderzoeksontwerp}\label{sec:OP_onderzoeksontwerp}
 Aan de hand van de hierboven beschreven doelstellingen, theoretisch kader en conceptueel model is het volgende onderzoeksontwerp opgesteld.
 
-\subsection{Onderzoeksvraag en deelvragen}\label{subsec:onderzoeksvraag-en-deelvragen}
+\subsection{Onderzoeksvraag}\label{subsec:onderzoeksvraag-en-deelvragen}
 Op basis van de probeemanalyse luidt de onderzoeksvraag als volgt: "Hoe kan EagleScience middels een geautomatiseerde methode inzicht krijgen in potentiële kwetsbaarheden van gebruikte bibliotheken binnen projecten waarbij rekening gehouden wordt met de huidige manier van werken?"
 
-Door het ontleden van deze onderzoeksvraag onstaan er twee domeinen waar onderzoek in gedaan moet worden. Het eerste domein is het gebruik en gevaar van externe bibliotheken, welke leidt tot de volgende deelvraag: "Wat is het effect van het gebruik van externe bibliotheken bij het ontwikkelen van software, welke gevaren brengt dit met zich mee en wat kan er gedaan worden om deze gevaren te minimaliseren?". Het tweede domein omvat methodes om geautomatiseerd SOUP-analyses te doen op projecten binnen EagleScience. De deelvraag is als volgt: "Welke SCA tooling is compabitble met de omgeving van EagleScience en welke methode kan worden toegepast om deze tooling te gebuiken voor het automatisch analyseren van externe dependencies?"
+Door het ontleden van deze onderzoeksvraag onstaan er twee delen waarnaar onderzoek gedaan moet worden. Het eerste deel is het gebruik en gevaar van externe bibliotheken, welke leidt tot de volgende onderzoeksvraag: "Wat is het effect van het gebruik van externe bibliotheken bij het ontwikkelen van software, welke gevaren brengt dit met zich mee en wat kan er gedaan worden om deze gevaren te minimaliseren?". Vervolgens kan deze kennis worden benut in het tweede deel, wat de praktische kant belicht gericht op de methode en tooling voor SOUP-analyses. Dit tweede deel omvat methodes om geautomatiseerd SOUP-analyses te doen op projecten binnen EagleScience. De onderzoeksvraag luidt als volgt: "Welke SCA tooling is compabitble met de omgeving van EagleScience en welke methode kan worden toegepast om deze tooling te gebuiken voor het automatisch analyseren van externe dependencies?"
 
-Deze domeinen zullen ieders in een deelonderzoek worden behandeld, waarvan de uitkomsten elkaar zullen aanvullen en samen tot een eind eindresultaat leiden.
+Deze delen zullen ieders in een deelonderzoek worden behandeld, waarvan de uitkomsten elkaar zullen aanvullen en samen tot een eind eindresultaat leiden.
 \begin{figure}[H]
     \myfloatalign
     \includegraphics[width=10cm]{gfx/Onderzoekmodel}
@@ -93,22 +93,22 @@ Deze domeinen zullen ieders in een deelonderzoek worden behandeld, waarvan de ui
     \label{fig:OnderzoeksModel}
 \end{figure}
 
-In figuur\ref{fig:OnderzoeksModel} is te zien hoe de twee domeinen met elkaar in relatie staan ten opzichte van het beoogde eindresulaat. Het onderzoek over het gebruik van externe bibliotheken zal leiden tot concrete inzichten die vervolgens gebruikt kunnen worden als kennis in het onderzoek naar een methode voor een SOUP-analyse. Dit zal uiteindelijk een methode opleveren die gebruikt kan worden voor de implementatie van de module die aan de opdracht voldoet.
+In figuur\ref{fig:OnderzoeksModel} is te zien hoe de twee delen met elkaar in relatie staan ten opzichte van het beoogde eindresulaat. Het onderzoek over het gebruik van externe bibliotheken zal leiden tot concrete inzichten die vervolgens gebruikt kunnen worden als kennis in het onderzoek naar een methode voor een SOUP-analyse. Dit zal uiteindelijk een methode opleveren die gebruikt kan worden voor de implementatie van de module die aan de opdracht voldoet.
 
 \subsection{Scope}\label{subsec:scope}
-Het domein softwareveiligheid is op het moment van schrijven een 'hot-topic', en zeer breed. Om deze reden is er gekozen om dit onderzoek te beperken tot het veiliger maken van software middels het analyseren en beschikbaar stellen van informatie over externe bibliotheken. Daarnaast zullen alleen de technologiën die compatibel zijn met de werkwijze van EagleScience mee worden genomen. Daarnaast is de opdracht\ref{ch:opdracht} zoals deze is gegeven door de CTO van EagleScience en leidraad voor de scope van het onderzoek
+Het domein softwareveiligheid is op het moment van schrijven een 'hot-topic', en zeer breed. Om deze reden is er gekozen om dit onderzoek te beperken tot het veiliger maken van software middels het analyseren en beschikbaar stellen van informatie over externe bibliotheken. Daarnaast zullen alleen de technologiën die compatibel zijn met de werkwijze van EagleScience mee worden genomen. Daarnaast is de opdracht\ref{ch:opdracht} zoals deze is gegeven door de CTO van EagleScience de leidraad voor de scope van het onderzoek.
 
 \subsection{Onderzoeken}\label{subsubsec:onderzoeken}
-Zoals hierboven is aangegeven zullen er een tweetal onderzoeken worden uitgevoerd die ieders een deel van de gestelde onderzoeksvraag zullen beantwoorden. De conclusie van het eerste onderzoek zal dienen als input voor het tweede onderzoek.
+Zoals hierboven is aangegeven zullen er een tweetal onderzoeken worden uitgevoerd. De conclusie van het eerste onderzoek zal dienen als input voor het tweede onderzoek.
 
 %\newpage %TODO: quickfix om volgorde lijkheid te veranderen voor figuren...
 
 
-\subsubsection{Onderzoek 1: gebruik externe bibliotheken, het gevaar en hoe veiliger te maken.}
-Het \textbf{doel} van dit onderzoek is om inzicht te krijgen wat een SOUP-analyse is en hoe relevant het is om dit te doen. Daarnaast wordt er gekeken wat de SOUP-analyse toevoegd aan de veiligheid van de software die EagleScience levert en hoe EagleScience mogelijk kan voorkomen dat er kwetsbaarheden in de ontwikkelde software terecht komt.
-De \textbf{scope} van dit onderzoek is dat er gekeken wordt naar het gebruik van externe bibliotheken en de toegevoegde waarde. Daarnaast wordt er gekeken wat er gedaan kan worden om het gebruik van externe bibliotheken veiliger te maken.
+\subsubsection{Onderzoek 1: gebruik externe bibliotheken, het gevaar en hoe veiliger te maken}
+Het \textbf{doel} van dit onderzoek is om inzicht te krijgen wat een SOUP-analyse is en hoe relevant het is om deze uit te voeren. Daarnaast wordt er gekeken wat de SOUP-analyse toevoegd aan de veiligheid van de software die EagleScience levert en hoe EagleScience mogelijk kan voorkomen dat er kwetsbaarheden in de uitgerolde software terecht komt.
+De \textbf{scope} van dit onderzoek is dat er gekeken wordt naar het gebruik van externe bibliotheken en de toegevoegde waarde hiervan. Daarnaast wordt er gekeken wat er gedaan kan worden om het gebruik van externe bibliotheken veiliger te maken.
 De \textbf{onderzoeksvraag} luid: "Wat is het effect van het gebruik van externe bibliotheken bij het ontwikkelen van software, welke gevaren brengt dit met zich mee en wat kan er gedaan worden om deze gevaren te minimaliseren?".
-De gebruikte \textbf{methodes} zullen deskresearch zijn aangevuld met conferenties. Waarbij als \textbf{bronnen} Artikelen en rapportages van instanties en bedrijven die zich bezighouden met de veiligheid van software waarbij met name de focus ligt op het gebruik van Externe bibliotheken. Software veiligheid is een 'hot-topic' en er worden jaarlijks veel conferenties gehouden over dit onderwerp. Door de huidige wereld situatie is het mogelijk om veel van deze conferenties "on-demand" terug te kijken wat op zijn beurt ook weer tot andere inzichten kan leiden. In figuur~\ref{fig:OnderzoeksModelNoodZaakSOUP} is te zien hoe het onderzoek opgebouwd is om vervolgens een antwoord op de onderzoeksvraag te verkrijgen.
+De gebruikte \textbf{methodes} zullen deskresearch zijn aangevuld met conferenties, waarbij \textbf{bronnen} zoals artikelen en rapportages van instanties en bedrijven die zich bezighouden met de veiligheid van software zullen worden opgenomen met als focus het gebruik van externe bibliotheken. Software veiligheid is een 'hot-topic' en er worden jaarlijks veel conferenties gehouden over dit onderwerp. Door de huidige wereld situatie is het mogelijk om veel van deze conferenties "on-demand" terug te kijken wat op zijn beurt ook weer tot andere inzichten kan leiden. In figuur~\ref{fig:OnderzoeksModelNoodZaakSOUP} is te zien hoe het onderzoek is opgebouwd.
 \begin{figure}[htbp]
     \myfloatalign
     \includegraphics[width=10cm]{gfx/OnderzoeksmodelSOUP}
@@ -118,15 +118,13 @@ De gebruikte \textbf{methodes} zullen deskresearch zijn aangevuld met conferenti
 
 
 
-\subsubsection{Onderzoek 2:}\\
-Het \textBF{doel} van dit onderzoek is om een methode te vinden die het mogelijk maakt om een SOUP-analyse te doen binnen de huidige dev-stack van EagleScience. Hiernaast moet er een SCA (Software Composition Analysis) tools voor deze dev-stack welke te gebruiken is in diezelfde methode.
-De \textbf{Scope} van het onderzoek is daarom zo dat er alleen gekeken wordt naat SCA tooling die analyses doet voor componenten binnen de dev-stack van EagleScience.
-De \textbf{Onderzoeksvraag} is dan ook: "Welke SCA tooling is compabitble met de omgeving van EagleScience en welke methode kan worden toegepast om deze tooling te gebuiken voor het automatisch analyseren van externe dependencies?"
-De \textbf{methode} die gebruikt wordt is deskresearch om te onderzoeken welke tooling er bestaat
+\subsubsection{Onderzoek 2: tools en methodes voor SOUP-analyses op de EagleScience dev-stack}\\
+Het \textBF{doel} van dit onderzoek is om een methode te vinden die het mogelijk maakt om een SOUP-analyse te doen binnen de huidige dev-stack van EagleScience. Hiervoor zullen er geschikte SCA (Software Composition Analysis) tools gevonden moeten worden.
+Binnen de \textbf{Scope} van het onderzoek zal daarom alleen gekeken worden naar SCA tooling die analyses doet voor componenten binnen de dev-stack van EagleScience.
+De \textbf{Onderzoeksvraag} luidt: "Welke SCA tooling is compabitble met de omgeving van EagleScience en welke methode kan worden toegepast om deze tooling te gebuiken voor het automatisch analyseren van externe dependencies?"
+De \textbf{methode} die gebruikt wordt is deskresearch. Daarnaast zullen er interviews gehouden worden met collega's om inzicht te krijgen in de huidige stand van zaken op het gebied van gebruik van externe bibliotheken en hoe er in de huidige situatie voor wordt gezorgd dat er geen kwetsbaarheden worden geintroduceerd door het gebruik hiervan.
 
-Daarnaast zullen er interviews gehouden worden met collega's om inzicht te krijgen in de huidige stand van zaken op het gebied van gebruik van externe bibliotheken en hoe er voor wordt gezorgd dat er geen kwetsbaarheden worden geintroduceerd door het gebruik hiervan.
-
-Als er een selectie is gemaakt voor een tool dient deze in een kleine testopstelling getest te worden om vervolgens te kijken of we deze kunnen implementeren in de bestaande uitrolmethode. De \textbf{bronnen} die gebruikt zullen worden zijn informatie bronnen van leveranciers van dergelijke tooling. Daarnaast zullen de bevindingen middels een review worden geverifieerd op bruikbaarheid bij de opdrachgever. Het onderzoeksmodel voor dit onderzoek is te vinden in figuur~\ref{fig:OnderzoeksModelSOUPmethode}
+Als er een selectie is gemaakt voor een tool dient deze in een kleine testopstelling getest te worden om vervolgens te kijken of deze kan worden geimplementeerd in de bestaande uitrolmethode. De \textbf{bronnen} die gebruikt zullen worden zijn informatie bronnen van leveranciers van dergelijke tooling. Ook zal er in interne documentatie worden gekeken hoe de huidige processen draaien waarin wordt beoogd om de SOUP-analyse uit te voeren. Daarnaast zullen de bevindingen middels een review worden geverifieerd op bruikbaarheid bij de opdrachtgever. Het onderzoeksmodel voor dit onderzoek is te vinden in figuur~\ref{fig:OnderzoeksModelSOUPmethode}
 
 \begin{figure}[htbp]
     \myfloatalign
@@ -135,13 +133,7 @@ Als er een selectie is gemaakt voor een tool dient deze in een kleine testopstel
     \label{fig:OnderzoeksModelSOUPmethode}
 \end{figure}
 
-Toevoegen aan methide onderziek.......
-
-
-Het \textbf{doel} van dit onderzoek is om kennis te vergaren over de manier van uitrollen van software binnen EagleScience. Daarnaast moet het onderzoek inzicht geven in de gebruikte dev-stack( programeertalen, tooling en frameworks). De uitkomst is relevant omdat het een basis is waar de nieuwe oplossing onderdeel van wordt. De \textbf{Scope} van dit onderzoek beperkt zich dan ook alleen op de processen van die direct iets te maken hebben met het ontwikkelen en uitrollen van de software. Uit het doel en de scope komt de volgende ~\textbf{onderzoeksvraag}: "Welke methode en dev-stack wordt er gebruikt om binnen EagleScience software te ontwikkelen en uit te rollen?". De \textbf{methodes} die gebruikt worden zijn de interne documenten over de verschillende platformen en werkwijzen die beschikbaar zijn gesteld door het bedrijf zelf. De kennis uit deze documenten kan worden aangevuld door informatie dat uit bronnen van leveranciers afkomstig is. Daarnaast zullen er gesprekken plaats vinden met collega's. Deze input geeft het volgende onderzoeks model wat te zien is in figuur~\ref{fig:OnderzoeksModelEaglescience}
-
-
-De \textbf{bronnen} die voornamelijk gebruikt worden zijn interne documenten waarin vermeld staat hoe een project verloopt en welke tooling er gebruikt wordt. Daarnaast zal er veel gebruik gemaakt worden van kennis van collega's en die ik zelf heb opgedaan dan al niet tijdens mijn opleiding.
+% TODO Toevoegen figuur aan figuur (onderzoeksmodellen samenvoegen)
 \begin{figure}[htbp]
     \myfloatalign
     \includegraphics[width=10cm]{gfx/OnderzoeksmodelES}
@@ -149,9 +141,9 @@ De \textbf{bronnen} die voornamelijk gebruikt worden zijn interne documenten waa
     \label{fig:OnderzoeksModelEaglescience}
 \end{figure}
 
-
+% TODO MAAIKE
 \subsection{strategie}\label{subsec:opstrategie}
-Om de drie onderzoeken die hierboven beschreven zijn goed uit te kunnen voeren zijn er de volgende strategieen bedacht die ervoor zorgen dat er een betrouwbaar resultaat is waar verder mee gewerkt kan worden.
+Om de twee onderzoeken die hierboven beschreven zijn goed uit te kunnen voeren zijn er de volgende strategieen bedacht die ervoor zorgen dat er een betrouwbaar resultaat is waar verder mee gewerkt kan worden.
 Voor het onderzoek binnen de huidige situatie binnen EagleScience wordt interne documentatie geraadpleegd aangevuld met vraag gesprekken met collega's die met het onderwerp te maken hebben. Deze gespreken zullen worden gehouden in delen gezien de manier waarop er binnen EagleScience gewerkt wordt. (heeft te maken met het aantal niet declarabele uren die ieder persoon wel of niet heeft). Het onderzoek naar de theorie van SOUP analyses wordt uitgevoerd middels een deskresearch waarbij in literatuur gezocht wordt naar methoden om de analyse te doen. Daarnaast wordt er een selectie gemaakt in tools die al ontwikkeld zijn die bruikbaar zijn voor het einddoel van de opdracht. In het laatste onderzoek wordt gekeken naar een method die past bij de huidige manier van werken binnen eaglescience, en de tools die gevonden zijn. Ook wordt er een ontwerp gemaakt hoe de methode eruit komt te zien er welke data dit oplevert waarna er een module ontwikkeld kan worden die deze data inzichtelijk maakt voor de stakeholders.
 
 
