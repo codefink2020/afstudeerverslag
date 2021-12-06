@@ -1,20 +1,48 @@
 % Todo Betere titel vinden
 \chapter{Onderzoek: Externe bibliotheken gebruiken en het gevaar hiervan}\label{ch:externeGevaren}
+Om een houvast te hebben in het ontwikkelen van een methode voor het analyseren van externe bibliotheken op kwetsbaarheden moet er een onderzoek gedaan worden over de theorie over het gebruik van externe bibliotheken, het gevaar en op welke manier er veilig mee gewerkt kan worden. De onderzoeksvraag voor dit onderzoek luidt dan ook: Wat is het effect van het gebruik van externe bibliotheken bij het ontwikkelen van software, welke gevaren brengt dit met zich mee en wat kan er gedaan worden om deze gevaren te minimaliseren?". Deze onderzoeksvraag is op te delen in de volgende deelvragen die ieders in een sectie worden beantwoord met als doel een conclussie te kunnen geven die als input te gebruiken is voor het onderzoek naar een methode voor SOUP analyses binnen EagleScience.
 
-\section{title}
-OWASP top 10 notatie
+\begin{itemize}
+    \item Hoeveel gebruik wordt er gemaakt van externe bibliotheken bij de ontwikkeling van applicaties?
+    \item Waarom worden externe bibliotheken gebruikt in het ontwikkelen van software?
+    \item Wat zijn potienteel gevaren die het gebruik van externe bibliotheken kunnen introduceren?
+    \item Hoe kan er voorkomen worden dat er kkwetsbaarheden onstaan in een applicatie die gebruik maakt van externe bibliotheken?
+    \item
+\end{itemize}
+
+\section{Hoeveel gebruik wordt er gemaakt van externe bibliotheken bij de ontwikkeling van applicaties?}
+Software wordt tegenwoording voor een groot deel vervaardigd door gebruik te maken van open source-code. Volgens een onderzoek gedaan door Synopsys\footnote{Synopsys is een bedrijf dat zich bezig houd met de ontwikkeling en verification van semiconductoren. Daarnaast ontwikkeld het tools voor verschillende taken in het domein software veiligheid. } (https://www.synopsys.com/software-integrity/resources/analyst-reports/open-source-security-risk-analysis.html?intcmp=sig-blog-ossra1) bestond in 2020 98\% van de 1546 geanalyseerde codebases uit opensource componenten. Daarnaast hadden ze gevonden dat 84\% van deze codebases minimaal één kwetsbaarheid bevat met een gemiddelde van 158 kwetsbaarheden. De gemiddelde kwetsbaarheid was 2.2 jaar oud.
+
+Ook al is dit onderzoek gedaan door een bedrijf wat zelf tools verkoopt om kwetsbaarheden op te sporen en dus de cijfers in hun voordeel zijn afgerond. Is het probleem van kwetsbaarheden in bibliotheken van derden zeer groot. Als we onderzoeken van andere bedrijven bekijken komen die op een ongeveer dezelfde getallen. TideLift, een bedrijf dat zich inzet voor verbeteren van het gebruik en veilig gebuik van OpenSource software,  claimde in 2019 al dat 92\% van de ontwikkelde applicaties Open Source componenten bevat.
+
+https://www.zdnet.com/article/its-an-open-source-world-78-percent-of-companies-run-open-source-software/
+
+
+
+\section{Waarom worden externe bibliotheken gebruikt in het ontwikkelen van software?}
+Bibliotheken zorgen over het algemeen ervoor dat herhalende taken die applicaties uit moeten voeren éénmalig wordt ontwikkeld en vervolgens voor meerdere projecten/applicaties in te zetten is. Op deze manier wordt ontwikkeltijd gewonnen omdat herhalende source-code geimporteerd kan worden en niet opnieuw geschreven hoeft te worden. Doordat het op een enkele plaats gedefineerd staat hoeft dit ook in het geval van een aanpassing maar op een enkele plek aangepast te worden Dit scheeld wederom tijd, maar ook potentieel fouten omdat de aanpassing niet overal hoeft te worden doorgevoerd. Het gebruik van bibliotheken is dus bijna niet weg te denken gezien de druk die op het ontwikkelen van software staat. Een stap verder is het gebruik van externe bibliotheken welke ervoor zorgen dat er om dezelfde redenen als hierboven nog minder ontwikkeltijd nodig is omdiezelfde taken te kunnen gebruiken echter wordt de bibliotheek niet door ontwikkelaars zelf ontwikkeld maar door een externe partij. Naast dat het gebruik van externe bibliotheken tijdswinst en dus de kosten voor het ontwikkelen van een applicatie kan verminderen zijn er nog een aantal voordelen die het benoemen waard zijn op het moment dat er veel gebruikte externe bibliotheken gebruikt worden in het ontwikkelproces: Als een bibliotheek gebruikt wordt door een groot aantal andere bedrijven ontstaat hier veel kennis over, wat resulteert in veel documentatie en support en een door de comunity ondersteunde standaard wat op zijn beurt weer helpt in het makkelijker op kunnen leiden van nieuw personeel. Daarnaast is er het feit dat als er door een 'grotere' community een biobluitheek gebruikt wordt deze ook vaker getest zal zijn. waarmee de functionele betrouwbaarheid verhoogd wordt.
+
+
+
+
+\section{Wat zijn potienteel gevaren die het gebruik van externe bibliotheken kunnen introduceren?}
+Hoewel de voordelen die hierboven beschreven zijn enorm kunnen zijn voor bedrijven die software ontwikkelen. Zijn er ook een aantal nadelen te benoemen waarvan de grootste wel is dat er potentieel kwetsbaarheden kunnen worden geintroduceert in de applicatie die niet direct kunnen worden gezien door ontwikkelaars die de bibliotheken gebruiken. Deze kwetsbaarheden kunnen zich op meerdere manieren manifesteren in de vorm van een "Supply Chain Attack". Waarbij zoals de naam al doet vermoeden er een aanval plaats vindt middels software die zich in de dependencies bevindt deze aanval kan op verschillende manieren plaatsvinden maar hebben meestal als doel dat er op een één of andere manier data bemachtigd wordt of anders de functionaliteit van de doel applicatie op een dusdanige manier wordt aangetast dat deze in het voordeel is van de aanvallers. Een probleem met dit soort aanvallen is veelal dat deze lange tijd onopgemerkt kunnen blijven (SolarWinds attack) omdat externe bibliotheken niet vaak worden gecheckt op juistheid. En op het moment dat ze al opgemerkt worden en er een verslag is gemaakt in een Vulnerablitiy database (NIST, NVD, Mitre) Deze ook nog door andere bedrijven die dezelfde bibliotheek met de zelfde versie wordt gebruikt waarbij deze bedrijven ook kwetsbaar zijn. Uit onderzoek van Sonartype blijkt dat een groot deel van de applicaties niet worden bijgewerkt of veelal niet op de juiste manier zodat er altijd een kwetsbaarheid zal blijven bestaan.
+
+
+
+
+
+\section{Hoe kan er voorkomen worden dat er kkwetsbaarheden onstaan in een applicatie die gebruik maakt van externe bibliotheken?}
+Hoewel er veel bedrijven en instanties zich verantwoordelijk voelen, dan al niet voor winst, om het mogelijk te maken om vilige software te ontwikkelen. Bestaat de OWASP puur en alleen om dit te doen op een vrijwillige basis. Zei doen dit door awareness te kweken over het veilig ontwikkelen van software. Eén van de belangrijkste methoden die zij hebben is de OWASP top 10 waarin iedere 5 jaar een lijst wordt gepresenteerd met de meest ktitsiche aspecten voor het ontwikkelen van veilige software. In 2021 stond op plaats A06:2021 een item over het
+
+
+\section{Hoeveel gebruik wordt er gemaakt van externe bibliotheken?}
+
+\section{OWASP}
 
 \section{Waarom potentieel gevaarlijk}
 
 \section{Hoe moet het opgelost worden}
-
-
-\section{}
-
-Software wordt tegenwoording voor een groot deel vervaardigd door gebruik te maken van open source-code. Volgens een onderzoek gedaan door Synopsys\footnote{Synopsys is een bedrijf dat zich bezig houd met de ontwikkeling en verification van semiconductoren. Daarnaast ontwikkeld het tools voor verschillende taken in het domein software veiligheid. } (https://www.synopsys.com/software-integrity/resources/analyst-reports/open-source-security-risk-analysis.html?intcmp=sig-blog-ossra1) bestond in 2020 98\% van de 1546 geanalyseerde codebases uit opensource componenten. Daarnaast hadden ze gevonden dat 84\% van deze codebases minimaal één kwetsbaarheid bevat met een gemiddelde van 158 kwetsbaarheden. De gemiddelde kwetsbaarheid was 2.2 jaar oud.
-
-Ook al is dit onderzoek gedaan door een bedrijf wat zelf tools verkoopt om kwetsbaarheden op te sporen en dus de cijfers in hun voordeel zijn afgerond. Is het probleem van kwetsbaarheden in bibliotheken van derden zeer groot.
-
 
 
 zijn de resultaten toch wel beangstigend.
@@ -98,7 +126,7 @@ externe bibliotheken worden veelvuldig gebruikt. Uit een onderzoek van VeraCode,
 Zoals inmiddels duidelijk bestaat een software component uit een mix van eigen geschreven source code en source code die geschreven staat in bibliotheken dan al niet van derden, zogenoemde depenencies. Deze regel geldt dus niet alleen voor de applicaties die door EagleScience is geschreven, maar dan ook voor de dependencies die gebruikt worden voor de geimporteerde dependency. Dit gaat resursief door totdat we bij dependencies aankomen die zelf geen dependencies gebruiken om hun taak te voltooien. Dit wordt ook wel een dependency tree genoemd. figuur ~\ref{fig:dependency-tree} geeft een verkapte versie weer waarin geillusteerd wordt hoe snel het aantal dependencies optelt.
 \begin{figure}[H]
     \myfloatalign
-    \includegraphics[width=12cm]{gfx/dependency-tree}
+    \includegraphics[width=12cm]{gfx/dependencyTree}
     \caption{Dependency tree}\label{fig:dependency-tree}
 \end{figure}
 
