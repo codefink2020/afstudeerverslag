@@ -4,17 +4,17 @@
 
 
  % For referencing the chapter elsewhere, use \autoref{ch:examples}
-Tegenwoordig zijn software-bibliotheken niet meer weg te denken uit het huidige software\-ontwikkelproces. Bibliotheken geven ontwikkelaars de mogelijkheid code te hergebruiken in meerdere projecten, om zo efficiënter te kunnen ontwikkelen. Dit helpt op zijn beurt om de Time-To-Market te verkorten. Bibliotheken kunnen door bedrijven zelf geschreven worden, in het geval van EagseScience is dit ArchES, of worden overgenomen van andere bedrijven/instellingen. ArchES is echter zelf ook afhankelijk van een aantal bibliotheken die niet ontwikkeld zijn door EagleScience. Hierdoor kan niet worden voorkomen dat bibliotheken worden gebruikt waarvan de afkomst niet geheel kan worden herleid.
+Tegenwoordig zijn software-bibliotheken niet meer weg te denken uit het huidige software\-ontwikkelproces. Bibliotheken geven ontwikkelaars de mogelijkheid code te hergebruiken in meerdere projecten, om zo efficiënter te kunnen ontwikkelen. Dit helpt op zijn beurt om de Time-To-Market te verkorten. Bibliotheken kunnen door bedrijven zelf geschreven worden, in het geval van EagseScience is dit ArchES, of worden overgenomen van andere bedrijven/instellingen. ArchES is echter zelf ook afhankelijk van een aantal bibliotheken die niet ontwikkeld zijn door Eaglescience. Hierdoor kan niet worden voorkomen dat bibliotheken worden gebruikt waarvan de afkomst niet geheel kan worden herleid.
 
-Deze (deels) onherleidbare bibliotheken vallen onder de noemer "Software of Unknown Provenance / Pedigree (SOUP)". Door het gebruik van dit soort bibliotheken kan er een aannemelijk risico ontstaan op het gebied van kwetsbaarheden. Om inzicht te verkrijgen in deze kwetsbaarheden en daarmee mogelijke veiligheidsissues dient een SOUP-analyse gedaan te worden. Binnen EagleScience wordt het belang hiervan onderstreept en daarom wordt er gezocht naar een efficiënte en, waar mogelijk, geautomatiseerde manier voor het uitvoeren van een dergelijke analyse. Hierdoor kan de veiligheid van de ontwikkelde applicaties worden gewaarborgd zonder afbreuk te doen aan kwaliteit.
+Deze (deels) onherleidbare bibliotheken vallen onder de noemer "Software of Unknown Provenance / Pedigree (SOUP)". Door het gebruik van dit soort bibliotheken kan er een aannemelijk risico ontstaan op het gebied van kwetsbaarheden. Om inzicht te verkrijgen in deze kwetsbaarheden en daarmee mogelijke veiligheidsissues dient een SOUP-analyse gedaan te worden. Binnen Eaglescience wordt het belang hiervan onderstreept en daarom wordt er gezocht naar een efficiënte en, waar mogelijk, geautomatiseerde manier voor het uitvoeren van een dergelijke analyse. Hierdoor kan de veiligheid van de ontwikkelde applicaties worden gewaarborgd zonder afbreuk te doen aan kwaliteit.
 
-\section{Opdracht vanuit EagleScience}\label{sec:opdracht-vanuit-EagleScience}
+\section{Opdracht vanuit Eaglescience}\label{sec:opdracht-vanuit-Eaglescience}
 
-Vanuit de CTO is de wens ontstaan om een systematisch opgebouwde methode te ontwikkelen waarbij er automatisch periodiek een SOUP-analyse gedaan wordt op bestaande en later nieuwe projecten. Het beoogde resultaat is een module die wordt toegevoegd aan de al bestaande portal van EagleScience waarbij project verantwoordelijken inzicht kunnen verkrijgen in de kwetsbaarheden die in een project aanwezig kunnen zijn door het gebruik van externe bibliotheken.
+Vanuit de CTO is de wens ontstaan om een systematisch opgebouwde methode te ontwikkelen waarbij er automatisch periodiek een SOUP-analyse gedaan wordt op bestaande en later nieuwe projecten. Het beoogde resultaat is een module die wordt toegevoegd aan de al bestaande portal van Eaglescience waarbij project verantwoordelijken inzicht kunnen verkrijgen in de kwetsbaarheden die in een project aanwezig kunnen zijn door het gebruik van externe bibliotheken.
 
 De aanleiding van deze opdracht is een gebrek aan inzicht in reeds draaiende software. In tegenstelling tot software waaraan nog ontwikkeld wordt, gaat er bij projecten waaraan niet actief wordt ontwikkeld het inzicht in gebruikte bibliotheken en hun versies verloren. Hierdoor is het onbekend welke kwetsbaarheden er mogelijk zijn in deze projecten,
 \subsection{Eisen aan de opdracht}\label{subsec: eisen-aan-de-opdracht}
-Vanuit EagleScience worden er een aantal eisen gesteld waaraan het eindproduct moet voldoen. Als er aan deze eisen is voldaan is er voor EagleScience een waardevol product ontwikkeld welke in gebruik kan worden genomen. Daarnaast zijn er een aantal opleveringseisen die gehaald dienen te worden om de kwaliteit te waarborgen. Ook is er aangegeven dat er bij voorkeur naar open source tooling dient gekeken te worden, daar er geen budget voor aanschaf van software voor handen is.
+Vanuit Eaglescience worden er een aantal eisen gesteld waaraan het eindproduct moet voldoen. Als er aan deze eisen is voldaan is er voor Eaglescience een waardevol product ontwikkeld welke in gebruik kan worden genomen. Daarnaast zijn er een aantal opleveringseisen die gehaald dienen te worden om de kwaliteit te waarborgen. Ook is er aangegeven dat er bij voorkeur naar open source tooling dient gekeken te worden, daar er geen budget voor aanschaf van software voor handen is.
 
 \textbf{Functionele eisen}
 \begin{itemize}
@@ -29,12 +29,12 @@ Vanuit EagleScience worden er een aantal eisen gesteld waaraan het eindproduct m
 \end{itemize}
 \textbf{Kwaliteitseisen}
 \begin{itemize}
-\item De module dient te voldoen aan de geldende kwaliteitsnormen binnen EagleScience, minimaal meetbaar door:
+\item De module dient te voldoen aan de geldende kwaliteitsnormen binnen Eaglescience, minimaal meetbaar door:
 	\begin{itemize}
 	\item Test coverage > 70\%
-	\item Onderdeel van de bestaande CI/CD voor de EagleScience Portal
+	\item Onderdeel van de bestaande CI/CD voor de Eaglescience Portal
 	\end{itemize}
-\item De geschreven code dient gereviewd te worden door een EagleScience ontwikkelaar
+\item De geschreven code dient gereviewd te worden door een Eaglescience ontwikkelaar
 \item De module dient gescheiden componenten te bevatten: Frontend, Backend, API
 \item Voor de API dient gebruik te worden gemaakt van swagger
 \item De module dient goed gedocumenteerd te zijn middels 'incode comments'
@@ -61,10 +61,10 @@ Naast dat de nieuwe module inzicht moet geven in de kwetsbaarheden van bibliothe
 
 
 \section{Opdracht fasen}\label{sec:opdracht-fasen}
-Om de hierboven beschreven opdracht zo goed als mogelijk uit te voeren dient er eerst een onderzoek gedaan te worden naar begrippen binnen het domein SOUP, de ontwikkelomgeving van EagleScience en daarnaast naar mogelijkheden om bibliotheken te screenenen en te testen op kwetsbaarheden. Na de onderzoeksfase moet er een module ontwikkeld worden die deze mogelijkheid implementeerd met inachtneming van de hierboven genoemde eisen.
+Om de hierboven beschreven opdracht zo goed als mogelijk uit te voeren dient er eerst een onderzoek gedaan te worden naar begrippen binnen het domein SOUP, de ontwikkelomgeving van Eaglescience en daarnaast naar mogelijkheden om bibliotheken te screenenen en te testen op kwetsbaarheden. Na de onderzoeksfase moet er een module ontwikkeld worden die deze mogelijkheid implementeerd met inachtneming van de hierboven genoemde eisen.
 
 \subsection{Fase 1: Onderzoek} \label{subsec:fase-1:-onderzoek}
-Als eerste dient er onderzoek gedaan te worden naar de huidige situatie binnen EagleScience waarbij er gekeken wordt naar de huidige dev-stack, de tooling, de werkwijze, als ook de huidige manier van uitrollen van applicaties. Daarna dient er een begrippen / literatuur onderzoek gedaan te worden binnen het domein SOUP om een goede kennis te vergaren over het domein om een basis te kunnen leggen voor een te implementeren module. Daarnaast dient er onderzoek gedaan te worden om te zien of er bibliotheken en resources zijn waar informatie over SOUP-bibliotheken te vinden is, en aan welke eisen deze bibliotheken moeten voldoen om kwetsbaar te worden. Hier lettende op de eisen vanuit EagleScience en de mogelijkheden die deze analyse bibliotheken bieden. Deze fase wordt beschreven in het deel~\ref{prt:Onderzoek} van dit document.
+Als eerste dient er onderzoek gedaan te worden naar de huidige situatie binnen Eaglescience waarbij er gekeken wordt naar de huidige dev-stack, de tooling, de werkwijze, als ook de huidige manier van uitrollen van applicaties. Daarna dient er een begrippen / literatuur onderzoek gedaan te worden binnen het domein SOUP om een goede kennis te vergaren over het domein om een basis te kunnen leggen voor een te implementeren module. Daarnaast dient er onderzoek gedaan te worden om te zien of er bibliotheken en resources zijn waar informatie over SOUP-bibliotheken te vinden is, en aan welke eisen deze bibliotheken moeten voldoen om kwetsbaar te worden. Hier lettende op de eisen vanuit Eaglescience en de mogelijkheden die deze analyse bibliotheken bieden. Deze fase wordt beschreven in het deel~\ref{prt:Onderzoek} van dit document.
 
 \subsection{Fase 2: Oplevering SOUP analyse module}\label{subsec:fase-2:-oplevering-soup-analyse-module}
 De uit het onderzoek behaalde resultaten aangaande beschikbare resources om een SOUP-analyse uit te voeren vormen een leidraad voor de implementatie van de module. Deze module moet voldoen aan de eisen die gesteld zijn. Het ontwerp en implementatie wordt beschreven in deel~\ref{prt:Implementatie}
