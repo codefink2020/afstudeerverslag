@@ -52,7 +52,7 @@ Zoals te zien is in figuur~\ref{fig:StakeholderAnalyse1} is hebben alle stakehol
 Het theoretisch kader waarmee wordt gewerkt bestaat uit twee delen. Het eerste deel omvat theorie over externe bibliotheken. Het richt zich op het gebruik hiervan en de potentiële gevaren en methoden om deze bibliotheken te analyseren. De geselecteerde bronnen zijn:
 \begin{itemize}
     \item \textbf{OWASP top 10 (https://owasp.org/Top10/)} De OWASP Top-10 is als uitgangspunt gekozen omdat de inhoud van dit document binnen Eaglescience geldt als aandachtspunt voor het ontwikkelen van veilige software. De basis voor dit onderzoek wordt beschreven in punt "A06:2021-Vulnerable and Outdated Components". Hier wordt beschreven welke gevaren er potentieel dreigen als op dit punt niets gedaan wordt.
-    \item \textbf{Detail pagina OWASP A06:2021(https://owasp.org/Top10/A06\_2021-Vulnerable\_and\_Outdated\_Components/)} Op deze pagina zijn details te vinden over item A06:2021 waaronder een beschrijving, hoe het te voorkomen is en een aantal voorbeeld scenario's waarbij een aanval wordt geillustreerd.
+    \item \textbf{Detail pagina OWASP A06:2021\\(https://owasp.org/Top10/A06\_2021-Vulnerable\_and\_Outdated\_Components/)} Op deze pagina zijn details te vinden over item A06:2021 waaronder een beschrijving, hoe het te voorkomen is en een aantal voorbeeld scenario's waarbij een aanval wordt geillustreerd.
     \item \textbf{OWASP dependency-check (https://owasp.org/www-project-dependency-check/)} Pagina over het project binnen de OWASP voor het analyseren van componenten in applicaties.
     \item \textbf{Justifying the use of software of uncertain pedigree (SOUP) in safety-related applications} P.G.\ Bishop, R.E.\ Bloomfield and P.K.D.\  Froome for Adelard 2001. Hoewel dit document verouderd lijkt staat er wel degelijk interessante informatie over waarom je SOUP zou gebruiken en hoe je de risico's kan verminderen.
     \item \textbf{Backstabber’s Knife Collection: A Review of Open Source Software Supply Chain Attacks} Marc Ohm, Henrik Plate, Arnold Sykosch, and Michael Meier: 2020: Dit artikel bevat informatie over een mogelijke vorm van aanvallen die middels SOUP uitgevoerd zouden kunnen worden. Daarnaast geeft het artikel inzicht in hoe de onderzoekers packages voor NPM, Python, en Ruby hebben onderzocht op kwetsbaarheden.
@@ -98,7 +98,7 @@ In figuur\ref{fig:OnderzoeksModel} is te zien hoe de twee delen met elkaar in re
 \subsection{Scope}\label{subsec:scope}
 Het domein softwareveiligheid is op het moment van schrijven een 'hot-topic', en zeer breed. Om deze reden is er gekozen om dit onderzoek te beperken tot het veiliger maken van software middels het analyseren en beschikbaar stellen van informatie over externe bibliotheken. Daarnaast zullen alleen de technologiën die compatibel zijn met de werkwijze van Eaglescience mee worden genomen. Daarnaast is de opdracht\ref{ch:opdracht} zoals deze is gegeven door de CTO van Eaglescience de leidraad voor de scope van het onderzoek.
 
-\subsection{Onderzoeken}\label{subsubsec:onderzoeken}
+\subsection{Onderzoeks strategie}\label{subsec:onderzoeks-strategie}
 Zoals hierboven is aangegeven zullen er een tweetal onderzoeken worden uitgevoerd. De conclusie van het eerste onderzoek zal dienen als input voor het tweede onderzoek.
 
 %\newpage %TODO: quickfix om volgorde lijkheid te veranderen voor figuren...
@@ -133,20 +133,6 @@ Als er een selectie is gemaakt voor een tool dient deze in een kleine testopstel
     \label{fig:OnderzoeksModelSOUPmethode}
 \end{figure}
 
-% TODO Toevoegen figuur aan figuur (onderzoeksmodellen samenvoegen)
-\begin{figure}[htbp]
-    \myfloatalign
-    \includegraphics[width=10cm]{gfx/OnderzoeksmodelES}
-    \caption{Onderzoeksmodel Eaglescience}
-    \label{fig:OnderzoeksModelEaglescience}
-\end{figure}
-
-% TODO MAAIKE
-\subsection{strategie}\label{subsec:opstrategie}
-Om de twee onderzoeken die hierboven beschreven zijn goed uit te kunnen voeren zijn er de volgende strategieen bedacht die ervoor zorgen dat er een betrouwbaar resultaat is waar verder mee gewerkt kan worden.
-Voor het onderzoek binnen de huidige situatie binnen Eaglescience wordt interne documentatie geraadpleegd aangevuld met vraag gesprekken met collega's die met het onderwerp te maken hebben. Deze gespreken zullen worden gehouden in delen gezien de manier waarop er binnen Eaglescience gewerkt wordt. (heeft te maken met het aantal niet declarabele uren die ieder persoon wel of niet heeft). Het onderzoek naar de theorie van SOUP analyses wordt uitgevoerd middels een deskresearch waarbij in literatuur gezocht wordt naar methoden om de analyse te doen. Daarnaast wordt er een selectie gemaakt in tools die al ontwikkeld zijn die bruikbaar zijn voor het einddoel van de opdracht. In het laatste onderzoek wordt gekeken naar een method die past bij de huidige manier van werken binnen Eaglescience, en de tools die gevonden zijn. Ook wordt er een ontwerp gemaakt hoe de methode eruit komt te zien er welke data dit oplevert waarna er een module ontwikkeld kan worden die deze data inzichtelijk maakt voor de stakeholders.
-
-
 \section{planning}\label{sec:planning}
 Om tijdig tot resultaten te komen is de volgende planning opgesteld.
 
@@ -180,8 +166,8 @@ Er zal een ontwerp worden gemaakt waarin vast gelegd is welke requirements er be
 \textit{wellicht nog toevoegen als resultaten: blokdiagram van oplossing/architectuur; sequence diagram om te komen van analyse tot rapportage (er is een handig tooltje om deze diagrammen te tekenen: https://bramp.github.io/js-sequence-diagrams/)}
 \textbf{Resultaat:} Eerste ontwerp in de vorm van een datamodel, blokdiagram van architectuur voor de oplossing, als ook een sequence diagram om van analyse tot rapportage te komen.
 
-\textit{4.4: Gebruik hier of de template ontwikkel omgeving voor (aparte branch/taak); of de portal ontwikkelomgeving
-4.4: Voeg rij resultaat toe: klaar voor review of gereviewde}
+%\textit{4.4: Gebruik hier of de template ontwikkel omgeving voor (aparte branch/taak); of de portal ontwikkelomgeving
+%4.4: Voeg rij resultaat toe: klaar voor review of gereviewde}
 
 \subsection{Implementatie en Testen \textbf{november 2021 - januari 2022 }}\label{subsec:implementatie-en-testen}
 Om te kunnen beginnen aan de implementatie is er een ontwikkel/ test omgeving nodig die het mogelijk maakt om zonder invloed op de dagelijkse werkzaamheden van Eaglescience een module te kunnen ontwikkelen. Deze zal eerst worden opgezet. Als test projecten zullen snapshots worden gebruikt van de daadwerkelijke projecten dit om een zo accuraat mogelijke test omgeving te hebben. Zoals in de opdracht beschreven dient de nieuwe module een onderdeel te zijn van de bestaande portal. Er zal dan ook direct samen worden gewerkt met het team die daar op het moment mee aan het ontwikkelen is. Tijdens de implementatie zal er ook worden gedocumenteerd wordt hoe de module werkt en welke procedures hier in worden gevolgd. Dit document biedt ontwikkelaars de mogelijkheid om dit door te nemen als on-boarding en referentie.
