@@ -1,17 +1,16 @@
 
-\chapter{Onderzoek: Methode en tooling om analyses te doen op externe bibliotheken binnen EagleScience}\label{ch:onderzoek:-methode-en-tooling-om-analyses-te-doen-op-externe-bibliotheken-binnen-eaglescience}
-In het vorige hoofdstukis duidelijk geworden dat er veel externe bibliotheken worden gebruikt om applicaties te ontwikkelen. Veel bedrijven kunnen niet meer zonder en EagleScience is hier geen uitzondering op. Het gebruik van externe bibliotheken heeft te veel voordelen op het gebied van besparing(tijd en geld), flexibiliteit, standaardisering om te proberen om deze voordelen te benutten middels intern ontwikkelde projecten. Het gebruik van externe bibliotheken is echter niet zonder gevaren en zonder dat er maatregelen worden genomen kunnen er kwetsbaarheden worden gebruikt om informatie of functionaliteit binnen een applicatie te misbruiken door kwaadwillenden. Er bestaan bronnen zoals de NVD van het NIST waarin deze kwetsbaarheden worden opgeslagen. Het is echter ondoenlijk om deze database met de hand te doorzoeken. Zeker op het moment dat de applicaties dusdanig veel bibliotheken gebruiken dat het volume te groot wordt. Volgens de aanwijzingen vermelding in de OWASP-top10 dienen alle dependencies en de geneste dependencies gecontrolleert te worden.
+\chapter{Onderzoek: Methode en tooling om analyses te doen op externe bibliotheken binnen Eaglescience}\label{ch:onderzoek:-methode-en-tooling-om-analyses-te-doen-op-externe-bibliotheken-binnen-Eaglescience}
+In het vorige hoofdstuk is duidelijk geworden dat er veel externe bibliotheken worden gebruikt om applicaties te ontwikkelen. Veel bedrijven kunnen niet meer zonder en Eaglescience is hier geen uitzondering op. Het gebruik van externe bibliotheken heeft te veel voordelen op het gebied van besparing(tijd en geld), flexibiliteit, standaardisering om te proberen om deze voordelen te benutten middels intern ontwikkelde projecten. Het gebruik van externe bibliotheken is echter niet zonder gevaren en zonder dat er maatregelen worden genomen kunnen er kwetsbaarheden worden gebruikt om informatie of functionaliteit binnen een applicatie te misbruiken door kwaadwillenden. Er bestaan bronnen zoals de NVD van het NIST waarin deze kwetsbaarheden worden opgeslagen. Het is echter ondoenlijk om deze database met de hand te doorzoeken. Zeker op het moment dat de applicaties dusdanig veel bibliotheken gebruiken dat het volume te groot wordt. Volgens de aanwijzingen vermelding in de OWASP-top10 dienen alle dependencies en de geneste dependencies gecontrolleert te worden.
 
-Dit onderzoek gaat over het zoeken van tooling en methoden om deze analyse automatisch en periodiek te kunnen doen om zo inzichtelijk te maken of er kwetsbaarheden in de uitgerolde applicatie zitten. Met het gebruiken van deze methode hoeft alleen de applicatie nog maar met de hand up-to-date te worden gehouden. Dit laatste is door de complexiteit bewust uit de opdracht gehouden. De onderzoeksvraag is dan ook: "Welke SCA tooling is compabitble met de omgeving van EagleScience en welke methode kan worden toegepast om deze tooling te gebuiken voor het automatisch analyseren van externe dependencies?". De hoofdvraag werpt de volgende deelvragen op die ieders hieronder worden beantwoord in een eigen paragraaf waarna een in de conclussie de methode wordt aangeboden.
+Dit onderzoek gaat over het zoeken van tooling en methoden om deze analyse automatisch en periodiek te kunnen doen om zo inzichtelijk te maken of er kwetsbaarheden in de uitgerolde applicatie zitten. Met het gebruiken van deze methode hoeft alleen de applicatie nog maar met de hand up-to-date te worden gehouden. Dit laatste is door de complexiteit bewust uit de opdracht gehouden. De onderzoeksvraag is dan ook: "Welke SCA tooling is compabitble met de omgeving van Eaglescience en welke methode kan worden toegepast om deze tooling te gebuiken voor het automatisch analyseren van externe dependencies?". De hoofdvraag werpt de volgende deelvragen op die ieders hieronder worden beantwoord in een eigen paragraaf waarna een in de conclussie de methode wordt aangeboden.
 Deelvragen:
 \begin{itemize}
-    \item Welke Dev-stack gebruikt EagleScience?
-    \item Op welke wijze ontwikkeld EagleScience software?
-    \item Hoe wordt er op dit moment software uitgerold binnen EagleScience?
+    \item Welke Werkwijze en Dev-stack gebruikt Eaglescience voor het ontwikkelen van software?
+    \item Hoe wordt er op dit moment software uitgerold binnen Eaglescience?
     \item Wat zijn de selectiecriteria voor tools die gebruikt kunnen worden?
     \item Welke tools zijn er beschikbaar?
     \item Welke data produceren de tools?
-    \item Hoe zijn deze tools te intgreren in de huidige buildstraat van EagleScience?
+    \item Hoe zijn deze tools te intgreren in de huidige buildstraat van Eaglescience?
     \item Welke methode kan worden gebruikt om middels de gevonden tools informatie over kwetsbaarheden binnen externe bibliotheken te vinden?
     \item
 \end{itemize}
@@ -37,7 +36,7 @@ De onderzoeksvraag voor dit onderzoek luid dan ook: "Hoe zijn de gevonden tools 
 Om de bovenstaande deelvragen te beantwoorden is er gekozen om in drie situaties te testen. Iedere situatie wordt opgezet voor zowel de SBT(Scala) tools als die voor NPM(TypeScript).
 \begin{enumerate}
     \item \textbf{sandbox omgeving} Dit is een omgeving waarbij een standaard project wordt opgezet met alleen de basis logica om het project te kunnen draaien. In het geval van Scala zal dit een playframework project zijn met daarin enkele database dependencies. Voor NPM zal dit een Angular Applicatie zijn met een UI framework.
-    \item \textbf{Bestaand EagleScience Project}. Een project wat zowel een SBT-project bevat als een NPM(node.js) Project bevat.
+    \item \textbf{Bestaand Eaglescience Project}. Een project wat zowel een SBT-project bevat als een NPM(node.js) Project bevat.
     \item \textbf{ALleen de dependency declaraties} In het geval van SBT is dit dus de build.sbt en voor NPM is dit  een package.json en wellicht ook de package.json.lock.
 \end{enumerate}
 
@@ -55,7 +54,7 @@ https://github.com/albuch/sbt-dependency-check for SBT
 https://github.com/eliasgranderubio/dagda niet zelfde als OWASP maar wellicht usefull
 
 
-Dit hoofdstuk geeft het onderzoek weer naar tools die binnen EagleScience ingezet kunnen worden voor het analyseren van de dependencies. De hoofdvraag in dit onderzoek is dan ook: "Welke tools kunnen er ingezet worden om binnen de dev-stack van EagleScience een analyse te doen op kwetsbaarheden in externe biblotheken?" Om deze vraag te kunnen beantwoorden zijn de volgende deelvragen opgesteld die samen een conclussie opleveren die gebruikt kan worden in het ontwerp van de module.
+Dit hoofdstuk geeft het onderzoek weer naar tools die binnen Eaglescience ingezet kunnen worden voor het analyseren van de dependencies. De hoofdvraag in dit onderzoek is dan ook: "Welke tools kunnen er ingezet worden om binnen de dev-stack van Eaglescience een analyse te doen op kwetsbaarheden in externe biblotheken?" Om deze vraag te kunnen beantwoorden zijn de volgende deelvragen opgesteld die samen een conclussie opleveren die gebruikt kan worden in het ontwerp van de module.
 
 
 
