@@ -48,7 +48,7 @@ Naast ontwikkeltalen gebruikt EagleScience een aantal tools om dagelijkse werkza
     \item \textbf{GitLab}
     Gitlab wordt binnen EagleScience gebruikt als Version control systeem. Er is voor gekozen om deze on premise te gebruiken op een server in eigen beheer op locatie. Gitlab biedt naast version control ook andere tooling aan die het mogelijk maken om vanuit gitlab te builden en/of uit te rollen echter wordt dit binnen EagleScience gedaan middels een andere tool genaamd Jenkins.
     \item \textbf{Jenkins}
-    Jenkins is een open-source automation server wat door Eaglescience gebruikt wordt om projecten te builden, testen, en deployen. Jenkins is gebouwd op een Java omgeving en is daarom uitermate geschikt om met gradle, Maven en SBT projecten om te gaan. Daarnaast kan het middels diverse Shellscripts (Bash, SH, PowerShell) aanverwante taken uitvoeren. Als laatst kan het middels plugins ook uitrollen op cloud omgevingen. Om deze redenenen heeft EagleScience gekozen om Jenkins te gebruiken. In een sectie hieronder wordt uitvoerig uitgewijd over hoe Jenkins binnen EagleScience een project build, test en uitrold.
+    Jenkins is een open-source automation server wat door Eaglescience gebruikt wordt om projecten te builden, testen, en deployen. Jenkins is gebouwd op een Java omgeving en is daarom uitermate geschikt om met gradle, Maven en SBT-projecten om te gaan. Daarnaast kan het middels diverse Shellscripts (Bash, SH, PowerShell) aanverwante taken uitvoeren. Als laatst kan het middels plugins ook uitrollen op cloud omgevingen. Om deze redenenen heeft EagleScience gekozen om Jenkins te gebruiken. In een sectie hieronder wordt uitvoerig uitgewijd over hoe Jenkins binnen EagleScience een project build, test en uitrold.
     \item \textbf{Portal} Een medewerkers portal welke op het moment van schrijven aan ontwikkeld wordt om tools en gegevens aan te bieden die niet project specifiek zijn. Op dit moment wordt er een LDAP password reset tool en verlof inzage en aanvraag aangebonden. Er wordt naast de module voor SOUP analyses ook een modele ontwikkeld welke het mogelijk maakt om uren te registreren. Deze ontwikkelingen zijn een antwoord op de wens om systemen samen te voegen om zo een overzichtelijker geheel aan te bieden voor werknemers.
 
     \begin{figure}
@@ -63,7 +63,7 @@ Naast ontwikkeltalen gebruikt EagleScience een aantal tools om dagelijkse werkza
 \section{Hoe wordt op dit moment software gedeployed?}\label{sec:hoe-wordt-op-dit-moment-software-gedeployed?}
 Zoals hierboven berschreven wordt Jenkins gebruikt om software te deployen naar zowel de productie omgevingen alsook de verschillende development en acceptatie omgevingen.
 Een deploy wordt gedaan op het moment dat er source code naar gitlab gepushed wordt.
-Doormiddel van Tokens in de Commit message kan gestuurd worden waar de build(als deze slaagt) gedeployed wordt bijv: {-all + portal} build en deployed alleen de portal. [ci-skip] zorgt ervoor dat er alleen een push wordt gedaan en geen build wordt gestart.
+Door middel van Tokens in de Commit message kan gestuurd worden waar de build(als deze slaagt) gedeployed wordt bijv: {-all + portal} build en deployed alleen de portal. [ci-skip] zorgt ervoor dat er alleen een push wordt gedaan en geen build wordt gestart.
 De configuratie die Jenkins gebruikt wordt beschreven in een aantal Jenkins files die meegenomen worden de repo. Middels parameters meegegeven in de commit kan er worden beslist of er een build moet plaatsvinden en zo ja waar en welke delen van de applicatie. Op deze manier is er een flexibiliteit voor de ontwikkelaar.
 [NOTE Illustratie maken.....]
 Naast de deploy geeft Jenkins nog een aantal andere waardevolle Artifacts als test/lint rapportages.
@@ -184,7 +184,7 @@ Beide tools generen rapporten in nagenoeg het zelfde schema. Op basis van dit sc
 %Voorhet maken van de snapshots moeten er in de jenkins pipeline een mechaniek worden geplaatst die de gevonden attributen kan opslaan in een database voor later gebruik.
 %
 %Een bijkomend voordeel van deze manier van werken is dat er een historiek onstaat in de gebruikte versies welke als bewijsvoering kan dienen bij incidenten.
-\section{Methode met gekozen tooling om een analyse te doen binnen Eaglescience}\label{Methode}
+\section{Methode met gekozen tooling om een analyse te doen binnen Eaglescience}\label{sec:methode}
 
 %Todo: Toevoegen aan de conclusie van het hoofdstuk
 \section{Conclussie}\label{sec:ESconclussie}
