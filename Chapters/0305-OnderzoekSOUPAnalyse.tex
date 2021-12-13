@@ -1,72 +1,80 @@
-
 \chapter{Onderzoek: Methode en tooling voor SOUP-analyses binnen Eaglescience}\label{ch:onderzoek-tool-methode}
-In het vorige hoofdstuk is duidelijk geworden dat er veel externe bibliotheken worden gebruikt om applicaties te ontwikkelen. Veel bedrijven kunnen niet meer zonder en Eaglescience is hier geen uitzondering op. Het gebruik van externe bibliotheken heeft te veel voordelen op het gebied van besparing(tijd en geld), flexibiliteit en standaardisering om te proberen om deze voordelen te benutten middels intern ontwikkelde projecten. Het gebruik van externe bibliotheken is echter niet zonder gevaren. Het is daarom zaak volgens de OWASP aangegeven manier te controleren wat de staat is van de verschillende bibliotheken. ALs dit niet gedaan wordt bestaat er de kans dat informatie wordt bemachtig of dat functionaliteit binnen een applicatie misbruikt kan worden door kwaadwillenden. Er bestaan bronnen zoals de NVD van het NIST waarin deze kwetsbaarheden worden opgeslagen. Het is echter ondoenlijk om deze database met de hand te doorzoeken. Zeker op het moment dat de applicaties dusdanig veel bibliotheken gebruiken dat het volume te groot wordt. Volgens de aanwijzingen vermelding in de OWASP-top10 dienen alle dependencies en de geneste dependencies gecontrolleert te worden.
+In het vorige hoofdstuk is duidelijk geworden dat er veel externe bibliotheken worden gebruikt om applicaties te ontwikkelen. Veel bedrijven kunnen niet meer zonder en Eaglescience is hier geen uitzondering op. Het gebruik van externe bibliotheken biedt te veel voordelen op het gebied van besparing (tijd en geld), flexibiliteit en standaardisering, ten opzichte van interne ontwikkelde bibliotheken. Het gebruik van externe bibliotheken is echter niet zonder gevaren. Het is daarom zaak om, volgens de OWASP aangegeven manier, te controleren wat de staat is van de te gebruiken bibliotheken. Als dit niet gedaan wordt, bestaat er de kans dat informatie wordt bemachtig of dat functionaliteit binnen een applicatie misbruikt kan worden door kwaadwillenden. Er bestaan bronnen zoals de NVD van het NIST waarin deze kwetsbaarheden worden opgeslagen. Het is echter ondoenlijk om deze database met de hand te doorzoeken. Zeker op het moment dat applicaties dusdanig veel bibliotheken gebruiken dat het volume simpelweg te groot wordt. Volgens de aanwijzingen van OWASP\-top10 dienen alle dependencies en de geneste dependencies gecontrolleert te worden.
 
-Dit onderzoek gaat over het zoeken van tooling en methoden om deze analyse automatisch en periodiek te kunnen doen om zo inzichtelijk te maken of er kwetsbaarheden in de uitgerolde applicatie zitten. Met het gebruiken van deze methode hoeft alleen de applicatie nog maar met de hand up-to-date te worden gehouden. Dit laatste is door de complexiteit bewust uit de opdracht gehouden. De onderzoeksvraag is dan ook: "Welke SCA tooling is compabitble met de omgeving van Eaglescience en welke methode kan worden toegepast om deze tooling te gebuiken voor het automatisch analyseren van externe dependencies?". De hoofdvraag werpt de volgende deelvragen op die ieders hieronder worden beantwoord in een eigen paragraaf waarna een in de conclussie de methode wordt aangeboden.
+Dit onderzoek beoogt om tooling en methoden om automatisch en periodiek SOUP analyses te kunnen doen om inzichtelijk te maken of er kwetsbaarheden in de uitgerolde applicatie zitten. Met het gebruiken van deze methode hoeft alleen de applicatie nog met de hand up\-to\-date te worden gehouden. Dit laatste is door de complexiteit bewust uit de opdracht gehouden. Een bijkomend voordeel is dat er door de SOUP analyse naast de kwetsbaarheden ook gegevens worden vastgelegd over de bibliotheken waardoor er in de toekomst een beter beeld bestaat over het gebruik daarvan. Dit beeld kan gebruikt worden om bij een gevonden kwetsbaarheid te achterhalen welke applicaties hier ook afhankelijk van zijn, wat op zijn beurt weer een directere manier van onderzoek oplevert.
+
+De onderzoeksvraag is dan ook: "Welke SCA tooling is compabitble met de omgeving van Eaglescience en welke methode kan worden toegepast om deze tooling te gebuiken voor het automatisch analyseren van externe dependencies?". De hoofdvraag werpt de volgende deelvragen, verdeelt in twee domeinen, op die ieders hieronder worden beantwoord in een eigen paragraaf waarna in de conclusie de methode wordt beschreven die geschikt wordt geacht als basis voor het ontwerp.
 \begin{itemize}
-    \item Welke Werkwijze en Dev-stack gebruikt Eaglescience voor het ontwikkelen van software?
-    \item Hoe wordt er op dit moment software uitgerold binnen Eaglescience?
-    \item Wat zijn de selectiecriteria voor tools die gebruikt kunnen worden?
-    \item Welke tools zijn er beschikbaar?
-    \item Hoe zijn deze tools te intgreren in de huidige buildstraat van Eaglescience?
-    \item Welke methode kan worden gebruikt om middels de gevonden tools informatie over kwetsbaarheden binnen externe bibliotheken te vinden?
-\end{itemize}
-
-\section{Werkwijze en Dev-stack binnen Eaglescience}\label{sec:werkwijze-en-dev-stack-binnen-eaglescience}
-Voordat er kan worden onderzocht welke tools en methode er geschikt zijn om een analyse te doen op projecten die Eaglescience in haar beheer heeft dient er gekeken te worden naar de manier waarop zij werkt en met welke middelen projecten worden ontwikkeld. Deze kennis is nodig om een scope aan te brengen in de zoektocht naar tooling.
-
-\subsection{Werkwijze}\label{subsec:ESwerkwijze}
-Binnen Eaglescience wordt er geprobeerd om "full Scrum" te werken. Dit wil zeggen dat voor ieder project een team van maximaal 9 full-stack developers wordt aangewezen. De sprints duren ongeveer 2 á 3 weken afhankelijk van wensen van de klant en beschikbaarheid van ontwikkelaars. Iedere sprint begint met een refinement waarbij de taken die op de backlog staan worden bekeken en ingeschat door het team. Tijdens de sprint vindt de ontwikkeling middels taken plaats die vervolgens worden gereviewd door een ander teamlid. Aan het einde van de sprint vind er een retrospective plaats en eventueel een demo om de voortgang te demonstreren aan de klant, dit is ook het moment dat het team ziet hoe de applicatie in het algemeen werkt. Dit is ook het moment voor de projectmanager en product owner om de taken die op de back-log staan opnieuw te prioriseren waarbij in de refinement van de volgende sprint de taken mee worden genomen.
-
-\subsection{Dev-stack}\label{subsec:ESdev-stack}
-EagleScience maakt volledige full stack oplossingen. Er wordt dus zowel front-end, backend, en database oplossingen ontwikkelt binnen projecten. Om deze reden wordt er binnen EagleScience gebruik gemaakt van verchillende ontwikkeltalen en tooling om projecten te voltooien. Hieronder staan de belangrijkste vermeld. Deze lijst is bij lange na niet volledig.
-
-\subsubsection{OntwikkelTalen en frameworks}\label{subsubsec:ontwikkeltalen-en-frameworks}
-Zoals eerder beschreven ontwikkelend EagleScience software full-stack. Er wordt dus gebruik gemaak van zowel talen voor de frontend en backend. Databases worden niet meegenomen in de lijst omdat deze als complete componenten worden gezien en de analyse op SOUP in deze ook niet veel zin heeft.
-\begin{itemize}
-    \item \textbf{Backend} De voornamelijkst taal voor het ontwikkelen van de backend binnen EagleScience is Scala. De keuze voor deze taal is de mogelijkheid om functioneel te kunnen programmeren in de Java Virtual Machine(JVM). Dat laatste zorgt ervoor dat bibliotheken die geschreven zijn in talen die ook ondersteunt worden door de JVM gebruikt kunnen worden door Scala. Daarbij heeft Scala de mogelijkheid om naadloos mee te groeien met een project. Vandaar de naam Scala wat een samenraapsel is van Scalable Language. De ondersteuning voor functioneel programeren geeft het voordeel dat de geschreven code makkelijker te testen is wat toe te dragen is aan het gebruik van pure functies. Pure functies hebben de eigenschap deterministisch te zijn wat wil zeggen dat iedere keer als een bepaalde input in een functie komt er altijd dezelfde output verwacht kan worden, zonder dat er side-effects plaatsvinden die de staat van een applicatie onbedoelt kunnen veranderen, wat de betrouwbaarheid ten goede komt. Deze eigenschap maakt het mogelijk om applicaties sneller en makkelijker te testen. Binnen EagleScience worden er in bijna alle projecten een aantal frameworks/bibliotheken gebruikt die het ontwikkelen van microservice web applicaties in Scala makkelijker maakt:
+    \item Huidige situatie binnen Eaglescience:
     \begin{itemize}
-        \item \textbf{PlayFramework 2.xx} Een web framework voor de ontwikkeling van webapplicaties in Scala we gebruikten het vooral als router voor de verschillende microservices die er achterliggen.
-        \item \textbf{ArchES} is een intern ontwikkeld framework wat de opbouw en de communicatie tussen microservices in scala verbeterd.ArchES is geinspireerd op Apache KAFKA en werkt middels hetzelfde pub -> sub principe.
+        \item Welke werkwijze en Dev\-stack gebruikt Eaglescience voor het ontwikkelen van software?
+        \item Hoe wordt er op dit moment software uitgerold binnen Eaglescience?
+        \item Wat zijn de selectiecriteria voor tools die gebruikt kunnen worden?
+    \end{itemize}
+
+    \item Onderzoek om de huidige situatie binnen Eaglescience om te zetten naar de nieuwe situatie:
+    \begin{itemize}
+        \item Welke tools zijn er beschikbaar?
+        \item Hoe zijn deze tools te integreren in de huidige buildstraat van Eaglescience?
+        \item Welke methode kan worden gebruikt om middels de gevonden tools informatie over kwetsbaarheden binnen externe bibliotheken te vinden?
     \end{itemize}
 \end{itemize}
-Binnen Scala kan er gebruik gemaakt worden van enkele buildtools zoals Maven, Gradle en Scala Build Tool (SBT). Binnen EagleScience wordt SBT gebruikt. Dit omdat het de defacto tool is voor Scala.
-[NOTE: dependency declaraties toe voegen?]
 
-\subsubsection{Frontend}
-Voor de frontend wordt bijna altijd gebruik gemaakt van TypeScript, een extensie op Javascript. Het meeste gebruikte frameworks is Angular welke gebruikt wordt om de diverse portalen en Unser-interfaces te ontwikkelen. NativeScript wordt gebruikt in combinatie met Angular om voor Mobile apps te kunnen ontwikkelen. TypeScript maakt het mogelijk om in javascript getypeert te programeren wat kan garanderen dat tijdens bugs en andere fouten tijdens het ontwikkelen opgemerkt kan worden zodat deze niet pas tijdens run-time aan het ligt komen. De reden voor het gebruik van Nativescript is dat het de mogelijkheid geeft om Angular te gebruiken voor de ontwikkeling van zowel android als IOS apps.  Beide ontwikkelframeworks draaien in JavaScript en om die reden is Node.js gebruikt als ontwikkelomgeving. En gezien javascript niet gecombileerd en dus niet gebuild wordt is er alleen een voorziening voor dependency management in de form van Yarn en Node Package Manager(NPM). Binnen EagleScience wordt NPM
-gebruikt voor het beheer van dependencies in een project.
 
+\section{Werkwijze en Dev-stack binnen Eaglescience}\label{sec:werkwijze-en-dev-stack-binnen-eaglescience}
+Voordat er kan worden onderzocht welke tools en methode er geschikt zijn om een analyse te doen op projecten die Eaglescience in haar beheer heeft, dient er gekeken te worden naar de manier waarop Eaglescience werkt en met welke middelen projecten worden ontwikkeld. Deze kennis is nodig om een scope aan te brengen in de zoektocht naar tooling.
+
+\subsection{Werkwijze}\label{subsec:ESwerkwijze}
+Binnen Eaglescience wordt er geprobeerd om "full Scrum" te werken. Dit wil zeggen dat voor ieder project een team van maximaal 9 full-stack developers wordt aangewezen. De sprints duren ongeveer 2 á 3 weken afhankelijk van wensen van de klant en beschikbaarheid van ontwikkelaars. Iedere sprint begint met een refinement door het team waarbij de taken die op de backlog staan worden bekeken en ingeschat. Tijdens de sprint vindt de ontwikkeling, opgedeeld in taken, plaats welke vervolgens worden gereviewd door een ander teamlid. Aan het einde van de sprint vindt er een retrospective plaats en eventueel een demo om de voortgang te demonstreren aan de klant. Dit is ook het moment dat het team ziet hoe de applicatie in het algemeen werkt. Daarnaast kunnen de projectmanager en product owner de taken die op de back-log staan opnieuw prioriseren, wat mee kan worden genomen in de volgende sprint. Als laatste is dit ook het moment waarbij een uitrol wordt uitgevoerd naar acceptatie en dys ook het meest geschikte moment voor een SOUP analyse.
+
+\subsection{Dev-stack}\label{subsec:ESdev-stack}
+EagleScience maakt volledige full stack oplossingen. Er worden dus zowel frontend, back-end, en database oplossingen ontwikkelt binnen projecten. Om deze reden wordt er binnen EagleScience gebruik gemaakt van verschillende ontwikkeltalen en tooling om projecten te voltooien. Hieronder staan de belangrijkste vermeld.
+
+\subsubsection{Ontwikkeltalen en frameworks}\label{subsubsec:ontwikkeltalen-en-frameworks}
+Zoals eerder beschreven ontwikkelt Eaglescience software full-stack. Er wordt dus gebruik gemaakt van zowel talen voor de frontend en back-end. Databases worden niet meegenomen in de lijst omdat deze als complete componenten worden gezien en de analyse op SOUP in deze ook niet veel zin heeft.
+\begin{itemize}
+    \item \textbf{Backend} De voornamelijkste taal voor het ontwikkelen van de back-end binnen EagleScience is Scala. Hiervoor is gekozen omdat deze taal de mogelijkheid biedt om functioneel te programmeren in de Java Virtual Machine (JVM). Hierdoor kunnen bibliotheken die geschreven zijn in talen die ook ondersteunt worden door de JVM gebruikt kunnen worden door Scala. Daarbij heeft Scala de mogelijkheid om naadloos mee te groeien met een project. Dit refereerd tevens naar de naam Scala, wat een samenraapsel is van Scalable Language. De ondersteuning voor functioneel programmeren heeft als voordeel dat de geschreven code makkelijker te testen is wat te danken is aan het juiste gebruik van pure functies. Pure functies hebben de eigenschap deterministisch te zijn wat wil zeggen dat iedere keer als een bepaalde input in een functie komt er altijd dezelfde output verwacht kan worden, zonder dat er side-effects plaatsvinden die de staat van een applicatie onbedoelt kunnen veranderen. Dit komt de betrouwbaarheid ten goede. Deze eigenschap maakt het mogelijk om applicaties sneller en makkelijker te testen. Binnen Eaglescience worden er in bijna alle projecten een aantal frameworks/bibliotheken gebruikt die het ontwikkelen van microservice web applicaties in Scala makkelijker maken:
+    \begin{itemize}
+        \item \textbf{PlayFramework 2.xx} Een web framework voor de ontwikkeling van webapplicaties in Scala. Eaglescience gebruikt dit vooral als router voor de verschillende microservices die er achterliggen.
+        \item \textbf{ArchES} is een intern ontwikkeld framework wat de opbouw en de communicatie tussen microservices in Scala verbeterd. ArchES is geinspireerd op Apache KAFKA en werkt middels hetzelfde pub -> sub principe.
+    \end{itemize} Binnen Scala kan er gebruik worden gemaakt van enkele buildtools zoals Maven, Gradle en Scala Build Tool (SBT). Binnen Eaglescience wordt SBT gebruikt omdat het de defacto tool is voor Scala.
+    \item {Frontend}
+    Voor de frontend wordt bij Eaglescience bijna altijd gebruik gemaakt van TypeScript, een extensie op Javascript. TypeScript maakt het mogelijk om in JavaScript getypeert te programeren wat kan garanderen dat tijdens bugs en andere fouten tijdens het ontwikkelen opgemerkt kan worden zodat deze niet pas tijdens run-time aan het ligt komen. Het meeste gebruikte frameworks is Angular welke gebruikt wordt om de diverse portalen en User-interfaces te ontwikkelen. NativeScript wordt gebruikt in combinatie met Angular om Mobile apps te ontwikkelen. De reden voor het gebruik van Nativescript is dat het de mogelijkheid geeft om Angular te gebruiken voor de ontwikkeling van zowel android als IOS apps. Beide ontwikkelframeworks draaien in JavaScript en om die reden wordt Node.js gebruikt als ontwikkelomgeving. Gezien JavaScript niet gecombileerd en dus niet gebuild wordt is er alleen een voorziening voor dependency management in de vorm van Yarn en Node Package Manager(NPM). Binnen Eaglescience wordt NPM gebruikt voor het beheer van dependencies in een project.
+\end{itemize}
+
+#todo NOTE: dependency declaraties toe voegen?
 
 \subsubsection{Tooling}\label{subsubsec:tooling}
-Naast ontwikkeltalen gebruikt EagleScience een aantal tools om dagelijkse werkzaamheden te stroomlijnen en software uit te rollen voor de klant. De tools zijn ieder op zijn beurt verantwoordelijk voor een specifieke taak en alle projecten dienen gebruik te maken van deze tools waar gepast. Hoe de tools samenwerken en uitgerold zijn is te zien in figuur~\ref{fig:es-tooling}
+Naast ontwikkeltalen gebruikt Eaglescience een aantal tools om dagelijkse werkzaamheden te stroomlijnen en software uit te rollen voor de klant. De tools zijn ieder verantwoordelijk voor een specifieke taak en alle projecten dienen wanneer gepast gebruik te maken van deze tools. Hoe de tools samenwerken en uitgerold zijn is te zien in figuur~\ref{fig:es-tooling}
 
 \begin{itemize}
-    \item \textbf{Jira} Binnen EagleScience wordt Jira gebruikt om taken binnen projecten te beheren. Hier worden taken aan projecten toegevoegd welke vervolgens in een spring wordt opgenomen. Deze sprints worden ook beheert middels Jira
+    \item \textbf{Jira}
+    Binnen Eaglescience wordt Jira gebruikt voor taakbeheer binnen projecten. Hier worden taken aan projecten toegevoegd welke vervolgens in een sprint worden opgenomen. Ook de sprints worden beheert middels Jira.
     \item \textbf{Confluence}
-    Confluence wordt gebruikt voor het documenteren van de verschillende projecten waar EagleScience aan werkt. Confluence en Jira zijn beiden van Atlassian wat ervoor zorgt dat deze met elkaar kunnen communiceren wat op zijn beurt de documentatie verbeterd. Op dit moment lijkt het erop dat Confluence een end of life heeft on 2023 en dat voor dit systeem een vervanging moet worden gevonden.
+    Confluence wordt gebruikt voor het documenteren van de verschillende projecten waar EagleScience aan werkt. Confluence en Jira zijn beiden van Atlassian waardoor deze met elkaar kunnen communiceren, wat op zijn beurt de documentatie verbeterd. Op dit moment lijkt het erop dat Confluence een end of life heeft in 2023 en dat voor dit systeem een vervanging moet worden gevonden.
     \item \textbf{GitLab}
-    Gitlab wordt binnen EagleScience gebruikt als Version control systeem. Er is voor gekozen om deze on premise te gebruiken op een server in eigen beheer op locatie. Gitlab biedt naast version control ook andere tooling aan die het mogelijk maken om vanuit gitlab te builden en/of uit te rollen echter wordt dit binnen EagleScience gedaan middels een andere tool genaamd Jenkins.
+    Gitlab wordt binnen Eaglescience gebruikt als Version control systeem. Er is gekozen om GitLab on premise te gebruiken op een server in eigen beheer op locatie.. Gitlab biedt naast version control ook andere tooling aan die het mogelijk maken om vanuit GitLab te builden en/of uit te rollen echter wordt dit binnen Eaglescience gedaan middels een andere tool genaamd Jenkins.
     \item \textbf{Jenkins}
     Jenkins is een open-source automation server wat door Eaglescience gebruikt wordt om projecten te builden, testen, en deployen. Jenkins is gebouwd op een Java omgeving en is daarom uitermate geschikt om met gradle, Maven en SBT-projecten om te gaan. Daarnaast kan het middels diverse Shellscripts (Bash, SH, PowerShell) aanverwante taken uitvoeren. Als laatst kan het middels plugins ook uitrollen op cloud omgevingen. Om deze redenenen heeft EagleScience gekozen om Jenkins te gebruiken. In een sectie hieronder wordt uitvoerig uitgewijd over hoe Jenkins binnen EagleScience een project build, test en uitrold.
-    \item \textbf{Portal} Een medewerkers portal welke op het moment van schrijven aan ontwikkeld wordt om tools en gegevens aan te bieden die niet project specifiek zijn. Op dit moment wordt er een LDAP password reset tool en verlof inzage en aanvraag aangebonden. Er wordt naast de module voor SOUP analyses ook een modele ontwikkeld welke het mogelijk maakt om uren te registreren. Deze ontwikkelingen zijn een antwoord op de wens om systemen samen te voegen om zo een overzichtelijker geheel aan te bieden voor werknemers.
+    \item \textbf{Portal}
+    Eaglescience ontwikkeld momenteel een medewerkers portal welke tools en gegevens aan kan bieden die niet project specifiek zijn. Op dit moment wordt er een LDAP password reset tool en verlof inzage en aanvraag aangebonden. Er wordt naast de module voor SOUP analyses ook een module ontwikkeld welke het mogelijk maakt om uren te registreren. Deze ontwikkelingen zijn een antwoord op de wens om systemen samen te voegen om zo een overzichtelijker geheel aan te kunnen bieden aan werknemers.
 
     \begin{figure}
         \centering
         \includegraphics[width=10cm]{gfx/soupcans}
-        \caption{Deze nog maken}
+        \caption{Samenwerking van tooling binnen Eaglescience}
         \label{fig:es-tooling}
     \end{figure}
 
 \end{itemize}
 %TODO: Nalopen
+
+
 \section{Hoe wordt op dit moment software gedeployed?}\label{sec:hoe-wordt-op-dit-moment-software-gedeployed?}
-Zoals hierboven berschreven wordt Jenkins gebruikt om software te deployen naar zowel de productie omgevingen alsook de verschillende development en acceptatie omgevingen.
-Een deploy wordt gedaan op het moment dat er source code naar gitlab gepushed wordt.
-Door middel van Tokens in de Commit message kan gestuurd worden waar de build(als deze slaagt) gedeployed wordt bijv: {-all + portal} build en deployed alleen de portal. [ci-skip] zorgt ervoor dat er alleen een push wordt gedaan en geen build wordt gestart.
-De configuratie die Jenkins gebruikt wordt beschreven in een aantal Jenkins files die meegenomen worden de repo. Middels parameters meegegeven in de commit kan er worden beslist of er een build moet plaatsvinden en zo ja waar en welke delen van de applicatie. Op deze manier is er een flexibiliteit voor de ontwikkelaar.
+Zoals hierboven beschreven wordt Jenkins gebruikt om software te deployen naar zowel de productie omgevingen als ook de verschillende development en acceptatie omgevingen. Een deploy wordt gedaan op het moment dat er source code naar GitLab gepushed wordt. Door middel van Tokens in de commit message kan gestuurd worden waar de build (als deze slaagt) gedeployed wordt bijv: {-all + portal} build en deployed alleen de portal. [ci-skip] zorgt ervoor dat er alleen een push wordt gedaan en geen build wordt gestart.
+De configuratie die Jenkins gebruikt wordt beschreven in een aantal Jenkins files die meegenomen worden in de repo. Middels parameters meegegeven in de commit kan er worden besloten of er een build moet plaatsvinden en zo ja waar en welke delen van de applicatie. Op deze manier wordt er flexibiliteit aan de ontwikkelaar geboden.
 [NOTE Illustratie maken.....]
-Naast de deploy geeft Jenkins nog een aantal andere waardevolle Artifacts als test/lint rapportages.
+Naast de deploy geeft Jenkins nog een aantal andere waardevolle artifacts als test/lint rapportages.
 Een build en deploy gaat volgens de onderstaande afbeelding:
 
 \begin{figure}[H]
@@ -75,8 +83,8 @@ Een build en deploy gaat volgens de onderstaande afbeelding:
     \caption{Jenkins(Blue Ocean) pipeline}
     \label{fig:JenkinsPipeLine}
 \end{figure}
-Een Jenkins pipeline werkt in een aantal stappen dat in een .jenkinsFile wordt beschreven.
-Deze jenkinsFile wordt in de determine stap ingelezen en de benodigde stappen op een rij gezet.
+Een Jenkins pipeline werkt in een aantal stappen welke in een .jenkinsFile worden beschreven.
+Deze JenkinsFile wordt in de determine stap ingelezen waarna de benodigde stappen op een rij worden gezet.
 De stappen die worden uitgevoerd zijn:
 \begin{itemize}
     \item \textbf{determine} Nu wordt bekeken welke stappen er nodig zijn om een succesvolle build en of deploy te kunnen doen./ Aan de hand van een JenkinsFile en tokens in een Commit message wordt hier bekeken welke stappen er moeten worden uitgevoerd om tot een goed einde te komen.
@@ -97,58 +105,85 @@ De stappen die worden uitgevoerd zijn:
     Einde van de PipeLine Jenkins geeft de workers die het project heeft gebruikt weer vrij.
 \end{itemize}
 
+
 \section{Passende SCA tooling}\label{sec:sca-tooling}
 
-In de opdracht (zie hoofstuk~\ref{ch:opdracht}) staat vermeld dat de te ontwikkelen module eenvoudig gebruikt dient te worden binnen de bestaande CI/CD Pipeline en dat de resultaten zichtbaar moeten zijn in de huidige portal. [NOTE: MEER REDENENEN?] Om deze redenen moet er dus een Software Composition Analysis tool gevonden worden die makkelijk te intgreren is in de huidige pipeline welke resultaten geeft die vervolgens te verwerken is tot een leesbare pagina in de portal. Als we deze stelling ontleden moeten er een aantal zaken worden onderzocht:
+In de opdracht (zie hoofstuk~\ref{ch:opdracht}) staat vermeld dat de te ontwikkelen module eenvoudig gebruikt dient te worden binnen de bestaande CI/CD Pipeline en dat de resultaten zichtbaar moeten zijn in de huidige portal. [NOTE: MEER REDENENEN?] Om deze redenen moet er dus een Software Composition Analysis(SCA) tool gevonden worden die makkelijk te intgreren is in de huidige pipeline welke resultaten geeft die vervolgens te verwerken is tot een leesbare pagina in de portal. Als we deze stelling ontleden moeten er een aantal zaken worden onderzocht:
 \begin{itemize}
-    \item Welke tooling is er beschikbaar om analyses uit te voeren op zowel SBT als NPM projecten?
+    \item Welke tooling is er beschikbaar om analyses uit te voeren op zowel SBT als NPM-projecten?
     \item Hoe is het resultaat die uit de tools komen?
     \item Hoe is de tool te integreren in de hudige pipeline?
 \end{itemize}
 Om deze vragen te beantwoorden moet er eerst een geschikte tool gevonden worden die met zowel SBT als NPM projecten overweg kan en bij voorkeur beide in een soortgelijk format(JSON, CSV, XML) een rapport kunnen genereren. Vervolgens dient er gekeken te worden naar hoe de geselecteerde tools een resultaat bouwen, hoe deze eruit ziet en in welke tijd het resultaat gegeven kan worden.
 
 \subsection{Tooling: Welke tooling is beschikbaar voor het analyseren van SOUP in projecten}\label{subsec:ESTooling}
-Er zijn een aantal bedrijven en instanties die tooling aanbieden om analyses te doen, als een google search wordt gedaan op "Scala dependency scan" dan komt op de eerste pagina van de resultaten snyk.io, SonarSouce en OWASP voor. Snyk.io bied meerdere opties voor het scannen van code en dus externe bibliotheken. Het is ook geschikt om Scala en TypeScript code te analyseren. Eén van die opties is middels een CLI Tool welke raporteerd naar een Dashboard gehost door Snyk zelf. Een andere optie die snyk aanbied is middels een plugin via InteliJ, welke door Eaglescience gebruikt wordt. Echter om de volledige functionaliteit te van Snyk te kunnen benutten is er een licentie nodig wat op zichzelf al een nadeel is. Een ander nadeel is dat de resulaten in een eigen omgeving, welke extern gehost wordt, kan worden ingezien. Snyk maakt het mogelijk om ook voor zowel NPM als SBT project
+Er zijn een aantal bedrijven en instanties die tooling aanbieden om analyses te doen, als een google search wordt gedaan op "Scala dependency scan" dan komt op de eerste pagina van de resultaten snyk.io, SonarSouce en OWASP voor.
 
-SonarSource is een ander bedrijf dat tooling aanbied voor het analyseren van source-code. Het doet dit door in de verschillende stadia van het proces tooling aan te bieden die helpen de kwaliteit van geleverde applicaties te verhogen. Als eerste biede het een gratis plugin, SonalLint, aan voor verschillende IDE's waarbij actief wordt gekeken naar fouten, bugs en dergelijk tijdens het schrijven van code op deze manier wordt er gekeken naar of code volgens standaarden worden geschreven en er geen kwetsbaarheden worden toegevoegd. Daarnaast is er en pakket wat SonarQube heet, dit pakket heeft de mogelijkheid om op verschillende momenten naar de kwaliteit en de veiligheid van de geschreven code. Hoewel SonarQube geschikt is om Scala en Typescript code te analyseren is dit voor de SonarLint plufin niet mogelijk dit te doen voor Scala code wel is er ondersteuning voor TypeScript.  Er zijn meerdere versies beschikbaar die elk meer functionaliteiten aanbieden. Zo is er een community edition, welke gratis is, die als server geinstalleerd kan worden en waar verschillende repositories kunnen worden bijgehouden. Naast een community edition zijn er andere editions beschikbaar waar voor betaald moet worden en er extra functies bij komen zoals GitLab integration en dergelijke.
+Snyk.io bied meerdere opties voor het scannen van code en dus externe bibliotheken. Het is ook geschikt om Scala en TypeScript code te analyseren. Eén van die opties is middels een CLI Tool welke raporteerd naar een Dashboard gehost door Snyk zelf. Een andere optie die snyk aanbied is middels een plugin via InteliJ, welke door Eaglescience gebruikt wordt. Echter om de volledige functionaliteit te van Snyk te kunnen benutten is er een licentie nodig wat op zichzelf al een nadeel is. Een ander nadeel is dat de resulaten in een eigen omgeving, welke extern gehost wordt, kan worden ingezien. Snyk maakt het mogelijk om ook voor zowel NPM als SBT project
 
-In eerdere onderzoeken is naar boven gekomen dat de OWASP zich bezig houd met het veilig houden van geschreven software. Een van de projecten die de OWASp is "Dependency-check". Dit is een Software Composition Tool wat mogelijk maakt om openbaar gemaakte kwetsbaarheden te detecteren door te kijken of er voor dependencies een Common Platform Enumeration(CPE) bestaat. Als deze CPE bestaat kan er gekeken worden of er een CVE voor bestaat en vervolgens worden weergegeven in resultaten. Als geen van beiden bekend zijn wordt er door de tool vanuit gegaan dat er op het moment van checken geen kwetsbaarheid gevonden is. Hoewel dit op het oog een goede tool is om SOUP te analyseren is het in het project ontwikkelde versie niet mogelijk om te scannen op SBT en NPM dependencies. Op de website van het project is echter een link naar een versie die SBT projecten kan analyseren. En een search in de NPM repository blijkt dat er een soortgelijke tool bestaat om NPM pakketten te analyseren.
+SonarSource is een ander bedrijf dat tooling aanbied voor het analyseren van source-code. Het doet dit door in de verschillende stadia van het proces tooling aan te bieden die helpen de kwaliteit van geleverde applicaties te verhogen. Als eerste biede het een gratis plugin, SonalLint, aan voor verschillende IDE's waarbij actief wordt gekeken naar fouten, bugs en dergelijk tijdens het schrijven van code op deze manier wordt er gekeken naar of code volgens standaarden worden geschreven en er geen kwetsbaarheden worden toegevoegd. Daarnaast is er en pakket wat SonarQube heet, dit pakket heeft de mogelijkheid om op verschillende momenten naar de kwaliteit en de veiligheid van de geschreven code. Hoewel SonarQube geschikt is om Scala en Typescript code te analyseren is dit voor de SonarLint plufin niet mogelijk dit te doen voor Scala code wel is er ondersteuning voor TypeScript. Er zijn meerdere versies beschikbaar die elk meer functionaliteiten aanbieden. Zo is er een community edition, welke gratis is, die als server geinstalleerd kan worden en waar verschillende repositories kunnen worden bijgehouden. Naast een community edition zijn er andere editions beschikbaar waar voor betaald moet worden en er extra functies bij komen zoals GitLab integration en dergelijke.
+
+In eerdere onderzoeken is naar boven gekomen dat de OWASP zich bezig houd met het veilig houden van geschreven software. Een van de projecten die de OWASp is "Dependency-check". Dit is een Software Composition Tool wat mogelijk maakt om openbaar gemaakte kwetsbaarheden te detecteren door te kijken of er voor dependencies een Common Platform Enumeration(CPE) bestaat. Als deze CPE bestaat kan er gekeken worden of er een CVE voor bestaat en vervolgens worden weergegeven in resultaten. Als geen van beiden bekend zijn wordt er door de tool vanuit gegaan dat er op het moment van checken geen kwetsbaarheid gevonden is. Hoewel dit op het oog een goede tool is om SOUP te analyseren is het in het project ontwikkelde versie niet mogelijk om te scannen op SBT en NPM dependencies. Op de website van het project is echter een link naar een versie die SBT-projecten kan analyseren. En een search in de NPM repository blijkt dat er een soortgelijke tool bestaat om NPM-pakketten te analyseren.
 
 
-Snyk.io laat toe om dependencies te analyseren voor zowel Scala als TypeScript. Echter worden alle gegevens bij snyk.io opgeslagen in een cloud omgeving daarnaast is er een licentie benodigd om analyses te kunnen doen. Hoewel SonarQube een heel mooi pakket is dient er voor de functionaliteit die we benodigd hebben betaald te worden. Daarmee is dit een goed alternatief mocht er geen geschikte methode worden gevonden middels de tools gevonden zijn welke gebruik maken van de OWASP dependency check Engine.
-
+%Snyk.io laat toe om dependencies te analyseren voor zowel Scala als TypeScript. Echter worden alle gegevens bij snyk.io opgeslagen in een cloud omgeving daarnaast is er een licentie benodigd om analyses te kunnen doen. Hoewel SonarQube een heel mooi pakket is dient er voor de functionaliteit die we benodigd hebben betaald te worden. Daarmee is dit een goed alternatief mocht er geen geschikte methode worden gevonden middels de tools gevonden zijn welke gebruik maken van de OWASP dependency check Engine.
+%
 %https://github.com/etnetera/owasp-dependency-check for Node.js /NPM
 %https://github.com/albuch/sbt-dependency-check for SBT
 %
 %https://github.com/eliasgranderubio/dagda niet zelfde als OWASP maar wellicht usefull
 
+%TODO: Tabel maken met de gevonden resultaten
+\begin{figure}
+    \centering
+    \includegraphics[width=10cm]{gfx/soupcans}
+    \caption{Tabel over resultaten van de gevonden tooling}
+    \label{fig:resultatenTooling}
+\end{figure}
+
 \subsection{Testen van Tools}
-Het lijkt dus voor de hand te liggen dat zowel de OWASP-dependency-Check(NPM) en de SBT-dependency-check verantwoorde keuzes zijn om verder te onderzoeken. Voor dat er overgegaan wordt tot implementatie van de tools dienen deze eerst worden onderzocht op bruikbaarheid om dit te realiseren zijn de volgende scenario's opgesteld die ieder een aspect van de tooling belichten:
+Het lijkt dus voor de hand te liggen dat zowel de OWASP-dependency-Check(NPM) en de SBT-dependency-check verantwoorde keuzes zijn om verder te onderzoeken. Voor dat er overgegaan kan worden tot implementatie van de tools. Dienen deze eerst worden onderzocht op bruikbaarheid. Om dit te realiseren zijn de volgende scenario's opgesteld die ieder samen een idee moeten vormen over de werking binnen een project en toepasbaarheid binnen een methode die in de volgende sectie wordt onderzocht.
 
+Er is gekozen voor twee scenario's"
 \begin{enumerate}
-    \item \textbf{Bestaand Eaglescience Project: }Om te achterhalen hoe de dependency check tools kunnen worden ingezet in projecten die op dit moment ontwikkeld en gehost worden. Moeten de tools worden geintegreerd in een bestaand project. Als project is er gekozen voor GroeiGids\footnote{Text over groeiGids}, een van de grotere projecten waar op dit moment aan wordt gewerkt. Het project bevat zowel een frontend(NPM Angular) als een App(NPM NativeScript), Maar ook een uit microservice bestaande SBT project waarbij een andere manier wordt gebruikt om dependencies te declaren. ( de normale maneir is het declareren in een enkel bestand genaamd build.sbt) voor Groeigids is ervoor gekozen om dependencies in een aparte file te declaren en deze vervolgens te importeren in de build.sbt. Theoretisch zou dit geen probleem moeten zijn gezien SBT zelf ook gebruik maakt van deze constructie.
-
-
-    Een project wat zowel een SBT-project bevat als een NPM(node.js) Project bevat. Dit "real-life"Scenario moet uitwijzen in welke tijd er een analyse gedaan kan worden. Dit is van belang om te zien of er een oponthoud is in de build ( duren nu al langer dan gewenst en iedere toevoeging is dus eigenlijk teveel) waarbij de resultaten al bekend zijn.
-    \item \textbf{ALleen de dependency declaraties} In het geval van SBT is dit dus de build.sbt en voor NPM is dit  een package.json en wellicht ook de package.json.lock. Mocht het "telang" duren om een analyse is de buildstraat te doen geeft dit resultaat inzicht of er een mogelijkheid is om op basis van alleen de dependency declaratie een analyse te doen. Met als doel om de analyse uitgesteld te kunnen doen zodat de buildstraat hier niet extra mee gemoeid is.
+    \item \textbf{Bestaand Eaglescience Project: }Om te achterhalen hoe de dependency check tools kunnen worden ingezet in projecten die op dit moment ontwikkeld en gehost worden moeten de tools worden geintegreerd in een bestaand project. Als project is er gekozen voor GroeiGids\footnote{GroeiGids is op het moment van schrijven één van de grootste qua code-volume waar Eaglescience aan werkt. Het is een project voor de ggz, waarbij ouders groei informatie over kinderen kan toevoegen.} een van de grotere projecten waar op dit moment aan wordt gewerkt. Het project bevat zowel een frontend(NPM Angular) als een App(NPM NativeScript), Maar ook een uit microservice bestaande SBT-project waarbij een andere manier wordt gebruikt om dependencies te declaren. Voor Groeigids is ervoor gekozen om dependencies in een aparte file te declaren en deze vervolgens te importeren in de build.sbt. Theoretisch zou dit geen probleem moeten zijn gezien SBT zelf ook gebruik maakt van deze constructie.
+    \item \textbf{ALleen de dependency declaraties} In het geval van SBT is dit dus de build.sbt en voor NPM is dit een package.json en wellicht ook de package.json.lock. De resultaten van deze test geven de mogelijkheid tot flexibiteit in het zoeken naar meerdere methodes voor het analyseren van de bibliotheken. Op het moment dat er alleen een declaratie bednogd is. Kan deze worden opgebouwd door lijsten die uit de pipelin zijn gehaald. welke als snapshot zijn opgeslagen.
 \end{enumerate}
 
-
-\textbf{Resultaat:} Het resultaat is dat het rapport gegenereerd door de dependency-check tools nagenoeg gelijk zijn en in het JSON formaat. Uit de rapporten bleek wel dat de dependency-check engines verschilden van elkaar met een enkele major versie.
-\subsubsection{bestaand Eaglescience project} Uitwijden over hoe de resulaten zijn binnen een bestaand project en wat de timing is.
+\subsubsection{Test 1: dependency scanning in een bestaand project}
+Uitwijden over hoe de resulaten zijn binnen een bestaand project en wat de timing is.
 \textbf{Doel:} Algemene werking van de geselecteerde plugins onderzoeken, waarbij vooral gekeken moet worden naar welke instellingen er relevant zijn,
 \textbf{Methode:} feitelijk is deze het ze
 \textbf{Resultaat:} Afhankelijk van de leeftijd van de cve database die lokaal wordt opgeslagen duurt de analyse meer dan een minuut. wat neerkomt op 2 minuten extra build tijd.
 
-\subsubsection{alleen dependency declarartie} methode en resultaten van deze test..
-\textbf{Doel:} Algemene werking van de geselecteerde plugins onderzoeken, waarbij vooral gekeken moet worden naar welke instellingen er relevant zijn,
-\textbf{Methode:}
+\subsubsection{Test 2: alleen de dependency infomatie gebruiken.}
+
+
+
+\textbf{Doel:} Werking van de tools onderzoeken zonder informatie over het gehele project.
+\textbf{Methode:} Ten
 \textbf{Resultaat:}
 
+Iedere keer wordt er een nieuwe folder aangemaakt met een nieuwe JSON dus er is geen persistence....
 
-\subsubsection{REsultaat vsn de tests en conclusie over het gebruik van de tooling in de een methode}
+Daarnaast MOET er een npm install gedaan worden wil de tool deps vinden...... Dit betekend dus dat er een "npmbuild gedaan moet worden.
+De NPM Dependency check voert onderwater het volgende commando uit \texttt{/dependency-check.sh --out=./dependency-check-reports --project angularSandbox -f JSON --data=/tmp/dependency-check-data --scan=package-lock.json
+} de -f en de --out flags zijn de output flags wat zegt dat er een JSON file in depende-check-reports directory in de base gemaakt moet worden. --scan = package-lock.json is het bestand wat geacanned wordt wat wil zeggen dat er een node_modules folder moet zijn is aangemaakt middels een npm install op de package.json van het project. In de logs is zijn ook statements te vinden die erop wijzen dat niet geinstalleerde dependencies wordten geskipped ) \texttt{2021-12-13 15:08:36,500 org.owasp.dependencycheck.analyzer.NodePackageAnalyzer:292
+WARN  - dependency skipped: node module esbuild-darwin-arm64 seems optional and not installed} Daarnaast worden de verschillen tussen de package.json en de package-lock.json niet meegenomen en is de -lock file leidend. Nog een indicatie dat er een npm install nodig is op basis van project package.json
 
 
+Database opzetten voor de tool duurt een geruime tijd dus als dit in een enkele keer kan is dit al tijdswinst. Het klijkt om deze reden ook niet handig om op een deploy de analyse te runnen.
+
+
+begin tool : 2021-12-13 15:01:08
+eind einde opzetten benodigdheden : 2021-12-13 15:08:35
+dit komt uit op 7 minuten lead time voor analyses.
+
+andere note is dat de tool redelijk wat CPU vroeg op het moment van analyseren wat op zijn beurt de performance van het builden van andere projecten weer kan schaden./
+
+\subsubsection{Resultaat:} Het resultaat is dat het rapport gegenereerd door de dependency-check tools nagenoeg gelijk zijn en in het JSON formaat. Uit de rapporten bleek wel dat de dependency-check engines verschilden van elkaar met een enkele major versie.
+
+\subsubsection{Resultaat vsn de tests en conclusie over het gebruik van de tooling in de een methode}
 
 \subsection{Methode voor extractie, verwerken en het publiseren van de resultaten gevonden in de projecten van EagleScience}\label{subsec:methodeSOUPES}
 
@@ -157,11 +192,9 @@ Het lijkt dus voor de hand te liggen dat zowel de OWASP-dependency-Check(NPM) en
 \subsubsection{Methode 2: postponed analyseren}
 Scannen op een later moment, dus door een project te bouwen op basis van een snapshot en deze op een later moment te analyseren.
 
-
-\subsubsection{Resultaat: } Methode 2: het scannen op een later moment heeft de wat mij betreft de voorkeur. gezien dit de minste redundantie in datat betekend. Echter moeten er wel meer functionaliteit worden geschreven om alle processen te kunnen uitvoeren.
+\subsubsection{Resultaat:} Methode 2: het scannen op een later moment heeft de wat mij betreft de voorkeur. gezien dit de minste redundantie in datat betekend. Echter moeten er wel meer functionaliteit worden geschreven om alle processen te kunnen uitvoeren.
 
 Beide tools generen rapporten in nagenoeg het zelfde schema. Op basis van dit schema kan een datamodel worden gegenereerd die het opslaan van de relevantie informatie. Er is ook een datamodel nodig om op te li
-
 
 
 %\section{Conclusie}\label{sec:conclusie}
@@ -184,10 +217,18 @@ Beide tools generen rapporten in nagenoeg het zelfde schema. Op basis van dit sc
 %Voorhet maken van de snapshots moeten er in de jenkins pipeline een mechaniek worden geplaatst die de gevonden attributen kan opslaan in een database voor later gebruik.
 %
 %Een bijkomend voordeel van deze manier van werken is dat er een historiek onstaat in de gebruikte versies welke als bewijsvoering kan dienen bij incidenten.
+
+
 \section{Methode met gekozen tooling om een analyse te doen binnen Eaglescience}\label{sec:methode}
 
 %Todo: Toevoegen aan de conclusie van het hoofdstuk
+
+
 \section{Conclussie}\label{sec:ESconclussie}
+Door gebruik te maken van de werkwijze van Eaglescience en daarom tijdens elke deploy naar acceptatie en productie een snapshot op te slaan van de gebruikte bibltiotheken onstaat er een beeld in het gebruik van bibliotheken per project. Deze snapshots kunnen vervolgens worden gebruikt om op een "later" te defineren moment analyses uit te voeren op bibliotheken. Op deze manier is er
+
+
+developement(TestOmgeving) of acceptatie/ productie
 Binnen EagleScience wordt er gewerkt middels de SCRUM methode om software te ontwikkelen. Waarbij Jira en Confluence worden gebruikt voor de documentatie van de projecten. Het zou voor de hand kunnen liggen om informatie over de SOUP analyses in Confluence op te slaan zodat er mee gelift kan worden op dit systeem. Echter doordat de end of life van Confluence is aangekondigd dient er een alternatief worden gezocht. Welke al in de opdracht is meegenomen.
 
 EagleScience ontwikkeld haar projecten over het algemeen in Scala en TypeScript met enkele daarbij behorende (build) tooling en wel SBT voor Scala en NPM voor node projecten. Het is dus noodzaak om voor deze twee tools en methode te vinden waarmee SOUP analyses gedaan kan worden. Daarnaast Jenkins de ideale mogelijkheid om of informatie te winnen over de staat van projecten die op dat moment uitgerold zijn. Dit kan zijn door de nog te onderzoeken methode direct door Jenkins te laten uitvoeren over door de dependency declaraties van projecten op te slaan in een omgeving waar mee extern de analyse kan woden uitvoerd.
