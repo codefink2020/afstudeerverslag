@@ -106,55 +106,46 @@ Een Jenkins pipeline werkt in een aantal stappen die in een .jenkinsFile worden 
 
 \section{Passende SCA tooling}\label{sec:sca-tooling}
 
-In de opdracht staat vermeld dat de te ontwikkelen module eenvoudig gebruikt dient te worden binnen de bestaande CI/CD Pipeline en dat de resultaten zichtbaar moeten zijn in de huidige portal. Om deze redenen moet er dus een Software Composition Analysis (SCA) tool gevonden worden die makkelijk te intgreren is in de huidige Jenkins pipeline welke resultaten geeft die vervolgens te verwerken zijn tot een leesbare pagina in de portal. Als we deze stelling ontleden moeten er een aantal zaken worden onderzocht:
+In de opdracht staat vermeld dat de te ontwikkelen module eenvoudig in gebruik dient te kunnen worden genomen binnen de bestaande CI/CD Pipeline en dat de resultaten zichtbaar moeten zijn in de huidige portal. Hierom moet er dus Software Composition Analysis (SCA) tooling gevonden worden die makkelijk te integreren is in de huidige Jenkins pipeline, welke resultaten geeft die vervolgens te verwerken zijn tot een leesbare pagina in de portal. Als we deze stelling ontleden moeten er een aantal zaken worden onderzocht:
 \begin{itemize}
     \item Welke tooling is er beschikbaar om SOUP-analyses uit te voeren op zowel SBT (Scala) als NPM (Node.js)-projecten?
     \item Welke resultaten worden er door de tool geproduceerd?
-    \item Hoe kan de tool worden geintegreerd in de hudige Jenkins pipeline?
+    \item Hoe kan de tooling worden geintegreerd in de huidige Jenkins pipeline?
 \end{itemize}
-Om deze vragen te beantwoorden moet er eerst een geschikte tool gevonden worden die, bij voorkeur, met zowel SBT als NPM-projecten overweg kan. Vervolgens dient er gekeken te worden naar hoe de geselecteerde tools een resultaat bouwen, hoe deze eruit ziet en in welke tijd het resultaat gegeven kan worden.
+Om deze vragen te beantwoorden moet er eerst geschikte tooling gevonden worden die, bij voorkeur, met zowel SBT als NPM-projecten overweg kan. Vervolgens dient er gekeken te worden naar hoe de geselecteerde tooling een resultaat bouwen, hoe deze eruit ziet en in welke tijd het resultaat gegeven kan worden.
 
 \subsection{Tooling: Welke tooling is er beschikbaar om SOUP-analyses uit te voeren op zowel SBT (Scala) als NPM (Node.js)-projecten?}\label{subsec:ESTooling}
-Er zijn een aantal bedrijven en instanties die tooling aanbieden om analyses te doen. Een google search op "Scala dependency scan" levert op de eerste resultaten pagina direct snyk.io, SonarSouce en OWASP op.
+Er zijn een aantal bedrijven en instanties die tooling aanbieden om analyses te doen. Een google search op "Scala dependency scan" levert op de eerste resultaten pagina direct Snyk.io, SonarSource en OWASP op.
 
-Snyk.io biedt meerdere opties voor het scannen van code en dus externe bibliotheken. Het is ook geschikt om Scala en TypeScript code te analyseren. Eén van die opties is middels een CLI Tool welke rapporteerd naar een Dashboard gehost door Snyk zelf. Een andere optie die Snyk aanbiedt is middels een plugin via InteliJ, welke door Eaglescience gebruikt wordt. Echter, om de volledige functionaliteit te van Snyk te kunnen benutten is er een licentie nodig wat op zichzelf al een nadeel is. Een ander nadeel is dat de resulaten in een eigen omgeving, welke extern gehost wordt, kan worden ingezien. Snyk maakt het mogelijk om ook voor zowel SBT als NPM-project.
+Snyk is een tool die geschikt is om Scala en TypeScript code, en dus bibliotheken te analyseren. Snyk kan worden ingezet op zowel SBT als NPM-projecten. Het biedt voor de analyse van code meerdere opties. Eén van die opties is middels een CLI Tool welke rapporteert naar een Dashboard gehost door Snyk zelf. Een andere optie die Snyk aanbiedt is te scannen middels een plugin via InteliJ, welke door Eaglescience gebruikt wordt. Als laatste optie biedt Snyk een plugin voor Jenkins die te integreren is in de buildstraat van Eaglescience. De voordelen van Snyk zijn dat er een volledig pakket wordt geboden, waarbij ook nog andere veiligheidsaspecten kunnen worden gecontroleerd (zoals het scannen van zelf geschreven code). Echter, om de volledige functionaliteit van Snyk te kunnen benutten is er een licentie nodig. Het nadeel hiervan is dat dit op periodieke basis geld kost. Een ander nadeel is dat de resulaten in een eigen omgeving, welke extern gehost wordt, kan worden ingezien. Hierdoor valt deze tooling echter buiten de vooraf gestelde criteria.
 
-SonarSource is een ander bedrijf dat tooling aanbied voor het analyseren van source-code. Het doet dit door in de verschillende stadia van het proces tooling aan te bieden die helpen de kwaliteit van geleverde applicaties te verhogen. Als eerste biede het een gratis plugin, SonalLint, aan voor verschillende IDE's waarbij actief wordt gekeken naar fouten, bugs en dergelijk tijdens het schrijven van code op deze manier wordt er gekeken naar of code volgens standaarden worden geschreven en er geen kwetsbaarheden worden toegevoegd. Daarnaast is er en pakket wat SonarQube heet, dit pakket heeft de mogelijkheid om op verschillende momenten naar de kwaliteit en de veiligheid van de geschreven code. Hoewel SonarQube geschikt is om Scala en Typescript code te analyseren is dit voor de SonarLint plufin niet mogelijk dit te doen voor Scala code wel is er ondersteuning voor TypeScript. Er zijn meerdere versies beschikbaar die elk meer functionaliteiten aanbieden. Zo is er een community edition, welke gratis is, die als server geinstalleerd kan worden en waar verschillende repositories kunnen worden bijgehouden. Naast een community edition zijn er andere editions beschikbaar waar voor betaald moet worden en er extra functies bij komen zoals GitLab integration en dergelijke.
+SonarSource is een ander bedrijf dat tooling aanbiedt voor het analyseren van source-code. Het doet dit door in de verschillende stadia van het proces tooling aan te bieden die helpen de kwaliteit van geleverde applicaties te verhogen. Als eerste biedt het een gratis plugin aan (SonarLint) voor verschillende IDE's waarbij actief wordt gekeken naar fouten, bugs en dergelijken tijdens het schrijven van code. Op die manier wordt er gekeken of code volgens standaarden worden geschreven en er geen kwetsbaarheden worden toegevoegd. Daarnaast is er een pakket dat SonarQube heet. Dit pakket biedt de mogelijkheid aan om op verschillende momenten naar de kwaliteit en de veiligheid van de aanwezige code te kijken. Hoewel SonarQube geschikt is om Scala en Typescript code te analyseren, is de SonarLint plugin niet compatibel met Scala code, maar wel met JavaScript en TypeScript. Er zijn meerdere versies beschikbaar die elk een specifiek aantal functionaliteiten aanbieden. Zo is er een community edition, welke gratis is, die als server geinstalleerd kan worden en waar verschillende repositories kunnen worden bijgehouden. Hiernaast zijn er andere editions beschikbaar waarvoor betaald moet worden en er extra functies worden geleverd, zoals GitLab integration en dergelijke. Samengevat zijn de voordelen van SonarSource tooling dat er tijdens alle stadia van software ontwikkeling controles worden ingebouwd die de code analyseren op o.a. kwetsbaarheden. Hiernaast kan SonarQube on premise draaien. Echter, een nadeel van de SonarQube plugin is dat SBT niet zelf door SonarSource ontwikkeld wordt, en SonarLint geen ondersteuning biedt voor SBT. De incompatibiliteit met Scala maakt integratie in de Eaglescience pipeline niet voor de hand liggend.
 
-In eerdere onderzoeken is naar boven gekomen dat de OWASP zich bezig houd met het veilig houden van geschreven software. Een van de projecten die de OWASp is "Dependency-check". Dit is een Software Composition Tool wat mogelijk maakt om openbaar gemaakte kwetsbaarheden te detecteren door te kijken of er voor dependencies een Common Platform Enumeration(CPE) bestaat. Als deze CPE bestaat kan er gekeken worden of er een CVE voor bestaat en vervolgens worden weergegeven in resultaten. Als geen van beiden bekend zijn wordt er door de tool vanuit gegaan dat er op het moment van checken geen kwetsbaarheid gevonden is. Hoewel dit op het oog een goede tool is om SOUP te analyseren is het in het project ontwikkelde versie niet mogelijk om te scannen op SBT en NPM dependencies. Op de website van het project is echter een link naar een versie die SBT-projecten kan analyseren. En een search in de NPM repository blijkt dat er een soortgelijke tool bestaat om NPM-pakketten te analyseren.
+In eerdere onderzoeken is naar boven gekomen dat de OWASP zich bezig houd met het veilig houden van geschreven software. Een van de projecten die de OWASP aanbiedt is "Dependency-check". Dit is een Software Composition Analysis (SCA) Tool die het mogelijk maakt om openbaar gemaakte kwetsbaarheden te detecteren door te kijken of er voor dependencies een Common Platform Enumeration (CPE) bestaat. Als deze CPE bestaat kan er gekeken worden of er een CVE voor bestaat en vervolgens worden weergegeven in resultaten. Als geen van beiden bekend is wordt er door de tool vanuit gegaan dat er op het moment van checken geen kwetsbaarheid gevonden is. Hoewel dit op het oog een goede tool is om SOUP te analyseren, is de in het project ontwikkelde versie niet geschikt om te scannen op SBT en NPM dependencies. Op de website van het project is echter een link naar een versie die SBT-projecten kan analyseren. Uit de NPM repository blijkt dat er een soortgelijke tool bestaat om NPM-pakketten te analyseren.
 
-
-%Snyk.io laat toe om dependencies te analyseren voor zowel Scala als TypeScript. Echter worden alle gegevens bij snyk.io opgeslagen in een cloud omgeving daarnaast is er een licentie benodigd om analyses te kunnen doen. Hoewel SonarQube een heel mooi pakket is dient er voor de functionaliteit die we benodigd hebben betaald te worden. Daarmee is dit een goed alternatief mocht er geen geschikte methode worden gevonden middels de tools gevonden zijn welke gebruik maken van de OWASP dependency check Engine.
+De SBT depedency check en de OWASP dependency check (scanner voor NPM) lijken op dit moment de enige voor de hand liggende tooling voor de SOUP-analyse. Beide tooling zijn gratis beschikbaar en open-source. Echter zijn dit geen op zichzelf staande tools, maar bieden ze wel de mogelijkheid om te worden geintergreerd in suits zoals Snyk en SonarQube. Het feit dat ze losse tools zijn maakt het mogelijk om deze in te zetten in de buildstraat van Eaglescience. Een ander voordeel is dat beide tooling gebruik maken van dezelfde engine.
 %
 %https://github.com/etnetera/owasp-dependency-check for Node.js /NPM
 %https://github.com/albuch/sbt-dependency-check for SBT
 %
 %https://github.com/eliasgranderubio/dagda niet zelfde als OWASP maar wellicht usefull
 
-
-% Snyk.io en SonarQube goed en alternatief, maar gebonden aan ... en vallen niet binnen de opdracht dus daarom OWASP gebruiken.
-
-
-
-
-
-
 \subsection{Testen van Tools}
 
-Het lijkt dus voor de hand te liggen dat zowel de OWASP-dependency-Check(NPM) en de SBT-dependency-check verantwoorde keuzes zijn om verder te onderzoeken. Voor dat er overgegaan kan worden tot implementatie van de tools. Dienen deze eerst worden onderzocht op bruikbaarheid. Om dit te realiseren zijn de volgende scenario's opgesteld die ieder samen een idee moeten vormen over de werking binnen een project en toepasbaarheid binnen een methode die in de volgende sectie wordt onderzocht.
+Het lijkt voor de hand te liggen dat zowel de SBT-dependency-check en de OWASP-dependency-check (NPM) verantwoorde keuzes zijn om verder te onderzoeken. Echter dienen deze eerst te worden onderzocht op bruikbaarheid voordat er kan worden gedacht aan implementatie. Om de bruikbaarheid te testen zijn de volgende scenario's opgesteld die samen een idee moeten geven over de werking binnen een project en toepasbaarheid binnen een methode die in de volgende sectie zal worden onderzocht.
 
 Er is gekozen voor twee scenario's
 \begin{enumerate}
-    \item \textbf{Bestaand Eaglescience Project: }Om te achterhalen hoe de dependency check tools kunnen worden ingezet in projecten die op dit moment ontwikkeld en gehost worden moeten de tools worden geintegreerd in een bestaand project. Als project is er gekozen voor GroeiGids\footnote{GroeiGids is op het moment van schrijven één van de grootste qua code-volume waar Eaglescience aan werkt. Het is een project voor de ggz, waarbij ouders groei informatie over kinderen kan toevoegen.} een van de grotere projecten waar op dit moment aan wordt gewerkt. Het project bevat zowel een frontend(NPM Angular) als een App(NPM NativeScript), Maar ook een uit microservice bestaande SBT-project waarbij een andere manier wordt gebruikt om dependencies te declaren. Voor Groeigids is ervoor gekozen om dependencies in een aparte file te declaren en deze vervolgens te importeren in de build.sbt. Theoretisch zou dit geen probleem moeten zijn gezien SBT zelf ook gebruik maakt van deze constructie.
-    \item \textbf{Alleen de dependency declaraties} Door alleen dependency declaraties te gebruiken en dus niet het volledig project kan worden onderzocht of de geselecteerde tooling om kan gaan met een gedeeltelijke bekendheid met het project. Dit zou wenselijk kunnen zijn om op een ander moment een analyse uit te voeren op de verschillende projecten. Het zou op die manier ook mogelijk maken om periodiek te controleren op kwetsbaarheden zonder dat een heel project opgezet dient te worden inclusies source code. Er dient dus gekeken te worden of de declaraties, in SBT is dit de build.sbt en in node is dit de package-lock.json welke de daadwerkelijk gebruikte dependencies na een install heeft opgeslagen.
+    \item \textbf{Bestaand Eaglescience Project} Om te achterhalen hoe de dependency check tools kunnen worden ingezet in projecten die op dit moment ontwikkeld en gehost worden, moeten de tools worden geintegreerd in een bestaand project. Als project is gekozen voor GroeiGids,\footnote{GroeiGids is op het moment van schrijven één van de grootste projecten waar Eaglescience aan werkt wanneer wordt gekeken naar code-volume en aantal depedencies. Het is een project in opdracht van de GGZ en biedt ouders de mogelijkheid om groei informatie van hun kinderen in op te slaan.} een van de grotere projecten waar op dit moment aan wordt gewerkt. Het project bevat zowel een frontend (NPM Angular) als een App (NPM NativeScript), evenals een uit microservice bestaande SBT-project waarbij een andere manier wordt gebruikt om dependencies te declareren. Voor GroeiGids worden dependencies in een aparte file gedeclareerd en deze worden vervolgens geimporteerd in de build.sbt. Theoretisch gezien zou dit geen probleem moeten zijn gezien SBT zelf ook gebruik maakt van deze constructie.
+
+    \item \textbf{Alleen de dependency declaraties} Door alleen dependency declaraties te gebruiken in een test, en dus niet het volledige project, kan worden onderzocht of de geselecteerde tooling hiermee om kan gaan. Dit zou wenselijk kunnen zijn om op een ander moment een analyse uit te voeren op de verschillende projecten. Het zou op die manier ook periodieke controle op kwetsbaarheden mogelijk maken zonder dat hiervoor een heel project opgezet dient te worden inclusief source-code.
 \end{enumerate}
 
 \subsubsection{Test 1a: SBT dependency scanning in een bestaand project}
-\textbf{Doel:} Onderzoek naar het gebruik van de sbt-dependency-check plugin in Groeigrids. Het gewenste resulaat moet zijn dat er kennis is hoe de plugin wordt geconfigureerd worden om de gewenste output, bij voorkeur een JSON file/object te verkrijgen.
-\textbf{Methode:} Als eerste dient de sbt-dependency-check plugin te worden geinstalleerde in het project middels de documentatie van het project. Cervolgens dient het output format te worden aangepast: \texttt{dependencyCheckFormats in Global += "JSON"}
-en \texttt{dependencyCheckFormats in Global += "HTML"} HTML wordt alleen gebruikt om in de test leesbare output te verkrijgen zodat deze kan worden geverifieerd met andere bronnen. Deze rapporten die resulteren in het draaien van \texttt{sbt dependencyCheck} dienen te worden gecontrolleerd tegen een andere bron. Daarnaast dient de tijd te worden opgenomen waarbij zowel de tijd wordt genoteerdt met het update van de database en de tijd zonder de database.
-
-\textbf{Resultaat:} De analyse duurt ongeveer  173 seconden inclusies het ophalen/updaten  van de database. Op het moment dat de database up-to-date is duurt een analyse  87 seconden. Dit zou dus inhouden dat een deploy iets langer zou duren dan voor de implementatie van de analyse methode.
+\textbf{Doel:} Onderzoek naar het gebruik van de SBT-dependency-check plugin in GroeiGids. Het gewenste resultaat is kennis over hoe de plugin wordt geconfigureerd om de gewenste output, bij voorkeur een JSON file/object, te verkrijgen.
+\textbf{Methode:} Als eerste dient de SBT-dependency-check plugin te worden geinstalleerd in het project middels de documentatie van het project. Vervolgens dient de output format te worden aangepast: \texttt{dependencyCheckFormats in Global += "JSON"}
+en \texttt{dependencyCheckFormats in Global += "HTML"}. HTML wordt alleen gebruikt om in de test leesbare output te verkrijgen zodat deze kan worden geverifieerd met andere bronnen. Deze rapporten die resulteren in het draaien van \texttt{SBT dependencyCheck} dienen te worden gecontrolleerd tegen een andere bron. Daarnaast dient te worden bepaald hoeveel langer de analyse duurt wanneer de database wordt geupdate.
+\textbf{Resultaat:} De analyse duurt ongeveer 173 seconden inclusief het ophalen/updaten van de database. Op het moment dat de database up-to-date is duurt een analyse 87 seconden. Dit zou dus inhouden dat een deploy 3 minuten langer wanneer een SOUP-analyse wordt gedraaid.
 \begin{figure}[bth]
     \myfloatalign
     \includegraphics[width=15cm]{gfx/report_analyse_test1a_SBT}
@@ -162,15 +153,18 @@ en \texttt{dependencyCheckFormats in Global += "HTML"} HTML wordt alleen gebruik
     \label{fig:SBTReport1A}
 \end{figure}
 
-In het screenshot in figuur~\ref{fig:SBTReport1A} is te zien dat er 219 unieke dependencies gescanned zijn en dat er 42 kwetsbaarheden gevonden zijn in 22 van de gescande dependencies. Bij het verifieren van de bovenste 5 genoemde vermeldingen tegen andere bronnen (opencve) is er vertrouwen dat de resultaten correct zijn.
+In figuur~\ref{fig:SBTReport1A} is te zien dat er 219 unieke dependencies gescanned zijn en dat er 42 kwetsbaarheden gevonden werden in 22 van de gescande dependencies. Na verificatie van de bovenste 5 vermeldingen tegen andere bronnen (opencve), bleek dat deze overeen kwamen, en het vertrouwen wordt gewekt dat de analyse correct is.
+
 \subsubsection{Test 1b: NPM dependency scanning in een bestaand project}
-Uitwijden over hoe de resulaten zijn binnen een bestaand project en wat de timing is.
-\textbf{Doel:} Algemene werking van de geselecteerde plugins onderzoeken, waarbij vooral gekeken moet worden naar welke instellingen er relevant zijn,
-\textbf{Methode:}  Voor NPM bestaat er niet iets zoals de plugin voor SBT projecten. maar wordt de owasp-dependency-check toegevoegd als een dev-dependency \texttt{npm install -D owasp-dependency-check}. en er moet een script worden aangemaakt in package.json die het volgende aanroept \texttt{"owasp-dependency-check --project \"GroeiGids APP\" -f HTML -o \"./reports\""} The tag HTML wordt daarna vervangen door JSON en alsnog een keer gedraait.
-\textbf{Resultaat:} De output van deze analyse is nagenoeg gelijk aan die van de analyse op SBT zoals in de test hiervoor. Het lijkt erop dat
+
+\textbf{Doel:} Onderzoek naar de algemene werking van de geselecteerde plugin, waarbij vooral gekeken moet worden naar welke instellingen er relevant zijn en of de output nagenoeg overeenkomt met die van de SBT analyse. Daarnaast moet de timing worden opgenomen.
+\textbf{Methode:} Voor NPM bestaat er geen plugin, welke wel beschikbaar is  voor SBT-projecten, echter wordt de OWASP-dependency-check toegevoegd als een dev-dependency \texttt{npm install -D owasp-dependency-check}, en moet er een script worden aangemaakt in package.json die het volgende aanroept \texttt{"owasp-dependency-check --project \"GroeiGids APP\" -f HTML -o \"./reports\""}. De tag HTML moet daarna vervangen worden door JSON en daarna alsnog een keer gedraait worden.
+\textbf{Resultaat:} De output van deze analyse is nagenoeg gelijk aan die van de hierboven uitgevoerde analyse op SBT. De output van de check ziet er qua opmaak hetzelfde uit als die van SBT. Ook de verificatie met OpenCVE is goed dus ook hier is er het vertrouwen dat de correcte resulaten worden weergeven.
 
 
-De output van de check geeft het zelfde weer als die in de test hiervoor dat wil zeggen dat alle onderwerpen het zelfde zijn, maar dat de inhoud dus info over de bibliotheken veranderd. Ook de beide JSON files zijn qua schema bijna identiek. Wat dus kan resulteren in een enkele procedure die de data kan omzetten naar bruikbare informatie.
+!!!! 21 sec zonder update
+?? met update
+weergeeft als die in de test hiervoor dat wil zeggen dat alle onderwerpen hetzelfde zijn, maar dat de inhoud dus info over de bibliotheken veranderd. Ook de beide JSON files zijn qua schema bijna identiek. Wat dus kan resulteren in een enkele procedure die de data kan omzetten naar bruikbare informatie.
 
 \begin{figure}[bth]
     \myfloatalign
@@ -178,6 +172,7 @@ De output van de check geeft het zelfde weer als die in de test hiervoor dat wil
     \caption{Deelresultaat van een analyse op de app van groeigids}
     \label{fig:SBTReport1b}
 \end{figure}
+
 
 \subsubsection{Test 2a: SBT alleen de dependency infomatie gebruiken.}
 
@@ -295,7 +290,7 @@ Beide tools generen rapporten in nagenoeg het zelfde schema. Op basis van dit sc
 %Todo: Toevoegen aan de conclusie van het hoofdstuk
 
 
-\section{Conclussie}\label{sec:ESconclussie}
+\section{Conclusie}\label{sec:ESconclusie}
 Door gebruik te maken van de werkwijze van Eaglescience en daarom tijdens elke deploy naar acceptatie en productie een snapshot op te slaan van de gebruikte bibltiotheken onstaat er een beeld in het gebruik van bibliotheken per project. Deze snapshots kunnen vervolgens worden gebruikt om op een "later" te defineren moment analyses uit te voeren op bibliotheken. Op deze manier is er
 
 
