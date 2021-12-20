@@ -124,6 +124,11 @@ SonarSource is een ander bedrijf dat tooling aanbiedt voor het analyseren van so
 In eerdere onderzoeken is naar boven gekomen dat de OWASP zich bezig houd met het veilig houden van geschreven software. Een van de projecten die de OWASP aanbiedt is "Dependency-check". Dit is een Software Composition Analysis (SCA) Tool die het mogelijk maakt om openbaar gemaakte kwetsbaarheden te detecteren door te kijken of er voor dependencies een Common Platform Enumeration (CPE) bestaat. Als deze CPE bestaat kan er gekeken worden of er een CVE voor bestaat en vervolgens worden weergegeven in resultaten. Als geen van beiden bekend is wordt er door de tool vanuit gegaan dat er op het moment van checken geen kwetsbaarheid gevonden is. Hoewel dit op het oog een goede tool is om SOUP te analyseren, is de in het project ontwikkelde versie niet geschikt om te scannen op SBT en NPM dependencies. Op de website van het project is echter een link naar een versie die SBT-projecten kan analyseren. Uit de NPM repository blijkt dat er een soortgelijke tool bestaat om NPM-pakketten te analyseren.
 
 De SBT depedency check en de OWASP dependency check (scanner voor NPM) lijken op dit moment de enige voor de hand liggende tooling voor de SOUP-analyse. Beide tooling zijn gratis beschikbaar en open-source. Echter zijn dit geen op zichzelf staande tools, maar bieden ze wel de mogelijkheid om te worden geintergreerd in suits zoals Snyk en SonarQube. Het feit dat ze losse tools zijn maakt het mogelijk om deze in te zetten in de buildstraat van Eaglescience. Een ander voordeel is dat beide tooling gebruik maken van dezelfde engine.
+
+
+De tooling die geselecteerd zijn maken beide gebruik van de dependency-check engine uit het OWASP project.
+De engine genereert een rapport door de beschreven dependencies te voorzien van een cpe(Common Platform enumeration). Deze CPE wordt vervolgens door de CVE database van het NIST gehaald. Als er zowel een CPE als een CVE gevonden wordt dan is er een kwetsbaarheid gevonden. Mocht een CPE missen dan gaat de tool ervan uit dat er geen kwetsbaaheid gevonden is.
+
 %
 %https://github.com/etnetera/owasp-dependency-check for Node.js /NPM
 %https://github.com/albuch/sbt-dependency-check for SBT
@@ -159,11 +164,11 @@ In figuur~\ref{fig:SBTReport1A} is te zien dat er 219 unieke dependencies gescan
 
 \textbf{Doel:} Onderzoek naar de algemene werking van de geselecteerde plugin, waarbij vooral gekeken moet worden naar welke instellingen er relevant zijn en of de output nagenoeg overeenkomt met die van de SBT analyse. Daarnaast moet de timing worden opgenomen.
 \textbf{Methode:} Voor NPM bestaat er geen plugin, welke wel beschikbaar is  voor SBT-projecten, echter wordt de OWASP-dependency-check toegevoegd als een dev-dependency \texttt{npm install -D owasp-dependency-check}, en moet er een script worden aangemaakt in package.json die het volgende aanroept \texttt{"owasp-dependency-check --project \"GroeiGids APP\" -f HTML -o \"./reports\""}. De tag HTML moet daarna vervangen worden door JSON en daarna alsnog een keer gedraait worden.
-\textbf{Resultaat:} De output van deze analyse is nagenoeg gelijk aan die van de hierboven uitgevoerde analyse op SBT. De output van de check ziet er qua opmaak hetzelfde uit als die van SBT. Ook de verificatie met OpenCVE is goed dus ook hier is er het vertrouwen dat de correcte resulaten worden weergeven.
+\textbf{Resultaat:} De output van deze analyse is nagenoeg gelijk aan die van de hierboven uitgevoerde analyse op SBT. De output van de check ziet er qua opmaak hetzelfde uit als die van SBT. Ook de verificatie met OpenCVE is goed dus ook hier is er het vertrouwen dat de correcte resulaten worden weergeven. Daarnaast duurt de scan zonder update 21 sec en 139 seconden met een database update.
 
 
 !!!! 21 sec zonder update
-?? met update
+139 sec met update
 weergeeft als die in de test hiervoor dat wil zeggen dat alle onderwerpen hetzelfde zijn, maar dat de inhoud dus info over de bibliotheken veranderd. Ook de beide JSON files zijn qua schema bijna identiek. Wat dus kan resulteren in een enkele procedure die de data kan omzetten naar bruikbare informatie.
 
 \begin{figure}[bth]
@@ -179,6 +184,11 @@ weergeeft als die in de test hiervoor dat wil zeggen dat alle onderwerpen hetzel
 
 
 Om te onderzoeken of een dependency check ook uitgevoerd kan worden zonder dat er een heel project bestaat en alleen een declaratie van dependencies in de build.sbt file. De uitkomsten moeten worden op gelijkheid worden gecontroleert om op deze manier te verifieren of deze methode ook werkt.
+
+
+
+
+sxdfghjkzxcvbnmasdfghjkl
 
 \textbf{Doel:} Achterhalen of er verschil kan bestaan tussen analyse op een volledig project ten opzichte van een project waarvan alleen de dependencies bekend zijn.
 \textbf{Methode:}Als eerst dient er een leeg sbt project gemaakt te worden waarbij
