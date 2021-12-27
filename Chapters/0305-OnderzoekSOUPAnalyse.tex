@@ -1,8 +1,6 @@
 \chapter{Onderzoek: Methode en tooling voor SOUP-analyses binnen Eaglescience}\label{ch:onderzoek-tool-methode}
-In het vorige hoofdstuk is duidelijk geworden dat er veel externe bibliotheken worden gebruikt bij de ontwikkeling van applicaties. Veel bedrijven kunnen niet meer zonder en Eaglescience is hier geen uitzondering op. Het gebruik van externe bibliotheken biedt namelijk veel voordelen op het gebied van besparing (tijd en geld), flexibiliteit en standaardisering, ten opzichte van interne ontwikkelde bibliotheken. Het gebruik van externe bibliotheken is echter niet zonder gevaren. Het is daarom zaak om, volgens de OWASP aangegeven manier, te controleren wat de staat is van de te gebruiken bibliotheken. Als dit niet gedaan wordt, bestaat de kans dat informatie wordt bemachtig of dat functionaliteit binnen een applicatie misbruikt kan worden door kwaadwillenden. Er bestaan bronnen zoals de NVD van het NIST waarin deze kwetsbaarheden worden opgeslagen. Het is echter ondoenlijk om deze database met de hand te doorzoeken. Zeker op het moment dat applicaties dusdanig veel bibliotheken gebruiken dat het volume simpelweg te groot wordt. Volgens de aanwijzingen van OWASP\-top10 dienen alle dependencies en de geneste dependencies gecontrolleert te worden.
-
+In het vorige hoofdstuk is duidelijk geworden dat er veel externe bibliotheken worden gebruikt bij de ontwikkeling van applicaties. Veel bedrijven kunnen niet meer zonder en Eaglescience is hier geen uitzondering op. Het gebruik van externe bibliotheken biedt namelijk veel voordelen op het gebied van besparing (tijd en geld), flexibiliteit en standaardisering, ten opzichte van interne ontwikkelde bibliotheken. Het gebruik van externe bibliotheken is echter niet zonder gevaren. Het is daarom zaak om, volgens de OWASP aangegeven manier, te controleren wat de staat is van de te gebruiken bibliotheken. Als dit niet gedaan wordt, bestaat de kans dat informatie wordt bemachtig of dat functionaliteit binnen een applicatie misbruikt kan worden door kwaadwillenden. Er bestaan bronnen zoals de NVD van het NIST waarin deze kwetsbaarheden worden opgeslagen. Het is echter ondoenlijk om deze database met de hand te doorzoeken. Zeker op het moment dat applicaties dusdanig veel bibliotheken gebruiken dat het volume simpelweg te groot wordt. Volgens de aanwijzingen van OWASP top10 dienen alle dependencies en de geneste dependencies gecontrolleert te worden.
 Dit onderzoek beoogt om tooling en methoden te identificeren voor Eaglescience om automatisch en periodiek SOUP-analyses te kunnen doen zodat kwetsbaarheden in applicaties inzichtelijk kunnen worden gemaakt. Door gebruik van deze methode hoeft alleen de applicatie nog met de hand up\-to\-date te worden gehouden. Dit laatste is door de complexiteit bewust uit de opdracht gehouden. Een bijkomend voordeel is dat er door de SOUP-analyse naast de kwetsbaarheden ook gegevens worden vastgelegd over de bibliotheken waardoor er in de toekomst een beter beeld bestaat over het gebruik daarvan. Dit beeld kan gebruikt worden om bij een gevonden kwetsbaarheid te achterhalen welke applicaties hier ook afhankelijk van zijn. Dit leverd op zijn beurt weer een directere manier van onderzoek op.
-
 De onderzoeksvraag is: "Welke SCA tooling is compatibel met de omgeving van Eaglescience en welke methode kan worden toegepast om deze tooling te gebuiken voor het automatisch analyseren van externe dependencies?". De hoofdvraag werpt de volgende deelvragen op, verdeelt in twee domeinen, die ieders hieronder worden beantwoord in een eigen paragraaf waarna in de conclusie de methode wordt beschreven die geschikt wordt geacht als basis voor het ontwerp.
 \begin{itemize}
     \item Huidige situatie binnen Eaglescience:
@@ -26,7 +24,6 @@ Voordat er kan worden onderzocht welke tools en methode er geschikt zijn om een 
 
 \subsection{Werkwijze}\label{subsec:ESwerkwijze}
 Binnen Eaglescience wordt er geprobeerd om "full Scrum" te werken. Dit wil zeggen dat voor ieder project een team van maximaal 9 full-stack developers wordt aangewezen. De sprints duren ongeveer 2 á 3 weken afhankelijk van wensen van de klant en beschikbaarheid van ontwikkelaars. Iedere sprint begint met een refinement door het team waarbij de taken die op de backlog staan worden bekeken en ingeschat. Tijdens de sprint vindt de ontwikkeling, opgedeeld in taken, plaats welke vervolgens worden gereviewd door een ander teamlid. Aan het einde van de sprint vindt er een retrospective plaats en eventueel een demo om de voortgang te demonstreren aan de klant. Dit is ook het moment dat het team ziet hoe de applicatie in het algemeen werkt. Daarnaast kunnen de projectmanager en product owner de taken die op de back-log staan opnieuw prioriseren, wat mee kan worden genomen in de volgende sprint. Als laatste is dit ook het moment waarbij een uitrol wordt uitgevoerd naar acceptatie en dys ook het meest geschikte moment voor een SOUP-analyse.
-
 
 \subsection{Dev-stack}\label{subsec:ESdev-stack}
 Eaglescience maakt volledige full stack oplossingen. Er worden dus zowel frontend, back-end, en database oplossingen ontwikkelt binnen projecten. Hierom wordt er binnen EagleScience gebruik gemaakt van verschillende ontwikkeltalen en tooling. Hieronder staan de belangrijkste vermeld.
@@ -104,6 +101,7 @@ Een Jenkins pipeline werkt in een aantal stappen die in een .jenkinsFile worden 
     Einde van de PipeLine Jenkins geeft de workers die het project heeft gebruikt weer vrij.
 \end{itemize}
 
+
 \section{Passende SCA tooling}\label{sec:sca-tooling}
 
 In de opdracht staat vermeld dat de te ontwikkelen module eenvoudig in gebruik dient te kunnen worden genomen binnen de bestaande CI/CD Pipeline en dat de resultaten zichtbaar moeten zijn in de huidige portal. Hierom moet er dus Software Composition Analysis (SCA) tooling gevonden worden die makkelijk te integreren is in de huidige Jenkins pipeline, welke resultaten geeft die vervolgens te verwerken zijn tot een leesbare pagina in de portal. Als we deze stelling ontleden moeten er een aantal zaken worden onderzocht:
@@ -127,7 +125,7 @@ De SBT depedency check en de OWASP dependency check (scanner voor NPM) lijken op
 
 
 De tooling die geselecteerd zijn maken beide gebruik van de dependency-check engine uit het OWASP project.
-De engine genereert een rapport door de beschreven dependencies te voorzien van een cpe(Common Platform enumeration). Deze CPE wordt vervolgens door de CVE database van het NIST gehaald. Als er zowel een CPE als een CVE gevonden wordt dan is er een kwetsbaarheid gevonden. Mocht een CPE missen dan gaat de tool ervan uit dat er geen kwetsbaaheid gevonden is.
+De engine genereert een rapport door de beschreven dependencies te voorzien van een cpe(Common Platform enumeration). Deze CPE wordt vervolgens door de CVE database van het NIST gehaald. Als er zowel een CPE als een CVE gevonden wordt dan is er een kwetsbaarheid gevonden. Mocht een CPE missen dan gaat de tool ervan uit dat er geen kwetsbaaheid gevonden is. Om performance te verbeteren wordt er iedere 4 uur een update gehaald van de database en deze lokaal opgeslagen. Waarbij deze lokale database wordt gebruikt. na 4 uur wordt de database opnieuw geupdate om er op die manier voor te zorgen dat deze up to date is. Deze interval is in te stellen in de configuratie van de engine.
 
 %
 %https://github.com/etnetera/owasp-dependency-check for Node.js /NPM
@@ -135,176 +133,237 @@ De engine genereert een rapport door de beschreven dependencies te voorzien van 
 %
 %https://github.com/eliasgranderubio/dagda niet zelfde als OWASP maar wellicht usefull
 
-\subsection{Testen van Tools}
+\subsection{Testen van Tools}\label{subsec:testen-van-tools}
 
 Het lijkt voor de hand te liggen dat zowel de SBT-dependency-check en de OWASP-dependency-check (NPM) verantwoorde keuzes zijn om verder te onderzoeken. Echter dienen deze eerst te worden onderzocht op bruikbaarheid voordat er kan worden gedacht aan implementatie. Om de bruikbaarheid te testen zijn de volgende scenario's opgesteld die samen een idee moeten geven over de werking binnen een project en toepasbaarheid binnen een methode die in de volgende sectie zal worden onderzocht.
 
 Er is gekozen voor twee scenario's
 \begin{enumerate}
-    \item \textbf{Bestaand Eaglescience Project} Om te achterhalen hoe de dependency check tools kunnen worden ingezet in projecten die op dit moment ontwikkeld en gehost worden, moeten de tools worden geintegreerd in een bestaand project. Als project is gekozen voor GroeiGids,\footnote{GroeiGids is op het moment van schrijven één van de grootste projecten waar Eaglescience aan werkt wanneer wordt gekeken naar code-volume en aantal depedencies. Het is een project in opdracht van de GGZ en biedt ouders de mogelijkheid om groei informatie van hun kinderen in op te slaan.} een van de grotere projecten waar op dit moment aan wordt gewerkt. Het project bevat zowel een frontend (NPM Angular) als een App (NPM NativeScript), evenals een uit microservice bestaande SBT-project waarbij een andere manier wordt gebruikt om dependencies te declareren. Voor GroeiGids worden dependencies in een aparte file gedeclareerd en deze worden vervolgens geimporteerd in de build.sbt. Theoretisch gezien zou dit geen probleem moeten zijn gezien SBT zelf ook gebruik maakt van deze constructie.
+    \item \textbf{Bestaand Eaglescience Project} Om te achterhalen hoe de dependency check tools kunnen worden ingezet in projecten die op dit moment ontwikkeld en gehost worden, moeten de tools worden geintegreerd in een bestaand project. Als project is gekozen voor GroeiGids,\footnote{GroeiGids is op het moment van schrijven één van de grootste projecten waar Eaglescience aan werkt wanneer wordt gekeken naar code-volume en aantal depedencies. Het is een project in opdracht van de GGD en biedt ouders de mogelijkheid om groei informatie van hun kinderen in op te slaan.} een van de grotere projecten waar op dit moment aan wordt gewerkt. Het project bevat zowel een frontend (NPM Angular) als een App (NPM NativeScript), evenals een uit microservices bestaand SBT-project (geschreven in Scala) waarbij een andere manier wordt gebruikt om dependencies te declareren. Voor GroeiGids worden dependencies in een aparte file gedeclareerd en deze worden vervolgens geimporteerd in de build.sbt. Theoretisch gezien zou dit geen probleem moeten zijn gezien SBT zelf ook gebruik maakt van deze constructie.
 
     \item \textbf{Alleen de dependency declaraties} Door alleen dependency declaraties te gebruiken in een test, en dus niet het volledige project, kan worden onderzocht of de geselecteerde tooling hiermee om kan gaan. Dit zou wenselijk kunnen zijn om op een ander moment een analyse uit te voeren op de verschillende projecten. Het zou op die manier ook periodieke controle op kwetsbaarheden mogelijk maken zonder dat hiervoor een heel project opgezet dient te worden inclusief source-code.
 \end{enumerate}
 
 \subsubsection{Test 1a: SBT dependency scanning in een bestaand project}
-\textbf{Doel:} Onderzoek naar het gebruik van de SBT-dependency-check plugin in GroeiGids. Het gewenste resultaat is kennis over hoe de plugin wordt geconfigureerd om de gewenste output, bij voorkeur een JSON file/object, te verkrijgen.
+\textbf{Doel:} Onderzoek naar het gebruik van de SBT-dependency-check plugin in GroeiGids. Het gewenste resultaat is kennis over hoe de plugin wordt geconfigureerd om de gewenste output, bij voorkeur een JSON file/object, te verkrijgen. Daarnaast wordt beoogd om inzicht te krijgen in hoeveel tijd de plugin nodig heeft voor het genereren van het rapport.
 \textbf{Methode:} Als eerste dient de SBT-dependency-check plugin te worden geinstalleerd in het project middels de documentatie van het project. Vervolgens dient de output format te worden aangepast: \texttt{dependencyCheckFormats in Global += "JSON"}
 en \texttt{dependencyCheckFormats in Global += "HTML"}. HTML wordt alleen gebruikt om in de test leesbare output te verkrijgen zodat deze kan worden geverifieerd met andere bronnen. Deze rapporten die resulteren in het draaien van \texttt{SBT dependencyCheck} dienen te worden gecontrolleerd tegen een andere bron. Daarnaast dient te worden bepaald hoeveel langer de analyse duurt wanneer de database wordt geupdate.
-\textbf{Resultaat:} De analyse duurt ongeveer 173 seconden inclusief het ophalen/updaten van de database. Op het moment dat de database up-to-date is duurt een analyse 87 seconden. Dit zou dus inhouden dat een deploy 3 minuten langer wanneer een SOUP-analyse wordt gedraaid.
+\textbf{Resultaat:} De analyse duurt ongeveer 173 seconden inclusief het ophalen/updaten van de database. Op het moment dat de database up-to-date is duurt een analyse 87 seconden. Dit zou dus inhouden dat een deploy 3 minuten langer duurt wanneer een SOUP-analyse wordt gedraaid voor een SBT project.
 \begin{figure}[bth]
     \myfloatalign
     \includegraphics[width=15cm]{gfx/report_analyse_test1a_SBT}
-    \caption{Deelresultaat van een analyse op de backend van groeigids}
+    \caption{Deelresultaat van een analyse op de backend van GroeiGids}
     \label{fig:SBTReport1A}
 \end{figure}
 
-In figuur~\ref{fig:SBTReport1A} is te zien dat er 219 unieke dependencies gescanned zijn en dat er 42 kwetsbaarheden gevonden werden in 22 van de gescande dependencies. Na verificatie van de bovenste 5 vermeldingen tegen andere bronnen (opencve), bleek dat deze overeen kwamen, en het vertrouwen wordt gewekt dat de analyse correct is.
+In figuur~\ref{fig:SBTReport1A} is te zien dat er 219 unieke dependencies gescanned zijn en dat er 42 kwetsbaarheden gevonden werden in 22 van de gescande dependencies. Na verificatie van de bovenste 5 vermeldingen tegen andere bronnen (opencve), bleek dat deze overeenkwamen, en het vertrouwen wordt daardoor gewekt dat de analyse correct is.
 
 \subsubsection{Test 1b: NPM dependency scanning in een bestaand project}
 
 \textbf{Doel:} Onderzoek naar de algemene werking van de geselecteerde plugin, waarbij vooral gekeken moet worden naar welke instellingen er relevant zijn en of de output nagenoeg overeenkomt met die van de SBT analyse. Daarnaast moet de timing worden opgenomen.
-\textbf{Methode:} Voor NPM bestaat er geen plugin, welke wel beschikbaar is  voor SBT-projecten, echter wordt de OWASP-dependency-check toegevoegd als een dev-dependency \texttt{npm install -D owasp-dependency-check}, en moet er een script worden aangemaakt in package.json die het volgende aanroept \texttt{"owasp-dependency-check --project \"GroeiGids APP\" -f HTML -o \"./reports\""}. De tag HTML moet daarna vervangen worden door JSON en daarna alsnog een keer gedraait worden.
-\textbf{Resultaat:} De output van deze analyse is nagenoeg gelijk aan die van de hierboven uitgevoerde analyse op SBT. De output van de check ziet er qua opmaak hetzelfde uit als die van SBT. Ook de verificatie met OpenCVE is goed dus ook hier is er het vertrouwen dat de correcte resulaten worden weergeven. Daarnaast duurt de scan zonder update 21 sec en 139 seconden met een database update.
-
-
-!!!! 21 sec zonder update
-139 sec met update
-weergeeft als die in de test hiervoor dat wil zeggen dat alle onderwerpen hetzelfde zijn, maar dat de inhoud dus info over de bibliotheken veranderd. Ook de beide JSON files zijn qua schema bijna identiek. Wat dus kan resulteren in een enkele procedure die de data kan omzetten naar bruikbare informatie.
+\textbf{Methode:} Voor NPM bestaat er geen plugin, welke wel beschikbaar is voor SBT-projecten. Echter kan de OWASP-dependency-check worden toegevoegd als een dev-dependency \texttt{npm install -D owasp-dependency-check}, waarna er een script moet worden aangemaakt in package.json die het volgende aanroept \texttt{"owasp-dependency-check --project \"GroeiGids APP\" -f JSON -f HTML -o \"./reports\""}. De tag HTML is hierin op genomen om de leesbaarheid te vergroten voor de peer-review.
+\textbf{Resultaat:} De output van deze analyse is nagenoeg gelijk aan die van de hierboven uitgevoerde analyse op SBT. De output van de check ziet er qua opmaak hetzelfde uit als die van SBT. Ook de verificatie met OpenCVE is goed dus ook hier is er het vertrouwen dat de correcte resulaten worden weergeven. Daarnaast duurt de scan zonder update van de database 21 sec en 139 seconden met een update van een database, zie figuur~\ref{fig:NPMReport1b}.
 
 \begin{figure}[bth]
     \myfloatalign
     \includegraphics[width=15cm]{gfx/report_analyse_test1b_NPM}
-    \caption{Deelresultaat van een analyse op de app van groeigids}
-    \label{fig:SBTReport1b}
+    \caption{Deelresultaat van een analyse op de app van GroeiGids}
+    \label{fig:NPMReport1b}
 \end{figure}
 
+Samengevat geven beide tools dezelfde rapporten comform hetzelfde JSON schema. Het feit dat deze overeenkomen biedt mogelijkheden voor het ontwikkelen van een enkele procedure voor het opnemen van deze rapporten in de API.
+Wanneer de tijden van het scannen van de SBT en NPM bij elkaar worden opgeteld duurt de analyse 108 sec wanneer de database niet wordt geupdate. Wanneer dit wel het geval is duurt de test 208 sec.
 
-\subsubsection{Test 2a: SBT alleen de dependency infomatie gebruiken.}
+\subsubsection{Test 2a: SBT alleen de dependency infomatie gebruiken}
+Om te onderzoeken of een dependency check ook uitgevoerd kan worden zonder dat er een heel project bestaat en alleen een declaratie van dependencies in de build.sbt file staat wordt er een 2e test uitgevoerd.
 
+\textbf{Doel:} Achterhalen welke bestanden er nodig zijn om een succesvolle analyse te doen. De uitkomsten moeten worden gecontroleerd op gelijkheid om te verifieren of deze methode dezelfde output genereeerd als in tests waarbij ook de source-code beschikbaar is.
 
+[NOTE:] Checken waarom nu wel een aggregate functie moet worden toegepast.
+%en 'dependencyCheck verandert in DependencyCheckAggregate.
 
-Om te onderzoeken of een dependency check ook uitgevoerd kan worden zonder dat er een heel project bestaat en alleen een declaratie van dependencies in de build.sbt file. De uitkomsten moeten worden op gelijkheid worden gecontroleert om op deze manier te verifieren of deze methode ook werkt.
+\textbf{Methode:}Het GroeiGids project, welke gebruikt is voor de vorige test, wordt volledig gekopieerd naar een aparte folder, waarna alle source-code (incl. de bijbehorende mappen) wordt verwijderd. Het enige dat overblijft is de project folder mat daarin een plugins.sbt waar de dependencyCheck is gedefineerd, de dependencies.scala in de server folder en de build.sbt in de root. Vervolgens wordt de plugin gestart middels \textt{sbt dependencyCheckAggregate} en het resultaat in JSON vergeleken met het resultaat uit test 1a.
 
+\textbf{Resultaat:} De rapporten die uitgegeven worden door zowel de eerste als de tweede test op het SBT project zijn gelijk. De scantijden zijn ongeveer hetzelfde, wat aangeeft dat deze methode van scannen een goed alternatief is voor het scannen van projecten, en ook gebruikt kan worden voor het periodiek scannen van een project. Van belang zijn de volgende bestanden: plugins.sbt, build.sbt en dependencies.scala omdat hier de dependency check plugin wordt gedefinieerd, als ook plugins benodigd voor het project. In build.sbt en dependencies.scala worden dependencies gedeclareerd.
 
+%TODO naar resulaten sectie kijken
 
+\subsubsection{Test 2b: NPM alleen de dependency infomatie gebruiken}
+%Node.js docker container opzetten..
+%package.json / package-lock.json copiere
+%npm ci
+%owasp script draaien
+%cp resulst naar buiten
+%destroy Container
 
-sxdfghjkzxcvbnmasdfghjkl
+Om te testen of de dependency check zonder informatie over het gebruik van de dependencies kan functioneren wordt er op een zelfde manier getest als bij test 2a, maar dan voor NPM projecten.
 
-\textbf{Doel:} Achterhalen of er verschil kan bestaan tussen analyse op een volledig project ten opzichte van een project waarvan alleen de dependencies bekend zijn.
-\textbf{Methode:}Als eerst dient er een leeg sbt project gemaakt te worden waarbij
-
-\textbf{Resultaat:}
-
-
-\subsubsection{Test 2b: NPM alleen de dependency infomatie gebruiken.}
-Node.js docker container opzetten..
-package.json / package-lock.json copiere
-npm ci
-owasp script draaien
-cp resulst naar buiten
-destroy Container
-
-
-Testen of de dependency check zonder informatie over het gebruik van de dependencies kan functioneren
-
-\textbf{Doel:}\\ Onderzoeken of er een dependency check uitgevoerd kan worden met alleen een package.json. Onderzoeken wat er nodig is om een succesvol rapportage te verkrijgen over eventuele kwetsbaarheden en gebruik van dependencies.
+\textbf{Doel:}\\ Onderzoeken wat er nodig is om een dependency check uit te voeren zonder source-code. Het vermoeden bestaat dat package.json en package-lock.json voldoende informatie bevatten om dit volgens verwachting uit te voeren. Daarnaast moet er gekeken worden of de packages geinstalleerd dienen te worden.
 
 \textbf{Methode:}
+\texttt{NPM init} zal worden gebruikt om een nieuw leeg project op te zetten. Vervolgens moeten de dependency declaraties worden gekopieerd; package.json en package-lock.json.
 
-\begin{enumerate}
-    \item Middels \texttt{NPM init} wordt er een nieuw project worden opgezet. Dit project is geheel leeg, zonder source code of dependency decalraties.
-    \item Dependency check toevoegen middels \texttt{npm install -D owasp-dependency-check} en een script toevoegen die het project zal draaien: \texttt{"owasp": "owasp-dependency-check --project \" angularSandbox \" -f JSON -l\"dep-check-log.txt\" "}%TODO quotes goedzetten
-    Dit meld dat er gelogt dient te worden naar dep-check-log.txt tijdens runtime en dat er een resulaat in JSON moet worden gegeneerd. ook wordt er een projectnaam meegegeven. [Checken of dit naamgeving is of daadwerkelijk functioneel].
-    \item dependencies van het project groeigids toevoegen in package.json. en het owasp script wat in de vorige stap werst gedefineerd gebruiken voor een analyse en de JSON die eruit komt veilig stellen in een andere map
-    \item een \texttt{npm install} uitvoeren om de dependencies te installeren in het project. Er is nog steeds geen code base op dit moment. Behalve die van de dependencies.
-    \item nogmaals het owasp script draaien.
-    \item JSON files met elkaar vergelijken.
-\end{enumerate}
+Hierna wordt de dependency check toegevoegd aan package.json middels \texttt{npm -D install owasp-dependency-check}. Hierna moet er een \texttt{NPM ci} worden uitgevoerd om de declaraties in package-lock.json te installeren. Dit resulteerd in een project zonder source-code, maar met geinstalleerde dependencies zoals ze het laatst bekend waren (bijv tijdens deploy).
 
-\textit{NPM init} kan gebuikt worden om een nieuwe leeg project op te zetten. hier moet vervolgens de dev-dependency-check aan toe gevoegd worden gevolgt door een \textit{NPM install}. op dit moment hebben we een leeg project met alleen de plugin geinstalleerd. vervolgens moeten de dependencies worden gekopieerd. en de check moet worden uitgevoerd. [Resultaat1] vervolgens moet er weer een \textit{NPM install} worden uitgevoerd Nu hebben we een project zonder source code en alleen de geinstalleerde dependencies. Deze dependencies dienen te worden vergeleken met de resultaten die in test 1a zijn gevonden. [Resultaat2].
+Vervolgens kan er middels een in package.json gedefineerd script: \texttt{"owasp": "owasp-dependency-check --project \" angularSandbox \" -f JSON -l\"dep-check-log.txt\" "}%TODO quotes goedzetten
+een rapport worden gegeneerd, dat vergeleken kan worden met de uitkomsten van test 1b.
 
 \textbf{Resultaat:}\\
-Het resultaat van stap 3 is dat er een analsye gedaan wordt op de package-lock.json, waar nu alleen maar een declararie staat van de dependency check. Alleen deze dependencies worden geanalyseerd en die van het project zijn niet meegenomen.
+Er kan enkel een analyse gedaan worden op het moment dat er zowel een package.json bestaat (declaratie van het script) als een package-lock.json (feitelijke dependency definitie van een laatste install), Daarnaast dienen ook de dependencies te zijn geinstalleerd. Kennelijk is dit een vereiste vanuit de OWASP dependency check. In de logs zijn ook statements te vinden die erop wijzen dat niet geinstalleerde dependencies worden geskipped
+\texttt{2021-12-13 15:08:36,500 org.owasp.dependencycheck.analyzer.NodePackageAnalyzer:292
+WARN  - dependency skipped: node module esbuild-darwin-arm64 seems optional and not installed}.
+
+%De NPM Dependency check voert onderwater het volgende commando uit \texttt{/dependency-check.sh --out=./dependency-check-reports --project angularSandbox -f JSON --data=/tmp/dependency-check-data --scan=package-lock.json
+%} de -f en de --out flags zijn de output flags die aangeven dat er een JSON file in depende-check-reports directory in de base gemaakt moet worden. --scan = package-lock.json is het bestand wat geacanned wordt wat wil zeggen dat er een node_modules folder moet zijn is aangemaakt middels een npm install op de package.json van het project.
+
+\subsubsection{Conclusie tests}
+Een analyse voor een project zo groot als GroeiGids duurt in het slechtste geval ongeveer 4 minuten. Hierbij is geen rekening gehouden met andere taken die processor tijd vragen. Deze tijd zal oplopen op het moment dat de Jenkins Server meerdere builds aan het uitvoeren is voor meerdere projecten. Echter zijn de rapporten in zowel test 1 als test 2 gelijk dus kunnen we beide manieren gebruiken voor de ontwikkeling van een methode.
+
+%TODO Maaike
+\newpage
 
 
-geen analyse gedaan kan worden op alleen een package.json. De tool heeft een package-lock.json nodig om in te kunnen achterhalen welke dependencies er worden gebruikt. Dit bestand wordt alleen gegenereerd op het moment dat er een \textt{npm install} wordt gedaan.
-Er is een installatie nodig van de dependencies
-Iedere keer wordt er een nieuwe folder aangemaakt met een nieuwe JSON dus er is geen persistence....
+\section{Methode voor extractie, verwerken en het publiseren van de resultaten gevonden in de projecten van EagleScience}\label{subsec:methodeSOUPES}
 
-Daarnaast MOET er een npm install gedaan worden wil de tool deps vinden...... Dit betekend dus dat er een "npmbuild gedaan moet worden.
-De NPM Dependency check voert onderwater het volgende commando uit \texttt{/dependency-check.sh --out=./dependency-check-reports --project angularSandbox -f JSON --data=/tmp/dependency-check-data --scan=package-lock.json
-} de -f en de --out flags zijn de output flags wat zegt dat er een JSON file in depende-check-reports directory in de base gemaakt moet worden. --scan = package-lock.json is het bestand wat geacanned wordt wat wil zeggen dat er een node_modules folder moet zijn is aangemaakt middels een npm install op de package.json van het project. In de logs is zijn ook statements te vinden die erop wijzen dat niet geinstalleerde dependencies wordten geskipped ) \texttt{2021-12-13 15:08:36,500 org.owasp.dependencycheck.analyzer.NodePackageAnalyzer:292
-WARN  - dependency skipped: node module esbuild-darwin-arm64 seems optional and not installed} Daarnaast worden de verschillen tussen de package.json en de package-lock.json niet meegenomen en is de -lock file leidend. Nog een indicatie dat er een npm install nodig is op basis van project package.json
+Er moet een methode worden ontwikkeld die in staat is om tijdens het uitrollen een scan uit te voeren op de verschillende modulen waar het project uit opgebouwd is. Daarnaast moet het gegevens over de uitrol als ook gegevens over de compositie van de verschillende modules opslaan als snapshot zodat deze op een later moment kunnen worden gebruikt om een periodiek op de zelfde uitrol te scannen.
 
+Als we gaan kijken naar de pipeline (zie figuur~\ref{fig:JenkinsPipeLine}) die nu ingebruik is zijn er twee momenten waar gebruikt kan worden gemaakt door de tool.
 
-Database opzetten voor de tool duurt een geruime tijd dus als dit in een enkele keer kan is dit al tijdswinst. Het klijkt om deze reden ook niet handig om op een deploy de analyse te runnen.
-
-
-begin tool : 2021-12-13 15:01:08
-eind einde opzetten benodigdheden : 2021-12-13 15:08:35
-dit komt uit op 7 minuten lead time voor analyses.
-
-andere note is dat de tool redelijk wat CPU vroeg op het moment van analyseren wat op zijn beurt de performance van het builden van andere projecten weer kan schaden./
-
-
-
-
-\subsubsection{Conclusie tests:}
-Een analyse voor een project zo groot als groeigids duurt in het slechtste geval ongeveer 2 minuten hierbij is geen rekening gehouden met andere taken die procesor tijd opvragen. De tijd zal oplopen op het moment dat de Jenkins Server meerdere build aan het uitvoeren is voor meerdere projecten.
+Er zijn twee momenten in de pipeline waar we nuttige informatie kunnen verkrijgen uit de pipeline. Ten eerste is dit in de up-to-deploy reeks waarin iedere module wordt gebuild. de laatste stap van ieder build proces is de vulnerability_scan.
 
 
 
-Het resultaat is dat het rapport gegenereerd door de dependency-check tools nagenoeg gelijk zijn en in het JSON formaat. Uit de rapporten bleek wel dat de dependency-check engines verschilden van elkaar met een enkele major versie.
+Ten eerste is dit \texttt{Vulnerability\_scan} op dit moment is een module gecompileerd en klaar voor deployment naar Azure.  welke onderdeel is van de up-to-deply reeks. taken in deze reeks worden paralel uitgevoerd voor iedere module waarbij aan het einde  aan het einde vand e rteeks up-to-deplo Dit is het moment dat er een dependency scan plaats vindt en de gebruikte dependency declaraties worden veilig gesteld In stap \texttt{post\_build} worden de artifacten die eerder gegenereerd zijn samengevoegd met de project en build metadata. Waarna ze naar de SOUPAPI worden verstuurt die het vervolgens verwerkt tot een rapport en deze opslaat in een database.
 
-het doen van een npm install is niet optimaal omdat deze opnieuw alle dependencies uitzoekt op dependencies en mogelijke veranderingen. npm ci is een mogelijke verbetering omdat deze gebruik maakt van de lock file waarin zoals de naam doet vermoeden vast staat welke deps er gebruikt worden en de nested deps ook. dus de resolve tijd is veelkorter (https://docs.npmjs.com/cli/v8/commands/npm-ci).
+in detail geeft dit de volgende methode: De Up-To-deploy reeks in het figuur wordt paralel gedraait voor iedere module in een project dus Backend,
 
 
 
-%TODO METHODE
-\subsection{Methode voor extractie, verwerken en het publiseren van de resultaten gevonden in de projecten van EagleScience}\label{subsec:methodeSOUPES}
 
-\subsubsection{Methode 1: Scannen in de buildstraat}
 
-\subsubsection{Methode 2: postponed analyseren}
+
+
+In de tests die hierboven is beschreven hoe op verschillende wijzen een rapport in de vorm van een JSON te verkrijgen is door de tool direct aan te roepen binnen een project. Hoewel dit de juiste gegevens geeft is dit niet de gewenste manier van werken. Er moet dus een methode gevonden worden die ingebouwd kan worden in de huidige build straat. Deze methode moet er voor zorgen dat de gegevens die bekend zijn van het project aan de API worden aangeboden Gobaal gezien kan dit plaats middels twee methoden. Hieronder wordt de theoretische werking uitgewerkt voor beide methoden. Waarbij er bij Methode 1 er van uit wordt dat er in de buildstraat een scan plaatsvind op de verschillende modulen binnen een project en er vervolgens het volledige rapport wordt uitgegegeven voor de backend en of frontend aan de API. Methode 2 zal er van uitgaan dat alleen de gegevens over het project en de samenstelling worden gedeeld aan de API en dat de API het scannen met de geselecteerde tools op zich neemt. In de tekst hieronder wordt de SOUPAPI genoemd. Dit is de in ontwikkeling zijnde module die het analayseren van SOUP coordineert.
+Zoals eerder in dit onderzoek is gebleken bestaat er een stap in de buildstraat dat al een check doet op kwetsbaarheden (vulnerability\_scan). Het lijkt dan ook voor de hand liggend om deze stap uit te breiden met één van de methoden. De timing van deze stap ten opzicht van de rest van de build is guntig omdat er op dit moment een build is geweest en alle dependencies zijn geinstalleerd en in hetgeval van een NPM project er een package-lock.json bestaat. Wat een vereiste is voor die de tool die de NPM bibliotheken scanned. Het resulaat van deze methoden is een JSON die gepost kan worden naar de SOUPAPI
+
+\subsection{Methode 1: Scannen in de buildstraat}
+In de jenkinsFile voor de stap(vulnerability\_scan) moet een task worden toegevoegd die anvullende taken uitvoerd voor zowel de backend als frontend modules. Beide zijn verschillende en worden dan ook apart beschreven waarbij er van uitgegaan wordt dat tijdens de laatste commit de benodigde tooling is declareerd in de modules dus (sbt-dependency-check plug-in in de plugins.sbt, en owasp-dependency-check als dev-dependency met executor script) Op dit moment van de pipeline zijn er images beschikbaar waarvan containers gestart kunnen worden. Naast het rapport voor iedere module dient er ook meta data van het project als ook van de scan worden opgeslagen
+
+\textbf{Frontend} De volgende stappen moeten worden uitgevoerd om een volledige JSON rapport te versturen vanuit een NPM project naar de SOUPAPI.
+\begin{enumerate}
+    \item Genereren van een SOUP rapport voor de module.
+    \begin{enumerate}
+        \item Opstarten van de contriner die gebuild is tijdens de build/test stap
+        \item \texttt{npm run owasp} draaien voor het genereneren van het rapport.
+        \item Rapport copieren naar de Jenkins Artifact store.
+        \item Optioneel checken naar threshold
+    \end{enumerate}
+\end{enumerate}
+
+\textbf{Backend} Feitelijk worden dezelfde stappen uitgevoerd voor de backend als voor de frontend. met als grote verschil de SBT plugin in plaats van de npm run aanroep. Het resultaat is eveneens een JSON rapport.
+\begin{enumerate}
+    \item Genereren van een SOUP rapport voor de module.
+    \begin{enumerate}
+        \item Opstarten van de contriner die gebuild is tijdens de build/test stap
+        \item \texttt{sbt dependenceCheckAggregate} draaien voor het genereneren van het rapport.
+        \item Rapport copieren naar de Jenkins Artifact store.
+        \item Optioneel checken naar threshold
+    \end{enumerate}
+\end{enumerate}
+
+Vervolgens moet er in de \text{post\_build} stap een aantal gegevens worden verzameld die nodig zijn voor de identifictie van de scan. Als ook de rapporten zelf.
+\begin{itemize}
+    \item Project naame
+    \item Timestamp build
+    \item project type(SBT/NPM)
+    \item Hash van de commit die de build heeft getriggered
+    \item Buildtool Version
+    \item runtime Version
+    \item Build target (development, Acceptance, Productie)
+    \item Build status (OK, FAIL)
+\end{itemize}
+Aan dit rijtje worden dus de twee JSON bestanden toegevoegd en deze worden middels een HTTP POST method geupload naar de SOUPAPI waar deze vervolgens verder wordt verwerkt tot een voor de portal bruikbare bron.
+
+
+\begin{figure}[bth]
+    \myfloatalign
+    \includegraphics[width=10cm]{gfx/Methode_1}
+    \caption{Methode 1 schema}
+    \label{fig:methode1Schema}
+\end{figure}
+
+\begin{enumerate}
+    \item
+\end{enumerate}
+\begin{itemize}
+    \item Voordelen   \begin{itemize}
+                          \item Bij iedere deploy naar een ingesteld omgeving is er een snapshot van de gebruikte bibliotheken
+                          \item Er is een mogelijkheid om de build te stoppen op het moment dat de threshold van toelaatbare kwetsbaarheden wordt overschreden.
+    \end{itemize}
+    \item Nadelen  \begin{itemize}
+                       \item Bij een periodieke check moet er een nieuwe build worden gestart wat weer tot onnodig verbruik van resources leidt.
+                       \item
+    \end{itemize}
+\end{itemize}
+
+\subsection{Methode 2: postponed analyseren}
 Scannen op een later moment, dus door een project te bouwen op basis van een snapshot en deze op een later moment te analyseren.
+In de JenkinsFile voor de stap moet er voor de post\_build stap een task worden toegevoegd die anvullende taken voor het opslaan van project metadata, build metadata de data over de commit die gebuild is. Daarnaast worden de bestanden waarin informatie over de gebruikte dependencies ook meegestuurd zodat er op een later moment een project van kan worden gebouwd zoals gedemonstreerdt in test 2.
+De volgende attributen zijn nodig om een build te identificeren en opnieuw op een andere plaats te verbouwen.
+\begin{itemize}
+    \item Project naame
+    \item Timestamp build
+    \item project type(SBT/NPM)
+    \item Hash van de commit die de build heeft getriggered
+    \item Buildtool Version
+    \item runtime Version
+    \item Build target (development, Acceptance, Productie)
+    \item Build status (OK, FAIL)
+    \item Bestanden uit portal: package.json , Package-lock.json
+    \item Bestanden uit App: Package.json, Package-lock.json
+    \item Bestanden uit SBT: build.sbt, dependencies.scala en de plugin.sbt.
+\end{itemize}
+Door deze attributen in een snapshot op te slaan in een database kan er op een later moment een analyse worden uitgevoerd.
 
-\subsubsection{Resultaat:} Methode 2: het scannen op een later moment heeft de wat mij betreft de voorkeur. gezien dit de minste redundantie in datat betekend. Echter moeten er wel meer functionaliteit worden geschreven om alle processen te kunnen uitvoeren.
+\begin{figure}[bth]
+    \myfloatalign
+    \includegraphics[width=15cm]{gfx/Methode_2}
+    \caption{Methode 2 schema}
+    \label{fig:methode2Schema}
+\end{figure}
 
-Beide tools generen rapporten in nagenoeg het zelfde schema. Op basis van dit schema kan een datamodel worden gegenereerd die het opslaan van de relevantie informatie. Er is ook een datamodel nodig om op te li
+\subsection{Voor en nadelen van de twee methoden}
+De eerste methode garandeerd een een rapport dat gegenereerd is op het moment dat de build is gedaan. Dit gaat echter te koste van de tijd in de pipeline wat er voor zorgt dat deze langer gaat duren. Daarnaast moet er iedere keer een build worden gedaan als er vervolgens periodiek wordt gescanned. Wat ten koste gaat van performance. Door het opslaan van de gegevens van een project zoals in methode 2 met daarbij de gebruikte declaraties kan een project opnieuw worden opgezet zonder dat er bekendheid is met de source code. Uit test 2 is gebleken dat de analyse tools alleen maar geinstalleerde dependencies nodig hebben om te funtioneren. Deze fluexibitleiteit komt het periodiek scannen van oudere projecten ten goede. Zeker op het moment als er een update is hoeft alleen de snapshot worden geupdate en er wordt periodiek de nieuwe versie gescannt.
+\subsection{Resultaat}
+Hoewel methdoe 1 makkelijk te integreren is moet als methode 1 alleen wordt gebruikt telkens een build worden gestart op het moment dat er een periodieke scan moet worden uitgevoerd. Deze build is dan zonder een deploy. Deze methode zal veel performance kosten voor het resultaat die het geeft. Methode 2 geeft de mogelijkheid om zelf controlle te hebben over wanneer de dependency scan plaats vindt met deze vrijheid kan dus ook periodiek worden gescanned. Dit omdat de dependency declaraties bekend zijn. en op basis van deze gegevens een leeg project kan worden opgezet. het zoal in tijd niet veel schelen wanneer een project wordt opgezet echter is het bij methode 2 niet zo dat de uitrol wordt uitgesteld.
 
+De beste oplossing zou zijn om bij een deploy middels methode 1 de scan uit te voeren. Op deze manier weet je direct wanneer er kwetsbaarheden worden geintroduceerd op bijv. productie. Ik zou naast de methode uitvoeren ook de declaraties meesturen zodat het mogelijk is om op een later moment en periodiek te kunnen scannen totdat er een nieuwe uitrol is geweest. op deze manier kan er dus automatisch een scan worden uitgevoerd die periodiek is te herhalen onder dezelfde omstandigheden.
 
-%\section{Conclusie}\label{sec:conclusie}
-%De twee tools draaien beiden op de zelfde engine. wat er vervolgens voor zorgt dat er voor beide tools nagenoeg de zelfde output is. Echter door de complexiteit van de projecten die uitgerold worden is voor de SBT tool veel werk om alle dependencie te analyseren wat niet te goed komt in de build tijd. op basis van dit gegeven is er voor gekozen om later een analyse uit te voeren op de dependencies en de pipeline alleen de gebruikte dependencies en hun versies te borgen in een snapshot in de database en deze snapshots periodiek te analyseren op kwetsbaarheden. Het voordeel van deze manier is naast dat het minder tijd kost in de build pipeline. we de analyse kunnen uitvoeren op ieder gewenst moment en dus ook in de nachtelijke uren wanneer de servers niet de druk hebben die ze overdag hebben. Voor het ontwerp moet er dan ook een manier gevonden worden om snapshots op te slaan waarin minimaal de volgende attributen zijn vastgelegd:
-%\begin{itemize}
-%    \item \textbf{timestamp:} De datum en tijd wanneer de snapshot is gemaakt
-%    \item \textbf{GitHash:} De Hash van de commit die de build heeft getriggered
-%    \item \textbf{projectName:} Naam van het project waar de snapshot voor is gemaakt
-%    \item \textbf{omgeving:} Op welke omgeving werdt er gebuild toen de snapshot is gemaakt
-%    \item \textbf{projectType:} Is het een SBT of NPM project ( later uit te breiden met een MAVEN en bijv. NUGET)
-%    \item \textbf{dependencyList:} Lijst van de gevonden dependencies en hun versies
-%    \item \textbf{analysed:} Boolean om aan te geven of de snapshot al is geannalyseerd.
-%   \item \textbf{ScalaVErsion}
-% \item \textbf{SBT version}
-%\end{itemize}
-% Kan er worden achterhaald door middel van ene Hash of de commit nieuwer is?
+\section{Conclusie}\label{sec:conclusie}
 
 
-%
-%Voorhet maken van de snapshots moeten er in de jenkins pipeline een mechaniek worden geplaatst die de gevonden attributen kan opslaan in een database voor later gebruik.
-%
-%Een bijkomend voordeel van deze manier van werken is dat er een historiek onstaat in de gebruikte versies welke als bewijsvoering kan dienen bij incidenten.
 
+De twee tools draaien beiden op de zelfde engine. wat er vervolgens voor zorgt dat er voor beide tools nagenoeg de zelfde output is. Echter door de complexiteit van de projecten die uitgerold worden is voor de SBT tool veel werk om alle dependencie te analyseren wat niet te goed komt in de build tijd. op basis van dit gegeven is er voor gekozen om later een analyse uit te voeren op de dependencies en de pipeline alleen de gebruikte dependencies en hun versies te borgen in een snapshot in de database en deze snapshots periodiek te analyseren op kwetsbaarheden. Het voordeel van deze manier is naast dat het minder tijd kost in de build pipeline. we de analyse kunnen uitvoeren op ieder gewenst moment en dus ook in de nachtelijke uren wanneer de servers niet de druk hebben die ze overdag hebben. Voor het ontwerp moet er dan ook een manier gevonden worden om snapshots op te slaan waarin minimaal de volgende attributen zijn vastgelegd:
 
-\section{Methode met gekozen tooling om een analyse te doen binnen Eaglescience}\label{sec:methode}
+Kan er worden achterhaald door middel van ene Hash of de commit nieuwer is?
+Voorhet maken van de snapshots moeten er in de jenkins pipeline een mechaniek worden geplaatst die de gevonden attributen kan opslaan in een database voor later gebruik.
+Een bijkomend voordeel van deze manier van werken is dat er een historiek onstaat in de gebruikte versies welke als bewijsvoering kan dienen bij incidenten.
 
 %Todo: Toevoegen aan de conclusie van het hoofdstuk
 
 
-\section{Conclusie}\label{sec:ESconclusie}
-Door gebruik te maken van de werkwijze van Eaglescience en daarom tijdens elke deploy naar acceptatie en productie een snapshot op te slaan van de gebruikte bibltiotheken onstaat er een beeld in het gebruik van bibliotheken per project. Deze snapshots kunnen vervolgens worden gebruikt om op een "later" te defineren moment analyses uit te voeren op bibliotheken. Op deze manier is er
 
+
+\section{Conclusie}\label{sec:ESconclusie}
+Door gebruik te maken van de huidige werkwijze binnen Eaglescience en daarom tijdens elke deploy naar acceptatie en of productie een snapshot op te slaan van de gebruikte bibltiotheken onstaat er een beeld in het gebruik van bibliotheken per project. Deze snapshots kunnen vervolgens worden gebruikt om op een "later" te defineren moment analyses uit te voeren op bibliotheken. Op deze manier is er
 
 developement(TestOmgeving) of acceptatie/ productie
 Binnen EagleScience wordt er gewerkt middels de SCRUM methode om software te ontwikkelen. Waarbij Jira en Confluence worden gebruikt voor de documentatie van de projecten. Het zou voor de hand kunnen liggen om informatie over de SOUP analyses in Confluence op te slaan zodat er mee gelift kan worden op dit systeem. Echter doordat de end of life van Confluence is aangekondigd dient er een alternatief worden gezocht. Welke al in de opdracht is meegenomen.
 
 EagleScience ontwikkeld haar projecten over het algemeen in Scala en TypeScript met enkele daarbij behorende (build) tooling en wel SBT voor Scala en NPM voor node projecten. Het is dus noodzaak om voor deze twee tools en methode te vinden waarmee SOUP analyses gedaan kan worden. Daarnaast Jenkins de ideale mogelijkheid om of informatie te winnen over de staat van projecten die op dat moment uitgerold zijn. Dit kan zijn door de nog te onderzoeken methode direct door Jenkins te laten uitvoeren over door de dependency declaraties van projecten op te slaan in een omgeving waar mee extern de analyse kan woden uitvoerd.
+
+
+Er wordt voor iedere service een nieuwe target folder aangemaakt, waarin het rapport voor die service wordt opgeslagen en vervolgens samengesteld in een algemeen bestand wat in de target folder van de server service komt te staan.
+
+
+De beste methode die men kan gebruiken om te scannen op kwetsbaarhden is een hybride tussen methode 1 en 2.
