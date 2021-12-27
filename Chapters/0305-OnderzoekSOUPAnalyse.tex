@@ -223,124 +223,32 @@ Een analyse voor een project zo groot als GroeiGids duurt in het slechtste geval
 \newpage
 
 
-\section{Methode voor extractie, verwerken en het publiseren van de resultaten gevonden in de projecten van EagleScience}\label{subsec:methodeSOUPES}
+\section{Methode voor extractie, verwerken en het publiceren van de resultaten gevonden in de projecten van Eaglescience}\label{subsec:methodeSOUPES}
 
-Er moet een methode worden ontwikkeld die in staat is om tijdens het uitrollen een scan uit te voeren op de verschillende modulen waar het project uit opgebouwd is. Daarnaast moet het gegevens over de uitrol als ook gegevens over de compositie van de verschillende modules opslaan als snapshot zodat deze op een later moment kunnen worden gebruikt om een periodiek op de zelfde uitrol te scannen.
+Er moet een methode worden ontwikkeld die in staat is om door de buildstraat gegenereerde gegevens te gebruiken voor het opbouwen van een rapport die in de portal te lezen is.
+Deze methode moet op twee manieren werken:
+Ten eerste moet het een dependency check uitvoeren tijdens het uitrollen om een rapport aan te kunnen bieden op het moment van deploy in Azure. Daarnaast moet het ook gegevens over het project zoals de dependecy declaraties, project en build meta klaarzetten in een scan que, zodat hiervan op een later moment gebruik van kan worden gemaakt.
 
-Als we gaan kijken naar de pipeline (zie figuur~\ref{fig:JenkinsPipeLine}) die nu ingebruik is zijn er twee momenten waar gebruikt kan worden gemaakt door de tool.
+De details van deze methode worden hieronder beschreven.
 
-Er zijn twee momenten in de pipeline waar we nuttige informatie kunnen verkrijgen uit de pipeline. Ten eerste is dit in de up-to-deploy reeks waarin iedere module wordt gebuild. de laatste stap van ieder build proces is de vulnerability_scan.
-
-
-
-Ten eerste is dit \texttt{Vulnerability\_scan} op dit moment is een module gecompileerd en klaar voor deployment naar Azure.  welke onderdeel is van de up-to-deply reeks. taken in deze reeks worden paralel uitgevoerd voor iedere module waarbij aan het einde  aan het einde vand e rteeks up-to-deplo Dit is het moment dat er een dependency scan plaats vindt en de gebruikte dependency declaraties worden veilig gesteld In stap \texttt{post\_build} worden de artifacten die eerder gegenereerd zijn samengevoegd met de project en build metadata. Waarna ze naar de SOUPAPI worden verstuurt die het vervolgens verwerkt tot een rapport en deze opslaat in een database.
-
-in detail geeft dit de volgende methode: De Up-To-deploy reeks in het figuur wordt paralel gedraait voor iedere module in een project dus Backend,
-
-
-
-
-
-
-
-In de tests die hierboven is beschreven hoe op verschillende wijzen een rapport in de vorm van een JSON te verkrijgen is door de tool direct aan te roepen binnen een project. Hoewel dit de juiste gegevens geeft is dit niet de gewenste manier van werken. Er moet dus een methode gevonden worden die ingebouwd kan worden in de huidige build straat. Deze methode moet er voor zorgen dat de gegevens die bekend zijn van het project aan de API worden aangeboden Gobaal gezien kan dit plaats middels twee methoden. Hieronder wordt de theoretische werking uitgewerkt voor beide methoden. Waarbij er bij Methode 1 er van uit wordt dat er in de buildstraat een scan plaatsvind op de verschillende modulen binnen een project en er vervolgens het volledige rapport wordt uitgegegeven voor de backend en of frontend aan de API. Methode 2 zal er van uitgaan dat alleen de gegevens over het project en de samenstelling worden gedeeld aan de API en dat de API het scannen met de geselecteerde tools op zich neemt. In de tekst hieronder wordt de SOUPAPI genoemd. Dit is de in ontwikkeling zijnde module die het analayseren van SOUP coordineert.
-Zoals eerder in dit onderzoek is gebleken bestaat er een stap in de buildstraat dat al een check doet op kwetsbaarheden (vulnerability\_scan). Het lijkt dan ook voor de hand liggend om deze stap uit te breiden met één van de methoden. De timing van deze stap ten opzicht van de rest van de build is guntig omdat er op dit moment een build is geweest en alle dependencies zijn geinstalleerd en in hetgeval van een NPM project er een package-lock.json bestaat. Wat een vereiste is voor die de tool die de NPM bibliotheken scanned. Het resulaat van deze methoden is een JSON die gepost kan worden naar de SOUPAPI
-
-\subsection{Methode 1: Scannen in de buildstraat}
-In de jenkinsFile voor de stap(vulnerability\_scan) moet een task worden toegevoegd die anvullende taken uitvoerd voor zowel de backend als frontend modules. Beide zijn verschillende en worden dan ook apart beschreven waarbij er van uitgegaan wordt dat tijdens de laatste commit de benodigde tooling is declareerd in de modules dus (sbt-dependency-check plug-in in de plugins.sbt, en owasp-dependency-check als dev-dependency met executor script) Op dit moment van de pipeline zijn er images beschikbaar waarvan containers gestart kunnen worden. Naast het rapport voor iedere module dient er ook meta data van het project als ook van de scan worden opgeslagen
-
-\textbf{Frontend} De volgende stappen moeten worden uitgevoerd om een volledige JSON rapport te versturen vanuit een NPM project naar de SOUPAPI.
-\begin{enumerate}
-    \item Genereren van een SOUP rapport voor de module.
-    \begin{enumerate}
-        \item Opstarten van de contriner die gebuild is tijdens de build/test stap
-        \item \texttt{npm run owasp} draaien voor het genereneren van het rapport.
-        \item Rapport copieren naar de Jenkins Artifact store.
-        \item Optioneel checken naar threshold
-    \end{enumerate}
-\end{enumerate}
-
-\textbf{Backend} Feitelijk worden dezelfde stappen uitgevoerd voor de backend als voor de frontend. met als grote verschil de SBT plugin in plaats van de npm run aanroep. Het resultaat is eveneens een JSON rapport.
-\begin{enumerate}
-    \item Genereren van een SOUP rapport voor de module.
-    \begin{enumerate}
-        \item Opstarten van de contriner die gebuild is tijdens de build/test stap
-        \item \texttt{sbt dependenceCheckAggregate} draaien voor het genereneren van het rapport.
-        \item Rapport copieren naar de Jenkins Artifact store.
-        \item Optioneel checken naar threshold
-    \end{enumerate}
-\end{enumerate}
-
-Vervolgens moet er in de \text{post\_build} stap een aantal gegevens worden verzameld die nodig zijn voor de identifictie van de scan. Als ook de rapporten zelf.
-\begin{itemize}
-    \item Project naame
-    \item Timestamp build
-    \item project type(SBT/NPM)
-    \item Hash van de commit die de build heeft getriggered
-    \item Buildtool Version
-    \item runtime Version
-    \item Build target (development, Acceptance, Productie)
-    \item Build status (OK, FAIL)
-\end{itemize}
-Aan dit rijtje worden dus de twee JSON bestanden toegevoegd en deze worden middels een HTTP POST method geupload naar de SOUPAPI waar deze vervolgens verder wordt verwerkt tot een voor de portal bruikbare bron.
-
-
-\begin{figure}[bth]
-    \myfloatalign
-    \includegraphics[width=10cm]{gfx/Methode_1}
-    \caption{Methode 1 schema}
-    \label{fig:methode1Schema}
+\begin{figure}
+    \centering
+    \includegraphics{}
+    \caption{Methode SOUP analyse}
+    \label{fig:methodeSOUPanalyse}
 \end{figure}
 
-\begin{enumerate}
-    \item
-\end{enumerate}
-\begin{itemize}
-    \item Voordelen   \begin{itemize}
-                          \item Bij iedere deploy naar een ingesteld omgeving is er een snapshot van de gebruikte bibliotheken
-                          \item Er is een mogelijkheid om de build te stoppen op het moment dat de threshold van toelaatbare kwetsbaarheden wordt overschreden.
-    \end{itemize}
-    \item Nadelen  \begin{itemize}
-                       \item Bij een periodieke check moet er een nieuwe build worden gestart wat weer tot onnodig verbruik van resources leidt.
-                       \item
-    \end{itemize}
-\end{itemize}
+In figuur~\ref{fig:methodeSOUPanalyse} is de methode voor de SOUP analyse uitgewerkt voor NPM en SBT. Voor beiden gelden globaal dezelfde stappen. Er zijn twee momenten waarop nuttige informatie kan worden verkregen uit de pipeline wanneer hieraan functionaliteiten worden toegevoegd ten behoeve van SOUP analyse. Ten eerste is dit de \texttt{Vulnerability\_scan} stap, en ten tweede de \texttt{post\_build} stap. In de \texttt{Vulnerability\_scan} stap is de module gereed en kan deze gescaned worden op vulnerabilities. Door hieraan de dependency check toe te voegen kan er een rapport gegenereerd worden die in de Jenkins artifacts wordt opgeslagen. In deze stap wordt in dezelfde Jenkins artifacts ook de dependency declaraties opgeslagen voor dezelfde module.
 
-\subsection{Methode 2: postponed analyseren}
-Scannen op een later moment, dus door een project te bouwen op basis van een snapshot en deze op een later moment te analyseren.
-In de JenkinsFile voor de stap moet er voor de post\_build stap een task worden toegevoegd die anvullende taken voor het opslaan van project metadata, build metadata de data over de commit die gebuild is. Daarnaast worden de bestanden waarin informatie over de gebruikte dependencies ook meegestuurd zodat er op een later moment een project van kan worden gebouwd zoals gedemonstreerdt in test 2.
-De volgende attributen zijn nodig om een build te identificeren en opnieuw op een andere plaats te verbouwen.
-\begin{itemize}
-    \item Project naame
-    \item Timestamp build
-    \item project type(SBT/NPM)
-    \item Hash van de commit die de build heeft getriggered
-    \item Buildtool Version
-    \item runtime Version
-    \item Build target (development, Acceptance, Productie)
-    \item Build status (OK, FAIL)
-    \item Bestanden uit portal: package.json , Package-lock.json
-    \item Bestanden uit App: Package.json, Package-lock.json
-    \item Bestanden uit SBT: build.sbt, dependencies.scala en de plugin.sbt.
-\end{itemize}
-Door deze attributen in een snapshot op te slaan in een database kan er op een later moment een analyse worden uitgevoerd.
+Op dit moment is bekend welke dependencies er gebruikt worden en is er een check uitgevoerd. Om erachter te komen voor welk project dit is dient er in de post build stap metadata toegevoegd te worden die helpen bij de indentificatie van het project. De project metadata omvat o.a. project naam, URL repo, welke modules het project bevat. De build metadata bevat o.a. de timestamp van de build, het resultaat van de build en welke githash er gebuild is. Deze metadata wordt ook in de Jenkins artifacts opgeslagen. Daarna worden alle artifacts gepost naar de SOUP API.
+De SOUP API haalt hieruit de SBT (sbt-report.json) en NPM (npm-report.json) rapporten gegenereerd door de dependency check. Vervolgens worden hieruit de relevante data gefilterd door de report builder, welke het daarop in een database plaatst die door de portal gebruikt kan worden.
+Om periodiek te kunnen scannen worden de project en build metadata samen met de dependency declaraties als een snapshot in een scan que gezet. Deze scan qua kan periodiek worden doorgelopen, om de projecten die hierin staan te scannen op kwetsbaarheden waarvoor de dependency check gebruikt wordt. Via de report builder zal hiervan de resultaten in de database worden geplaatst.
 
-\begin{figure}[bth]
-    \myfloatalign
-    \includegraphics[width=15cm]{gfx/Methode_2}
-    \caption{Methode 2 schema}
-    \label{fig:methode2Schema}
-\end{figure}
-
-\subsection{Voor en nadelen van de twee methoden}
-De eerste methode garandeerd een een rapport dat gegenereerd is op het moment dat de build is gedaan. Dit gaat echter te koste van de tijd in de pipeline wat er voor zorgt dat deze langer gaat duren. Daarnaast moet er iedere keer een build worden gedaan als er vervolgens periodiek wordt gescanned. Wat ten koste gaat van performance. Door het opslaan van de gegevens van een project zoals in methode 2 met daarbij de gebruikte declaraties kan een project opnieuw worden opgezet zonder dat er bekendheid is met de source code. Uit test 2 is gebleken dat de analyse tools alleen maar geinstalleerde dependencies nodig hebben om te funtioneren. Deze fluexibitleiteit komt het periodiek scannen van oudere projecten ten goede. Zeker op het moment als er een update is hoeft alleen de snapshot worden geupdate en er wordt periodiek de nieuwe versie gescannt.
 \subsection{Resultaat}
-Hoewel methdoe 1 makkelijk te integreren is moet als methode 1 alleen wordt gebruikt telkens een build worden gestart op het moment dat er een periodieke scan moet worden uitgevoerd. Deze build is dan zonder een deploy. Deze methode zal veel performance kosten voor het resultaat die het geeft. Methode 2 geeft de mogelijkheid om zelf controlle te hebben over wanneer de dependency scan plaats vindt met deze vrijheid kan dus ook periodiek worden gescanned. Dit omdat de dependency declaraties bekend zijn. en op basis van deze gegevens een leeg project kan worden opgezet. het zoal in tijd niet veel schelen wanneer een project wordt opgezet echter is het bij methode 2 niet zo dat de uitrol wordt uitgesteld.
-
-De beste oplossing zou zijn om bij een deploy middels methode 1 de scan uit te voeren. Op deze manier weet je direct wanneer er kwetsbaarheden worden geintroduceerd op bijv. productie. Ik zou naast de methode uitvoeren ook de declaraties meesturen zodat het mogelijk is om op een later moment en periodiek te kunnen scannen totdat er een nieuwe uitrol is geweest. op deze manier kan er dus automatisch een scan worden uitgevoerd die periodiek is te herhalen onder dezelfde omstandigheden.
+Door in de buildstraat te scannen wordt er een rapport ten tijde van de build gegenereerd. Ondanks dat dit de duur van de deploy kan verlengen wordt er hierdoor gegarandeerd dat er een rapport beschikbaar is over de uitgerolde externe bibliotheken. Door in dezelfde stap ook alle beschikbare declaraties beschikbaar te stellen voor de SOUP API kan er op basis van die declaraties periodiek een analyse worden uitgevoerd.
+De methode voor het periodiek scannen geeft de mogelijkheid om te scannen tijdens voor de server rustige momenten. Hierdoor is er geen impact van de SOUP analyse op de performance tijdens kantooruren
 
 \section{Conclusie}\label{sec:conclusie}
-
 
 
 De twee tools draaien beiden op de zelfde engine. wat er vervolgens voor zorgt dat er voor beide tools nagenoeg de zelfde output is. Echter door de complexiteit van de projecten die uitgerold worden is voor de SBT tool veel werk om alle dependencie te analyseren wat niet te goed komt in de build tijd. op basis van dit gegeven is er voor gekozen om later een analyse uit te voeren op de dependencies en de pipeline alleen de gebruikte dependencies en hun versies te borgen in een snapshot in de database en deze snapshots periodiek te analyseren op kwetsbaarheden. Het voordeel van deze manier is naast dat het minder tijd kost in de build pipeline. we de analyse kunnen uitvoeren op ieder gewenst moment en dus ook in de nachtelijke uren wanneer de servers niet de druk hebben die ze overdag hebben. Voor het ontwerp moet er dan ook een manier gevonden worden om snapshots op te slaan waarin minimaal de volgende attributen zijn vastgelegd:
@@ -367,3 +275,91 @@ Er wordt voor iedere service een nieuwe target folder aangemaakt, waarin het rap
 
 
 De beste methode die men kan gebruiken om te scannen op kwetsbaarhden is een hybride tussen methode 1 en 2.
+
+
+
+%\subsection{Methode 1: Scannen in de buildstraat}
+%In de jenkinsFile voor de stap(vulnerability\_scan) moet een task worden toegevoegd die anvullende taken uitvoerd voor zowel de backend als frontend modules. Beide zijn verschillende en worden dan ook apart beschreven waarbij er van uitgegaan wordt dat tijdens de laatste commit de benodigde tooling is declareerd in de modules dus (sbt-dependency-check plug-in in de plugins.sbt, en owasp-dependency-check als dev-dependency met executor script) Op dit moment van de pipeline zijn er images beschikbaar waarvan containers gestart kunnen worden. Naast het rapport voor iedere module dient er ook meta data van het project als ook van de scan worden opgeslagen
+%
+%\textbf{Frontend} De volgende stappen moeten worden uitgevoerd om een volledige JSON rapport te versturen vanuit een NPM project naar de SOUPAPI.
+%\begin{enumerate}
+%    \item Genereren van een SOUP rapport voor de module.
+%    \begin{enumerate}
+%        \item Opstarten van de contriner die gebuild is tijdens de build/test stap
+%        \item \texttt{npm run owasp} draaien voor het genereneren van het rapport.
+%        \item Rapport copieren naar de Jenkins Artifact store.
+%        \item Optioneel checken naar threshold
+%    \end{enumerate}
+%\end{enumerate}
+%
+%\textbf{Backend} Feitelijk worden dezelfde stappen uitgevoerd voor de backend als voor de frontend. met als grote verschil de SBT plugin in plaats van de npm run aanroep. Het resultaat is eveneens een JSON rapport.
+%\begin{enumerate}
+%    \item Genereren van een SOUP rapport voor de module.
+%    \begin{enumerate}
+%        \item Opstarten van de contriner die gebuild is tijdens de build/test stap
+%        \item \texttt{sbt dependenceCheckAggregate} draaien voor het genereneren van het rapport.
+%        \item Rapport copieren naar de Jenkins Artifact store.
+%        \item Optioneel checken naar threshold
+%    \end{enumerate}
+%\end{enumerate}
+%
+%Vervolgens moet er in de \text{post\_build} stap een aantal gegevens worden verzameld die nodig zijn voor de identifictie van de scan. Als ook de rapporten zelf.
+%\begin{itemize}
+%    \item Project naame
+%    \item Timestamp build
+%    \item project type(SBT/NPM)
+%    \item Hash van de commit die de build heeft getriggered
+%    \item Buildtool Version
+%    \item runtime Version
+%    \item Build target (development, Acceptance, Productie)
+%    \item Build status (OK, FAIL)
+%\end{itemize}
+%Aan dit rijtje worden dus de twee JSON bestanden toegevoegd en deze worden middels een HTTP POST method geupload naar de SOUPAPI waar deze vervolgens verder wordt verwerkt tot een voor de portal bruikbare bron.
+%
+%
+%\begin{figure}[bth]
+%    \myfloatalign
+%    \includegraphics[width=10cm]{gfx/Methode_1}
+%    \caption{Methode 1 schema}
+%    \label{fig:methode1Schema}
+%\end{figure}
+%
+%\begin{enumerate}
+%    \item
+%\end{enumerate}
+%\begin{itemize}
+%    \item Voordelen   \begin{itemize}
+%                          \item Bij iedere deploy naar een ingesteld omgeving is er een snapshot van de gebruikte bibliotheken
+%                          \item Er is een mogelijkheid om de build te stoppen op het moment dat de threshold van toelaatbare kwetsbaarheden wordt overschreden.
+%    \end{itemize}
+%    \item Nadelen  \begin{itemize}
+%                       \item Bij een periodieke check moet er een nieuwe build worden gestart wat weer tot onnodig verbruik van resources leidt.
+%                       \item
+%    \end{itemize}
+%\end{itemize}
+%
+%\subsection{Methode 2: postponed analyseren}
+%Scannen op een later moment, dus door een project te bouwen op basis van een snapshot en deze op een later moment te analyseren.
+%In de JenkinsFile voor de stap moet er voor de post\_build stap een task worden toegevoegd die anvullende taken voor het opslaan van project metadata, build metadata de data over de commit die gebuild is. Daarnaast worden de bestanden waarin informatie over de gebruikte dependencies ook meegestuurd zodat er op een later moment een project van kan worden gebouwd zoals gedemonstreerdt in test 2.
+%De volgende attributen zijn nodig om een build te identificeren en opnieuw op een andere plaats te verbouwen.
+%\begin{itemize}
+%    \item Project naame
+%    \item Timestamp build
+%    \item project type(SBT/NPM)
+%    \item Hash van de commit die de build heeft getriggered
+%    \item Buildtool Version
+%    \item runtime Version
+%    \item Build target (development, Acceptance, Productie)
+%    \item Build status (OK, FAIL)
+%    \item Bestanden uit portal: package.json , Package-lock.json
+%    \item Bestanden uit App: Package.json, Package-lock.json
+%    \item Bestanden uit SBT: build.sbt, dependencies.scala en de plugin.sbt.
+%\end{itemize}
+%Door deze attributen in een snapshot op te slaan in een database kan er op een later moment een analyse worden uitgevoerd.
+%
+%\begin{figure}[bth]
+%    \myfloatalign
+%    \includegraphics[width=15cm]{gfx/Methode_2}
+%    \caption{Methode 2 schema}
+%    \label{fig:methode2Schema}
+%\end{figure}
