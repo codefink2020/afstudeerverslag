@@ -1,0 +1,27 @@
+{
+  "projectnaam":"GroeiGids",
+  "BuildHash": "fb5f5cb47bbd0cbf2f4771c55242fedbf41c5efc",
+  "buildDate": "22-01-2022",
+  "buildModules":["App", "portal","backend"],
+  "reports": [
+    {
+      "NPM-portal-report": {}
+    },
+    {"NPM-app-Report": {}
+    },
+    {
+      "sbt-backend-report": {}
+    }
+  ],
+  "dependencies": [
+    {
+      "npm-portal-deps": {}
+    },
+    {
+      "npm-app-deps": {}
+    },
+    {
+      "sbt-backend-deps": {}
+    }
+  ]
+}

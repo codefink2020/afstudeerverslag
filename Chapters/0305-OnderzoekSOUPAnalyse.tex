@@ -219,10 +219,8 @@ WARN  - dependency skipped: node module esbuild-darwin-arm64 seems optional and 
 \subsubsection{Conclusie tests}
 Een analyse voor een project zo groot als GroeiGids duurt in het slechtste geval ongeveer 4 minuten. Hierbij is geen rekening gehouden met andere taken die processor tijd vragen. Deze tijd zal oplopen op het moment dat de Jenkins Server meerdere builds aan het uitvoeren is voor meerdere projecten. Echter zijn de rapporten in zowel test 1 als test 2 gelijk dus kunnen we beide manieren gebruiken voor de ontwikkeling van een methode.
 
-%TODO Maaike
+
 \newpage
-
-
 \section{Methode voor extractie, verwerken en het publiceren van de resultaten gevonden in de projecten van Eaglescience}\label{subsec:methodeSOUPES}
 
 Er moet een methode worden ontwikkeld die in staat is om door de buildstraat gegenereerde gegevens te gebruiken voor het opbouwen van een rapport die in de portal te lezen is.
@@ -240,43 +238,30 @@ De details van deze methode worden hieronder beschreven.
 
 In figuur~\ref{fig:methodeSOUPanalyse} is de methode voor de SOUP analyse uitgewerkt voor NPM en SBT. Voor beiden gelden globaal dezelfde stappen. Er zijn twee momenten waarop nuttige informatie kan worden verkregen uit de pipeline wanneer hieraan functionaliteiten worden toegevoegd ten behoeve van SOUP analyse. Ten eerste is dit de \texttt{Vulnerability\_scan} stap, en ten tweede de \texttt{post\_build} stap. In de \texttt{Vulnerability\_scan} stap is de module gereed en kan deze gescaned worden op vulnerabilities. Door hieraan de dependency check toe te voegen kan er een rapport gegenereerd worden die in de Jenkins artifacts wordt opgeslagen. In deze stap wordt in dezelfde Jenkins artifacts ook de dependency declaraties opgeslagen voor dezelfde module.
 
-Op dit moment is bekend welke dependencies er gebruikt worden en is er een check uitgevoerd. Om erachter te komen voor welk project dit is dient er in de post build stap metadata toegevoegd te worden die helpen bij de indentificatie van het project. De project metadata omvat o.a. project naam, URL repo, welke modules het project bevat. De build metadata bevat o.a. de timestamp van de build, het resultaat van de build en welke githash er gebuild is. Deze metadata wordt ook in de Jenkins artifacts opgeslagen. Daarna worden alle artifacts gepost naar de SOUP API.
+Op dit moment is bekend welke dependencies er gebruikt worden en is er een check uitgevoerd. Om erachter te komen voor welk project dit is dient er in de post build stap metadata toegevoegd te worden die helpen bij de indentificatie van het project. De project metadata omvat o.a. project naam, URL repo en welke modules het project bevat. De build metadata bevat o.a. de timestamp van de build, het resultaat van de build en welke githash er gebuild is. Deze metadata wordt ook in de Jenkins artifacts opgeslagen. Daarna worden alle artifacts gepost naar de SOUP API.
 De SOUP API haalt hieruit de SBT (sbt-report.json) en NPM (npm-report.json) rapporten gegenereerd door de dependency check. Vervolgens worden hieruit de relevante data gefilterd door de report builder, welke het daarop in een database plaatst die door de portal gebruikt kan worden.
-Om periodiek te kunnen scannen worden de project en build metadata samen met de dependency declaraties als een snapshot in een scan que gezet. Deze scan qua kan periodiek worden doorgelopen, om de projecten die hierin staan te scannen op kwetsbaarheden waarvoor de dependency check gebruikt wordt. Via de report builder zal hiervan de resultaten in de database worden geplaatst.
+
+
+Om periodiek te kunnen scannen, worden de project en build metadata samen met de dependency declaraties als een snapshot in een scan que gezet. Deze scan que kan periodiek worden doorlopen, om de projecten die hierin staan te scannen op kwetsbaarheden waarvoor de dependency check gebruikt wordt. Via de report builder zullen hiervan de resultaten in de database worden geplaatst.
 
 \subsection{Resultaat}
-Door in de buildstraat te scannen wordt er een rapport ten tijde van de build gegenereerd. Ondanks dat dit de duur van de deploy kan verlengen wordt er hierdoor gegarandeerd dat er een rapport beschikbaar is over de uitgerolde externe bibliotheken. Door in dezelfde stap ook alle beschikbare declaraties beschikbaar te stellen voor de SOUP API kan er op basis van die declaraties periodiek een analyse worden uitgevoerd.
-De methode voor het periodiek scannen geeft de mogelijkheid om te scannen tijdens voor de server rustige momenten. Hierdoor is er geen impact van de SOUP analyse op de performance tijdens kantooruren
+Door in de buildstraat te scannen wordt er een rapport ten tijde van de build gegenereerd. Ondanks dat dit de duur van de deploy kan verlengen wordt er hierdoor gegarandeerd dat er een rapport beschikbaar is over de uitgerolde externe bibliotheken. Door in dezelfde stap ook alle in het project aanwezige declaraties beschikbaar te stellen voor de SOUP API kan er op basis van die declaraties periodiek een analyse worden uitgevoerd. Door zowel de resultaten van de dependency check als de dependency declaraties waar deze check op is uitgevoerd veilig te stellen weet je zeker dat de periodieke scans dezelfde basis hebben als de tijdens de deploy uitgevoerde scan. De methode voor het periodiek scannen geeft de mogelijkheid om te scannen tijdens voor de server rustige momenten. Hierdoor is er minder impact van de SOUP analyse op de performance tijdens kantooruren.
 
-\section{Conclusie}\label{sec:conclusie}
+\subsection{Conclusie}\label{sec:conclusie}
+De hierboven genoemde methode maakt het in theorie mogelijk om middels een depedency check geautomatiseerd een SOUP analyse uit te voeren tijdens de uitrol van een project, met als resultaat een rapport over de eventueel gevonden kwetsbaarheden. Tijdens de methode worden de projectgegevens veilig gesteld waardoor later op periodieke basis dezelfde dependency check kan worden uitgevoerd.
+Deze methode maakt het mogelijk om inzichten te krijgen zodat de preventie stappen beschreven in OWASP top 10 - A06:2021 "Vulnerable and outdated components" kunnen worden nageleefd.
 
 
-De twee tools draaien beiden op de zelfde engine. wat er vervolgens voor zorgt dat er voor beide tools nagenoeg de zelfde output is. Echter door de complexiteit van de projecten die uitgerold worden is voor de SBT tool veel werk om alle dependencie te analyseren wat niet te goed komt in de build tijd. op basis van dit gegeven is er voor gekozen om later een analyse uit te voeren op de dependencies en de pipeline alleen de gebruikte dependencies en hun versies te borgen in een snapshot in de database en deze snapshots periodiek te analyseren op kwetsbaarheden. Het voordeel van deze manier is naast dat het minder tijd kost in de build pipeline. we de analyse kunnen uitvoeren op ieder gewenst moment en dus ook in de nachtelijke uren wanneer de servers niet de druk hebben die ze overdag hebben. Voor het ontwerp moet er dan ook een manier gevonden worden om snapshots op te slaan waarin minimaal de volgende attributen zijn vastgelegd:
-
-Kan er worden achterhaald door middel van ene Hash of de commit nieuwer is?
-Voorhet maken van de snapshots moeten er in de jenkins pipeline een mechaniek worden geplaatst die de gevonden attributen kan opslaan in een database voor later gebruik.
-Een bijkomend voordeel van deze manier van werken is dat er een historiek onstaat in de gebruikte versies welke als bewijsvoering kan dienen bij incidenten.
-
-%Todo: Toevoegen aan de conclusie van het hoofdstuk
+\section{Eindconclusie}\label{sec:Eindconclusie}
+In dit hoofdstuk zijn een aantal onderzoeken uitgevoerd. Deze hebben inzichten opgeleverd over hoe Eaglescience software ontwikkeld, waarbij aandacht is besteed aan de devstack, werkwijze en tooling. Deze bevindingen vormden de basis voor de zoektocht naar compatibele tooling voor SOUP analyses binnen Scala en TypeScript projecten, waarbij SBT en NPM worden gebruikt als buildtools. Doordat Eaglescience ontwikkeld in een 'niche-taal' (Scala) is de beschikbare tooling gelimiteerd. Desondanks is er voor beide door Eaglescience gebruikte hoofdtalen geschikte tooling gevonden om SOUP analyses mee uit te voeren (OWASP-dependency-check voor NPM en sbt-dependency-check voor SBT). Uit documentatie van deze tooling bleek dat er testen mee konden worden uitgevoerd om te onderzoeken hoe ze in een methode zouden kunnen worden geimplementeerd om aan de project eisen te kunnen voldoen. De geselecteerde tooling bleken compatibel en goed te werken tijdens een reeks testen, en te voldoen aan de in de opdracht gestelde eisen. Tijdens deze testen werd inspiratie opgedaan voor een methode om gegevens uit de Jenskins buildstraat te verkrijgen en te analyseren. Door samenvoeging van de twee testmethodes is er een methode gevonden voor de analyse van externe bibliotheken binnen Eaglescience projecten. Deze methode maakt het in theorie mogelijk om zowel na deploy geautomatiseerd te draaien als op periodieke basis. De bevindingen van dit hoofdstuk zullen als basis dienen voor het ontwerp van de daadwerkelijke module voor de uitvoering van SOUP analyses.
 
 
 
+%De twee tools draaien beiden op de zelfde engine. wat er vervolgens voor zorgt dat er voor beide tools nagenoeg de zelfde output is. Echter door de complexiteit van de projecten die uitgerold worden is voor de SBT tool veel werk om alle dependencie te analyseren wat niet te goed komt in de build tijd. op basis van dit gegeven is er voor gekozen om later een analyse uit te voeren op de dependencies en de pipeline alleen de gebruikte dependencies en hun versies te borgen in een snapshot in de database en deze snapshots periodiek te analyseren op kwetsbaarheden. Het voordeel van deze manier is naast dat het minder tijd kost in de build pipeline. we de analyse kunnen uitvoeren op ieder gewenst moment en dus ook in de nachtelijke uren wanneer de servers niet de druk hebben die ze overdag hebben. Voor het ontwerp moet er dan ook een manier gevonden worden om snapshots op te slaan waarin minimaal de volgende attributen zijn vastgelegd:
 
-\section{Conclusie}\label{sec:ESconclusie}
-Door gebruik te maken van de huidige werkwijze binnen Eaglescience en daarom tijdens elke deploy naar acceptatie en of productie een snapshot op te slaan van de gebruikte bibltiotheken onstaat er een beeld in het gebruik van bibliotheken per project. Deze snapshots kunnen vervolgens worden gebruikt om op een "later" te defineren moment analyses uit te voeren op bibliotheken. Op deze manier is er
-
-developement(TestOmgeving) of acceptatie/ productie
-Binnen EagleScience wordt er gewerkt middels de SCRUM methode om software te ontwikkelen. Waarbij Jira en Confluence worden gebruikt voor de documentatie van de projecten. Het zou voor de hand kunnen liggen om informatie over de SOUP analyses in Confluence op te slaan zodat er mee gelift kan worden op dit systeem. Echter doordat de end of life van Confluence is aangekondigd dient er een alternatief worden gezocht. Welke al in de opdracht is meegenomen.
-
-EagleScience ontwikkeld haar projecten over het algemeen in Scala en TypeScript met enkele daarbij behorende (build) tooling en wel SBT voor Scala en NPM voor node projecten. Het is dus noodzaak om voor deze twee tools en methode te vinden waarmee SOUP analyses gedaan kan worden. Daarnaast Jenkins de ideale mogelijkheid om of informatie te winnen over de staat van projecten die op dat moment uitgerold zijn. Dit kan zijn door de nog te onderzoeken methode direct door Jenkins te laten uitvoeren over door de dependency declaraties van projecten op te slaan in een omgeving waar mee extern de analyse kan woden uitvoerd.
-
-
-Er wordt voor iedere service een nieuwe target folder aangemaakt, waarin het rapport voor die service wordt opgeslagen en vervolgens samengesteld in een algemeen bestand wat in de target folder van de server service komt te staan.
-
-
-De beste methode die men kan gebruiken om te scannen op kwetsbaarhden is een hybride tussen methode 1 en 2.
-
-
+%Kan er worden achterhaald door middel van ene Hash of de commit nieuwer is?
+%Voorhet maken van de snapshots moeten er in de jenkins pipeline een mechaniek worden geplaatst die de gevonden attributen kan opslaan in een database voor later gebruik.
+%Een bijkomend voordeel van deze manier van werken is dat er een historiek onstaat in de gebruikte versies welke als bewijsvoering kan dienen bij incidenten.
 
 %\subsection{Methode 1: Scannen in de buildstraat}
 %In de jenkinsFile voor de stap(vulnerability\_scan) moet een task worden toegevoegd die anvullende taken uitvoerd voor zowel de backend als frontend modules. Beide zijn verschillende en worden dan ook apart beschreven waarbij er van uitgegaan wordt dat tijdens de laatste commit de benodigde tooling is declareerd in de modules dus (sbt-dependency-check plug-in in de plugins.sbt, en owasp-dependency-check als dev-dependency met executor script) Op dit moment van de pipeline zijn er images beschikbaar waarvan containers gestart kunnen worden. Naast het rapport voor iedere module dient er ook meta data van het project als ook van de scan worden opgeslagen
@@ -363,3 +348,6 @@ De beste methode die men kan gebruiken om te scannen op kwetsbaarhden is een hyb
 %    \caption{Methode 2 schema}
 %    \label{fig:methode2Schema}
 %\end{figure}
+
+
+%Binnen EagleScience wordt er gewerkt middels de SCRUM methode om software te ontwikkelen. Waarbij Jira en Confluence worden gebruikt voor de documentatie van de projecten. Het zou voor de hand kunnen liggen om informatie over de SOUP analyses in Confluence op te slaan zodat er mee gelift kan worden op dit systeem. Echter doordat de end of life van Confluence is aangekondigd dient er een alternatief worden gezocht. Welke al in de opdracht is meegenomen.
