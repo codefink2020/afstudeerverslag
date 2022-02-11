@@ -1,27 +1,74 @@
 {
-  "projectnaam":"GroeiGids",
+  "projectnaam": "GroeiGids",
   "BuildHash": "fb5f5cb47bbd0cbf2f4771c55242fedbf41c5efc",
   "buildDate": "22-01-2022",
-  "buildModules":["App", "portal","backend"],
+  "buildModules": [
+    "App",
+    "portal",
+    "backend"
+  ],
   "reports": [
     {
-      "NPM-portal-report": {}
-    },
-    {"NPM-app-Report": {}
+      "NPM-portal-report": {
+        "tool": "OWASP-NPM",
+        "report": {}
+      }
     },
     {
-      "sbt-backend-report": {}
+      "NPM-app-Report": {
+        "tool": "OWASP-NPM",
+        "report": {}
+      }
+    },
+    {
+      "sbt-backend-report": {
+        "tool": "OWASP-SBT",
+        "report": {}
+      }
     }
   ],
   "dependencies": [
     {
-      "npm-portal-deps": {}
+      "npm-portal-deps": {
+        "dependencies": [
+          {
+            "naam": "<<NAAM>>",
+            "versie": "<<Versie>>"
+          }
+        ],
+        "devDependencies": [
+          {
+            "naam": "<<NAAM>>",
+            "versie": "<<Versie>>"
+          }
+        ]
+      }
     },
     {
-      "npm-app-deps": {}
+      "npm-app-deps": {
+        "dependencies": [
+          {
+            "naam": "<<NAAM>>",
+            "versie": "<<Versie>>"
+          }
+        ],
+        "devDependencies": [
+          {
+            "naam": "<<NAAM>>",
+            "versie": "<<Versie>>"
+          }
+        ]
+      }
     },
     {
-      "sbt-backend-deps": {}
+      "sbt-backend-deps": {
+        "dependencies": [
+          {
+            "naam": "<<NAAM>>",
+            "versie": "<<Versie>>"
+          }
+        ]
+      }
     }
   ]
 }
